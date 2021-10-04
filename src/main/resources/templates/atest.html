@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/search.css">
+</head>
+<body>
+<header class="cd-main-header animate-search">
+    <div class="cd-logo">
+        <a href="#0">
+            <img src="img/cd-logo.svg" alt="Logo">
+        </a></div>
+
+    <nav class="cd-main-nav-wrapper">
+        <a href="#search" class="cd-search-trigger cd-text-replace">Search</a>
+
+        <ul class="cd-main-nav">
+            <li><a href="#0">Products</a></li>
+            <!-- additional navigation items -->
+        </ul>
+    </nav>
+
+    <a href="#0" class="cd-nav-trigger cd-text-replace">
+        Menu<span></span>
+    </a>
+</header>
+
+<main class="cd-main-content">
+    <!-- your content here -->
+</main>
+
+<div id="search" class="cd-main-search">
+    <form>
+        <input type="search" placeholder="Search...">
+
+        <div class="cd-select">
+            <span>in</span>
+            <select name="select-category">
+                <option value="all-categories">all Categories</option>
+                <!-- additional options here -->
+            </select>
+            <span class="selected-value">all Categories</span>
+        </div>
+    </form>
+
+    <div class="cd-search-suggestions">
+        <div class="news">
+            <h3>News</h3>
+            <ul>
+                <li>
+                    <a class="image-wrapper" href="#0">
+                        <img src="img/placeholder.png" alt="News image">
+                    </a>
+                    <h4><a class="cd-nowrap" href="#0">...</a></h4>
+                    <time datetime="2016-01-12">Feb 03, 2016</time>
+                </li>
+
+                <!-- additional news here -->
+            </ul>
+        </div> <!-- .news -->
+
+        <div class="quick-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#0">Find a store</a></li>
+                <!-- additional quick links here -->
+            </ul>
+        </div>
+    </div> <!-- .cd-search-suggestions -->
+
+    <a href="#0" class="close cd-text-replace">Close Form</a>
+</div> <!-- .cd-main-search -->
+
+<script src="../static/js/search.js"></script>
+</body>
+
+</html>

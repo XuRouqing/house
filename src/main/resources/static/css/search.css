@@ -1,0 +1,77 @@
+.cd-main-header, .cd-main-content {
+    position: relative;
+    transition: transform 0.3s;
+}
+.cd-main-header.nav-is-visible, .cd-main-content.nav-is-visible {
+    transform: translateX(-260px);
+}
+@media only screen and (min-width: 1024px) {
+    .cd-main-search {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+    }
+    .cd-main-search.is-visible {
+        /* search form open */
+        opacity: 1;
+        visibility: visible;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .animate-search .cd-main-search.is-visible {
+        /* trigger search form animation if <header> has the .animate-search class */
+        animation: cd-slide-in 0.3s;
+    }
+    .animate-search .is-visible .cd-search-suggestions {
+        /* trigger the dropdown animation if <header> has the .animate-search class */
+        transform-origin: center top;
+        animation: cd-3d-rotation 0.5s 0.3s;
+        animation-fill-mode: backwards;
+    }
+}
+@keyframes cd-slide-in {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes cd-3d-rotation {
+    0% {
+        transform: perspective(1000px) rotateX(-90deg);
+    }
+    100% {
+        transform: perspective(1000px) translateY(0);
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .cd-main-search .cd-select {
+        position: absolute;
+        right: 0;
+        overflow: hidden;
+    }
+    .cd-main-search select {
+        /* the <select> element is not visible - it is covered by the .selected-value element */
+        position: absolute;
+        right: 0;
+        opacity: 0;
+        color: transparent;
+    }
+    .cd-main-search .selected-value {
+        color: #ffffff;
+        pointer-events: none;
+    }
+    .cd-main-search select, .cd-main-search .selected-value {
+        padding: 0.5em 1.7em 0.5em .3em;
+        font-size: 1.4rem;
+        border-radius: 3px;
+    }
+}
