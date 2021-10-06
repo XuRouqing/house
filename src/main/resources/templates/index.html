@@ -7,11 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>我爱我家装修公司</title>
     <meta name="robots" content="index, follow">
-    <meta name="description"
-          content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop.">
+    <meta name="description" content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/plugins.min.css">
     <link rel="stylesheet" href="../static/css/style.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" type="text/css" href="../static/css/htmleaf-demo.css">
+    <link rel="stylesheet" href="../static/css/search.css"> <!-- Resource style -->
+    <script src="../static/js/modernizr.js"></script> <!-- Modernizr -->
 
 </head>
 
@@ -25,7 +29,6 @@
         </div>
     </div>
 </div>
-<div class="main-wrapper">
 
     <!--头部-->
     <header class="main-header-area">
@@ -67,7 +70,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12">
-                        <div class="header-middle-wrap position-relative">
+                        <div class="header-middle-wrap position-relative cd-main-header">
                             <div class="header-contact d-none d-lg-flex">
                                 <i class="pe-7s-call"></i>
                                 <a href="tel://+00-123-456-789">+00 123 456 789</a>
@@ -75,36 +78,70 @@
                             <a href="" class="header-logo">
                                 <img src="../static/picture/dark.png" alt="Header Logo">
                             </a>
-                            <div class="header-right">
-                                <ul>
-                                    <li>
-                                        <a href="#exampleModal" class="search-btn bt" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            <i class="pe-7s-search"></i>
-                                        </a>
-                                    </li>
-                                    <li class="d-none d-lg-block">
-                                        <a href="wishlist.html">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                    </li>
-                                    <li class="minicart-wrap me-3 me-lg-0">
-                                        <a href="#miniCart" class="minicart-btn toolbar-btn">
-                                            <i class="pe-7s-shopbag"></i>
-                                            <span class="quantity">3</span>
-                                        </a>
-                                    </li>
-                                    <li class="mobile-menu_wrap d-block d-lg-none">
-                                        <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">
-                                            <i class="pe-7s-menu"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+<!--                            <div class="header-right">-->
+<!--                                <ul>-->
+<!--                                    <li>-->
+<!--                                        <a href="#exampleModal" class="search-btn bt" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                                            <i class="pe-7s-search"></i>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                    <li class="mobile-menu_wrap d-block d-lg-none">-->
+<!--                                        <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">-->
+<!--                                            <i class="pe-7s-menu"></i>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+                            <nav class="cd-main-nav-wrapper">
+                                <a href="#search" class="cd-search-trigger cd-text-replace">Search</a>
+                            </nav> <!-- .cd-main-nav-wrapper -->
+                            <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
+                            <div id="search" class="cd-main-search">
+                                <form>
+                                    <input type="search" placeholder="Search...">
+                                    <div class="cd-select">
+                                        <select name="select-category">
+                                            <option value="all-categories">全部</option>
+                                            <option value="category1">房型</option>
+                                            <option value="category2">风格</option>
+                                            <option value="category2">类型</option>
+                                            <option value="category3">设计师</option>
+                                        </select>
+                                        <span class="selected-value">全部</span>
+                                    </div>
+                                </form>
+                                <a href="#0" class="close cd-text-replace">Close Form</a>
+                            </div> <!-- .cd-main-search -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+<!--        <header class="cd-main-header animate-search">-->
+<!--            <nav class="cd-main-nav-wrapper">-->
+<!--                <a href="#search" class="cd-search-trigger cd-text-replace">Search</a>-->
+<!--            </nav> &lt;!&ndash; .cd-main-nav-wrapper &ndash;&gt;-->
+
+<!--            <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>-->
+<!--        </header>-->
+<!--        <div id="search" class="cd-main-search">-->
+<!--            <form>-->
+<!--                <input type="search" placeholder="Search...">-->
+
+<!--                <div class="cd-select">-->
+<!--                    <span>in</span>-->
+<!--                    <select name="select-category">-->
+<!--                        <option value="all-categories">all Categories</option>-->
+<!--                        <option value="category1">Category 1</option>-->
+<!--                        <option value="category2">Category 2</option>-->
+<!--                        <option value="category3">Category 3</option>-->
+<!--                    </select>-->
+<!--                    <span class="selected-value">all Categories</span>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--            <a href="#0" class="close cd-text-replace">Close Form</a>-->
+<!--        </div> &lt;!&ndash; .cd-main-search &ndash;&gt;-->
+<!--        <div class="cd-cover-layer"></div> &lt;!&ndash; cover main content when search form is open &ndash;&gt;-->
+
         <div class="header-bottom d-none d-lg-block">
             <div class="container">
                 <div class="row">
@@ -114,7 +151,7 @@
                                 <ul>
 <!--                                    首页-->
                                     <li class="drop-holder">
-                                        <a href="">首页</a>
+                                        <a href="">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                     </li>
 <!--                                    精装案例-->
                                     <li class="megamenu-holder">
@@ -383,17 +420,6 @@
                                             <li><a class="dropdown-item" href="login-register.html">Login | Register</a>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li class="d-none d-lg-block">
-                                        <a href="wishlist.html">
-                                            <i class="pe-7s-like"></i>
-                                        </a>
-                                    </li>
-                                    <li class="minicart-wrap me-3 me-lg-0">
-                                        <a href="#miniCart" class="minicart-btn toolbar-btn">
-                                            <i class="pe-7s-shopbag"></i>
-                                            <span class="quantity">3</span>
-                                        </a>
                                     </li>
                                     <li class="mobile-menu_wrap d-block d-lg-none">
                                         <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">
@@ -3091,7 +3117,8 @@
 </div>
 
 <script src="../static/js/plugins.min.js"></script>
-
+<script src="../static/js/jquery-2.1.1.min.js"></script>
+<script src="../static/js/main.js"></script> <!-- Resource jQuery -->
 </body>
 
 <style>

@@ -1,35 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh" class="no-js">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../static/css/search.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery和CSS3炫酷高级搜索框设计效果|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" type="text/css" href="../static/css/htmleaf-demo.css">
+    <link rel="stylesheet" href="../static/css/search.css"> <!-- Resource style -->
+    <script src="../static/js/modernizr.js"></script> <!-- Modernizr -->
 </head>
 <body>
-<header class="cd-main-header animate-search">
-    <div class="cd-logo">
-        <a href="#0">
-            <img src="img/cd-logo.svg" alt="Logo">
-        </a></div>
-
+<header class="cd-main-header">
     <nav class="cd-main-nav-wrapper">
         <a href="#search" class="cd-search-trigger cd-text-replace">Search</a>
+    </nav> <!-- .cd-main-nav-wrapper -->
 
-        <ul class="cd-main-nav">
-            <li><a href="#0">Products</a></li>
-            <!-- additional navigation items -->
-        </ul>
-    </nav>
-
-    <a href="#0" class="cd-nav-trigger cd-text-replace">
-        Menu<span></span>
-    </a>
+    <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
 </header>
-
-<main class="cd-main-content">
-    <!-- your content here -->
-</main>
-
 <div id="search" class="cd-main-search">
     <form>
         <input type="search" placeholder="Search...">
@@ -38,41 +28,19 @@
             <span>in</span>
             <select name="select-category">
                 <option value="all-categories">all Categories</option>
-                <!-- additional options here -->
+                <option value="category1">Category 1</option>
+                <option value="category2">Category 2</option>
+                <option value="category3">Category 3</option>
             </select>
             <span class="selected-value">all Categories</span>
         </div>
     </form>
-
-    <div class="cd-search-suggestions">
-        <div class="news">
-            <h3>News</h3>
-            <ul>
-                <li>
-                    <a class="image-wrapper" href="#0">
-                        <img src="img/placeholder.png" alt="News image">
-                    </a>
-                    <h4><a class="cd-nowrap" href="#0">...</a></h4>
-                    <time datetime="2016-01-12">Feb 03, 2016</time>
-                </li>
-
-                <!-- additional news here -->
-            </ul>
-        </div> <!-- .news -->
-
-        <div class="quick-links">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="#0">Find a store</a></li>
-                <!-- additional quick links here -->
-            </ul>
-        </div>
-    </div> <!-- .cd-search-suggestions -->
-
     <a href="#0" class="close cd-text-replace">Close Form</a>
 </div> <!-- .cd-main-search -->
+<div class="cd-cover-layer"></div> <!-- cover main content when search form is open -->
 
-<script src="../static/js/search.js"></script>
+
+<script src="../static/js/jquery-2.1.1.min.js"></script>
+<script src="../static/js/main.js"></script> <!-- Resource jQuery -->
 </body>
-
 </html>
