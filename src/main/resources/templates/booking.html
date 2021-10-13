@@ -793,58 +793,58 @@
                   <div class="time-slot">
                     <ul class="clearfix">
                       <li>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>上午 AM</span>
                         </a>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>下午 PM</span>
                         </a>
                       </li>
                       <li>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>上午 AM</span>
                         </a>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>下午 PM</span>
                         </a>
                       </li>
                       <li>
-                        <a class="timing" href="#">
+                        <a class="timing date" href="#">
                           <span>上午 AM</span>
                         </a>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>下午 PM</span>
                         </a>
                       </li>
                       <li>
-                        <a class="timing" href="#">
+                        <a class="timing date" href="#">
                           <span>上午 AM</span>
                         </a>
-                        <a class="timing" href="#">
+                        <a class="timing date" href="#">
                           <span>下午 PM</span>
                         </a>
                       </li>
                       <li>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>上午 AM</span>
                         </a>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>下午 PM</span>
                         </a>
                       </li>
                       <li>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>上午 AM</span>
                         </a>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>下午 PM</span>
                         </a>
                       </li>
                       <li>
-                        <a class="timing" href="#">
+                        <a class="timing noDate" href="#">
                           <span>上午 AM</span>
                         </a>
-                        <a class="timing" href="#">
+                        <a class="timing date" href="#">
                           <span>下午 PM</span>
                         </a>
                       </li>
@@ -862,7 +862,7 @@
 
           <!-- Submit Section -->
           <div class="submit-section proceed-btn text-right">
-            <a href="checkout.html" class="btn btn-primary submit-btn">Proceed to Pay</a>
+            <a href="checkout.html" class="btn submit-btn">预约</a>
           </div>
           <!-- /Submit Section -->
 
@@ -1247,6 +1247,27 @@
   }
   a:hover{
     text-decoration:none
+  }
+  .submit-section .submit-btn {
+    padding: 12px 30px;
+    font-weight: 600;
+    font-size: 16px;
+    min-width: 100px;
+    color: white;
+    background-color: #09e5ab;
+    border: 1px solid #09e5ab;
+  }
+  .submit-btn:hover{
+    background-color: #09dca4;
+    border: 1px solid #09e5ab;
+  }
+  .date {
+    background-color: #b4b4b4;
+    pointer-events: none;
+    cursor: default;
+  }
+  .noDate {
+    background-color: #f5f5f5;
   }
 </style>
 
