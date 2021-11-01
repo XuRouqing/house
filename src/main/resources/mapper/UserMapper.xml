@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.UserMapper">
+
+    <insert id="insertUser" parameterType="User">
+        insert into user (name,character,password)
+        values (#{name},#{character},#{password})
+    </insert>
+
+    <select id="selectUserById" resultType="User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="selectUserAll" resultType="User">
+        select * from user
+    </select>
+
+    <select id="findUserByNameAndPWD" resultType="User">
+        select * from user
+        where name = #{name}
+          and password = #{password}
+    </select>
+
+    <select id="findUserByName" resultType="User">
+        select * from user
+        where name = #{name}
+    </select>
+
+    <update id="modifyUser" parameterType="User">
+        UPDATE user SET name=#{name},password=#{password}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="User">
+        DELETE FROM user
+        WHERE id=#{id}
+    </delete>
+
+</mapper>
