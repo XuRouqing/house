@@ -9,22 +9,22 @@
   <meta name="robots" content="index, follow">
   <meta name="description" content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/css/plugins.min.css">
-  <link rel="stylesheet" href="../static/css/style.min.css">
+  <link rel="stylesheet" href="Path/css/plugins.min.css">
+  <link rel="stylesheet" href="Path/css/style.min.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="../static/css/reset.css"> <!-- CSS reset -->
-  <link rel="stylesheet" type="text/css" href="../static/css/htmleaf-demo.css">
-  <link rel="stylesheet" href="../static/css/search.css"> <!-- Resource style -->
-  <script src="../static/js/modernizr.js"></script> <!-- Modernizr -->
-  <link rel="icon" href="../static/image/newlogo.png">
+  <link rel="stylesheet" href="Path/css/reset.css"> <!-- CSS reset -->
+  <link rel="stylesheet" type="text/css" href="Path/css/htmleaf-demo.css">
+  <link rel="stylesheet" href="Path/css/search.css"> <!-- Resource style -->
+  <script src="Path/js/modernizr.js"></script> <!-- Modernizr -->
+  <link rel="icon" href="Path/image/newlogo.png">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.4.0/css/bootstrap.min.css">
   <!-- Fontawesome CSS -->
-  <link rel="stylesheet" href="../static/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="../static/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="Path/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="Path/fontawesome/css/all.min.css">
   <!-- Main CSS -->
-  <link rel="stylesheet" href="../static/css/bookStyle.css">
+  <link rel="stylesheet" href="Path/css/bookStyle.css">
 
 </head>
 
@@ -47,7 +47,7 @@
       <div class="row align-items-center">
         <div class="col-6">
           <div class="header-top-left">
-            <img src="../static/image/location.png" width="20px" height="20px">
+            <img src="Path/image/location.png" width="20px" height="20px">
             <span class="pronia-offer">城市</span>
           </div>
         </div>
@@ -61,8 +61,8 @@
                   用户
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="settingButton">
-                  <li><a class="dropdown-item" href="my-account.html">个人信息</a></li>
-                  <li><a class="dropdown-item" href="login-register.html">退出</a>
+                  <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
+                  <li><a class="dropdown-item" onclick="logout()">退出</a>
                   </li>
                 </ul>
               </li>
@@ -84,8 +84,8 @@
               <i class="pe-7s-call"></i>
               <a href="tel://+00-123-456-789">+00 123 456 789</a>
             </div>
-            <a href="" class="header-logo">
-              <img src="../static/picture/dark.png" alt="Header Logo">
+            <a class="header-logo">
+              <img src="Path/picture/dark.png" alt="Header Logo">
             </a>
             <!--                            搜索框-->
             <nav class="cd-main-nav-wrapper">
@@ -122,11 +122,11 @@
               <ul>
                 <!--                                    首页-->
                 <li class="drop-holder">
-                  <a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                  <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <!--                                    精装案例-->
                 <li class="megamenu-holder">
-                  <a href="shop-grid-fullwidth.html">精装案例</a>
+                  <a th:href="@{fullwidth}">精装案例</a>
                   <ul class="drop-menu megamenu">
                     <li>
                       <span class="title">Shop Layout</span>
@@ -204,24 +204,46 @@
                 </li>
                 <!--                                    设计团队-->
                 <li>
-                  <a href="designer-list.html">设计团队</a>
+                  <a th:href="@{designer-list}">设计团队</a>
                 </li>
                 <!--                                    品质工程-->
                 <li>
-                  <a href="about.html">品质工程</a>
+                  <a th:href="@{worker-list}">品质工程</a>
                 </li>
                 <!--                                    营销活动-->
                 <li>
-                  <a href="about.html">营销活动</a>
+                  <a th:href="@{discount}">营销活动</a>
                 </li>
                 <!--                                    在线预约-->
                 <li>
-                  <a href="about.html">在线预约</a>
+                  <a th:href="@{booking}">在线预约</a>
                 </li>
                 <!--                                    联系我们-->
                 <li>
-                  <a href="contact.html">联系我们</a>
+                  <a th:href="@{contact}">联系我们</a>
                 </li>
+                <!--                                    <li class="drop-holder">-->
+                <!--                                        <a href="blog.html">Blog</a>-->
+                <!--                                        <ul class="drop-menu">-->
+                <!--                                            <li>-->
+                <!--                                                <a href="blog-listview.html">Blog List View</a>-->
+                <!--                                            </li>-->
+                <!--                                            <li>-->
+                <!--                                                <a href="blog-detail.html">Blog Detail</a>-->
+                <!--                                            </li>-->
+                <!--                                        </ul>-->
+                <!--                                    </li>-->
+                <!--                                    <li class="drop-holder">-->
+                <!--                                        <a href="#">Pages</a>-->
+                <!--                                        <ul class="drop-menu">-->
+                <!--                                            <li>-->
+                <!--                                                <a href="faq.html">FAQ</a>-->
+                <!--                                            </li>-->
+                <!--                                            <li>-->
+                <!--                                                <a href="404.html">Error 404</a>-->
+                <!--                                            </li>-->
+                <!--                                        </ul>-->
+                <!--                                    </li>-->
               </ul>
             </nav>
           </div>
@@ -229,7 +251,6 @@
       </div>
     </div>
   </div>
-
   <div class="header-sticky py-4 py-lg-0">
     <div class="container">
       <div class="header-nav position-relative">
@@ -237,7 +258,7 @@
           <div class="col-lg-3 col-6">
 
             <a href="" class="header-logo" style="margin-right: 20px">
-              <img src="../static/picture/dark.png" alt="Header Logo">
+              <img src="Path/picture/dark.png" alt="Header Logo">
             </a>
 
           </div>
@@ -246,11 +267,11 @@
               <nav class="main-nav">
                 <ul>
                   <li class="drop-holder">
-                    <a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                    <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                   </li>
                   <!--                                    精装案例-->
                   <li class="megamenu-holder">
-                    <a href="shop-grid-fullwidth.html">精装案例</a>
+                    <a th:href="@{fullwidth}">精装案例</a>
                     <ul class="drop-menu megamenu">
                       <li>
                         <span class="title">Shop Layout</span>
@@ -328,23 +349,23 @@
                   </li>
                   <!--                                    设计团队-->
                   <li>
-                    <a href="designer-list.html">设计团队</a>
+                    <a th:href="@{designer-list}">设计团队</a>
                   </li>
                   <!--                                    品质工程-->
                   <li>
-                    <a href="about.html">品质工程</a>
+                    <a th:href="@{worker-list}">品质工程</a>
                   </li>
                   <!--                                    营销活动-->
                   <li>
-                    <a href="about.html">营销活动</a>
+                    <a th:href="@{discount}">营销活动</a>
                   </li>
                   <!--                                    在线预约-->
                   <li>
-                    <a href="about.html">在线预约</a>
+                    <a th:href="@{booking}">在线预约</a>
                   </li>
                   <!--                                    联系我们-->
                   <li>
-                    <a href="contact.html">联系我们</a>
+                    <a th:href="@{contact}">联系我们</a>
                   </li>
                 </ul>
               </nav>
@@ -360,8 +381,8 @@
                     <i class="pe-7s-users"></i>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                    <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                    <li><a class="dropdown-item" href="login-register.html">Login | Register</a>
+                    <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
+                    <li><a class="dropdown-item" th:href="@{login-register}">Login | Register</a>
                     </li>
                   </ul>
                 </li>
@@ -377,7 +398,6 @@
       </div>
     </div>
   </div>
-
   <div class="mobile-menu_wrapper" id="mobileMenu">
     <div class="offcanvas-body">
       <div class="inner-body">
@@ -417,12 +437,12 @@
                 <i class="pe-7s-users"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
-                <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                <li><a class="dropdown-item" href="login-register.html">Login | Register</a></li>
+                <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
+                <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
               </ul>
             </li>
             <li>
-              <a href="wishlist.html">
+              <a>
                 <i class="pe-7s-like"></i>
               </a>
             </li>
@@ -640,7 +660,31 @@
       </div>
     </div>
   </div>
-
+  <!--        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">-->
+  <!--            <div class="modal-dialog modal-fullscreen">-->
+  <!--                <div class="modal-content modal-bg-dark">-->
+  <!--                    <div class="modal-header">-->
+  <!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"-->
+  <!--                                data-tippy="Close" data-tippy-inertia="true" data-tippy-animation="shift-away"-->
+  <!--                                data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">-->
+  <!--                        </button>-->
+  <!--                    </div>-->
+  <!--                    <div class="modal-body">-->
+  <!--                        <div class="modal-search">-->
+  <!--                            <span class="searchbox-info">Start typing and press Enter to search or ESC to close</span>-->
+  <!--                            <form action="#" class="hm-searchbox">-->
+  <!--                                <input type="text" name="Search..." value="Search..."-->
+  <!--                                       onblur="if(this.value==''){this.value='Search...'}"-->
+  <!--                                       onfocus="if(this.value=='Search...'){this.value=''}" autocomplete="off">-->
+  <!--                                <button class="search-btn" type="submit" aria-label="searchbtn">-->
+  <!--                                    <i class="pe-7s-search"></i>-->
+  <!--                                </button>-->
+  <!--                            </form>-->
+  <!--                        </div>-->
+  <!--                    </div>-->
+  <!--                </div>-->
+  <!--            </div>-->
+  <!--        </div>-->
   <div class="offcanvas-minicart_wrapper" id="miniCart">
     <div class="offcanvas-body">
       <div class="minicart-content">
@@ -659,7 +703,7 @@
                                                        data-tippy-delay="50" data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder"></i></a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="../static/picture/2-1-70x78.png" alt="Product Image">
+              <img class="img-full" src="Path/picture/2-1-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">American Marigold</a>
@@ -673,7 +717,7 @@
                                                        data-tippy-delay="50" data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder"></i></a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="../static/picture/2-2-70x78.png" alt="Product Image">
+              <img class="img-full" src="Path/picture/2-2-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">Black Eyed Susan</a>
@@ -687,7 +731,7 @@
                  data-tippy-theme="sharpborder"></i>
             </a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="../static/picture/2-3-70x78.png" alt="Product Image">
+              <img class="img-full" src="Path/picture/2-3-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">Bleeding Heart</a>
@@ -723,11 +767,11 @@
           <div class="doctor-widget">
             <div class="doc-info-left">
               <div class="doctor-img">
-                <img src="../static/image/dis1.jpg" class="img-fluid" alt="User Image">
+                <img src="Path/image/dis1.jpg" class="img-fluid" alt="User Image">
               </div>
               <div class="doc-info-cont">
                 <h4 class="doc-name" style="padding: 4px">李严峻</h4>
-                <p class="doc-department"><img src="../static/picture/v.png" class="img-fluid" alt="Speciality">首席设计师</p>
+                <p class="doc-department"><img src="Path/picture/v.png" class="img-fluid" alt="Speciality">首席设计师</p>
                 <div class="clinic-services">
                   <span>现代</span>
                   <span>简约</span>
@@ -787,7 +831,7 @@
                                 <h3 class="post-title"><a href="#">轻奢高级感</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">李严峻</a></li>
@@ -808,7 +852,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -829,7 +873,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -850,7 +894,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -871,7 +915,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -892,7 +936,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -913,7 +957,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -934,7 +978,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -955,7 +999,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -976,7 +1020,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -997,7 +1041,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -1022,7 +1066,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -1043,7 +1087,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -1064,7 +1108,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -1085,7 +1129,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -1106,7 +1150,7 @@
                                 <h3 class="post-title"><a href="#">Latest News Post</a></h3>
                               </div>
                               <div class="pic">
-                                <img src="../static/image/ad1.jpg" alt=""/>
+                                <img src="Path/image/ad1.jpg" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
@@ -1140,7 +1184,7 @@
 
 
 <!-- Begin Footer Area -->
-<div class="footer-area" data-bg-image="../static/image/1-1920x465.jpg">
+<div class="footer-area" data-bg-image="Path/image/1-1920x465.jpg">
   <div class="footer-top section-space-top-100 pb-60">
     <div class="container">
       <div class="row">
@@ -1148,7 +1192,7 @@
           <div class="footer-widget-item">
             <div class="footer-widget-logo">
               <a href="">
-                <img src="../static/picture/dark.png" alt="Logo">
+                <img src="Path/picture/dark.png" alt="Logo">
               </a>
             </div>
             <p class="footer-widget-desc">Lorem ipsum dolor sit amet, consec adipisl elit, sed do
@@ -1271,7 +1315,7 @@
           </div>
           <div class="payment-method">
             <a href="#">
-              <img src="../static/picture/1.png" alt="Payment Method">
+              <img src="Path/picture/1.png" alt="Payment Method">
             </a>
           </div>
         </div>
@@ -1313,25 +1357,25 @@
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="../static/picture/1-1-570x633.jpg"
+                      <img class="img-full" src="Path/picture/1-1-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="../static/picture/1-2-570x633.jpg"
+                      <img class="img-full" src="Path/picture/1-2-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="../static/picture/1-3-570x633.jpg"
+                      <img class="img-full" src="Path/picture/1-3-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="../static/picture/1-4-570x633.jpg"
+                      <img class="img-full" src="Path/picture/1-4-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
@@ -1408,7 +1452,7 @@
               <ul class="service-item-wrap pb-0">
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="../static/picture/car.png" alt="Shipping Icon">
+                    <img src="Path/picture/car.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Free <br> Shipping</span>
@@ -1416,7 +1460,7 @@
                 </li>
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="../static/picture/card.png" alt="Shipping Icon">
+                    <img src="Path/picture/card.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Safe <br> Payment</span>
@@ -1424,7 +1468,7 @@
                 </li>
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="../static/picture/service.png" alt="Shipping Icon">
+                    <img src="Path/picture/service.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Safe <br> Payment</span>
@@ -1446,10 +1490,10 @@
 </a>
 <!-- Scroll To Top End Here -->
 
-<script src="../static/js/plugins.min.js"></script>
-<script src="../static/js/jquery-2.1.1.min.js"></script>
-<script src="../static/js/main.js"></script> <!-- Resource jQuery -->
-<script src="../static/js/jquery.min.js"></script>
+<script src="Path/js/plugins.min.js"></script>
+<script src="Path/js/jquery-2.1.1.min.js"></script>
+<script src="Path/js/main.js"></script> <!-- Resource jQuery -->
+<script src="Path/js/jquery.min.js"></script>
 </body>
 
 <style>

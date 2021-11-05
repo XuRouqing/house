@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -70,8 +70,8 @@
                                     用户
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="settingButton">
-                                    <li><a class="dropdown-item" href="my-account.html">个人信息</a></li>
-                                    <li><a class="dropdown-item" href="login-register.html">退出</a>
+                                    <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
+                                    <li><a class="dropdown-item" onclick="logout()">退出</a>
                                     </li>
                                 </ul>
                             </li>
@@ -93,7 +93,7 @@
                             <i class="pe-7s-call"></i>
                             <a href="tel://+00-123-456-789">+00 123 456 789</a>
                         </div>
-                        <a href="" class="header-logo">
+                        <a class="header-logo">
                             <img src="Path/picture/dark.png" alt="Header Logo">
                         </a>
 <!--                            搜索框-->
@@ -131,11 +131,11 @@
                             <ul>
 <!--                                    首页-->
                                 <li class="drop-holder">
-                                    <a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                                    <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                 </li>
 <!--                                    精装案例-->
                                 <li class="megamenu-holder">
-                                    <a href="shop-grid-fullwidth.html">精装案例</a>
+                                    <a th:href="@{fullwidth}">精装案例</a>
                                     <ul class="drop-menu megamenu">
                                         <li>
                                             <span class="title">Shop Layout</span>
@@ -213,23 +213,23 @@
                                 </li>
 <!--                                    设计团队-->
                                 <li>
-                                    <a href="designer-list.html">设计团队</a>
+                                    <a th:href="@{designer-list}">设计团队</a>
                                 </li>
 <!--                                    品质工程-->
                                 <li>
-                                    <a href="about.html">品质工程</a>
+                                    <a th:href="@{worker-list}">品质工程</a>
                                 </li>
 <!--                                    营销活动-->
                                 <li>
-                                    <a href="about.html">营销活动</a>
+                                    <a th:href="@{discount}">营销活动</a>
                                 </li>
 <!--                                    在线预约-->
                                 <li>
-                                    <a href="about.html">在线预约</a>
+                                    <a th:href="@{booking}">在线预约</a>
                                 </li>
 <!--                                    联系我们-->
                                 <li>
-                                    <a href="contact.html">联系我们</a>
+                                    <a th:href="@{contact}">联系我们</a>
                                 </li>
 <!--                                    <li class="drop-holder">-->
 <!--                                        <a href="blog.html">Blog</a>-->
@@ -276,11 +276,11 @@
                             <nav class="main-nav">
                                 <ul>
                                     <li class="drop-holder">
-                                        <a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                                        <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                     </li>
 <!--                                    精装案例-->
                                     <li class="megamenu-holder">
-                                        <a href="shop-grid-fullwidth.html">精装案例</a>
+                                        <a th:href="@{fullwidth}">精装案例</a>
                                         <ul class="drop-menu megamenu">
                                             <li>
                                                 <span class="title">Shop Layout</span>
@@ -358,23 +358,23 @@
                                     </li>
 <!--                                    设计团队-->
                                     <li>
-                                        <a href="designer-list.html">设计团队</a>
+                                        <a th:href="@{designer-list}">设计团队</a>
                                     </li>
 <!--                                    品质工程-->
                                     <li>
-                                        <a href="about.html">品质工程</a>
+                                        <a th:href="@{worker-list}">品质工程</a>
                                     </li>
-<!--                                    营销活动-->
+                                    <!--                                    营销活动-->
                                     <li>
-                                        <a href="about.html">营销活动</a>
+                                        <a th:href="@{discount}">营销活动</a>
                                     </li>
-<!--                                    在线预约-->
+                                    <!--                                    在线预约-->
                                     <li>
-                                        <a href="about.html">在线预约</a>
+                                        <a th:href="@{booking}">在线预约</a>
                                     </li>
-<!--                                    联系我们-->
+                                    <!--                                    联系我们-->
                                     <li>
-                                        <a href="contact.html">联系我们</a>
+                                        <a th:href="@{contact}">联系我们</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -390,8 +390,8 @@
                                         <i class="pe-7s-users"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                                        <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                                        <li><a class="dropdown-item" href="login-register.html">Login | Register</a>
+                                        <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
+                                        <li><a class="dropdown-item" th:href="@{login-register}">Login | Register</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -446,12 +446,12 @@
                                 <i class="pe-7s-users"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
-                                <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                                <li><a class="dropdown-item" href="login-register.html">Login | Register</a></li>
+                                <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
+                                <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="wishlist.html">
+                            <a>
                                 <i class="pe-7s-like"></i>
                             </a>
                         </li>
@@ -968,7 +968,7 @@
         </div>
     </div>
     <div style="margin-top: 30px;text-align: center">
-        <button class="more"><a href="shop-grid-fullwidth.html" style="color: white">查看更多</a></button>
+        <button class="more"><a th:href="@{fullwidth}">查看更多</a></button>
     </div>
 </div>
 <!-- 精装案例 -->
