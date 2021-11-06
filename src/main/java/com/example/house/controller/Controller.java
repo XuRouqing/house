@@ -1,13 +1,27 @@
 package com.example.house.controller;
 
 
+import com.example.house.pojo.Designer;
+import com.example.house.service.DesignerService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("")
 public class Controller {
+
+    @Autowired
+    private DesignerService designerService;
+
     @RequestMapping("/index")
     public String testSession(HttpSession session) {
         return "index";
@@ -23,9 +37,21 @@ public class Controller {
         return "shop-grid-fullwidth";
     }
 
+//    @RequestMapping("/designer-list")
+//    public String todesignerlist() {
+//        return "designer-list.html";
+//    }
+
     @RequestMapping("/designer-list")
-    public String todesignerlist() {
-        return "designer-list.html";
+    public String todesignerlist(Model model, @RequestParam(required = true,defaultValue = "1") Integer pageNow,
+                                 @RequestParam(required = false,defaultValue = "8") Integer pageSize, HttpServletRequest request){
+        PageHelper.startPage(pageNow,5);
+        List<Designer> designers=designerService.getDesignerListByPage(pageNow,pageSize);
+//        List<Designer> designers=designerService.getDesignerList();
+        PageInfo<Designer> designerPageInfo=new PageInfo<>(designers);
+        model.addAttribute("pageInfo",designerPageInfo);
+        model.addAttribute("designerInfo",designers);
+        return "designer-list";
     }
 
     @RequestMapping("/worker-list")
@@ -57,4 +83,6 @@ public class Controller {
     public String tobooking() {
         return "booking.html";
     }
+
+
 }

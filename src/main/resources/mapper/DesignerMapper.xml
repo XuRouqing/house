@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.DesignerMapper">
+
+    <insert id="insertDesigner" parameterType="Designer">
+        insert into designer (name,gender,workingAge,level,style,represent,tel,age,pic)
+        values (#{name},#{gender},#{workingAge},#{level},#{style},#{represent},#{tel},#{age},#{pic})
+    </insert>
+
+    <select id="selectDesignerById" resultType="Designer">
+        select * from designer where id = #{id}
+    </select>
+
+    <select id="selectDesignerAll" resultType="Designer">
+        select * from designer
+    </select>
+
+    <select id="findDesignerByName" resultType="Designer">
+        select * from designer
+        where name = #{name}
+    </select>
+
+    <update id="modifyDesigner" parameterType="Designer">
+        UPDATE designer SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteDesigner" parameterType="Designer">
+        DELETE FROM designer
+        WHERE id=#{id}
+    </delete>
+
+</mapper>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -829,360 +829,29 @@
                                  aria-labelledby="grid-view-tab">
 
                                 <div class="row row-grid">
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="col-md-6 col-lg-4 col-xl-3" th:each="designer : ${designerInfo}">
                                         <div class="card widget-profile pat-widget-profile">
                                             <div class="card-body">
                                                 <div class="pro-widget-content">
                                                     <div class="profile-info-widget">
                                                         <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
+                                                            <img th:src="'Path'+${designer.pic}" alt="Designer Image">
                                                         </a>
                                                         <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
+                                                            <h3><a href="patient-profile.html" th:text="${designer.name}">李严峻</a></h3>
 
                                                             <div class="patient-details">
                                                                 <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
+                                                                <h5 class="mb-0"><i class="fas fa-map-marker-alt"><span th:text="${designer.level}"></span></i></h5>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="patient-info">
                                                     <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="card widget-profile pat-widget-profile">
-                                            <div class="card-body">
-                                                <div class="pro-widget-content">
-                                                    <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
-                                                            <img src="Path/image/dis1.jpg" alt="User Image">
-                                                        </a>
-                                                        <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html">李严峻</a></h3>
-
-                                                            <div class="patient-details">
-                                                                <h5><b></b></h5>
-                                                                <h5 class="mb-0"><i
-                                                                        class="fas fa-map-marker-alt">首席设计师</i></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="patient-info">
-                                                    <ul>
-                                                        <li>联系电话<span>19520018563</span></li>
-                                                        <li>擅长风格<span>复古、美式</span></li>
-                                                        <li>代表作<span>桃源小镇 、 复地悦之城</span></li>
+                                                        <li>联系电话<span th:text="${designer.tel}"></span></li>
+                                                        <li>擅长风格<span th:text="${designer.style}"></span></li>
+                                                        <li>代表作<span th:text="${designer.represent}"></span></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -1194,14 +863,22 @@
                         </div>
 
                     </div>
+
                     <div class="pagination-area" style="text-align: center">
                         <nav aria-label="Page navigation example" style="margin: 0 auto">
                             <ul class="pagination justify-content-center">
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                                <li>
+                                    <a class="page-link" th:href="@{/designer-list?pageNow=}+${pageInfo.prePage}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:each="page:${pageInfo.navigatepageNums}" style="padding: 0" th:class="${page==pageInfo.getPrePage()+1?'page-item active':'page-item'}">
+                                    <a class="page-link" th:href="@{/designer-list?pageNow=}+${page}" th:text="${page}"></a>
+                                </li>
+                                <li>
+                                    <a class="page-link" th:href="@{/designer-list?pageNow=}+${pageInfo.nextPage}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo</span>
+                                    </a>
                                 </li>
                             </ul>
                         </nav>
@@ -1557,7 +1234,7 @@
     }
 
     .page-link {
-        margin: 10px;
+        margin: 0px;
         font-size: 16px;
         font-family: Rubik;
     }
