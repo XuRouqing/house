@@ -18,6 +18,13 @@
         select * from designer
     </select>
 
+    <select id="selectDesignerBySL" resultType="Designer">
+        select * from designer
+        where 1=1
+            and (style like CONCAT(CONCAT('%',#{style},'%')) or #{style}='')
+            and (level=#{level} or #{level}='')
+    </select>
+
     <select id="findDesignerByName" resultType="Designer">
         select * from designer
         where name = #{name}

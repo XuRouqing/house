@@ -37,6 +37,13 @@ public class DesignerServiceImp implements DesignerService  {
         return designers;
     }
 
+    @Override
+    public List<Designer> getDesignerByPageAndSL(int pageNow, int pageCount, String style, String level){
+        PageHelper.startPage(pageNow, pageCount);
+        List<Designer> designers = designerMapper.selectDesignerBySL(style, level);
+        return designers;
+    }
+
 
     @Override
     public Designer findDesignerByName(String name){

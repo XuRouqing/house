@@ -37,22 +37,29 @@ public class Controller {
         return "shop-grid-fullwidth";
     }
 
-//    @RequestMapping("/designer-list")
-//    public String todesignerlist() {
-//        return "designer-list.html";
-//    }
-
     @RequestMapping("/designer-list")
     public String todesignerlist(Model model, @RequestParam(required = true,defaultValue = "1") Integer pageNow,
-                                 @RequestParam(required = false,defaultValue = "8") Integer pageSize, HttpServletRequest request){
+                                 @RequestParam(required = false, defaultValue = "8") Integer pageSize,
+                                 @RequestParam(required = false, defaultValue = "") String style,
+                                 @RequestParam(required = false, defaultValue = "") String level ){
         PageHelper.startPage(pageNow,5);
-        List<Designer> designers=designerService.getDesignerListByPage(pageNow,pageSize);
-//        List<Designer> designers=designerService.getDesignerList();
+        List<Designer> designers=designerService.getDesignerByPageAndSL(pageNow,pageSize,style,level);
         PageInfo<Designer> designerPageInfo=new PageInfo<>(designers);
         model.addAttribute("pageInfo",designerPageInfo);
         model.addAttribute("designerInfo",designers);
         return "designer-list";
     }
+
+//    @RequestMapping("/designer-list")
+//    public String todesignerlist(Model model, @RequestParam(required = true,defaultValue = "1") Integer pageNow,
+//                                 @RequestParam(required = false,defaultValue = "8") Integer pageSize, HttpServletRequest request){
+//        PageHelper.startPage(pageNow,5);
+//        List<Designer> designers=designerService.getDesignerListByPage(pageNow,pageSize);
+//        PageInfo<Designer> designerPageInfo=new PageInfo<>(designers);
+//        model.addAttribute("pageInfo",designerPageInfo);
+//        model.addAttribute("designerInfo",designers);
+//        return "designer-list";
+//    }
 
     @RequestMapping("/worker-list")
     public String toworkderlist() {

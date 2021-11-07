@@ -5,6 +5,7 @@ import com.example.house.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import sun.security.krb5.internal.crypto.Des;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface DesignerMapper {
     Designer selectDesignerById(int id);
     List<Designer> selectDesignerAll();
     public Designer findDesignerByName(@Param("name") String name);
+    public List<Designer> selectDesignerBySL(String style, String level);
     public void modifyDesigner(Designer designer);
     public void deleteDesigner(Integer id);
 }

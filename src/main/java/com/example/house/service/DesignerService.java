@@ -9,6 +9,7 @@ public interface DesignerService {
     public Designer findDesignerById(Integer id);
     public List<Designer> getDesignerList();
     public List<Designer> getDesignerListByPage(int pageNow, int pageCount);
+    public List<Designer> getDesignerByPageAndSL(int pageNow, int pageCount, String style, String level);
     public Designer findDesignerByName(String name);
     public void modifyDesigner(Designer designer);
     public void deleteDesigner(Integer id);
