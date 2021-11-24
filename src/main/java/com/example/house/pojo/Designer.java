@@ -22,4 +22,7 @@ public class Designer {
     private String tel;
     private int age;
     private String pic;
+    private String form;
+    private String location;
+
 }

@@ -17,6 +17,8 @@ import org.springframework.web.util.UrlPathHelper;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.Style;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
@@ -27,7 +29,9 @@ public class Controller {
     private DesignerService designerService;
 
     @RequestMapping("/index")
-    public String testSession(HttpSession session) {
+    public String testSession(HttpSession session, Model model) {
+        List<Designer> designers=designerService.getTopNDesigner(5);
+        model.addAttribute("designerInfo",designers);
         return "index";
     }
 
@@ -89,7 +93,7 @@ public class Controller {
 
     @RequestMapping("/designer-list")
     public String todesignerlist(Model model, @RequestParam(required = true,defaultValue = "1") Integer pageNow,
-                                 @RequestParam(required = false, defaultValue = "8") Integer pageSize,
+                                 @RequestParam(required = false, defaultValue = "9") Integer pageSize,
                                  @RequestParam(required = false, defaultValue = "") String style,
                                  @RequestParam(required = false, defaultValue = "") String level,
                                  HttpServletRequest request){
@@ -145,6 +149,18 @@ public class Controller {
 //        model.addAttribute("designerInfo",designers);
 //        return "designer-list";
 //    }
+
+//    @RequestMapping("/designer")
+//    public String todesigner() {
+//        return "designer.html";
+//    }
+
+    @RequestMapping("/designer/{id}")
+    public String todesigner(@PathVariable int id, Model model) {
+        Designer designer=designerService.findDesignerById(id);
+        model.addAttribute("designerInfo",designer);
+        return "designer";
+    }
 
     @RequestMapping("/worker-list")
     public String toworkderlist() {

@@ -53,48 +53,6 @@
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="Path/css/bookStyle.css">
 
-    <script language="JavaScript">
-        function classify(){
-            var test = window.location.href;
-            var test1 = window.location.href;
-            var levelP=test.indexOf("level");
-            var levelT,level,styleT,style;
-            if(levelP!=-1){
-                levelT=test.substring(levelP);
-                if (levelT.indexOf('&')!=-1){
-                    level=levelT.substring(0,levelT.indexOf('&')-1);
-                }
-                else {
-                    level=levelT;
-                }
-            }
-            var styleP=test1.indexOf("style");
-            if(styleP!=-1){
-                styleT=test1.substring(styleP);
-                if (styleT.indexOf('&')!=-1){
-                    style=styleT.substring(0,styleT.indexOf('&')-1);
-                }
-                else {
-                    style=styleT;
-                }
-            }
-        }
-
-        function getStyle(){
-            var test = window.location.href;
-            var styleP=test.indexOf("style");
-            if(styleP!=-1){
-                styleT=test.substring(styleP);
-                if (styleT.indexOf('&')!=-1){
-                    style=styleT.substring(0,styleT.indexOf('&')-1);
-                }
-                else {
-                    style=styleT;
-                }
-            }
-            return style;
-        }
-    </script>
 </head>
 
 <body>
@@ -843,7 +801,7 @@
                         <a href="#" rel="beiou" name="style" class="default">北欧</a>
                         <a href="#" rel="fugu" name="style" class="default">复古</a>
                         <a href="#" rel="hunda" name="style" class="default">混搭</a>
-                        <a href="#" rel="xinggudai" name="style" class="default">新古典</a>
+                        <a href="#" rel="xingudai" name="style" class="default">新古典</a>
                         <a href="#" rel="dizhonghai" name="style" class="default">地中海</a>
                         <a href="#" rel="dongnandya" name="style" class="default">东南亚</a>
                         <a href="#" rel="other" name="style" class="default">其他</a>
@@ -853,7 +811,7 @@
                     <dt style="width: 80px">等级</dt>
                     <dd>
                         <a href="#" rel="allLevel" name="level" class="all on">全部</a>
-                        <a href="#" rel="shejizongjian" name="level" class="default">设计总监</a>
+                        <a href="#" rel="zongjian" name="level" class="default">设计总监</a>
                         <a href="#" rel="shouxi" name="level" class="default">首席设计师</a>
                         <a href="#" rel="zhureng" name="level" class="default">主任设计师</a>
                         <a href="#" rel="fuzhureng" name="level" class="default">副主任设计师</a>
@@ -869,18 +827,17 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="grid-view" role="tabpanel"
                                  aria-labelledby="grid-view-tab">
-
                                 <div class="row row-grid">
                                     <div class="col-md-6 col-lg-4 col-xl-3" th:each="designer : ${designerInfo}">
                                         <div class="card widget-profile pat-widget-profile">
                                             <div class="card-body">
                                                 <div class="pro-widget-content">
                                                     <div class="profile-info-widget">
-                                                        <a href="patient-profile.html" class="booking-doc-img">
+                                                        <a th:href="@{/designer/}+${designer.id}" class="booking-doc-img">
                                                             <img th:src="'Path'+${designer.pic}" alt="Designer Image">
                                                         </a>
                                                         <div class="profile-det-info">
-                                                            <h3><a href="patient-profile.html" th:text="${designer.name}">李严峻</a></h3>
+                                                            <h3><a th:href="@{/designer/}+${designer.id}" th:text="${designer.name}">李严峻</a></h3>
 
                                                             <div class="patient-details">
                                                                 <h5><b></b></h5>
@@ -893,7 +850,7 @@
                                                     <ul>
                                                         <li>联系电话<span th:text="${designer.tel}"></span></li>
                                                         <li>擅长风格<span th:text="${designer.style}"></span></li>
-                                                        <li>代表作<span th:text="${designer.represent}"></span></li>
+                                                        <li>代表作<span th:text="${designer.represent}" style="max-width:160px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;"></span></li>
                                                     </ul>
                                                 </div>
                                             </div>

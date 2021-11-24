@@ -6,8 +6,8 @@
 <mapper namespace="com.example.house.dao.DesignerMapper">
 
     <insert id="insertDesigner" parameterType="Designer">
-        insert into designer (name,gender,workingAge,level,style,represent,tel,age,pic)
-        values (#{name},#{gender},#{workingAge},#{level},#{style},#{represent},#{tel},#{age},#{pic})
+        insert into designer (name,gender,workingAge,level,style,represent,tel,age,pic,form)
+        values (#{name},#{gender},#{workingAge},#{level},#{style},#{represent},#{tel},#{age},#{pic},#{form})
     </insert>
 
     <select id="selectDesignerById" resultType="Designer">
@@ -23,6 +23,10 @@
         where 1=1
             and (styleValue like CONCAT(CONCAT('%',#{style},'%')) or #{style}='')
             and (levelValue=#{level} or #{level}='')
+    </select>
+
+    <select id="selectTopNDesigner" resultType="Designer">
+        select * from designer limit #{n}
     </select>
 
     <select id="findDesignerByName" resultType="Designer">

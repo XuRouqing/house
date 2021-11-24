@@ -44,6 +44,11 @@ public class DesignerServiceImp implements DesignerService  {
         return designers;
     }
 
+    @Override
+    public List<Designer> getTopNDesigner(int n){
+        List<Designer> designers = designerMapper.selectTopNDesigner(n);
+        return designers;
+    }
 
     @Override
     public Designer findDesignerByName(String name){

@@ -968,7 +968,7 @@
         </div>
     </div>
     <div style="margin-top: 30px;text-align: center">
-        <button class="more"><a th:href="@{fullwidth}">查看更多</a></button>
+        <button class="more"><a th:href="@{fullwidth}" style="color: white">查看更多</a></button>
     </div>
 </div>
 <!-- 精装案例 -->
@@ -1015,63 +1015,27 @@
         <div class="testimonial-bg" data-bg-image="static/image/1-1-1820x443.jpg">
             <div class="section-title-wrap">
                 <h2 class="section-title">设计团队</h2>
-                <p class="section-desc mb-0">Contrary to popular belief, Lorem Ipsum is not simply random
-                    text. It has roots in a piece of classical Latin literature
-                </p>
+<!--                <p class="section-desc mb-0">Contrary to popular belief, Lorem Ipsum is not simply random-->
+<!--                    text. It has roots in a piece of classical Latin literature-->
+<!--                </p>-->
             </div>
         </div>
         <div class="container custom-space">
             <div class="swiper-container testimonial-slider with-bg">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide testimonial-item">
+                    <div class="swiper-slide testimonial-item" th:each="designer : ${designerInfo}">
                         <div class="user-info mb-3">
                             <div class="user-shape-wrap">
                                 <div class="user-img">
-                                    <img src="Path/picture/11.png" alt="User Image">
+                                    <img style="width: 77px;height: 77px;border-radius: 100px" th:src="'Path'+${designer.pic}" alt="User Image">
                                 </div>
                             </div>
                             <div class="user-content text-charcoal">
-                                <h4 class="user-name mb-1">Phoenix Baker</h4>
-                                <span class="user-occupation">Client</span>
+                                <h4 class="user-name mb-1" th:text="${designer.name}"></h4>
+                                <span class="user-occupation" th:text="${designer.level}"></span>
                             </div>
                         </div>
-                        <p class="user-comment mb-6">Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod
-                            tempo
-                            incididunt ut labore et dolore. magna
-                        </p>
-                    </div>
-                    <div class="swiper-slide testimonial-item">
-                        <div class="user-info mb-3">
-                            <div class="user-shape-wrap">
-                                <div class="user-img">
-                                    <img src="Path/picture/2.png" alt="User Image">
-                                </div>
-                            </div>
-                            <div class="user-content text-charcoal">
-                                <h4 class="user-name mb-1">Phoenix Baker</h4>
-                                <span class="user-occupation">Client</span>
-                            </div>
-                        </div>
-                        <p class="user-comment mb-6">Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod
-                            tempo
-                            incididunt ut labore et dolore. magna
-                        </p>
-                    </div>
-                    <div class="swiper-slide testimonial-item">
-                        <div class="user-info mb-3">
-                            <div class="user-shape-wrap">
-                                <div class="user-img">
-                                    <img src="Path/picture/3.png" alt="User Image">
-                                </div>
-                            </div>
-                            <div class="user-content text-charcoal">
-                                <h4 class="user-name mb-1">Phoenix Baker</h4>
-                                <span class="user-occupation">Client</span>
-                            </div>
-                        </div>
-                        <p class="user-comment mb-6">Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod
-                            tempo
-                            incididunt ut labore et dolore. magna
+                        <p class="user-comment mb-6" th:text="${designer.form}">
                         </p>
                     </div>
                 </div>
