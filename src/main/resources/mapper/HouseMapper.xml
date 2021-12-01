@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.HouseMapper">
+
+    <insert id="insertHouse" parameterType="House">
+        insert into house (style,houseType,area,city,local,time,original,plane,price,designerId,workerIds,type,roomIds)
+        values (#{style},#{houseType},#{area},#{city},#{local},#{time},#{original},#{plane},#{price},#{designerId},#{workerIds},#{type},#{roomIds})
+    </insert>
+
+    <select id="selectHouseById" resultType="House">
+        select * from house where houseId = #{houseId}
+    </select>
+
+    <select id="selectHouseAll" resultType="House">
+        select * from house
+    </select>
+
+    <select id="findHouseByDesignerId" resultType="House">
+        select * from house
+        where designerId = #{designerId}
+    </select>
+
+    <update id="modifyHouse" parameterType="House">
+        UPDATE house SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        WHERE houseId=#{houseId}
+    </update>
+
+    <delete id="deleteHouse" parameterType="House">
+        DELETE FROM house
+        WHERE houseId=#{houseId}
+    </delete>
+
+</mapper>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -9,29 +9,29 @@
   <meta name="robots" content="index, follow">
   <meta name="description" content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="Path/css/plugins.min.css">
-  <link rel="stylesheet" href="Path/css/style.min.css">
+  <link rel="stylesheet" href="../Path/css/plugins.min.css">
+  <link rel="stylesheet" href="../Path/css/style.min.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="Path/css/reset.css"> <!-- CSS reset -->
-  <link rel="stylesheet" type="text/css" href="Path/css/htmleaf-demo.css">
-  <link rel="stylesheet" href="Path/css/search.css"> <!-- Resource style -->
-  <script src="Path/js/modernizr.js"></script> <!-- Modernizr -->
-  <link rel="icon" href="Path/image/newlogo.png">
+  <link rel="stylesheet" href="../Path/css/reset.css"> <!-- CSS reset -->
+  <link rel="stylesheet" type="text/css" href="../Path/css/htmleaf-demo.css">
+  <link rel="stylesheet" href="../Path/css/search.css"> <!-- Resource style -->
+  <script src="../Path/js/modernizr.js"></script> <!-- Modernizr -->
+  <link rel="icon" href="../Path/image/newlogo.png">
 
 
   <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.4.0/css/bootstrap.min.css">
 
   <!-- Fontawesome CSS -->
-  <link rel="stylesheet" href="Path/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="Path/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../Path/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="../Path/fontawesome/css/all.min.css">
 
   <!-- Main CSS -->
-  <link rel="stylesheet" href="Path/css/bookStyle.css">
+  <link rel="stylesheet" href="../Path/css/bookStyle.css">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
-  <script src="Path/js/html5shiv.min.js"></script>
-  <script src="Path/js/respond.min.js"></script>
+  <script src="../Path/js/html5shiv.min.js"></script>
+  <script src="../Path/js/respond.min.js"></script>
   <![endif]-->
 </head>
 
@@ -54,7 +54,7 @@
       <div class="row align-items-center">
         <div class="col-6">
           <div class="header-top-left">
-            <img src="Path/image/location.png" width="20px" height="20px">
+            <img src="../Path/image/location.png" width="20px" height="20px">
             <span class="pronia-offer">城市</span>
           </div>
         </div>
@@ -92,7 +92,7 @@
               <a href="tel://+00-123-456-789">+00 123 456 789</a>
             </div>
             <a class="header-logo">
-              <img src="Path/picture/dark.png" alt="Header Logo">
+              <img src="../Path/picture/dark.png" alt="Header Logo">
             </a>
             <!--                            搜索框-->
             <nav class="cd-main-nav-wrapper">
@@ -265,7 +265,7 @@
           <div class="col-lg-3 col-6">
 
             <a href="" class="header-logo" style="margin-right: 20px">
-              <img src="Path/picture/dark.png" alt="Header Logo">
+              <img src="../Path/picture/dark.png" alt="Header Logo">
             </a>
 
           </div>
@@ -710,7 +710,7 @@
                                                        data-tippy-delay="50" data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder"></i></a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="Path/picture/2-1-70x78.png" alt="Product Image">
+              <img class="img-full" src="../Path/picture/2-1-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">American Marigold</a>
@@ -724,7 +724,7 @@
                                                        data-tippy-delay="50" data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder"></i></a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="Path/picture/2-2-70x78.png" alt="Product Image">
+              <img class="img-full" src="../Path/picture/2-2-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">Black Eyed Susan</a>
@@ -738,7 +738,7 @@
                  data-tippy-theme="sharpborder"></i>
             </a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="Path/picture/2-3-70x78.png" alt="Product Image">
+              <img class="img-full" src="../Path/picture/2-3-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">Bleeding Heart</a>
@@ -772,11 +772,11 @@
             <div class="card-body">
               <div class="booking-doc-info">
                 <a href="doctor-profile.html" class="booking-doc-img">
-                  <img src="Path/image/dis1.jpg" alt="User Image">
+                  <img src="../Path/image/dis1.jpg" alt="User Image">
                 </a>
                 <div class="booking-info">
-                  <h4><a href="doctor-profile.html">李严峻</a></h4>
-                  <p class="text-muted mb-0"><img src="Path/image/location.png" style="height: 15px;width: 15px">浙江 温州</p>
+                  <h4 th:text="${designerInfo.name}"><a th:href="'../'+@{designer/}+${designerInfo.id}"></a></h4>
+                  <p class="text-muted mb-0" th:text="${designerInfo.location}"><img src="../Path/image/location.png" style="height: 15px;width: 15px">浙江 温州</p>
                 </div>
               </div>
             </div>
@@ -920,7 +920,7 @@
 </div>
 
 <!-- Begin Footer Area -->
-<div class="footer-area" data-bg-image="Path/image/1-1920x465.jpg">
+<div class="footer-area" data-bg-image="../Path/image/1-1920x465.jpg">
   <div class="footer-top section-space-top-100 pb-60">
     <div class="container">
       <div class="row">
@@ -928,7 +928,7 @@
           <div class="footer-widget-item">
             <div class="footer-widget-logo">
               <a href="">
-                <img src="Path/picture/dark.png" alt="Logo">
+                <img src="../Path/picture/dark.png" alt="Logo">
               </a>
             </div>
             <p class="footer-widget-desc">Lorem ipsum dolor sit amet, consec adipisl elit, sed do
@@ -1051,7 +1051,7 @@
           </div>
           <div class="payment-method">
             <a href="#">
-              <img src="Path/picture/1.png" alt="Payment Method">
+              <img src="../Path/picture/1.png" alt="Payment Method">
             </a>
           </div>
         </div>
@@ -1093,25 +1093,25 @@
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="Path/picture/1-1-570x633.jpg"
+                      <img class="img-full" src="../Path/picture/1-1-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="Path/picture/1-2-570x633.jpg"
+                      <img class="img-full" src="../Path/picture/1-2-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="Path/picture/1-3-570x633.jpg"
+                      <img class="img-full" src="../Path/picture/1-3-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="Path/picture/1-4-570x633.jpg"
+                      <img class="img-full" src="../Path/picture/1-4-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
@@ -1188,7 +1188,7 @@
               <ul class="service-item-wrap pb-0">
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="Path/picture/car.png" alt="Shipping Icon">
+                    <img src="../Path/picture/car.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Free <br> Shipping</span>
@@ -1196,7 +1196,7 @@
                 </li>
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="Path/picture/card.png" alt="Shipping Icon">
+                    <img src="../Path/picture/card.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Safe <br> Payment</span>
@@ -1204,7 +1204,7 @@
                 </li>
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="Path/picture/service.png" alt="Shipping Icon">
+                    <img src="../Path/picture/service.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Safe <br> Payment</span>
@@ -1226,21 +1226,21 @@
 </a>
 <!-- Scroll To Top End Here -->
 
-<script src="Path/js/plugins.min.js"></script>
-<script src="Path/js/jquery-2.1.1.min.js"></script>
-<script src="Path/js/main.js"></script> <!-- Resource jQuery -->
+<script src="../Path/js/plugins.min.js"></script>
+<script src="../Path/js/jquery-2.1.1.min.js"></script>
+<script src="../Path/js/main.js"></script> <!-- Resource jQuery -->
 
-<script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../Path/js/jquery-1.9.1.min.js"></script>
 
 
-<script src="Path/js/jquery.min.js"></script>
+<script src="../Path/js/jquery.min.js"></script>
 
 <!-- Bootstrap Core JS -->
-<script src="Path/js/popper.min.js"></script>
+<script src="../Path/js/popper.min.js"></script>
 <script src="http://cdn.bootstrapmb.com/bootstrap/4.4.0/js/bootstrap.min.js"></script>
 
 <!-- Custom JS -->
-<script src="Path/js/script.js"></script>
+<script src="../Path/js/script.js"></script>
 <script>
   for (var i=0;i<7;i++){
     var week = "week" + (i+1);
@@ -1248,7 +1248,7 @@
     var date = new Date();
     date.setTime(date.getTime()+i*24*60*60*1000);
     var y= date.getFullYear();
-    var m = date.getMonth();
+    var m = date.getMonth()+1;
     var d = date.getDate();
     var w = date.getDay();
     var weekday = "";

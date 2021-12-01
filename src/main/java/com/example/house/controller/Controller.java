@@ -2,7 +2,9 @@ package com.example.house.controller;
 
 
 import com.example.house.pojo.Designer;
+import com.example.house.pojo.House;
 import com.example.house.service.DesignerService;
+import com.example.house.service.HouseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class Controller {
 
     @Autowired
     private DesignerService designerService;
+
+    @Autowired
+    private HouseService houseService;
 
     @RequestMapping("/index")
     public String testSession(HttpSession session, Model model) {
@@ -158,7 +163,9 @@ public class Controller {
     @RequestMapping("/designer/{id}")
     public String todesigner(@PathVariable int id, Model model) {
         Designer designer=designerService.findDesignerById(id);
+        List<House> houses=houseService.findHouseByDesignerId(id);
         model.addAttribute("designerInfo",designer);
+        model.addAttribute("houseInfo",houses);
         return "designer";
     }
 
@@ -187,9 +194,11 @@ public class Controller {
         return "login-register.html";
     }
 
-    @RequestMapping("/booking")
-    public String tobooking() {
-        return "booking.html";
+    @RequestMapping("/booking/{id}")
+    public String tobooking(@PathVariable int id, Model model) {
+        Designer designer=designerService.findDesignerById(id);
+        model.addAttribute("designerInfo",designer);
+        return "booking";
     }
 
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.RoomMapper">
+
+    <insert id="insertRoom" parameterType="Room">
+        insert into Room (roomId,roomType,specificType,style,price)
+        values (#{roomId},#{roomType},#{specificType},#{style},#{price})
+    </insert>
+
+    <select id="selectRoomById" resultType="Room">
+        select * from Room where roomId = #{roomId}
+    </select>
+
+    <select id="selectRoomAll" resultType="Room">
+        select * from Room
+    </select>
+
+    <select id="getRoomByHouseId" resultType="Room">
+        select * from Room
+        where houseId = #{houseId}
+    </select>
+
+    <select id="selectRoomByType" resultType="Room">
+        select * from Room
+        where type = #{type}
+    </select>
+
+    <select id="selectRoomByspecificType" resultType="Room">
+        select * from Room
+        where specificType = #{specificType}
+    </select>
+
+    <select id="selectRoomByStyle" resultType="Room">
+        select * from Room
+        where style = #{style}
+    </select>
+
+    <update id="modifyRoom" parameterType="Room">
+        UPDATE Room SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        WHERE roomId=#{roomId}
+    </update>
+
+    <delete id="deleteRoom" parameterType="Room">
+        DELETE FROM Room
+        WHERE roomId=#{roomId}
+    </delete>
+
+</mapper>
