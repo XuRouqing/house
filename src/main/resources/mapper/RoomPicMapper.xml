@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.RoomPicMapper">
+
+    <insert id="insertRoomPic" parameterType="RoomPic">
+        insert into RoomPic (roomId,href,describe)
+        values (#{roomId},#{href},#{describe})
+    </insert>
+
+    <select id="selectRoomPicById" resultType="RoomPic">
+        select * from RoomPic where picId = #{picId}
+    </select>
+
+    <select id="selectRoomPicAll" resultType="RoomPic">
+        select * from RoomPic
+    </select>
+
+    <select id="selectRoomPicByRoomId" resultType="RoomPic">
+        select * from RoomPic
+        where roomId = #{roomId}
+    </select>
+
+    <update id="modifyRoomPic" parameterType="RoomPic">
+        UPDATE RoomPic SET roomId=#{roomId},href=#{href},describe=#{describe}}
+        WHERE picId=#{picId}
+    </update>
+
+    <delete id="deleteRoomPic" parameterType="RoomPic">
+        DELETE FROM RoomPic
+        WHERE picId=#{picId}
+    </delete>
+
+</mapper>

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @ConfigurationProperties(prefix = "roompic")
 public class RoomPic {
-    private int picID;
+    private int picId;
     private int roomId;
     private String href;
     private String describe;

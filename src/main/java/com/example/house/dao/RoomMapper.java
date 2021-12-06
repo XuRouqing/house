@@ -15,6 +15,7 @@ public interface RoomMapper {
     public List<Room> selectRoomAll();//getRoomList
     public List<Room> getRoomByHouseId(@Param("houseId") int houseId);//getRoomByHouseId
     public List<Room> selectRoomByType(String type);//getRoomByType
+    public List<Room> selectRoomByStyle(String style);//getRoomByStyle
     public List<Room> selectRoomByspecificType(String specificType);//getRoomByspecificType
     public void modifyRoom(Room room);//modifyRoom
     public void deleteRoom(Integer roomId);//deleteRoom

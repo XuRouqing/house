@@ -6,45 +6,65 @@
 <mapper namespace="com.example.house.dao.RoomMapper">
 
     <insert id="insertRoom" parameterType="Room">
-        insert into Room (roomId,roomType,specificType,style,price)
+        insert into room (roomId,roomType,specificType,style,price)
         values (#{roomId},#{roomType},#{specificType},#{style},#{price})
     </insert>
 
     <select id="selectRoomById" resultType="Room">
-        select * from Room where roomId = #{roomId}
+        select * from room
+            where roomId = #{roomId}
     </select>
 
     <select id="selectRoomAll" resultType="Room">
-        select * from Room
+        select * from room
     </select>
 
-    <select id="getRoomByHouseId" resultType="Room">
-        select * from Room
-        where houseId = #{houseId}
+    <select id="getRoomByHouseId" parameterType="int" resultMap="getRoomPic">
+         select * from room left JOIN roompic ON room.roomId=roompic.roomId
+             where room.houseId = #{houseId}
     </select>
+
+    <resultMap id="getRoomPic" type="com.example.house.pojo.Room">
+        <id property="roomId" column="roomId"/>
+        <result property="houseId" column="houseId"/>
+        <result property="roomType" column="roomType"/>
+        <result property="specificType" column="specificType"/>
+        <result property="style" column="style"/>
+        <result property="price" column="price"/>
+        <!--        <collection property="href" ofType="String">-->
+        <!--            <id property="href" column="href"/>-->
+        <!--        </collection>-->
+        <!-- property表示集合类型属性名称，ofType表示集合中的对象是什么类型 -->
+        <collection property="roomPics" ofType="com.example.house.pojo.RoomPic">
+            <id property="picId" column="picId"/>
+            <result property="roomId" column="roomId"/>
+            <result property="href" column="href"/>
+            <result property="describe" column="describe"/>
+        </collection>
+    </resultMap>
 
     <select id="selectRoomByType" resultType="Room">
-        select * from Room
+        select * from room
         where type = #{type}
     </select>
 
     <select id="selectRoomByspecificType" resultType="Room">
-        select * from Room
+        select * from room
         where specificType = #{specificType}
     </select>
 
     <select id="selectRoomByStyle" resultType="Room">
-        select * from Room
+        select * from room
         where style = #{style}
     </select>
 
     <update id="modifyRoom" parameterType="Room">
-        UPDATE Room SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        UPDATE room SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
         WHERE roomId=#{roomId}
     </update>
 
     <delete id="deleteRoom" parameterType="Room">
-        DELETE FROM Room
+        DELETE FROM room
         WHERE roomId=#{roomId}
     </delete>
 

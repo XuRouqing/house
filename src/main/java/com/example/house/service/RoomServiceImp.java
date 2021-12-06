@@ -44,6 +44,11 @@ public class RoomServiceImp implements RoomService  {
     }
 
     @Override
+    public List<Room> getRoomByStyle(String style){
+        return roomMapper.selectRoomByStyle(style);
+    }
+
+    @Override
     public List<Room> getRoomByspecificType(String specificType){
         return roomMapper.selectRoomByspecificType(specificType);
     }
