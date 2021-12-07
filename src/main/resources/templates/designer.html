@@ -145,7 +145,7 @@
               <ul>
                 <!--                                    首页-->
                 <li class="drop-holder">
-                  <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                  <a th:href="'../'+@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <!--                                    精装案例-->
                 <li class="megamenu-holder">
@@ -853,14 +853,14 @@
 <!--                                <h3 class="post-title" th:text="${house.title}"></h3>-->
 <!--                              </div>-->
                               <div class="pic">
-                                <img src="../Path/image/ad1.jpg" alt=""/>
+                                <img style="width: 335px;height: 210px" th:src="${house.mainPic}" alt=""/>
                               </div>
                               <ul class="post-bar">
                                 <li th:text="${house.style}+' | '+${house.houseType}"><i class="fa fa-clock-o"></i></li>
                               </ul>
                               <p class="post-description" th:text="${house.title}">
                               </p>
-                              <a href="#" class="read-more" th:href="@{/designer/case/}+${house.houseId}">查看更多</a>
+                              <a href="#" class="read-more" th:href="@{/case/}+${house.houseId}">查看更多</a>
                             </div>
                           </div>
                         </div>

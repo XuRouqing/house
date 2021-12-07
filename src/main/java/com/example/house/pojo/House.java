@@ -29,4 +29,5 @@ public class House {
     private String roomIds;
     private String title;
     private String describe;
+    private String mainPic;
 }

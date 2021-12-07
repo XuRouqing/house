@@ -157,11 +157,11 @@
                             <ul>
                                 <!--                                    首页-->
                                 <li class="drop-holder">
-                                    <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                                    <a th:href="'../'+@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                 </li>
                                 <!--                                    精装案例-->
                                 <li class="megamenu-holder">
-                                    <a th:href="@{fullwidth}">精装案例</a>
+                                    <a th:href="'../'+@{fullwidth}">精装案例</a>
                                     <ul class="drop-menu megamenu">
                                         <li>
                                             <span class="title">Shop Layout</span>
@@ -794,14 +794,38 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="case-article">
+                    <div style="margin: 0 40px">
+                        <div style="margin-bottom: 40px">
+                            <h3 style="font-weight: normal;color: #384d4d" th:text="${houseInfo.title}"></h3>
+                        </div>
+                        <div style="margin: 70px 0" th:if="${not #strings.isEmpty(houseInfo.describe)}">
+                            <h3 style="margin-bottom: 20px">方案说明</h3>
+                            <p th:text="${houseInfo.describe}"></p>
+                        </div>
+                        <div class="case-work-process" th:if="${not #strings.isEmpty(houseInfo.original)}">
+                            <div class="section-title-wrap">
+                                <h4 class="section-title" th:text="户型图"></h4>
+                            </div>
+                            <div class="case-article-img">
+                                <img style="width: 100%" th:src="'../../Path'+${houseInfo.original}" alt="Images">
+                            </div>
+                        </div>
+                        <div class="case-work-process" th:if="${not #strings.isEmpty(houseInfo.plane)}">
+                            <div class="section-title-wrap">
+                                <h4 class="section-title" th:text="平面图"></h4>
+                            </div>
+                            <div class="case-article-img">
+                                <img style="width: 100%" th:src="'../../Path'+${houseInfo.plane}" alt="Images">
+                            </div>
+                        </div>
+                    </div>
                     <div th:each="room : ${roomsInfo} ">
                         <div class="section-title-wrap">
                             <h4 class="section-title" th:text="${room.specificType}"></h4>
                         </div>
-
                         <div class="case-work-process" th:each="pic : ${room.roomPics}">
                             <div class="case-article-img">
-                                <img th:src="'../../Path'+${pic.href}" alt="Images">
+                                <img style="width: 100%" th:src="'../../Path'+${pic.href}" alt="Images">
                             </div>
                             <p th:text="${pic.describe}"></p>
                         </div>
@@ -1164,6 +1188,17 @@
     }
     a:hover{
         text-decoration:none
+    }
+    .section-title {
+        text-transform: uppercase;
+        position: relative;
+        color: #393939;
+        font-size: 24px;
+        line-height: 40px;
+        padding-left: 90px;
+        padding-right: 90px;
+        font-weight: 520;
+        margin-bottom: 30px;
     }
 </style>
 

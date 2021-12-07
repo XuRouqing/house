@@ -98,7 +98,7 @@ public class Controller {
 
     @RequestMapping("/designer-list")
     public String todesignerlist(Model model, @RequestParam(required = true,defaultValue = "1") Integer pageNow,
-                                 @RequestParam(required = false, defaultValue = "9") Integer pageSize,
+                                 @RequestParam(required = false, defaultValue = "8") Integer pageSize,
                                  @RequestParam(required = false, defaultValue = "") String style,
                                  @RequestParam(required = false, defaultValue = "") String level,
                                  HttpServletRequest request){
