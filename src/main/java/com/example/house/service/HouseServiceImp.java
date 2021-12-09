@@ -1,6 +1,7 @@
 package com.example.house.service;
 
 import com.example.house.dao.HouseMapper;
+import com.example.house.pojo.Designer;
 import com.example.house.pojo.House;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,13 @@ public class HouseServiceImp implements HouseService  {
     public List<House> getHouseListByPage(int pageNow, int pageCount){
         PageHelper.startPage(pageNow, pageCount);
         List<House> houses = houseMapper.selectHouseAll();
+        return houses;
+    }
+
+    @Override
+    public List<House> getHouseByPageAndSTA(int pageNow, int pageCount, String style, String type, String area){
+        PageHelper.startPage(pageNow, pageCount);
+        List<House> houses = houseMapper.selectHouseByPageAndSTA(style, type, area);
         return houses;
     }
 

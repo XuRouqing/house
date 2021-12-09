@@ -852,6 +852,33 @@
                                 </li>
                             </ul>
                         </div>
+                        <div style="margin: 20px 20px 20px 0">
+                            <div class="card widget-profile pat-widget-profile">
+                                <div class="card-body">
+                                    <div class="pro-widget-content">
+                                        <div class="profile-info-widget">
+                                            <a th:href="@{/designer/}+${designerInfo.id}" class="booking-doc-img">
+                                                <img th:src="'../Path'+${designerInfo.pic}" alt="Designer Image">
+                                            </a>
+                                            <div class="profile-det-info">
+                                                <h3><a th:href="@{/designer/}+${designerInfo.id}" th:text="${designerInfo.name}"></a></h3>
+                                                <div class="patient-details">
+                                                    <h5><b></b></h5>
+                                                    <h5 class="mb-0"><span th:text="${designerInfo.level}"></span></i></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="patient-info">
+                                        <ul>
+                                            <li>联系电话<span th:text="${designerInfo.tel}"></span></li>
+                                            <li>擅长风格<span th:text="${designerInfo.style}"></span></li>
+                                            <li>代表作<span th:text="${designerInfo.represent}" style="max-width:160px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 <!--                    <div class="side-bar-widget">-->
 <!--                        <h3 class="title">Tag Cloud</h3>-->

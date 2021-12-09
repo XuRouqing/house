@@ -1,5 +1,6 @@
 package com.example.house.dao;
 
+import com.example.house.pojo.Designer;
 import com.example.house.pojo.House;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -14,6 +15,7 @@ public interface HouseMapper {
     House selectHouseById(int houseId);
     List<House> selectHouseAll();
     public List<House> findHouseByDesignerId(@Param("designerId") int designerId);
+    public List<House> selectHouseByPageAndSTA(String style, String type, String area);
     public void modifyHouse(House house);
     public void deleteHouse(Integer houseId);
 }

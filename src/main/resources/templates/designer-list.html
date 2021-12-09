@@ -837,7 +837,7 @@
                                                             <img th:src="'Path'+${designer.pic}" alt="Designer Image">
                                                         </a>
                                                         <div class="profile-det-info">
-                                                            <h3><a th:href="@{/designer/}+${designer.id}" th:text="${designer.name}">李严峻</a></h3>
+                                                            <h3><a th:href="@{/designer/}+${designer.id}" th:text="${designer.name}"></a></h3>
 
                                                             <div class="patient-details">
                                                                 <h5><b></b></h5>
@@ -856,13 +856,10 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                     <div class="pagination-area" style="text-align: center">
                         <nav aria-label="Page navigation example" style="margin: 0 auto">
                             <ul class="pagination justify-content-center">

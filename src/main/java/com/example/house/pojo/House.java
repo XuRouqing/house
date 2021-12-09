@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 public class House {
     private int houseId;
     private String style;//风格
+    private String styleValue;
     private String houseType;//户型
     private double area;
+    private String areaValue;
     private String city;
     private String local;//具体地点
     private String time;
@@ -26,8 +28,10 @@ public class House {
     private int designerId;
     private String workerIds;
     private String type;//类型（全包、半包、旧改）
+    private String typeValue;
     private String roomIds;
     private String title;
     private String describe;
     private String mainPic;
+    private String designer;
 }

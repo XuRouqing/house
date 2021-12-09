@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -778,42 +778,42 @@
                         <dt style="width: 80px">风格</dt>
                         <dd>
                             <a href="#" rel="" name="style" class="all on">全部</a>
-                            <a href="#" rel="简约" name="style" class="default">简约</a>
-                            <a href="#" rel="现代" name="style" class="default">现代</a>
-                            <a href="#" rel="中式" name="style" class="default">中式</a>
-                            <a href="#" rel="欧式" name="style" class="default">欧式</a>
-                            <a href="#" rel="美式" name="style" class="default">美式</a>
-                            <a href="#" rel="日式" name="style" class="default">日式</a>
-                            <a href="#" rel="田园" name="style" class="default">田园</a>
-                            <a href="#" rel="宜家" name="style" class="default">宜家</a>
-                            <a href="#" rel="北欧" name="style" class="default">北欧</a>
-                            <a href="#" rel="复古" name="style" class="default">复古</a>
-                            <a href="#" rel="混搭" name="style" class="default">混搭</a>
-                            <a href="#" rel="新古典" name="style" class="default">新古典</a>
-                            <a href="#" rel="地中海" name="style" class="default">地中海</a>
-                            <a href="#" rel="东南亚" name="style" class="default">东南亚</a>
-                            <a href="#" rel="其他" name="style" class="default">其他</a>
+                            <a href="#" rel="jianyue" name="style" class="default">简约</a>
+                            <a href="#" rel="xiandai" name="style" class="default">现代</a>
+                            <a href="#" rel="zhongshi" name="style" class="default">中式</a>
+                            <a href="#" rel="oushi" name="style" class="default">欧式</a>
+                            <a href="#" rel="meishi" name="style" class="default">美式</a>
+                            <a href="#" rel="rishi" name="style" class="default">日式</a>
+                            <a href="#" rel="tianyuan" name="style" class="default">田园</a>
+                            <a href="#" rel="yijia" name="style" class="default">宜家</a>
+                            <a href="#" rel="beiou" name="style" class="default">北欧</a>
+                            <a href="#" rel="fugu" name="style" class="default">复古</a>
+                            <a href="#" rel="hunda" name="style" class="default">混搭</a>
+                            <a href="#" rel="xingudai" name="style" class="default">新古典</a>
+                            <a href="#" rel="dizhonghai" name="style" class="default">地中海</a>
+                            <a href="#" rel="dongnandya" name="style" class="default">东南亚</a>
+                            <a href="#" rel="other" name="style" class="default">其他</a>
                         </dd>
                     </dl>
                     <dl class="cation-list">
                         <dt style="width: 80px">装修类型</dt>
                         <dd>
-                            <a href="#" rel="" name="theme" class="all on">全部</a>
-                            <a href="#" rel="全包" name="theme" class="default">全包</a>
-                            <a href="#" rel="半包" name="theme" class="default">半包</a>
-                            <a href="#" rel="其他" name="theme" class="default">其他</a>
+                            <a href="#" rel="" name="type" class="all on">全部</a>
+                            <a href="#" rel="quanbao" name="type" class="default">全包</a>
+                            <a href="#" rel="banbao" name="type" class="default">半包</a>
+                            <a href="#" rel="other" name="type" class="default">其他</a>
                         </dd>
                     </dl>
                     <dl class="cation-list">
                         <dt style="width: 80px">面积</dt>
                         <dd>
                             <a href="#" rel="" name="area" class="all on">全部</a>
-                            <a href="#" rel="0 - 70" name="area" class="default">70㎡以下</a>
-                            <a href="#" rel="70 - 80" name="area" class="default">70㎡ - 80㎡ </a>
-                            <a href="#" rel="80 - 90" name="area" class="default">80㎡ - 90㎡ </a>
-                            <a href="#" rel="90 - 110" name="area" class="default">90㎡ - 110㎡ </a>
-                            <a href="#" rel="110 - 140" name="area" class="default">110㎡ - 140㎡</a>
-                            <a href="#" rel="140 - " name="area" class="default">140㎡以上</a>
+                            <a href="#" rel="0,70" name="area" class="default">70㎡以下</a>
+                            <a href="#" rel="70,80" name="area" class="default">70㎡ - 80㎡ </a>
+                            <a href="#" rel="80,90" name="area" class="default">80㎡ - 90㎡ </a>
+                            <a href="#" rel="90,110" name="area" class="default">90㎡ - 110㎡ </a>
+                            <a href="#" rel="110,140" name="area" class="default">110㎡ - 140㎡</a>
+                            <a href="#" rel="140," name="area" class="default">140㎡以上</a>
                         </dd>
                     </dl>
                 </div>
@@ -822,363 +822,69 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="product-topbar">
-                                <ul>
-                                    <li class="product-view-wrap">
-                                        <ul class="nav" role="tablist">
-                                            <li class="grid-view" role="presentation">
-                                                <a class="active" id="grid-view-tab" data-bs-toggle="tab" href="#grid-view" role="tab" aria-selected="true">
-                                                    <i class="fa fa-th"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-view" role="presentation">
-                                                <a id="list-view-tab" data-bs-toggle="tab" href="#list-view" role="tab" aria-selected="true">
-                                                    <i class="fa fa-th-list"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+<!--                            <div class="product-topbar">-->
+<!--                                <ul>-->
+<!--                                    <li class="product-view-wrap">-->
+<!--                                        <ul class="nav" role="tablist">-->
+<!--                                            <li class="grid-view" role="presentation">-->
+<!--                                                <a class="active" id="grid-view-tab" data-bs-toggle="tab" href="#grid-view" role="tab" aria-selected="true">-->
+<!--                                                    <i class="fa fa-th"></i>-->
+<!--                                                </a>-->
+<!--                                            </li>-->
+<!--                                            <li class="list-view" role="presentation">-->
+<!--                                                <a id="list-view-tab" data-bs-toggle="tab" href="#list-view" role="tab" aria-selected="true">-->
+<!--                                                    <i class="fa fa-th-list"></i>-->
+<!--                                                </a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
-                                    <div class="product-grid-view row g-y-20">
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <h3 class="post-title"><a href="#">轻奢高级感</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">李严峻</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        美式复古风格的房屋尽显高级
-                                                    </p>
-                                                    <a href="#" class="read-more">查看更多</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
+<!--                                <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">-->
+<!--                                    <div class="product-grid-view row g-y-20">-->
+<!--                                        <div class="col-lg-3 col-md-4 col-sm-6" th:each="house : ${houseInfo}">-->
+<!--                                            <div class="product-item">-->
+<!--                                                <div class="post-slide">-->
+<!--                                                    <div class="post-header">-->
+<!--                                                        <p style="height: 50px" class="post-title">-->
+<!--                                                            <a style="font-size: 15px;color: #616161" th:href="@{/case/}+${house.houseId}" th:text="${house.title}"></a>-->
+<!--                                                        </p>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="pic">-->
+<!--                                                        <img style="height: 120px;width: 190px" th:src="'Path'+${house.mainPic}" alt=""/>-->
+<!--                                                    </div>-->
+<!--                                                    <ul class="post-bar">-->
+<!--                                                        <li><i class="fa fa-users"></i> <a th:href="@{/designer/}+${house.designerId}" th:text="${house.designer}"></a></li>-->
+<!--                                                        <li><i class="fa fa-clock-o" th:text="${house.time}"></i></li>-->
+<!--                                                    </ul>-->
+<!--                                                    <p class="post-description myText" th:text="${house.describe}">-->
+<!--                                                    </p>-->
+<!--                                                    <a th:href="@{/case/}+${house.houseId}" class="read-more">查看更多</a>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
                                     <div class="product-list-view row g-y-30">
-                                        <div class="col-12">
+                                        <div class="col-12" th:each="house : ${houseInfo}">
                                             <div class="product-item">
                                                 <div class="post-slide">
                                                     <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
+<!--                                                        <a href="#" class="subtitle">Lorem ipsum</a>-->
+                                                        <h3 class="post-title"><a th:href="@{/case/}+${house.houseId}" th:text="${house.title}"></a></h3>
                                                     </div>
                                                     <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
+                                                        <img style="width: 1000px;height: 620px" th:src="'Path'+${house.mainPic}" alt=""/>
                                                     </div>
                                                     <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
+                                                        <li><i class="fa fa-user"></i> <a th:href="@{/designer/}+${house.designerId}" th:text="${house.designer}"></a></li>
+                                                        <li><i class="fa fa-clock-o" th:text="${house.time}"></i></li>
                                                     </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
+                                                    <p class="post-description myText" th:text="${house.describe}">
                                                     </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="product-item">
-                                                <div class="post-slide">
-                                                    <div class="post-header">
-                                                        <a href="#" class="subtitle">Lorem ipsum</a>
-                                                        <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                                                    </div>
-                                                    <div class="pic">
-                                                        <img src="Path/image/ad1.jpg" alt=""/>
-                                                    </div>
-                                                    <ul class="post-bar">
-                                                        <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                                        <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                                                    </ul>
-                                                    <p class="post-description">
-                                                        Lorem ipsum dolor sit
-                                                    </p>
-                                                    <a href="#" class="read-more">read more</a>
+                                                    <a th:href="@{/case/}+${house.houseId}" class="read-more">查看更多</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1188,11 +894,18 @@
                             <div class="pagination-area" style="text-align: center">
                                 <nav aria-label="Page navigation example" style="margin: 0 auto">
                                     <ul class="pagination justify-content-center">
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">&raquo;</a>
+                                        <li>
+                                            <a class="page-link" th:href="@{/fullwidth1?pageNow=}+${pageInfo.prePage}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item" th:each="page:${pageInfo.navigatepageNums}" style="padding: 0" th:class="${page==pageInfo.getPrePage()+1?'page-item active':'page-item'}">
+                                            <a class="page-link" th:href="@{/fullwidth1?pageNow=}+${page}" th:text="${page}"></a>
+                                        </li>
+                                        <li>
+                                            <a class="page-link" th:href="@{/fullwidth1?pageNow=}+${pageInfo.nextPage}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo</span>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -1528,6 +1241,13 @@
         margin: 10px;
         font-size: 16px;
         font-family: Rubik;
+    }
+    .myText{
+        overflow:hidden;
+        text-overflow:ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 </style>
 

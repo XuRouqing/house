@@ -45,8 +45,131 @@ public class Controller {
         return "my-account";
     }
 
+    @RequestMapping("/fullwidth1")
+    public String tofullwidth(HttpServletRequest request,
+                              @RequestParam(required = true,defaultValue = "1") Integer pageNow,
+                              RedirectAttributes attr){
+        String refUrl=request.getHeader("Referer").toString();
+        int typeP=refUrl.indexOf("type");
+        String typeT="";
+        String type="";
+        if(typeP!=-1){
+            typeT=refUrl.substring(typeP);
+            if (typeT.indexOf('&')!=-1){
+                type=typeT.substring(0,typeT.indexOf('&'));
+            }
+            else {
+                type=typeT;
+            }
+        }
+        int styleP=refUrl.indexOf("area");
+        String styleT="";
+        String style="";
+        if(styleP!=-1){
+            styleT=refUrl.substring(styleP);
+            if (styleT.indexOf('&')!=-1){
+                style=styleT.substring(0,styleT.indexOf('&'));
+            }
+            else {
+                style=styleT;
+            }
+        }
+        int areaP=refUrl.indexOf("area");
+        String areaT="";
+        String area="";
+        if(areaP!=-1){
+            areaT=refUrl.substring(areaP);
+            if (areaT.indexOf('&')!=-1){
+                area=areaT.substring(0,areaT.indexOf('&'));
+            }
+            else {
+                area=areaT;
+            }
+        }
+        if (style!=""){
+            style=style.substring(6);
+            attr.addAttribute("style",style);
+            pageNow=1;
+        }
+        if (area!=""){
+            area=area.substring(6);
+            attr.addAttribute("area",area);
+            pageNow=1;
+        }
+        if (type!=""){
+            type=type.substring(6);
+            attr.addAttribute("type",type);
+            pageNow=1;
+        }
+        if(pageNow==0){
+            pageNow=1;
+        }
+        attr.addAttribute("pageNow",pageNow);
+        return "redirect:/fullwidth";
+//        return "shop-grid-fullwidth";
+    }
+
     @RequestMapping("/fullwidth")
-    public String tofullwidth() {
+    public String tofullwidth(Model model, @RequestParam(required = true,defaultValue = "1") Integer pageNow,
+                                 @RequestParam(required = false, defaultValue = "8") Integer pageSize,
+                                 @RequestParam(required = false, defaultValue = "") String style,
+                                 @RequestParam(required = false, defaultValue = "") String type,
+                                 @RequestParam(required = false, defaultValue = "") String area,
+                                 HttpServletRequest request){
+        String refUrl=request.getHeader("Referer").toString();
+        int typeP=refUrl.indexOf("type");
+        String typeT="";
+        String typeRef="";
+        if(typeP!=-1){
+            typeT=refUrl.substring(typeP);
+            if (typeT.indexOf('&')!=-1){
+                typeRef=typeT.substring(0,typeT.indexOf('&'));
+            }
+            else {
+                typeRef=typeT;
+            }
+        }
+        int styleP=refUrl.indexOf("style");
+        String styleT="";
+        String styleRef="";
+        if(styleP!=-1){
+            styleT=refUrl.substring(styleP);
+            if (styleT.indexOf('&')!=-1){
+                styleRef=styleT.substring(0,styleT.indexOf('&'));
+            }
+            else {
+                styleRef=styleT;
+            }
+        }
+        int areaP=refUrl.indexOf("area");
+        String areaT="";
+        String areaRef="";
+        if(areaP!=-1){
+            areaT=refUrl.substring(areaP);
+            if (areaT.indexOf('&')!=-1){
+                areaRef=areaT.substring(0,areaT.indexOf('&'));
+            }
+            else {
+                areaRef=areaT;
+            }
+        }
+        if (areaRef!=""){
+            areaRef=areaRef.substring(6);
+        }
+        if (typeRef!=""){
+            typeRef=typeRef.substring(6);
+        }
+        if (styleRef!=""){
+            styleRef=styleRef.substring(6);
+        }
+        if (!area.equals(areaRef)||!type.equals(typeRef)||!style.equals(styleRef)){
+            pageNow=1;
+        }
+        PageHelper.startPage(pageNow,5);
+        List<House> houses=houseService.getHouseByPageAndSTA(pageNow,pageSize,style,type,area);
+        PageInfo<House> housePageInfo=new PageInfo<>(houses);
+        model.addAttribute("pageInfo",housePageInfo);
+        model.addAttribute("houseInfo",houses);
         return "shop-grid-fullwidth";
     }
 

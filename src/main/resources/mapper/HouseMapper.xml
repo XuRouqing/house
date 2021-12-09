@@ -11,7 +11,17 @@
     </insert>
 
     <select id="selectHouseById" resultType="House">
-        select * from house where houseId = #{houseId}
+        select * from house
+            where houseId = #{houseId}
+    </select>
+
+    <select id="selectHouseByPageAndSTA" resultType="House">
+        select house.*,designer.name as designer from house, designer
+        where 1=1
+          and (house.designerId = designer.id)
+          and (house.styleValue like CONCAT(CONCAT('%',#{style},'%')) or #{style}='')
+          and (typeValue=#{type} or #{type }='')
+          and (areaValue=#{area} or #{area}='')
     </select>
 
     <select id="selectHouseAll" resultType="House">
