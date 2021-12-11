@@ -3,8 +3,10 @@ package com.example.house.controller;
 
 import com.example.house.pojo.Designer;
 import com.example.house.pojo.House;
+import com.example.house.pojo.Worker;
 import com.example.house.service.DesignerService;
 import com.example.house.service.HouseService;
+import com.example.house.service.WorkerService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UrlPathHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.Style;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
@@ -32,6 +29,9 @@ public class Controller {
 
     @Autowired
     private HouseService houseService;
+
+    @Autowired
+    private WorkerService workerService;
 
     @RequestMapping("/index")
     public String testSession(HttpSession session, Model model) {
@@ -293,13 +293,23 @@ public class Controller {
     }
 
     @RequestMapping("/worker-list")
-    public String toworkderlist() {
-        return "worker-list.html";
+    public String toworkderlist(Model model,@RequestParam(required = false, defaultValue = "") String type,
+                                HttpServletRequest request) {
+        List<Worker> workers=workerService.getWorkerByType(type);
+        model.addAttribute("workerInfo",workers);
+        return "worker-list";
+    }
+
+    @RequestMapping("/worker/{id}")
+    public String toworker(@PathVariable int id, Model model) {
+        Worker worker = workerService.findWorkerById(id);
+        model.addAttribute("workerInfo",worker);
+        return "worker1";
     }
 
     @RequestMapping("/discount")
     public String todiscount() {
-        return "discount.html";
+        return "discount";
     }
 
     @RequestMapping("/calendar")

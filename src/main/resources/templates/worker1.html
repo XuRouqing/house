@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -9,22 +9,47 @@
   <meta name="robots" content="index, follow">
   <meta name="description" content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="Path/css/plugins.min.css">
-  <link rel="stylesheet" href="Path/css/style.min.css">
+  <link rel="stylesheet" href="../Path/css/plugins.min.css">
+  <link rel="stylesheet" href="../Path/css/style.min.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="Path/css/reset.css"> <!-- CSS reset -->
-  <link rel="stylesheet" type="text/css" href="Path/css/htmleaf-demo.css">
-  <link rel="stylesheet" href="Path/css/search.css"> <!-- Resource style -->
-  <script src="Path/js/modernizr.js"></script> <!-- Modernizr -->
-  <link rel="icon" href="Path/image/newlogo.png">
+  <link rel="stylesheet" href="../Path/css/reset.css"> <!-- CSS reset -->
+  <link rel="stylesheet" type="text/css" href="../Path/css/htmleaf-demo.css">
+  <link rel="stylesheet" href="../Path/css/search.css"> <!-- Resource style -->
+  <script src="../Path/js/modernizr.js"></script> <!-- Modernizr -->
+  <link rel="icon" href="../Path/image/newlogo.png">
+  <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/dashboard/">
+  <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-olOxEXxDwd20BlATUibkEnjPN3sVq2YWmYOnsMYutq7X8YcUdD6y/1I+f+ZOq/47" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../Path/css/card.css" />
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.4.0/css/bootstrap.min.css">
   <!-- Fontawesome CSS -->
-  <link rel="stylesheet" href="Path/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="Path/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../Path/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="../Path/fontawesome/css/all.min.css">
   <!-- Main CSS -->
-  <link rel="stylesheet" href="Path/css/bookStyle.css">
+  <link rel="stylesheet" href="../Path/css/bookStyle.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-NU/T4JKmgovMiPaK2GP9Y+TVBQxiaiYFJB6igFtfExinKlzVruIK6XtKqxCGXwCG"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie8-responsive-file-warning.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie-emulation-modes-warning.js"></script>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
+          integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+          crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/vendor/holder.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+  <link rel="stylesheet" href="../Path/css/font-awesome.min.css">
 
 </head>
 
@@ -47,7 +72,7 @@
       <div class="row align-items-center">
         <div class="col-6">
           <div class="header-top-left">
-            <img src="Path/image/location.png" width="20px" height="20px">
+            <img src="../Path/image/location.png" width="20px" height="20px">
             <span class="pronia-offer">城市</span>
           </div>
         </div>
@@ -85,7 +110,7 @@
               <a href="tel://+00-123-456-789">+00 123 456 789</a>
             </div>
             <a class="header-logo">
-              <img src="Path/picture/dark.png" alt="Header Logo">
+              <img src="../Path/picture/dark.png" alt="Header Logo">
             </a>
             <!--                            搜索框-->
             <nav class="cd-main-nav-wrapper">
@@ -122,11 +147,11 @@
               <ul>
                 <!--                                    首页-->
                 <li class="drop-holder">
-                  <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                  <a th:href="'../'+@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <!--                                    精装案例-->
                 <li class="megamenu-holder">
-                  <a th:href="@{fullwidth}">精装案例</a>
+                  <a th:href="'../'+@{fullwidth}">精装案例</a>
                   <ul class="drop-menu megamenu">
                     <li>
                       <span class="title">Shop Layout</span>
@@ -204,23 +229,23 @@
                 </li>
                 <!--                                    设计团队-->
                 <li>
-                  <a th:href="@{designer-list}">设计团队</a>
+                  <a th:href="'../'+@{designer-list}">设计团队</a>
                 </li>
                 <!--                                    品质工程-->
                 <li>
-                  <a th:href="@{worker-list}">品质工程</a>
+                  <a th:href="'../'+@{worker-list}">品质工程</a>
                 </li>
                 <!--                                    营销活动-->
                 <li>
-                  <a th:href="@{discount}">营销活动</a>
+                  <a th:href="'../'+@{discount}">营销活动</a>
                 </li>
                 <!--                                    在线预约-->
                 <li>
-                  <a th:href="@{booking}">在线预约</a>
+                  <a th:href="'../'+@{booking}">在线预约</a>
                 </li>
                 <!--                                    联系我们-->
                 <li>
-                  <a th:href="@{contact}">联系我们</a>
+                  <a th:href="'../'+@{contact}">联系我们</a>
                 </li>
                 <!--                                    <li class="drop-holder">-->
                 <!--                                        <a href="blog.html">Blog</a>-->
@@ -258,7 +283,7 @@
           <div class="col-lg-3 col-6">
 
             <a href="" class="header-logo" style="margin-right: 20px">
-              <img src="Path/picture/dark.png" alt="Header Logo">
+              <img src="../Path/picture/dark.png" alt="Header Logo">
             </a>
 
           </div>
@@ -267,11 +292,11 @@
               <nav class="main-nav">
                 <ul>
                   <li class="drop-holder">
-                    <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                    <a th:href="'../'+@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                   </li>
                   <!--                                    精装案例-->
                   <li class="megamenu-holder">
-                    <a th:href="@{fullwidth}">精装案例</a>
+                    <a th:href="'../'+@{fullwidth}">精装案例</a>
                     <ul class="drop-menu megamenu">
                       <li>
                         <span class="title">Shop Layout</span>
@@ -349,23 +374,23 @@
                   </li>
                   <!--                                    设计团队-->
                   <li>
-                    <a th:href="@{designer-list}">设计团队</a>
+                    <a th:href="'../'+@{designer-list}">设计团队</a>
                   </li>
                   <!--                                    品质工程-->
                   <li>
-                    <a th:href="@{worker-list}">品质工程</a>
+                    <a th:href="'../'+@{worker-list}">品质工程</a>
                   </li>
                   <!--                                    营销活动-->
                   <li>
-                    <a th:href="@{discount}">营销活动</a>
+                    <a th:href="'../'+@{discount}">营销活动</a>
                   </li>
                   <!--                                    在线预约-->
                   <li>
-                    <a th:href="@{booking}">在线预约</a>
+                    <a th:href="'../'+@{booking}">在线预约</a>
                   </li>
                   <!--                                    联系我们-->
                   <li>
-                    <a th:href="@{contact}">联系我们</a>
+                    <a th:href="'../'+@{contact}">联系我们</a>
                   </li>
                 </ul>
               </nav>
@@ -381,8 +406,8 @@
                     <i class="pe-7s-users"></i>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                    <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                    <li><a class="dropdown-item" th:href="@{login-register}">Login | Register</a>
+                    <li><a class="dropdown-item" th:href="'../'+@{account}">My account</a></li>
+                    <li><a class="dropdown-item" th:href="'../'+@{login-register}">Login | Register</a>
                     </li>
                   </ul>
                 </li>
@@ -437,7 +462,7 @@
                 <i class="pe-7s-users"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
-                <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
+                <li><a class="dropdown-item" th:href="'../'+@{account}">My account</a></li>
                 <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
               </ul>
             </li>
@@ -703,7 +728,7 @@
                                                        data-tippy-delay="50" data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder"></i></a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="Path/picture/2-1-70x78.png" alt="Product Image">
+              <img class="img-full" src="../Path/picture/2-1-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">American Marigold</a>
@@ -717,7 +742,7 @@
                                                        data-tippy-delay="50" data-tippy-arrow="true"
                                                        data-tippy-theme="sharpborder"></i></a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="Path/picture/2-2-70x78.png" alt="Product Image">
+              <img class="img-full" src="../Path/picture/2-2-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">Black Eyed Susan</a>
@@ -731,7 +756,7 @@
                  data-tippy-theme="sharpborder"></i>
             </a>
             <a href="single-product-variable.html" class="product-item_img">
-              <img class="img-full" src="Path/picture/2-3-70x78.png" alt="Product Image">
+              <img class="img-full" src="../Path/picture/2-3-70x78.png" alt="Product Image">
             </a>
             <div class="product-item_content">
               <a class="product-item_title" href="single-product-variable.html">Bleeding Heart</a>
@@ -761,428 +786,237 @@
   <div class="content">
     <div class="container">
 
-      <!-- Doctor Widget -->
-      <div class="card">
-        <div class="card-body">
-          <div class="doctor-widget">
-            <div class="doc-info-left">
-              <div class="doctor-img">
-                <img src="Path/image/dis1.jpg" class="img-fluid" alt="User Image">
-              </div>
-              <div class="doc-info-cont">
-                <h4 class="doc-name" style="padding: 4px">李严峻</h4>
-                <div class="clinic-services">
-                  <span>水电</span>
+      <!-- Page Wrapper -->
+      <div class="page-wrapper">
+        <div class="content container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="profile-header">
+                <div class="row align-items-center">
+                  <div class="col-auto profile-image">
+                    <a href="#">
+                      <img class="rounded-circle" style="width: 120px;height: 120px;" alt="User Image" th:src="${workerInfo.pic}">
+                    </a>
+                  </div>
+                  <div class="col ml-md-n2 profile-user-info">
+                    <h4 class="name" th:text="${workerInfo.name}"></h4>
+                    <h6 class="text-muted" th:text="${workerInfo.tel}"></h6>
+                    <div class="user-Location" th:text="${workerInfo.city}"><i class="fa fa-map-marker"></i></div>
+<!--                    <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>-->
+                  </div>
+<!--                  <div class="col-auto profile-btn">-->
+<!--                    <a href="" class="btn btn-primary">-->
+<!--                      Edit-->
+<!--                    </a>-->
+<!--                  </div>-->
                 </div>
               </div>
-            </div>
-            <div class="doc-info-right">
-              <div class="clini-infos">
-                <ul>
-                  <li><i class="fas fa-phone" style="margin: 0 5px"></i></i><span style="font-size: 18px;">123 4567 8910</span></li>
+              <div class="profile-menu">
+                <ul class="nav nav-tabs nav-tabs-solid">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#per_details_tab">个人简介</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#password_tab">修改密码</a>
+                  </li>
                 </ul>
               </div>
-              <div class="doctor-action">
-                <ul>
-                  <li><i class="fas fa-map-marker-alt" style="margin: 0 5px"></i>浙江 温州</li>
-                </ul>
-<!--                <i class="fas fa-phone" style="margin: 0 5px"></i>-->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /Doctor Widget -->
+              <div class="tab-content profile-tab-cont">
 
-      <!-- Doctor Details Tab -->
-      <div class="card">
-        <div class="card-body pt-0">
+                <!-- Personal Details Tab -->
+                <div class="tab-pane fade show active" id="per_details_tab">
 
-          <!-- Tab Menu -->
-          <nav class="user-tabs mb-4">
-            <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-              <li class="nav-item">
-                <a class="nav-link active" style="font-size: 20px;color: #abd373">负责案例</a>
-              </li>
-            </ul>
-          </nav>
-          <!-- /Tab Menu -->
+                  <!-- Personal Details -->
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title d-flex justify-content-between">
+                            <span th:class="myTitle">个人信息</span>
+                            <a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>编辑</a>
+                          </h5>
+                          <div class="row">
+                            <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">姓名</p>
+                            <p class="col-sm-10" th:text="${workerInfo.name}"></p>
+                          </div>
+                          <div class="row">
+                            <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工龄</p>
+                            <p class="col-sm-10" th:text="${workerInfo.workingAge}"></p>
+                          </div>
+                          <div class="row">
+                            <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">年龄</p>
+                            <p class="col-sm-10" th:text="${workerInfo.age}"></p>
+                          </div>
+                          <div class="row">
+                            <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">电话</p>
+                            <p class="col-sm-10" th:text="${workerInfo.tel}"></p>
+                          </div>
+                          <div class="row">
+                            <p class="col-sm-2 text-muted text-sm-right mb-0">地址</p>
+                            <p class="col-sm-10" th:text="${workerInfo.city}"></p>
+                          </div>
+                          <div class="row" th:if="${not #strings.isEmpty(workerInfo.represent)}">
+                            <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">代表作</p>
+                            <p class="col-sm-10" th:text="${workerInfo.represent}"></p>
+                          </div>
+                          <div class="row" th:if="${not #strings.isEmpty(workerInfo.describe)}">
+                            <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">个人经历</p>
+                            <p class="col-sm-10" th:text="${workerInfo.describe}"></p>
+                          </div>
+                          <div class="row" th:if="${not #strings.isEmpty(workerInfo.declaration)}">
+                            <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工作宣言</p>
+                            <p class="col-sm-10" th:text="${workerInfo.declaration}"></p>
+                          </div>
+                        </div>
+                      </div>
 
-          <!-- Tab Content -->
-          <div class="tab-content pt-0">
-
-            <!-- Overview Content -->
-            <div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
-              <div class="row">
-                <div class="col-md-12">
-
-                  <div class="tab-content">
-                    <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
-                      <div class="product-grid-view row g-y-20">
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <h3 class="post-title"><a href="#">轻奢高级感</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">李严峻</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                美式复古风格的房屋尽显高级
-                              </p>
-                              <a href="#" class="read-more">查看更多</a>
+                      <!-- Edit Details Modal -->
+                      <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document" >
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Personal Details</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
                             </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
+                            <div class="modal-body">
+                              <form>
+                                <div class="row form-row">
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>First Name</label>
+                                      <input type="text" class="form-control" value="John">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>Last Name</label>
+                                      <input type="text"  class="form-control" value="Doe">
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <label>Date of Birth</label>
+                                      <div class="cal-icon">
+                                        <input type="text" class="form-control" value="24-07-1983">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>Email ID</label>
+                                      <input type="email" class="form-control" value="johndoe@example.com">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>Mobile</label>
+                                      <input type="text" value="+1 202-555-0125" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <h5 class="form-title"><span>Address</span></h5>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <label>Address</label>
+                                      <input type="text" class="form-control" value="4663 Agriculture Lane">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>City</label>
+                                      <input type="text" class="form-control" value="Miami">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>State</label>
+                                      <input type="text" class="form-control" value="Florida">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>Zip Code</label>
+                                      <input type="text" class="form-control" value="22434">
+                                    </div>
+                                  </div>
+                                  <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                      <label>Country</label>
+                                      <input type="text" class="form-control" value="United States">
+                                    </div>
+                                  </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                              </form>
                             </div>
                           </div>
                         </div>
                       </div>
+                      <!-- /Edit Details Modal -->
+
                     </div>
-                    <div class="tab-pane fade" id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
-                      <div class="product-list-view row g-y-30">
-                        <div class="col-12">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
+
+
+                  </div>
+                  <!-- /Personal Details -->
+
+                </div>
+                <!-- /Personal Details Tab -->
+
+                <!-- Change Password Tab -->
+                <div id="password_tab" class="tab-pane fade">
+
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Change Password</h5>
+                      <div class="row">
+                        <div class="col-md-10 col-lg-6">
+                          <form>
+                            <div class="form-group">
+                              <label>Old Password</label>
+                              <input type="password" class="form-control">
                             </div>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
+                            <div class="form-group">
+                              <label>New Password</label>
+                              <input type="password" class="form-control">
                             </div>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
+                            <div class="form-group">
+                              <label>Confirm Password</label>
+                              <input type="password" class="form-control">
                             </div>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="product-item">
-                            <div class="post-slide">
-                              <div class="post-header">
-                                <a href="#" class="subtitle">Lorem ipsum</a>
-                                <h3 class="post-title"><a href="#">Latest News Post</a></h3>
-                              </div>
-                              <div class="pic">
-                                <img src="Path/image/ad1.jpg" alt=""/>
-                              </div>
-                              <ul class="post-bar">
-                                <li><i class="fa fa-users"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-clock-o"></i> March 5,2016</li>
-                              </ul>
-                              <p class="post-description">
-                                Lorem ipsum dolor sit
-                              </p>
-                              <a href="#" class="read-more">read more</a>
-                            </div>
-                          </div>
+                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                          </form>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <!-- /Change Password Tab -->
+
               </div>
             </div>
-            <!-- /Overview Content -->
           </div>
+
         </div>
       </div>
-      <!-- /Doctor Details Tab -->
-
+      <!-- /Page Wrapper -->
     </div>
   </div>
   <!-- /Page Content -->
+
   <!-- Begin Footer Area -->
-  <div class="footer-area" data-bg-image="Path/image/1-1920x465.jpg">
+  <div class="footer-area" data-bg-image="../Path/image/1-1920x465.jpg">
     <div class="footer-top section-space-top-100 pb-60">
       <div class="container">
         <div class="row">
           <div class="col-lg-3">
             <div class="footer-widget-item">
               <div class="footer-widget-logo">
-                <a href="">
-                  <img src="Path/picture/dark.png" alt="Logo">
+                <a href="index.html">
+                  <img src="../Path/picture/dark.png" alt="Logo">
                 </a>
               </div>
               <p class="footer-widget-desc">Lorem ipsum dolor sit amet, consec adipisl elit, sed do
@@ -1305,7 +1139,7 @@
             </div>
             <div class="payment-method">
               <a href="#">
-                <img src="Path/picture/1.png" alt="Payment Method">
+                <img src="../Path/picture/1.png" alt="Payment Method">
               </a>
             </div>
           </div>
@@ -1317,9 +1151,9 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="copyright">
-                            <span class="copyright-text">© 2021 Pronia Made with <i
-                                    class="fa fa-heart text-danger"></i> by
-                        <a href="javascript:;" rel="noopener" target="_blank">HasThemes</a> </span>
+                                <span class="copyright-text">© 2021 Pronia Made with <i
+                                        class="fa fa-heart text-danger"></i> by
+                            <a href="javascript:;" rel="noopener" target="_blank">HasThemes</a> </span>
             </div>
           </div>
         </div>
@@ -1329,6 +1163,8 @@
   <!-- Footer Area End Here -->
 </div>
 <!-- /Main Wrapper -->
+
+
 
 
 <!-- Begin Modal Area -->
@@ -1350,25 +1186,25 @@
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="Path/picture/1-1-570x633.jpg"
+                      <img class="img-full" src="../Path/picture/1-1-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="Path/picture/1-2-570x633.jpg"
+                      <img class="img-full" src="../Path/picture/1-2-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="Path/picture/1-3-570x633.jpg"
+                      <img class="img-full" src="../Path/picture/1-3-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
                   <div class="swiper-slide">
                     <a href="#" class="single-img">
-                      <img class="img-full" src="Path/picture/1-4-570x633.jpg"
+                      <img class="img-full" src="../Path/picture/1-4-570x633.jpg"
                            alt="Product Image">
                     </a>
                   </div>
@@ -1445,7 +1281,7 @@
               <ul class="service-item-wrap pb-0">
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="Path/picture/car.png" alt="Shipping Icon">
+                    <img src="../Path/picture/car.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Free <br> Shipping</span>
@@ -1453,7 +1289,7 @@
                 </li>
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="Path/picture/card.png" alt="Shipping Icon">
+                    <img src="../Path/picture/card.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Safe <br> Payment</span>
@@ -1461,7 +1297,7 @@
                 </li>
                 <li class="service-item">
                   <div class="service-img">
-                    <img src="Path/picture/service.png" alt="Shipping Icon">
+                    <img src="../Path/picture/service.png" alt="Shipping Icon">
                   </div>
                   <div class="service-content">
                     <span class="title">Safe <br> Payment</span>
@@ -1483,10 +1319,16 @@
 </a>
 <!-- Scroll To Top End Here -->
 
-<script src="Path/js/plugins.min.js"></script>
-<script src="Path/js/jquery-2.1.1.min.js"></script>
-<script src="Path/js/main.js"></script> <!-- Resource jQuery -->
-<script src="Path/js/jquery.min.js"></script>
+<script src="../Path/js/plugins.min.js"></script>
+<script src="../Path/js/jquery-2.1.1.min.js"></script>
+<script src="../Path/js/main.js"></script> <!-- Resource jQuery -->
+<script src="../Path/js/jquery.min.js"></script>
+
+<script src="../Path/js/jquery-3.2.1.min.js"></script>
+<script src="../Path/js/popper.min.js"></script>
+<script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="../Path/js/jquery.slimscroll.min.js"></script>
+<script  src="../Path/js/script.js"></script>
 </body>
 
 <style>
@@ -1500,6 +1342,16 @@
   a:hover{
     text-decoration:none
   }
+  .name{
+    font-family: sans-serif;
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  .myTitle{
+    font-family: sans-serif;
+    font-size: 20px;
+  }
+
 </style>
 
 </html>

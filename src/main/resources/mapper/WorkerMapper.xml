@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.WorkerMapper">
+
+    <insert id="insertWorker" parameterType="Worker">
+        insert into worker (name,gender,city,type,age,workingAge,represent,tel,pic,describe,#{declaration})
+        values (#{name},#{gender},#{city},#{type},#{age},#{workingAge},#{represent},#{tel},#{pic},#{describe},#{declaration})
+    </insert>
+
+    <select id="selectWorkerById" resultType="Worker">
+        select * from worker where id = #{id}
+    </select>
+
+    <select id="selectWorkerAll" resultType="Worker">
+        select * from worker
+    </select>
+
+    <select id="selectWorkerByType" resultType="Worker">
+        select * from worker
+        where 1=1
+            and (typeValue like CONCAT(CONCAT('%',#{type},'%')) or #{type}='')
+    </select>
+
+    <select id="findWorkerByName" resultType="Worker">
+        select * from worker
+        where name = #{name}
+    </select>
+
+    <update id="modifyWorker" parameterType="Worker">
+        UPDATE worker SET name=#{name},gender=#{gender},city=#{city},type=#{type},age=#{age},workingAge=#{workingAge},represent=#{represent},tel=#{tel},pic=#{pic},describe=#{describe},declaration=#{declaration}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteWorker" parameterType="Worker">
+        DELETE FROM worker
+        WHERE id=#{id}
+    </delete>
+
+</mapper>

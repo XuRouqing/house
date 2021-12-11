@@ -44,14 +44,15 @@
   <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/dist/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/vendor/holder.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie10-viewport-bug-workaround.js"></script>
-  <!--    分类过滤-->
-  <link href="Path/css/select.css" rel="stylesheet" type="text/css"/>
-  <script type="text/javascript" src="Path/js/jquery.min.js"></script>
-  <script type="text/javascript" src="Path/js/current.js"></script>
 
-
+<!--main-->
   <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="Path/css/bookStyle.css">
+  <script src="Path/js/html5shiv.min.js"></script>
+  <script src="Path/js/respond.min.js"></script>
+  <!-- Fontawesome CSS -->
+  <link rel="stylesheet" href="Path/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="Path/fontawesome/css/all.min.css">
 
 </head>
 
@@ -782,230 +783,272 @@
   </header>
   <!-- Main Header Area End Here -->
 
-  <!-- Begin Main Content Area -->
-  <main class="main-content">
-    <div class="cation-content">
-      <div class="cation-middle">
-        <dl class="cation-list">
-          <dt style="width: 80px">工种</dt>
-          <dd>
-            <a href="#" rel="alltype" name="type" class="all on">全部</a>
-            <a href="#" rel="gongzhang" name="type" class="default">工长</a>
-            <a href="#" rel="cailiao" name="type" class="default">材料</a>
-            <a href="#" rel="chaigai" name="type" class="default">拆改</a>
-            <a href="#" rel="mugong" name="type" class="default">木工</a>
-            <a href="#" rel="shuidian" name="type" class="default">水电</a>
-            <a href="#" rel="fangshui" name="type" class="default">防水</a>
-            <a href="#" rel="niwa" name="type" class="default">泥瓦</a>
-            <a href="#" rel="youqi" name="type" class="default">油漆</a>
-            <a href="#" rel="other" name="type" class="default">其他</a>
-          </dd>
-        </dl>
-      </div>
-    </div>
-    <div class="shop-area section-space-y-axis-100">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="tab-content">
-              <div class="tab-pane fade show active" id="grid-view" role="tabpanel"
-                   aria-labelledby="grid-view-tab">
-                <div class="row row-grid">
-                  <div class="col-md-6 col-lg-4 col-xl-3" th:each="worker : ${workerInfo}">
-                    <div class="card widget-profile pat-widget-profile">
-                      <div class="card-body">
-                        <div class="pro-widget-content">
-                          <div class="profile-info-widget">
-                            <a th:href="@{/worker/}+${worker.id}" class="booking-doc-img">
-                              <img th:src="'Path'+${worker.pic}" alt="worker Image">
-                            </a>
-                            <div class="profile-det-info">
-<!--                              <h3><a th:href="@{/worker/}+${worker.id}" th:text="${worker.name}"></a></h3>-->
-                              <h3><a th:href="@{/worker}" th:text="${worker.name}"></a></h3>
+  <div class="main-wrapper">
 
-                              <div class="patient-details">
-                                <h5><b></b></h5>
-                                <h5 class="mb-0"><i class="fas fa-map-marker-alt"><span style="font-size: 15px" th:text="${worker.type}"></span></i></h5>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="patient-info">
-                          <ul>
-                            <li>联系电话<span th:text="${worker.tel}"></span></li>
-                            <li>工龄<span th:text="${worker.workingAge}" style="max-width:160px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;"></span></li>
-                            <li>年龄<span th:text="${worker.age}" style="max-width:160px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;"></span></li>
-                          </ul>
-                        </div>
+    <!-- Page Content -->
+    <div class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+
+            <!-- Search Filter -->
+            <div class="card search-filter">
+              <div class="card-header">
+                <h4 class="card-title mb-0">查找</h4>
+              </div>
+              <div class="card-body">
+                <div class="filter-widget">
+                  <h4>工种</h4>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type" checked>
+                      <span class="checkmark"></span> 全部
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type">
+                      <span class="checkmark"></span> 拆改
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type">
+                      <span class="checkmark"></span> 水电
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type">
+                      <span class="checkmark"></span> 防水
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type">
+                      <span class="checkmark"></span> 泥瓦
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type">
+                      <span class="checkmark"></span> 木工
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="gender_type">
+                      <span class="checkmark"></span> 油漆
+                    </label>
+                  </div>
+                </div>
+                <div class="filter-widget">
+                </div>
+                <div class="btn-search">
+                  <button type="button" class="btn btn-block">查找</button>
+                </div>
+              </div>
+            </div>
+            <!-- /Search Filter -->
+
+          </div>
+
+          <div class="col-md-12 col-lg-8 col-xl-9">
+
+            <!-- Doctor Widget -->
+            <div class="card" th:each="worker : ${workerInfo}">
+              <div class="card-body">
+                <div class="doctor-widget">
+                  <div class="doc-info-left">
+                    <div class="doctor-img">
+                      <a href="doctor-profile.html">
+                        <img th:src="${worker.pic}" class="img-fluid" alt="User Image">
+                      </a>
+                    </div>
+                    <div class="doc-info-cont">
+                      <h4 class="doc-name"><a href="doctor-profile.html" th:text="${worker.name}"></a></h4>
+                      <p class="doc-speciality" th:text="${worker.type}"></p>
+                      <div class="clinic-details">
+                        <p class="doc-location" th:text="${worker.city}"></p>
                       </div>
+                    </div>
+                  </div>
+                  <div class="doc-info-right">
+                    <div class="clinic-booking">
+                      <a class="view-pro-btn" href="doctor-profile.html">查看详情</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- /Doctor Widget -->
           </div>
         </div>
+
       </div>
+
     </div>
+    <!-- /Page Content -->
 
-  </main>
-  <!-- Main Content Area End Here -->
-
-  <!-- Begin Footer Area -->
-  <div class="footer-area" data-bg-image="Path/image/1-1920x465.jpg">
-    <div class="footer-top section-space-top-100 pb-60">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="footer-widget-item">
-              <div class="footer-widget-logo">
-                <a href="index.html">
-                  <img src="Path/picture/dark.png" alt="Logo">
+    <!-- Begin Footer Area -->
+    <div class="footer-area" data-bg-image="Path/image/1-1920x465.jpg" style="margin-top: 20px">
+      <div class="footer-top section-space-top-100 pb-60">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="footer-widget-item">
+                <div class="footer-widget-logo">
+                  <a href="index.html">
+                    <img src="Path/picture/dark.png" alt="Logo">
+                  </a>
+                </div>
+                <p class="footer-widget-desc">Lorem ipsum dolor sit amet, consec adipisl elit, sed do
+                  eiusmod
+                  tempor
+                  <br>
+                  incidio ut labore et dolore magna.
+                </p>
+                <div class="social-link with-border">
+                  <ul>
+                    <li>
+                      <a href="#" data-tippy="Facebook" data-tippy-inertia="true"
+                         data-tippy-animation="shift-away" data-tippy-delay="50"
+                         data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                        <i class="fa fa-facebook"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" data-tippy="Twitter" data-tippy-inertia="true"
+                         data-tippy-animation="shift-away" data-tippy-delay="50"
+                         data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                        <i class="fa fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" data-tippy="Pinterest" data-tippy-inertia="true"
+                         data-tippy-animation="shift-away" data-tippy-delay="50"
+                         data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                        <i class="fa fa-pinterest"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" data-tippy="Dribbble" data-tippy-inertia="true"
+                         data-tippy-animation="shift-away" data-tippy-delay="50"
+                         data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                        <i class="fa fa-dribbble"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-4 pt-40">
+              <div class="footer-widget-item">
+                <h3 class="footer-widget-title">Useful Links</h3>
+                <ul class="footer-widget-list-item">
+                  <li>
+                    <a href="#">About Pronia</a>
+                  </li>
+                  <li>
+                    <a href="#">How to shop</a>
+                  </li>
+                  <li>
+                    <a href="#">FAQ</a>
+                  </li>
+                  <li>
+                    <a href="#">Contact us</a>
+                  </li>
+                  <li>
+                    <a href="#">Log in</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-4 pt-40">
+              <div class="footer-widget-item">
+                <h3 class="footer-widget-title">My Account</h3>
+                <ul class="footer-widget-list-item">
+                  <li>
+                    <a href="#">Sign In</a>
+                  </li>
+                  <li>
+                    <a href="#">View Cart</a>
+                  </li>
+                  <li>
+                    <a href="#">My Wishlist</a>
+                  </li>
+                  <li>
+                    <a href="#">Track My Order</a>
+                  </li>
+                  <li>
+                    <a href="#">Help</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-4 pt-40">
+              <div class="footer-widget-item">
+                <h3 class="footer-widget-title">Our Service</h3>
+                <ul class="footer-widget-list-item">
+                  <li>
+                    <a href="#">Payment Methods</a>
+                  </li>
+                  <li>
+                    <a href="#">Money Guarantee!</a>
+                  </li>
+                  <li>
+                    <a href="#">Returns</a>
+                  </li>
+                  <li>
+                    <a href="#">Shipping</a>
+                  </li>
+                  <li>
+                    <a href="#">Privacy Policy</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 pt-40">
+              <div class="footer-contact-info">
+                <h3 class="footer-widget-title">Got Question? Call Us</h3>
+                <a class="number" href="tel://123-456-789">123 456 789</a>
+                <div class="address">
+                  <ul>
+                    <li>
+                      Your Address Goes Here
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="payment-method">
+                <a href="#">
+                  <img src="Path/picture/1.png" alt="Payment Method">
                 </a>
               </div>
-              <p class="footer-widget-desc">Lorem ipsum dolor sit amet, consec adipisl elit, sed do
-                eiusmod
-                tempor
-                <br>
-                incidio ut labore et dolore magna.
-              </p>
-              <div class="social-link with-border">
-                <ul>
-                  <li>
-                    <a href="#" data-tippy="Facebook" data-tippy-inertia="true"
-                       data-tippy-animation="shift-away" data-tippy-delay="50"
-                       data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                      <i class="fa fa-facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" data-tippy="Twitter" data-tippy-inertia="true"
-                       data-tippy-animation="shift-away" data-tippy-delay="50"
-                       data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                      <i class="fa fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" data-tippy="Pinterest" data-tippy-inertia="true"
-                       data-tippy-animation="shift-away" data-tippy-delay="50"
-                       data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                      <i class="fa fa-pinterest"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" data-tippy="Dribbble" data-tippy-inertia="true"
-                       data-tippy-animation="shift-away" data-tippy-delay="50"
-                       data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                      <i class="fa fa-dribbble"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-4 pt-40">
-            <div class="footer-widget-item">
-              <h3 class="footer-widget-title">Useful Links</h3>
-              <ul class="footer-widget-list-item">
-                <li>
-                  <a href="#">About Pronia</a>
-                </li>
-                <li>
-                  <a href="#">How to shop</a>
-                </li>
-                <li>
-                  <a href="#">FAQ</a>
-                </li>
-                <li>
-                  <a href="#">Contact us</a>
-                </li>
-                <li>
-                  <a href="#">Log in</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-4 pt-40">
-            <div class="footer-widget-item">
-              <h3 class="footer-widget-title">My Account</h3>
-              <ul class="footer-widget-list-item">
-                <li>
-                  <a href="#">Sign In</a>
-                </li>
-                <li>
-                  <a href="#">View Cart</a>
-                </li>
-                <li>
-                  <a href="#">My Wishlist</a>
-                </li>
-                <li>
-                  <a href="#">Track My Order</a>
-                </li>
-                <li>
-                  <a href="#">Help</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-4 pt-40">
-            <div class="footer-widget-item">
-              <h3 class="footer-widget-title">Our Service</h3>
-              <ul class="footer-widget-list-item">
-                <li>
-                  <a href="#">Payment Methods</a>
-                </li>
-                <li>
-                  <a href="#">Money Guarantee!</a>
-                </li>
-                <li>
-                  <a href="#">Returns</a>
-                </li>
-                <li>
-                  <a href="#">Shipping</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-3 pt-40">
-            <div class="footer-contact-info">
-              <h3 class="footer-widget-title">Got Question? Call Us</h3>
-              <a class="number" href="tel://123-456-789">123 456 789</a>
-              <div class="address">
-                <ul>
-                  <li>
-                    Your Address Goes Here
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="payment-method">
-              <a href="#">
-                <img src="Path/picture/1.png" alt="Payment Method">
-              </a>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="copyright">
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="copyright">
                                 <span class="copyright-text">© 2021 Pronia Made with <i
                                         class="fa fa-heart text-danger"></i> by
                             <a href="javascript:;" rel="noopener" target="_blank">HasThemes</a> </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Footer Area End Here -->
+    <!-- Footer Area End Here -->
 
+  </div>
+
+  <!-- Main Content Area End Here -->
   <!-- Begin Modal Area -->
   <div class="modal quick-view-modal fade" id="quickModal" data-bs-backdrop="static" data-bs-keyboard="false"
        tabindex="-1" aria-labelledby="quickModal" aria-hidden="true">
@@ -1171,14 +1214,20 @@
 <script src="Path/js/main.js"></script> <!-- Resource jQuery -->
 <script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
-  $(function () {
-    new SelectTag({
-      child: ".default", //所有默认
-      over: 'on', //当前选中
-      all: ".all" // 默认全部
-    });
-  })
-</script>
+<script src="Path/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="Path/js/popper.min.js"></script>
+<script src="http://cdn.bootstrapmb.com/bootstrap/4.4.0/js/bootstrap.min.js"></script>
+
+<!-- Sticky Sidebar JS -->
+<script src="Path/js/ResizeSensor.js"></script>
+<script src="Path/js/theia-sticky-sidebar.js"></script>
+
+
+<!-- Custom JS -->
+<script src="Path/js/script.js"></script>
+
 </body>
 <style>
   .main-nav > ul > li > a {
@@ -1195,7 +1244,7 @@
   }
 
   .page-link {
-    margin: 0px;
+    margin: 10px;
     font-size: 16px;
     font-family: Rubik;
   }
