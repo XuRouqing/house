@@ -1,12 +1,8 @@
 package com.example.house.controller;
 
 
-import com.example.house.pojo.Designer;
-import com.example.house.pojo.House;
-import com.example.house.pojo.Worker;
-import com.example.house.service.DesignerService;
-import com.example.house.service.HouseService;
-import com.example.house.service.WorkerService;
+import com.example.house.pojo.*;
+import com.example.house.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +29,21 @@ public class Controller {
     @Autowired
     private WorkerService workerService;
 
+    @Autowired
+    private SetService setService;
+
+    @Autowired
+    private SetContentService contentService;
+
+    @Autowired
+    private SetConfigService configService;
+
     @RequestMapping("/index")
     public String testSession(HttpSession session, Model model) {
         List<Designer> designers=designerService.getTopNDesigner(5);
+        List<Set> set = setService.getSetList();
         model.addAttribute("designerInfo",designers);
+        model.addAttribute("setInfo",set);
         return "index";
     }
 
@@ -304,11 +311,15 @@ public class Controller {
     public String toworker(@PathVariable int id, Model model) {
         Worker worker = workerService.findWorkerById(id);
         model.addAttribute("workerInfo",worker);
-        return "worker1";
+        return "worker";
     }
 
-    @RequestMapping("/discount")
-    public String todiscount() {
+    @RequestMapping("/discount/{id}")
+    public String todiscount(@PathVariable int id, Model model) {
+        List<SetContent> contents = contentService.getSetContentListBySet(id);
+        List<SetConfig> configs = configService.getSetConfigListBySet(id);
+        model.addAttribute("contentInfo",contents);
+        model.addAttribute("configInfo",configs);
         return "discount";
     }
 

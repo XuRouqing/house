@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.SetConfigMapper">
+
+    <insert id="insertSetConfig" parameterType="SetConfig">
+        insert into setConfig (setId,name,pic)
+        values (#{setId},#{name},#{pic})
+    </insert>
+
+    <select id="selectSetConfigById" resultType="SetConfig">
+        select * from setConfig
+            where setConfigId = #{setConfigId}
+    </select>
+
+    <select id="selectSetConfigAll" resultType="SetConfig">
+        select * from setConfig
+    </select>
+
+    <select id="selectSetConfigBySet" resultType="SetConfig">
+        select * from setConfig where setId = #{setId}
+    </select>
+
+    <update id="modifySetConfig" parameterType="SetConfig">
+        UPDATE setConfig SET setId=#{setId},name=#{name},brand=#{brand}
+        WHERE setConfigId=#{setConfigId}
+    </update>
+
+    <delete id="deleteSetConfig" parameterType="SetConfig">
+        DELETE FROM setConfig
+        WHERE setConfigId=#{setConfigId}
+    </delete>
+
+</mapper>

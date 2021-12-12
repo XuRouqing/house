@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.SetContentMapper">
+
+    <insert id="insertSetContent" parameterType="SetContent">
+        insert into setContent (setId,name,pic)
+        values (#{setId},#{name},#{pic})
+    </insert>
+
+    <select id="selectSetContentById" resultType="SetContent">
+        select * from setContent
+            where contentId = #{contentId}
+    </select>
+
+    <select id="selectSetContentAll" resultType="SetContent">
+        select * from setContent
+    </select>
+
+    <select id="selectSetContentBySet" resultType="SetContent">
+        SELECT  (@i:=@i+1)  rownum,a.* FROM  setcontent a  ,(SELECT   @i:=0)  t2
+        WHERE setId=#{setId}
+    </select>
+
+    <update id="modifySetContent" parameterType="SetContent">
+        UPDATE setContent SET setId=#{setId},name =#{name},pic=#{pic}
+        WHERE setContentId=#{setContentId}
+    </update>
+
+    <delete id="deleteSetContent" parameterType="SetContent">
+        DELETE FROM setContent
+        WHERE setContentId=#{setContentId}
+    </delete>
+
+</mapper>

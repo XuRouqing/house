@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.SetMapper">
+
+    <insert id="insertSet" parameterType="Set">
+        insert into set (setId,name,pic)
+        values (#{setId},#{name},#{pic})
+    </insert>
+
+    <select id="selectSetById" resultType="Set">
+        select * from set
+            where setId = #{setId}
+    </select>
+
+    <select id="selectSetAll" resultType="Set">
+        select * from set
+    </select>
+
+    <update id="modifySet" parameterType="Set">
+        UPDATE set SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        WHERE setId=#{setId}
+    </update>
+
+    <delete id="deleteSet" parameterType="Set">
+        DELETE FROM set
+        WHERE setId=#{setId}
+    </delete>
+
+</mapper>
