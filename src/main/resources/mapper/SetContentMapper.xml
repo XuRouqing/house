@@ -10,19 +10,51 @@
         values (#{setId},#{name},#{pic})
     </insert>
 
-    <select id="selectSetContentById" resultType="SetContent">
-        select * from setContent
+    <select id="selectSetContentById" resultType="setContent">
+        select * from setContent left join
             where contentId = #{contentId}
     </select>
+
+<!--    <select id="selectSetContentById" resultMap="getConfig">-->
+<!--        SELECT (@i:=@i+1) rownum,ct.*,cg.* FROM setcontent ct,-->
+<!--            (SELECT cf.* FROM setcontent ct,setconfig cf WHERE FIND_IN_SET(CONVERT(,CHAR),cf.contentId)) cg,-->
+<!--            (SELECT @i:=0) t2-->
+<!--        WHERE ct.setId=#{setId}-->
+<!--        GROUP BY cg.configId-->
+<!--    </select>-->
+
+    <select id="selectSetContentBySet" resultMap="getConfig">
+        SELECT (@i:=@i+1) rownum,t.*,f.* FROM setcontent t,setconfig f,(SELECT @i:=0) t2
+        WHERE t.setId=#{setId} AND t.contentId=f.contentId
+    </select>
+
+    <resultMap id="getConfig" type="com.example.house.pojo.SetContent">
+        <id property="contentId" column="contentId"/>
+        <result property="setId" column="setId"/>
+        <result property="name" column="name"/>
+        <result property="pic" column="pic"/>
+        <result property="rownum" column="rownum"/>
+        <!--        <collection property="href" ofType="String">-->
+        <!--            <id property="href" column="href"/>-->
+        <!--        </collection>-->
+        <!-- property表示集合类型属性名称，ofType表示集合中的对象是什么类型 -->
+        <collection property="setConfigs" ofType="com.example.house.pojo.SetConfig">
+            <id property="configId" column="configId"/>
+            <result property="setId" column="setId"/>
+            <result property="contentId" column="contentId"/>
+            <result property="category" column="category"/>
+            <result property="brand" column="brand"/>
+        </collection>
+    </resultMap>
 
     <select id="selectSetContentAll" resultType="SetContent">
         select * from setContent
     </select>
 
-    <select id="selectSetContentBySet" resultType="SetContent">
-        SELECT  (@i:=@i+1)  rownum,a.* FROM  setcontent a  ,(SELECT   @i:=0)  t2
-        WHERE setId=#{setId}
-    </select>
+<!--    <select id="selectSetContentBySet" resultType="SetContent">-->
+<!--        SELECT  (@i:=@i+1)  rownum,a.* FROM  setcontent a  ,(SELECT   @i:=0)  t2-->
+<!--        WHERE setId=#{setId}-->
+<!--    </select>-->
 
     <update id="modifySetContent" parameterType="SetContent">
         UPDATE setContent SET setId=#{setId},name =#{name},pic=#{pic}

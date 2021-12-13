@@ -775,52 +775,17 @@
         <div class="row">
             <div class="col-lg-12">
                 <ul class="nav product-tab-nav tab-style-1" id="myTab" role="tablist">
-<!--                    <li class="nav-item" role="presentation">-->
-<!--                        <a class="active" id="parlour" data-bs-toggle="tab" th:href="'#'+${contentInfo.get(0).contentId}" role="tab"-->
-<!--                           aria-controls="set1" aria-selected="true" th:text="${contentInfo.get(0).name}">-->
-<!--                        </a>-->
-<!--                    </li>-->
                     <li class="nav-item" role="presentation" th:each="content : ${contentInfo}">
-                        <a th:if="${content.rownum} eq 1" class="active" id="parlour" data-bs-toggle="tab" th:href="${content.name}" role="tab"
-                           aria-controls="set1" aria-selected="true" th:text="${content.name}">
+                        <a th:if="${content.rownum} eq 1" class="active" id="parlour" data-bs-toggle="tab" th:href="'#set'+${content.contentId}" role="tab"
+                           aria-selected="true" th:text="${content.name}">
                         </a>
-                        <a th:if="${content.rownum} ne 1" id="kitchen" data-bs-toggle="tab" th:href="${content.name}" role="tab"
-                           aria-controls="set2" aria-selected="false" th:text="${content.name}">
+                        <a th:if="${content.rownum} ne 1" id="kitchen" data-bs-toggle="tab" th:href="'#set'+${content.contentId}" role="tab"
+                           aria-selected="false" th:text="${content.name}">
                         </a>
                     </li>
-<!--                    <li class="nav-item" role="presentation">-->
-<!--                        <a id="dining" data-bs-toggle="tab" href="#set3" role="tab" aria-controls="set3"-->
-<!--                           aria-selected="false">-->
-<!--                            厨房-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item" role="presentation">-->
-<!--                        <a id="masterBedroom" data-bs-toggle="tab" href="#set4" role="tab" aria-controls="set3"-->
-<!--                           aria-selected="false">-->
-<!--                            主卧-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item" role="presentation">-->
-<!--                        <a id="guestBedroom" data-bs-toggle="tab" href="#set5" role="tab" aria-controls="set3"-->
-<!--                           aria-selected="false">-->
-<!--                            次卧-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item" role="presentation">-->
-<!--                        <a id="bathroom" data-bs-toggle="tab" href="#set6" role="tab" aria-controls="set3"-->
-<!--                           aria-selected="false">-->
-<!--                            卫生间-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item" role="presentation">-->
-<!--                        <a id="balcony" data-bs-toggle="tab" href="#set7" role="tab" aria-controls="set3"-->
-<!--                           aria-selected="false">-->
-<!--                            阳台-->
-<!--                        </a>-->
-<!--                    </li>-->
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" th:id="${contentInfo.get(0).contentId}" role="tabpanel">
+                    <div class="tab-pane fade show active" th:id="'set'+${contentInfo.get(0).contentId}" role="tabpanel">
                         <div>
                             <div class="col-md-8">
                                 <img th:src="'../Path/'+${contentInfo.get(0).pic}" style="width: 730px;height: 445px">
@@ -830,164 +795,30 @@
                             <h2 class="scrollbarTitle">套餐内品牌配置明细</h2>
                             <hr />
                             <p style="margin: 30px"> </p>
-                            <div th:each="config : ${configInfo}">
-                                <p class="p1" th:text="${config.name}"></p>
+                            <div th:each="config : ${contentInfo.get(0).getSetConfigs()}">
+                                <p class="p1" th:text="${config.category}"></p>
                                 <p th:text="${config.brand}"></p>
                             </div>
                             <hr />
                         </div>
                     </div>
-                    <div class="tab-pane fade" th:each="content : ${contentInfo}" th:id="${content.contentId}" role="tabpanel">
+                    <div class="tab-pane fade" th:each="content : ${contentInfo}" th:if="${content.rownum} ne 1" th:id="'set'+${content.contentId}" role="tabpanel">
                         <div>
                             <div class="col-md-8" >
                                 <img th:src="'../Path'+${content.pic}" style="width: 730px;height: 445px">
                             </div>
-                            <div class="content mCustomScrollbar">
-                                <h2 class="scrollbarTitle">套餐内品牌配置明细</h2>
-                                <hr />
-                                <p style="margin: 30px"> </p>
-                                <p class="p1" th:each="config : ${configInfo}" th:text="${config.name}"></p>
-                                <p th:each="config : ${configInfo}" th:text="${config.brand}"></p>
-                                <hr />
-                                <hr />
+                        </div>
+                        <div class="content mCustomScrollbar">
+                            <h2 class="scrollbarTitle">套餐内品牌配置明细</h2>
+                            <hr />
+                            <p style="margin: 30px"> </p>
+                            <div th:each="config : ${content.getSetConfigs()}">
+                                <p class="p1" th:text="${config.category}"></p>
+                                <p th:text="${config.brand}"></p>
                             </div>
+                            <hr />
                         </div>
                     </div>
-<!--                    <div class="tab-pane fade" id="set3" role="tabpanel" aria-labelledby="set2-tab">-->
-<!--                        <div>-->
-<!--                            <div class="col-md-8">-->
-<!--                                <img src="../Path/image/ad4.jpg" style="width: 730px;height: 445px">-->
-<!--                            </div>-->
-<!--                            <div class="content mCustomScrollbar">-->
-<!--                                <h2 class="scrollbarTitle">套餐内品牌配置明细</h2>-->
-<!--                                <hr />-->
-<!--                                <p style="margin: 30px"> </p>-->
-<!--                                <p class="p1">①地砖+10cm 地砖踢脚线（含铺贴及人工辅料）</p>-->
-<!--                                <p>L&D/马可波罗/惠万家/罗马利奥/诺贝尔/欧神诺/新中源/孔雀/金牌亚洲/顺辉/金意陶/东鹏</p>-->
-<!--                                <p class="p1">②墙顶面腻子基层</p>-->
-<!--                                <p>圣都专用家装耐水光面腻子</p>-->
-<!--                                <p class="p1">③墙顶面乳胶漆</p>-->
-<!--                                <p>德国舒尔茨</p>-->
-<!--                                <p class="p1">④玄关单面门套</p>-->
-<!--                                <p>凤凰谷/奇创/升升概念/TATA/梦天</p>-->
-<!--                                <p class="p1">⑤大理石窗台板</p>-->
-<!--                                <p>天然石材/人造石</p>-->
-<!--                                <p class="p1">⑥电路（强弱电铺设及筒灯/射灯安装）</p>-->
-<!--                                <p>强电线：千岛湖永通/中大元通；弱电线：科意姆；线盒：恒高；PVC 线管：保利</p>-->
-<!--                                <p class="p1">⑦开关插座面板及安装</p>-->
-<!--                                <p>西门子（指定型号）</p>-->
-<!--                                <hr />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="tab-pane fade" id="set4" role="tabpanel" aria-labelledby="set2-tab">-->
-<!--                        <div>-->
-<!--                            <div class="col-md-8">-->
-<!--                                <img src="../Path/image/ad5.jpg" style="width: 730px;height: 445px">-->
-<!--                            </div>-->
-<!--                            <div class="content mCustomScrollbar">-->
-<!--                                <h2 class="scrollbarTitle">套餐内品牌配置明细</h2>-->
-<!--                                <hr />-->
-<!--                                <p style="margin: 30px"> </p>-->
-<!--                                <p class="p1">①地砖+10cm 地砖踢脚线（含铺贴及人工辅料）</p>-->
-<!--                                <p>L&D/马可波罗/惠万家/罗马利奥/诺贝尔/欧神诺/新中源/孔雀/金牌亚洲/顺辉/金意陶/东鹏</p>-->
-<!--                                <p class="p1">②墙顶面腻子基层</p>-->
-<!--                                <p>圣都专用家装耐水光面腻子</p>-->
-<!--                                <p class="p1">③墙顶面乳胶漆</p>-->
-<!--                                <p>德国舒尔茨</p>-->
-<!--                                <p class="p1">④玄关单面门套</p>-->
-<!--                                <p>凤凰谷/奇创/升升概念/TATA/梦天</p>-->
-<!--                                <p class="p1">⑤大理石窗台板</p>-->
-<!--                                <p>天然石材/人造石</p>-->
-<!--                                <p class="p1">⑥电路（强弱电铺设及筒灯/射灯安装）</p>-->
-<!--                                <p>强电线：千岛湖永通/中大元通；弱电线：科意姆；线盒：恒高；PVC 线管：保利</p>-->
-<!--                                <p class="p1">⑦开关插座面板及安装</p>-->
-<!--                                <p>西门子（指定型号）</p>-->
-<!--                                <hr />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="tab-pane fade" id="set5" role="tabpanel" aria-labelledby="set2-tab">-->
-<!--                        <div>-->
-<!--                            <div class="col-md-8">-->
-<!--                                <img src="../Path/image/ad6.jpg" style="width: 730px;height: 445px">-->
-<!--                            </div>-->
-<!--                            <div class="content mCustomScrollbar">-->
-<!--                                <h2 class="scrollbarTitle">套餐内品牌配置明细</h2>-->
-<!--                                <hr />-->
-<!--                                <p style="margin: 30px"> </p>-->
-<!--                                <p class="p1">①地砖+10cm 地砖踢脚线（含铺贴及人工辅料）</p>-->
-<!--                                <p>L&D/马可波罗/惠万家/罗马利奥/诺贝尔/欧神诺/新中源/孔雀/金牌亚洲/顺辉/金意陶/东鹏</p>-->
-<!--                                <p class="p1">②墙顶面腻子基层</p>-->
-<!--                                <p>圣都专用家装耐水光面腻子</p>-->
-<!--                                <p class="p1">③墙顶面乳胶漆</p>-->
-<!--                                <p>德国舒尔茨</p>-->
-<!--                                <p class="p1">④玄关单面门套</p>-->
-<!--                                <p>凤凰谷/奇创/升升概念/TATA/梦天</p>-->
-<!--                                <p class="p1">⑤大理石窗台板</p>-->
-<!--                                <p>天然石材/人造石</p>-->
-<!--                                <p class="p1">⑥电路（强弱电铺设及筒灯/射灯安装）</p>-->
-<!--                                <p>强电线：千岛湖永通/中大元通；弱电线：科意姆；线盒：恒高；PVC 线管：保利</p>-->
-<!--                                <p class="p1">⑦开关插座面板及安装</p>-->
-<!--                                <p>西门子（指定型号）</p>-->
-<!--                                <hr />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="tab-pane fade" id="set6" role="tabpanel" aria-labelledby="set2-tab">-->
-<!--                        <div>-->
-<!--                            <div class="col-md-8">-->
-<!--                                <img src="../Path/image/ad7.jpg" style="width: 730px;height: 445px">-->
-<!--                            </div>-->
-<!--                            <div class="content mCustomScrollbar">-->
-<!--                                <h2 class="scrollbarTitle">套餐内品牌配置明细</h2>-->
-<!--                                <hr />-->
-<!--                                <p style="margin: 30px"> </p>-->
-<!--                                <p class="p1">①地砖+10cm 地砖踢脚线（含铺贴及人工辅料）</p>-->
-<!--                                <p>L&D/马可波罗/惠万家/罗马利奥/诺贝尔/欧神诺/新中源/孔雀/金牌亚洲/顺辉/金意陶/东鹏</p>-->
-<!--                                <p class="p1">②墙顶面腻子基层</p>-->
-<!--                                <p>圣都专用家装耐水光面腻子</p>-->
-<!--                                <p class="p1">③墙顶面乳胶漆</p>-->
-<!--                                <p>德国舒尔茨</p>-->
-<!--                                <p class="p1">④玄关单面门套</p>-->
-<!--                                <p>凤凰谷/奇创/升升概念/TATA/梦天</p>-->
-<!--                                <p class="p1">⑤大理石窗台板</p>-->
-<!--                                <p>天然石材/人造石</p>-->
-<!--                                <p class="p1">⑥电路（强弱电铺设及筒灯/射灯安装）</p>-->
-<!--                                <p>强电线：千岛湖永通/中大元通；弱电线：科意姆；线盒：恒高；PVC 线管：保利</p>-->
-<!--                                <p class="p1">⑦开关插座面板及安装</p>-->
-<!--                                <p>西门子（指定型号）</p>-->
-<!--                                <hr />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="tab-pane fade" id="set7" role="tabpanel" aria-labelledby="set2-tab">-->
-<!--                        <div>-->
-<!--                            <div class="col-md-8">-->
-<!--                                <img src="../Path/image/ad8.jpg" style="width: 730px;height: 445px">-->
-<!--                            </div>-->
-<!--                            <div class="content mCustomScrollbar">-->
-<!--                                <h2 class="scrollbarTitle">套餐内品牌配置明细</h2>-->
-<!--                                <hr />-->
-<!--                                <p style="margin: 30px"> </p>-->
-<!--                                <p class="p1">①地砖+10cm 地砖踢脚线（含铺贴及人工辅料）</p>-->
-<!--                                <p>L&D/马可波罗/惠万家/罗马利奥/诺贝尔/欧神诺/新中源/孔雀/金牌亚洲/顺辉/金意陶/东鹏</p>-->
-<!--                                <p class="p1">②墙顶面腻子基层</p>-->
-<!--                                <p>圣都专用家装耐水光面腻子</p>-->
-<!--                                <p class="p1">③墙顶面乳胶漆</p>-->
-<!--                                <p>德国舒尔茨</p>-->
-<!--                                <p class="p1">④玄关单面门套</p>-->
-<!--                                <p>凤凰谷/奇创/升升概念/TATA/梦天</p>-->
-<!--                                <p class="p1">⑤大理石窗台板</p>-->
-<!--                                <p>天然石材/人造石</p>-->
-<!--                                <p class="p1">⑥电路（强弱电铺设及筒灯/射灯安装）</p>-->
-<!--                                <p>强电线：千岛湖永通/中大元通；弱电线：科意姆；线盒：恒高；PVC 线管：保利</p>-->
-<!--                                <p class="p1">⑦开关插座面板及安装</p>-->
-<!--                                <p>西门子（指定型号）</p>-->
-<!--                                <hr />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
             </div>
         </div>

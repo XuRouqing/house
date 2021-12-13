@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Data
 @AllArgsConstructor
@@ -17,4 +19,5 @@ public class SetContent {
     private String name;
     private String pic;
     private int rownum;
+    private List<SetConfig> setConfigs;
 }

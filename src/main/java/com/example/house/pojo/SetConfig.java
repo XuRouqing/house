@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class SetConfig {
     private int configId;
     private int setId;
-    private String name;
+    private String contentId;
+    private String category;
     private String brand;
 }

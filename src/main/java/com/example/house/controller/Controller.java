@@ -318,6 +318,9 @@ public class Controller {
     public String todiscount(@PathVariable int id, Model model) {
         List<SetContent> contents = contentService.getSetContentListBySet(id);
         List<SetConfig> configs = configService.getSetConfigListBySet(id);
+        for (int i=0;i<contents.size();i++){
+            System.out.println(contents.get(i));
+        }
         model.addAttribute("contentInfo",contents);
         model.addAttribute("configInfo",configs);
         return "discount";
