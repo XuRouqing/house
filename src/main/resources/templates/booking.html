@@ -33,6 +33,23 @@
   <script src="../Path/js/html5shiv.min.js"></script>
   <script src="../Path/js/respond.min.js"></script>
   <![endif]-->
+
+  <script>
+    function change(i){
+      var now = document.getElementById(i.id);
+      var other = document.getElementsByClassName("noDate");
+      $.each( other, function( key, value) {
+        value.classList.remove("selected");
+      });
+      now.classList.add("selected");
+    }
+    function openmodal() {
+      $('#mymodal').modal("show");
+    }
+    function goback() {
+      $('#mymodal').modal("hide");
+    }
+  </script>
 </head>
 
 <body>
@@ -129,36 +146,36 @@
               <ul>
                 <!--                                    首页-->
                 <li>
-                  <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                  <a th:href="'../'+@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <!--                                    精装案例-->
                 <li>
-                  <a th:href="@{fullwidth}">精装案例</a>
+                  <a th:href="'../'+@{fullwidth}">精装案例</a>
                 </li>
                 <!--                                    设计团队-->
                 <li>
-                  <a th:href="@{designer-list}">设计团队</a>
+                  <a th:href="'../'+@{designer-list}">设计团队</a>
                 </li>
                 <!--                                    品质工程-->
                 <li>
-                  <a th:href="@{worker-list}">品质工程</a>
+                  <a th:href="'../'+@{worker-list}">品质工程</a>
                 </li>
                 <!--                                    营销活动-->
                 <li class="drop-holder">
-                  <a th:href="@{discount/1}">营销活动</a>
+                  <a th:href="'../'+@{discount/1}">营销活动</a>
                   <ul class="drop-menu">
                     <li th:each="set : ${setInfo}">
-                      <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                      <a style="font-size: 15px" th:text="${set.name}" th:href="'../'+@{discount/}+${set.setId}"></a>
                     </li>
                   </ul>
                 </li>
                 <!--                                    在线预约-->
                 <li>
-                  <a th:href="@{booking}">在线预约</a>
+                  <a th:href="'../'+@{booking}">在线预约</a>
                 </li>
                 <!--                                    联系我们-->
                 <li>
-                  <a th:href="@{contact}">联系我们</a>
+                  <a th:href="'../'+@{contact}">联系我们</a>
                 </li>
               </ul>
             </nav>
@@ -183,36 +200,36 @@
               <nav class="main-nav">
                 <ul>
                   <li>
-                    <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                    <a th:href="'../'+@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                   </li>
                   <!--                                    精装案例-->
                   <li>
-                    <a th:href="@{fullwidth}">精装案例</a>
+                    <a th:href="'../'+@{fullwidth}">精装案例</a>
                   </li>
                   <!--                                    设计团队-->
                   <li>
-                    <a th:href="@{designer-list}">设计团队</a>
+                    <a th:href="'../'+@{designer-list}">设计团队</a>
                   </li>
                   <!--                                    品质工程-->
                   <li>
-                    <a th:href="@{worker-list}">品质工程</a>
+                    <a th:href="'../'+@{worker-list}">品质工程</a>
                   </li>
                   <!--                                    营销活动-->
                   <li class="drop-holder">
-                    <a th:href="@{discount/1}">营销活动</a>
+                    <a th:href="'../'+@{discount/1}">营销活动</a>
                     <ul class="drop-menu">
                       <li th:each="set : ${setInfo}">
-                        <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                        <a style="font-size: 15px" th:text="${set.name}" th:href="'../'+@{discount/}+${set.setId}"></a>
                       </li>
                     </ul>
                   </li>
                   <!--                                    在线预约-->
                   <li>
-                    <a th:href="@{booking}">在线预约</a>
+                    <a th:href="'../'+@{booking}">在线预约</a>
                   </li>
                   <!--                                    联系我们-->
                   <li>
-                    <a th:href="@{contact}">联系我们</a>
+                    <a th:href="'../'+@{contact}">联系我们</a>
                   </li>
                 </ul>
               </nav>
@@ -228,8 +245,8 @@
                     <i class="pe-7s-users"></i>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                    <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                    <li><a class="dropdown-item" th:href="@{login-register}">Login | Register</a>
+                    <li><a class="dropdown-item" th:href="'../'+@{account}">My account</a></li>
+                    <li><a class="dropdown-item" th:href="'../'+@{login-register}">Login | Register</a>
                     </li>
                   </ul>
                 </li>
@@ -284,7 +301,7 @@
                 <i class="pe-7s-users"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
-                <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
+                <li><a class="dropdown-item" th:href="'../'+@{account}">My account</a></li>
                 <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
               </ul>
             </li>
@@ -507,6 +524,31 @@
       </div>
     </div>
   </div>
+  <!--        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">-->
+  <!--            <div class="modal-dialog modal-fullscreen">-->
+  <!--                <div class="modal-content modal-bg-dark">-->
+  <!--                    <div class="modal-header">-->
+  <!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"-->
+  <!--                                data-tippy="Close" data-tippy-inertia="true" data-tippy-animation="shift-away"-->
+  <!--                                data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">-->
+  <!--                        </button>-->
+  <!--                    </div>-->
+  <!--                    <div class="modal-body">-->
+  <!--                        <div class="modal-search">-->
+  <!--                            <span class="searchbox-info">Start typing and press Enter to search or ESC to close</span>-->
+  <!--                            <form action="#" class="hm-searchbox">-->
+  <!--                                <input type="text" name="Search..." value="Search..."-->
+  <!--                                       onblur="if(this.value==''){this.value='Search...'}"-->
+  <!--                                       onfocus="if(this.value=='Search...'){this.value=''}" autocomplete="off">-->
+  <!--                                <button class="search-btn" type="submit" aria-label="searchbtn">-->
+  <!--                                    <i class="pe-7s-search"></i>-->
+  <!--                                </button>-->
+  <!--                            </form>-->
+  <!--                        </div>-->
+  <!--                    </div>-->
+  <!--                </div>-->
+  <!--            </div>-->
+  <!--        </div>-->
   <div class="offcanvas-minicart_wrapper" id="miniCart">
     <div class="offcanvas-body">
       <div class="minicart-content">
@@ -585,13 +627,31 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <div class="booking-doc-info">
-                <a href="doctor-profile.html" class="booking-doc-img">
-                  <img src="../Path/image/dis1.jpg" alt="User Image">
-                </a>
-                <div class="booking-info">
-                  <h4 th:text="${designerInfo.name}"><a th:href="'../'+@{designer/}+${designerInfo.id}"></a></h4>
-                  <p class="text-muted mb-0" th:text="${designerInfo.location}"><img src="../Path/image/location.png" style="height: 15px;width: 15px">浙江 温州</p>
+              <div class="doctor-widget">
+                <div class="doc-info-left">
+                  <div class="doctor-img">
+                    <img th:src="${designerInfo.pic}" class="img-fluid" alt="User Image">
+                  </div>
+                  <div class="doc-info-cont">
+                    <h4 class="doc-name" style="padding: 4px" th:text="${designerInfo.name}"></h4>
+                    <p class="doc-department"><img src="../Path/picture/v.png" class="img-fluid" alt="Speciality" th:text="${designerInfo.level}">首席设计师</p>
+                    <div class="clinic-services">
+                      <span th:text="${designerInfo.style}"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="doc-info-right">
+                  <div class="clini-infos">
+                    <ul>
+                      <li><i class="fas fa-phone" style="margin: 0 5px" th:text="${designerInfo.tel}"></i></i><span style="font-size: 18px;"></span></li>
+                    </ul>
+                  </div>
+                  <div class="doctor-action">
+                    <ul>
+                      <p style="font-size: 15px;margin: 20px" th:text="${designerInfo.location}"><i class="fas fa-map-marker-alt" style="margin: 0 5px"></i></p>
+                    </ul>
+                    <!--                <i class="fas fa-phone" style="margin: 0 5px"></i>-->
+                  </div>
                 </div>
               </div>
             </div>
@@ -649,64 +709,20 @@
                 <div class="col-md-12">
 
                   <!-- Time Slot -->
-                  <div class="time-slot">
-                    <ul class="clearfix">
+                  <div id="time-slot" class="time-slot">
+                    <ul id="clearfix" class="clearfix">
                       <li th:each="num : ${#numbers.sequence(0,6)}">
-                        <a class="timing noDate" href="#">
-                          <span>上午 AM</span>
-                        </a>
-                        <a class="timing noDate" href="#">
-                          <span>下午 PM</span>
-                        </a>
+                        <p th:id="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'dd')+'AM'}"
+                           th:value="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'yyyy-MM-dd')+'AM'}"
+                           class="timing noDate" onclick="change(this)">
+                          <span>上午 9:00-11:00</span>
+                        </p>
+                        <p th:id="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'dd')+'PM'}"
+                           th:value="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'yyyy-MM-dd')+'PM'}"
+                           class="timing noDate" onclick="change(this)">
+                          <span>下午 14:00-17:00</span>
+                        </p>
                       </li>
-<!--                      <li>-->
-<!--                        <a class="timing noDate" href="#">-->
-<!--                          <span>上午 AM</span>-->
-<!--                        </a>-->
-<!--                        <a class="timing noDate" href="#">-->
-<!--                          <span>下午 PM</span>-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li>-->
-<!--                        <a class="timing date" href="#">-->
-<!--                          <span>上午 AM</span>-->
-<!--                        </a>-->
-<!--                        <a class="timing noDate" href="#">-->
-<!--                          <span>下午 PM</span>-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li>-->
-<!--                        <a class="timing date" href="#">-->
-<!--                          <span>上午 AM</span>-->
-<!--                        </a>-->
-<!--                        <a class="timing date" href="#">-->
-<!--                          <span>下午 PM</span>-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li>-->
-<!--                        <a class="timing noDate" href="#">-->
-<!--                          <span>上午 AM</span>-->
-<!--                        </a>-->
-<!--                        <a class="timing noDate" href="#">-->
-<!--                          <span>下午 PM</span>-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li>-->
-<!--                        <a class="timing noDate" href="#">-->
-<!--                          <span>上午 AM</span>-->
-<!--                        </a>-->
-<!--                        <a class="timing noDate" href="#">-->
-<!--                          <span>下午 PM</span>-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li>-->
-<!--                        <a class="timing noDate" href="#">-->
-<!--                          <span>上午 AM</span>-->
-<!--                        </a>-->
-<!--                        <a class="timing date" href="#">-->
-<!--                          <span>下午 PM</span>-->
-<!--                        </a>-->
-<!--                      </li>-->
                     </ul>
                   </div>
                   <!-- /Time Slot -->
@@ -721,10 +737,40 @@
 
           <!-- Submit Section -->
           <div class="submit-section proceed-btn text-right">
-            <a href="checkout.html" class="btn submit-btn">预约</a>
+            <button class="btn submit-btn" data-toggle="modal"
+               data-target=".bs-example-modal-lg" onclick="openmodal()">预约</button>
           </div>
           <!-- /Submit Section -->
-
+          <div class="modal fade" tabindex="-1" role="dialog" id="mymodal" aria-labelledby="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="myaccount-details">
+                  <form id="contact-form" class="contact-form">
+                    <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                      <p style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" th:text="预约信息"></p>
+                    </div>
+                    <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                      <input type="text" name="name" id="name" placeholder="称呼*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
+                    </div>
+                    <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                      <input type="text" name="phone" id="phone" placeholder="联系电话*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
+                    </div>
+                    <div class="form-field">
+                      <input type="text" name="email" id="email" placeholder="邮箱" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off">
+                    </div>
+                    <div class="form-field mb-5">
+                      <textarea name="message" id="message" placeholder="备注" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="textarea-field"></textarea>
+                    </div>
+                    <div class="contact-button-wrap submit-section">
+                      <button type="submit" class="btn submit-btn" name="submit">提交</button>
+                      <button type="button" class="btn submit-btn" name="exit" onclick="goback()">取消</button>
+                      <p class="form-messege mb-0"></p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1116,7 +1162,7 @@
     background-color: #09e5ab;
     border: 1px solid #09e5ab;
   }
-  .submit-btn:hover{
+  .submit-btn:hover {
     background-color: #09dca4;
     border: 1px solid #09e5ab;
   }
@@ -1127,6 +1173,10 @@
   }
   .noDate {
     background-color: #f5f5f5;
+  }
+  .contact-form {
+    padding: 50px 40px;
+    width: calc(100% );
   }
 </style>
 
