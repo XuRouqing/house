@@ -16,7 +16,7 @@
     </select>
 
     <select id="selectSetAll" resultType="Set">
-        select * from myset
+        select (@i:=@i+1) rownum,myset.* from myset, (SELECT @i:=0) t2
     </select>
 
     <update id="modifySet" parameterType="Set">

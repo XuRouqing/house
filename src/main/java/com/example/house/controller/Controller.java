@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,12 +39,17 @@ public class Controller {
     @Autowired
     private SetConfigService configService;
 
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        List<Set> set = setService.getSetList();
+        model.addAttribute("setInfo",set);
+    }
+
+
     @RequestMapping("/index")
     public String testSession(HttpSession session, Model model) {
         List<Designer> designers=designerService.getTopNDesigner(5);
-        List<Set> set = setService.getSetList();
         model.addAttribute("designerInfo",designers);
-        model.addAttribute("setInfo",set);
         return "index";
     }
 
@@ -318,9 +324,6 @@ public class Controller {
     public String todiscount(@PathVariable int id, Model model) {
         List<SetContent> contents = contentService.getSetContentListBySet(id);
         List<SetConfig> configs = configService.getSetConfigListBySet(id);
-        for (int i=0;i<contents.size();i++){
-            System.out.println(contents.get(i));
-        }
         model.addAttribute("contentInfo",contents);
         model.addAttribute("configInfo",configs);
         return "discount";

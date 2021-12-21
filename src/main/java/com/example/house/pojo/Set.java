@@ -15,4 +15,5 @@ public class Set {
     private int setId;
     private String name;
     private String pic;
+    private int rownum;
 }

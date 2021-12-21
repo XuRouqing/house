@@ -15,14 +15,6 @@
             where contentId = #{contentId}
     </select>
 
-<!--    <select id="selectSetContentById" resultMap="getConfig">-->
-<!--        SELECT (@i:=@i+1) rownum,ct.*,cg.* FROM setcontent ct,-->
-<!--            (SELECT cf.* FROM setcontent ct,setconfig cf WHERE FIND_IN_SET(CONVERT(,CHAR),cf.contentId)) cg,-->
-<!--            (SELECT @i:=0) t2-->
-<!--        WHERE ct.setId=#{setId}-->
-<!--        GROUP BY cg.configId-->
-<!--    </select>-->
-
     <select id="selectSetContentBySet" resultMap="getConfig">
         SELECT (@i:=@i+1) rownum,t.*,f.* FROM setcontent t,setconfig f,(SELECT @i:=0) t2
         WHERE t.setId=#{setId} AND t.contentId=f.contentId
