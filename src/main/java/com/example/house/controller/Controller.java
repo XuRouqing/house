@@ -7,10 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +35,9 @@ public class Controller {
 
     @Autowired
     private SetConfigService configService;
+
+    @Autowired
+    private AppointmentService appointmentService;
 
     @ModelAttribute
     public void addAttributes(Model model) {
@@ -329,11 +329,6 @@ public class Controller {
         return "discount";
     }
 
-    @RequestMapping("/calendar")
-    public String tocalendar() {
-        return "calendar.html";
-    }
-
     @RequestMapping("/contact")
     public String tocontact() {
         return "contact.html";
@@ -347,9 +342,20 @@ public class Controller {
     @RequestMapping("/booking/{id}")
     public String tobooking(@PathVariable int id, Model model) {
         Designer designer=designerService.findDesignerById(id);
+        List<Appointment> appointments=appointmentService.getAppointmentList();
         model.addAttribute("designerInfo",designer);
+        model.addAttribute("appointmentInfo",appointments);
         return "booking";
     }
 
-
+    @PostMapping("/appointmentAdd")
+    public String appointmentAdd(Appointment appointment, HttpSession session, HttpServletRequest request, Model model){
+        if(appointment!=null){
+            appointmentService.addAppointment(appointment);
+            List<Appointment> appointments=appointmentService.getAppointmentList();
+            model.addAttribute("appointmentInfo",appointments);
+            return "redirect:/booking/"+appointment.getDesignerId();
+        }
+        return "booking/"+appointment.getDesignerId();
+    }
 }

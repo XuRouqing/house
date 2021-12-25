@@ -35,6 +35,7 @@
   <![endif]-->
 
   <script>
+    var select;
     function change(i){
       var now = document.getElementById(i.id);
       var other = document.getElementsByClassName("noDate");
@@ -42,9 +43,19 @@
         value.classList.remove("selected");
       });
       now.classList.add("selected");
+      select = now;
     }
     function openmodal() {
+      if (select==null){
+        alert("未选择时间");
+        return;
+      }
       $('#mymodal').modal("show");
+      var selectTime = document.getElementById("selectTime");
+      $(selectTime).text(select.id);
+      var date = document.getElementById("date");
+      $(date).text(select.id);
+      $(date).val(select.id);
     }
     function goback() {
       $('#mymodal').modal("hide");
@@ -712,12 +723,12 @@
                   <div id="time-slot" class="time-slot">
                     <ul id="clearfix" class="clearfix">
                       <li th:each="num : ${#numbers.sequence(0,6)}">
-                        <p th:id="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'dd')+'AM'}"
+                        <p th:id="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'yyyy-MM-dd')+'AM'}"
                            th:value="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'yyyy-MM-dd')+'AM'}"
                            class="timing noDate" onclick="change(this)">
                           <span>上午 9:00-11:00</span>
                         </p>
-                        <p th:id="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'dd')+'PM'}"
+                        <p th:id="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'yyyy-MM-dd')+'PM'}"
                            th:value="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'yyyy-MM-dd')+'PM'}"
                            class="timing noDate" onclick="change(this)">
                           <span>下午 14:00-17:00</span>
@@ -745,26 +756,36 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="myaccount-details">
-                  <form id="contact-form" class="contact-form">
+                  <form th:action="@{/appointmentAdd}" method="post" id="appointmentInfo" class="contact-form">
                     <div class="form-field me-lg-30 mb-35 mb-lg-0">
                       <p style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" th:text="预约信息"></p>
                     </div>
                     <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                      <input type="text" name="name" id="name" placeholder="称呼*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
+                      <p id="selectTime">时间</p>
+                      <input type="hidden" name="date" id="date">
                     </div>
                     <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                      <input type="text" name="phone" id="phone" placeholder="联系电话*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
+                      <input type="text" name="customerName" id="customerName" placeholder="称呼*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
+                    </div>
+                    <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                      <input type="text" name="customerTel" id="customerTel" placeholder="联系电话*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
                     </div>
                     <div class="form-field">
-                      <input type="text" name="email" id="email" placeholder="邮箱" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off">
+                      <input type="text" name="location" id="location" placeholder="地址*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
+                    </div>
+                    <div class="form-field">
+                      <input type="text" name="customerEmail" id="customerEmail" placeholder="邮箱" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off">
                     </div>
                     <div class="form-field mb-5">
                       <textarea name="message" id="message" placeholder="备注" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="textarea-field"></textarea>
                     </div>
+                    <div>
+                      <input name="designerId" id="designerId" type="hidden" th:value="${designerInfo.id}">
+                    </div>
                     <div class="contact-button-wrap submit-section">
-                      <button type="submit" class="btn submit-btn" name="submit">提交</button>
+                      <button id="save" type="submit" class="btn submit-btn" name="submit">提交</button>
                       <button type="button" class="btn submit-btn" name="exit" onclick="goback()">取消</button>
-                      <p class="form-messege mb-0"></p>
+<!--                      <p class="form-messege mb-0"></p>-->
                     </div>
                   </form>
                 </div>

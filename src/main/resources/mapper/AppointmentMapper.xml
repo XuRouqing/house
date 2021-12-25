@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.AppointmentMapper">
+
+    <insert id="insertAppointment" parameterType="Appointment">
+        insert into appointment (designerId,customerId,date,time,customerTel,customerName,customerEmail,message,location)
+        values (#{designerId},#{customerId},#{date},#{time},#{customerTel},#{customerName},#{customerEmail},#{message},#{location})
+    </insert>
+
+    <select id="selectAppointmentAll" resultType="Appointment">
+        select * from appointment
+    </select>
+
+    <select id="selectAppointmentByDesigner" resultType="Appointment">
+        select * from appointment
+        where designerId = #{designerId}
+    </select>
+
+    <select id="selectAppointmentByCustomer" resultType="Appointment">
+        select * from appointment
+        where customerId = #{customerId}
+    </select>
+
+</mapper>
