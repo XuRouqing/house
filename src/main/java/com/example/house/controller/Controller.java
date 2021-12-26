@@ -12,7 +12,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.Style;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("")
@@ -343,8 +346,10 @@ public class Controller {
     public String tobooking(@PathVariable int id, Model model) {
         Designer designer=designerService.findDesignerById(id);
         List<Appointment> appointments=appointmentService.getAppointmentList();
+        List dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
         model.addAttribute("designerInfo",designer);
         model.addAttribute("appointmentInfo",appointments);
+        model.addAttribute("dateListInfo",dateList);
         return "booking";
     }
 
@@ -353,7 +358,9 @@ public class Controller {
         if(appointment!=null){
             appointmentService.addAppointment(appointment);
             List<Appointment> appointments=appointmentService.getAppointmentList();
+            List dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
             model.addAttribute("appointmentInfo",appointments);
+            model.addAttribute("dateListInfo",dateList);
             return "redirect:/booking/"+appointment.getDesignerId();
         }
         return "booking/"+appointment.getDesignerId();

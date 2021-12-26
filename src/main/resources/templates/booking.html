@@ -52,10 +52,15 @@
       }
       $('#mymodal').modal("show");
       var selectTime = document.getElementById("selectTime");
-      $(selectTime).text(select.id);
+      $(selectTime).text(select.attributes["value"].value);
       var date = document.getElementById("date");
-      $(date).text(select.id);
-      $(date).val(select.id);
+      $(date).text(select.attributes["value"].value);
+      $(date).val(select.attributes["value"].value);
+      // var time = document.getElementById("time");
+      // $(date).text(select.attributes["value"].value.slice(0,-2));
+      // $(date).val(select.attributes["value"].value.slice(0,-2));
+      // $(time).text(select.attributes["value"].value.slice(-2));
+      // $(time).val(select.attributes["value"].value.slice(-2));
     }
     function goback() {
       $('#mymodal').modal("hide");
@@ -763,6 +768,7 @@
                     <div class="form-field me-lg-30 mb-35 mb-lg-0">
                       <p id="selectTime">时间</p>
                       <input type="hidden" name="date" id="date">
+                      <input type="hidden" name="time" id="time">
                     </div>
                     <div class="form-field me-lg-30 mb-35 mb-lg-0">
                       <input type="text" name="customerName" id="customerName" placeholder="称呼*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
@@ -1159,6 +1165,24 @@
     }
     document.getElementById(week).innerHTML = weekday ;
     document.getElementById(day).innerHTML = m + "月" + d + "日" ;
+  }
+  /**
+   * 用于判断预约表中的时间是否可选择
+   * 从Controller中获取已预约时间信息，并将其进行格式化
+   * 通过时间信息来查找标签(标签的id与数据库中的时间信息对应)
+   * 设置找到标签的类
+   * @type {string}
+   */
+  var date = '[[${dateListInfo}]]';
+  var date = date.slice(1,-1);
+  var datelist = date.split(",");
+  for (var i=0;i<datelist.length;i++){
+    datelist[i] = datelist[i].trim();//去除前后多余空格*
+    var ele = document.getElementById(datelist[i]);
+    if (ele!=null){
+      ele.classList.remove("noDate");
+      ele.classList.add("date");
+    }
   }
 </script>
 </body>
