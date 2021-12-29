@@ -630,32 +630,36 @@
                     <dt style="width: 80px">风格</dt>
                     <dd>
                         <a href="#" rel="" name="style" class="all on">全部</a>
-                        <a href="#" rel="jianyue" name="style" class="default">简约</a>
-                        <a href="#" rel="xiandai" name="style" class="default">现代</a>
-                        <a href="#" rel="zhongshi" name="style" class="default">中式</a>
-                        <a href="#" rel="oushi" name="style" class="default">欧式</a>
-                        <a href="#" rel="meishi" name="style" class="default">美式</a>
-                        <a href="#" rel="rishi" name="style" class="default">日式</a>
-                        <a href="#" rel="tianyuan" name="style" class="default">田园</a>
-                        <a href="#" rel="yijia" name="style" class="default">宜家</a>
-                        <a href="#" rel="beiou" name="style" class="default">北欧</a>
-                        <a href="#" rel="fugu" name="style" class="default">复古</a>
-                        <a href="#" rel="hunda" name="style" class="default">混搭</a>
-                        <a href="#" rel="xingudai" name="style" class="default">新古典</a>
-                        <a href="#" rel="dizhonghai" name="style" class="default">地中海</a>
-                        <a href="#" rel="dongnandya" name="style" class="default">东南亚</a>
-                        <a href="#" rel="other" name="style" class="default">其他</a>
+                        <a href="#" th:each="index : ${styleIndex}" th:rel="${index.id}"
+                           name="style" class="default" th:text="${index.name}"></a>
+<!--                        <a href="#" rel="jianyue" name="style" class="default">简约</a>-->
+<!--                        <a href="#" rel="xiandai" name="style" class="default">现代</a>-->
+<!--                        <a href="#" rel="zhongshi" name="style" class="default">中式</a>-->
+<!--                        <a href="#" rel="oushi" name="style" class="default">欧式</a>-->
+<!--                        <a href="#" rel="meishi" name="style" class="default">美式</a>-->
+<!--                        <a href="#" rel="rishi" name="style" class="default">日式</a>-->
+<!--                        <a href="#" rel="tianyuan" name="style" class="default">田园</a>-->
+<!--                        <a href="#" rel="yijia" name="style" class="default">宜家</a>-->
+<!--                        <a href="#" rel="beiou" name="style" class="default">北欧</a>-->
+<!--                        <a href="#" rel="fugu" name="style" class="default">复古</a>-->
+<!--                        <a href="#" rel="hunda" name="style" class="default">混搭</a>-->
+<!--                        <a href="#" rel="xingudai" name="style" class="default">新古典</a>-->
+<!--                        <a href="#" rel="dizhonghai" name="style" class="default">地中海</a>-->
+<!--                        <a href="#" rel="dongnandya" name="style" class="default">东南亚</a>-->
+<!--                        <a href="#" rel="other" name="style" class="default">其他</a>-->
                     </dd>
                 </dl>
                 <dl class="cation-list">
                     <dt style="width: 80px">等级</dt>
                     <dd>
                         <a href="#" rel="allLevel" name="level" class="all on">全部</a>
-                        <a href="#" rel="zongjian" name="level" class="default">设计总监</a>
-                        <a href="#" rel="shouxi" name="level" class="default">首席设计师</a>
-                        <a href="#" rel="zhureng" name="level" class="default">主任设计师</a>
-                        <a href="#" rel="fuzhureng" name="level" class="default">副主任设计师</a>
-                        <a href="#" rel="zisheng" name="level" class="default">资深设计师</a>
+                        <a href="#" th:each="index : ${levelIndex}" th:rel="${index.id}"
+                           name="level" class="default" th:text="${index.name}"></a>
+<!--                        <a href="#" rel="zongjian" name="level" class="default">设计总监</a>-->
+<!--                        <a href="#" rel="shouxi" name="level" class="default">首席设计师</a>-->
+<!--                        <a href="#" rel="zhureng" name="level" class="default">主任设计师</a>-->
+<!--                        <a href="#" rel="fuzhureng" name="level" class="default">副主任设计师</a>-->
+<!--                        <a href="#" rel="zisheng" name="level" class="default">资深设计师</a>-->
                     </dd>
                 </dl>
             </div>

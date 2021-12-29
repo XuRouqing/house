@@ -1,6 +1,7 @@
 package com.example.house.dao;
 
 import com.example.house.pojo.Designer;
+import com.example.house.pojo.Index;
 import com.example.house.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,6 @@ public interface DesignerMapper {
     public List<Designer> selectTopNDesigner(int n);
     public void modifyDesigner(Designer designer);
     public void deleteDesigner(Integer id);
+    public List<Index> selectDesignerLevel();
+    public List<Index> selectDesignerStyle();
 }

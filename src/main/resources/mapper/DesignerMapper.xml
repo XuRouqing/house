@@ -44,4 +44,11 @@
         WHERE id=#{id}
     </delete>
 
+    <select id="selectDesignerLevel" resultType="Index">
+        SELECT * from designerlevel
+    </select>
+
+    <select id="selectDesignerStyle" resultType="Index">
+        SELECT * from styleindex
+    </select>
 </mapper>

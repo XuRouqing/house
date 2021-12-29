@@ -19,6 +19,7 @@ public class House {
     private String houseType;//户型
     private double area;
     private String areaValue;
+    private String formValue;
     private String city;
     private String local;//具体地点
     private String time;

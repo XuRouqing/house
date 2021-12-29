@@ -1,6 +1,7 @@
 package com.example.house.service;
 
 import com.example.house.pojo.Designer;
+import com.example.house.pojo.Index;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface DesignerService {
     public Designer findDesignerByName(String name);
     public void modifyDesigner(Designer designer);
     public void deleteDesigner(Integer id);
+    public List<Index> getDesignerLevel();
+    public List<Index> getDesignerStyle();
 }

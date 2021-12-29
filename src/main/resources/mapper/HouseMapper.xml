@@ -15,12 +15,13 @@
             where houseId = #{houseId}
     </select>
 
-    <select id="selectHouseByPageAndSTA" resultType="House">
+    <select id="selectHouseByPageAndSTFA" resultType="House">
         select house.*,designer.name as designer from house, designer
         where 1=1
           and (house.designerId = designer.id)
           and (house.styleValue like CONCAT(CONCAT('%',#{style},'%')) or #{style}='')
-          and (typeValue=#{type} or #{type }='')
+          and (typeValue=#{type} or #{type}='')
+          and (formValue=#{form} or #{form}='')
           and (areaValue=#{area} or #{area}='')
     </select>
 
@@ -42,5 +43,21 @@
         DELETE FROM house
         WHERE houseId=#{houseId}
     </delete>
+
+    <select id="selectHouseStyle" resultType="Index">
+        select * from styleindex
+    </select>
+
+    <select id="selectHouseType" resultType="Index">
+        select * from housetype
+    </select>
+
+    <select id="selectHouseForm" resultType="Index">
+        select * from houseform
+    </select>
+
+    <select id="selectHouseArea" resultType="Index">
+        select * from housearea
+    </select>
 
 </mapper>

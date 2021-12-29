@@ -120,7 +120,15 @@ public class Controller {
         if(pageNow==0){
             pageNow=1;
         }
+        List<Index> houseStyle = houseService.getHouseStyleIndex();
+        List<Index> houseType = houseService.getHouseTypeIndex();
+        List<Index> houseForm = houseService.getHouseFormIndex();
+        List<Index> houseArea = houseService.getHouseAreaIndex();
         attr.addAttribute("pageNow",pageNow);
+        attr.addAttribute("houseStyle",houseStyle);
+        attr.addAttribute("houseType",houseType);
+        attr.addAttribute("houseForm",houseForm);
+        attr.addAttribute("houseArea",houseArea);
         return "redirect:/fullwidth";
 //        return "shop-grid-fullwidth";
     }
@@ -130,6 +138,7 @@ public class Controller {
                                  @RequestParam(required = false, defaultValue = "8") Integer pageSize,
                                  @RequestParam(required = false, defaultValue = "") String style,
                                  @RequestParam(required = false, defaultValue = "") String type,
+                                 @RequestParam(required = false, defaultValue = "") String form,
                                  @RequestParam(required = false, defaultValue = "") String area,
                                  HttpServletRequest request){
         String refUrl=request.getHeader("Referer").toString();
@@ -157,6 +166,18 @@ public class Controller {
                 styleRef=styleT;
             }
         }
+        int formP=refUrl.indexOf("form");
+        String formT="";
+        String formRef="";
+        if(formP!=-1){
+            formT=refUrl.substring(formP);
+            if (formT.indexOf('&')!=-1){
+                formRef=formT.substring(0,formT.indexOf('&'));
+            }
+            else {
+                formRef=formT;
+            }
+        }
         int areaP=refUrl.indexOf("area");
         String areaT="";
         String areaRef="";
@@ -172,20 +193,28 @@ public class Controller {
         if (areaRef!=""){
             areaRef=areaRef.substring(6);
         }
-        if (typeRef!=""){
-            typeRef=typeRef.substring(6);
+        if (formRef!=""){
+            formRef=formRef.substring(6);
         }
         if (styleRef!=""){
             styleRef=styleRef.substring(6);
         }
-        if (!area.equals(areaRef)||!type.equals(typeRef)||!style.equals(styleRef)){
+        if (!area.equals(areaRef)||!type.equals(typeRef)||!style.equals(styleRef)||!form.equals(formRef)){
             pageNow=1;
         }
         PageHelper.startPage(pageNow,5);
-        List<House> houses=houseService.getHouseByPageAndSTA(pageNow,pageSize,style,type,area);
+        List<House> houses=houseService.getHouseByPageAndSTFA(pageNow,pageSize,style,type,form,area);
         PageInfo<House> housePageInfo=new PageInfo<>(houses);
+        List<Index> houseStyle = houseService.getHouseStyleIndex();
+        List<Index> houseType = houseService.getHouseTypeIndex();
+        List<Index> houseForm = houseService.getHouseFormIndex();
+        List<Index> houseArea = houseService.getHouseAreaIndex();
         model.addAttribute("pageInfo",housePageInfo);
         model.addAttribute("houseInfo",houses);
+        model.addAttribute("houseStyle",houseStyle);
+        model.addAttribute("houseType",houseType);
+        model.addAttribute("houseForm",houseForm);
+        model.addAttribute("houseArea",houseArea);
         return "shop-grid-fullwidth";
     }
 
@@ -231,7 +260,11 @@ public class Controller {
         if(pageNow==0){
             pageNow=1;
         }
+        List<Index> levelIndex = designerService.getDesignerLevel();
+        List<Index> styleIndex = designerService.getDesignerStyle();
         attr.addAttribute("pageNow",pageNow);
+        attr.addAttribute("levelIndex",levelIndex);
+        attr.addAttribute("styleIndex",styleIndex);
         return "redirect:/designer-list";
     }
 
@@ -278,8 +311,12 @@ public class Controller {
         PageHelper.startPage(pageNow,5);
         List<Designer> designers=designerService.getDesignerByPageAndSL(pageNow,pageSize,style,level);
         PageInfo<Designer> designerPageInfo=new PageInfo<>(designers);
+        List<Index> levelIndex = designerService.getDesignerLevel();
+        List<Index> styleIndex = designerService.getDesignerStyle();
         model.addAttribute("pageInfo",designerPageInfo);
         model.addAttribute("designerInfo",designers);
+        model.addAttribute("levelIndex",levelIndex);
+        model.addAttribute("styleIndex",styleIndex);
         return "designer-list";
     }
 

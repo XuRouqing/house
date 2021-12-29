@@ -618,42 +618,59 @@
                         <dt style="width: 80px">风格</dt>
                         <dd>
                             <a href="#" rel="" name="style" class="all on">全部</a>
-                            <a href="#" rel="jianyue" name="style" class="default">简约</a>
-                            <a href="#" rel="xiandai" name="style" class="default">现代</a>
-                            <a href="#" rel="zhongshi" name="style" class="default">中式</a>
-                            <a href="#" rel="oushi" name="style" class="default">欧式</a>
-                            <a href="#" rel="meishi" name="style" class="default">美式</a>
-                            <a href="#" rel="rishi" name="style" class="default">日式</a>
-                            <a href="#" rel="tianyuan" name="style" class="default">田园</a>
-                            <a href="#" rel="yijia" name="style" class="default">宜家</a>
-                            <a href="#" rel="beiou" name="style" class="default">北欧</a>
-                            <a href="#" rel="fugu" name="style" class="default">复古</a>
-                            <a href="#" rel="hunda" name="style" class="default">混搭</a>
-                            <a href="#" rel="xingudai" name="style" class="default">新古典</a>
-                            <a href="#" rel="dizhonghai" name="style" class="default">地中海</a>
-                            <a href="#" rel="dongnandya" name="style" class="default">东南亚</a>
-                            <a href="#" rel="other" name="style" class="default">其他</a>
+                            <a href="#" th:each="index : ${houseStyle}" th:rel="${index.id}"
+                               name="style" class="default" th:text="${index.name}"></a>
+<!--                            <a href="#" rel="jianyue" name="style" class="default">简约</a>-->
+<!--                            <a href="#" rel="xiandai" name="style" class="default">现代</a>-->
+<!--                            <a href="#" rel="zhongshi" name="style" class="default">中式</a>-->
+<!--                            <a href="#" rel="oushi" name="style" class="default">欧式</a>-->
+<!--                            <a href="#" rel="meishi" name="style" class="default">美式</a>-->
+<!--                            <a href="#" rel="rishi" name="style" class="default">日式</a>-->
+<!--                            <a href="#" rel="tianyuan" name="style" class="default">田园</a>-->
+<!--                            <a href="#" rel="yijia" name="style" class="default">宜家</a>-->
+<!--                            <a href="#" rel="beiou" name="style" class="default">北欧</a>-->
+<!--                            <a href="#" rel="fugu" name="style" class="default">复古</a>-->
+<!--                            <a href="#" rel="hunda" name="style" class="default">混搭</a>-->
+<!--                            <a href="#" rel="xingudai" name="style" class="default">新古典</a>-->
+<!--                            <a href="#" rel="dizhonghai" name="style" class="default">地中海</a>-->
+<!--                            <a href="#" rel="dongnandya" name="style" class="default">东南亚</a>-->
+<!--                            <a href="#" rel="other" name="style" class="default">其他</a>-->
                         </dd>
                     </dl>
                     <dl class="cation-list">
                         <dt style="width: 80px">装修类型</dt>
                         <dd>
                             <a href="#" rel="" name="type" class="all on">全部</a>
-                            <a href="#" rel="quanbao" name="type" class="default">全包</a>
-                            <a href="#" rel="banbao" name="type" class="default">半包</a>
-                            <a href="#" rel="other" name="type" class="default">其他</a>
+                            <a href="#" th:each="index : ${houseType}" th:rel="${index.id}"
+                               name="type" class="default" th:text="${index.name}"></a>
+<!--                            <a href="#" rel="quanbao" name="type" class="default">全包</a>-->
+<!--                            <a href="#" rel="banbao" name="type" class="default">半包</a>-->
+<!--                            <a href="#" rel="other" name="type" class="default">其他</a>-->
+                        </dd>
+                    </dl>
+                    <dl class="cation-list">
+                        <dt style="width: 80px">装修类别</dt>
+                        <dd>
+                            <a href="#" rel="" name="form" class="all on">全部</a>
+                            <a href="#" th:each="index : ${houseForm}" th:rel="${index.id}"
+                               name="form" class="default" th:text="${index.name}"></a>
+<!--                            <a href="#" rel="quanbao" name="type" class="default">全包</a>-->
+<!--                            <a href="#" rel="banbao" name="type" class="default">半包</a>-->
+<!--                            <a href="#" rel="other" name="type" class="default">其他</a>-->
                         </dd>
                     </dl>
                     <dl class="cation-list">
                         <dt style="width: 80px">面积</dt>
                         <dd>
                             <a href="#" rel="" name="area" class="all on">全部</a>
-                            <a href="#" rel="0,70" name="area" class="default">70㎡以下</a>
-                            <a href="#" rel="70,80" name="area" class="default">70㎡ - 80㎡ </a>
-                            <a href="#" rel="80,90" name="area" class="default">80㎡ - 90㎡ </a>
-                            <a href="#" rel="90,110" name="area" class="default">90㎡ - 110㎡ </a>
-                            <a href="#" rel="110,140" name="area" class="default">110㎡ - 140㎡</a>
-                            <a href="#" rel="140," name="area" class="default">140㎡以上</a>
+                            <a href="#" th:each="index : ${houseArea}" th:rel="${index.id}"
+                               name="area" class="default" th:text="${index.name}"></a>
+<!--                            <a href="#" rel="0,70" name="area" class="default">70㎡以下</a>-->
+<!--                            <a href="#" rel="70,80" name="area" class="default">70㎡ - 80㎡ </a>-->
+<!--                            <a href="#" rel="80,90" name="area" class="default">80㎡ - 90㎡ </a>-->
+<!--                            <a href="#" rel="90,110" name="area" class="default">90㎡ - 110㎡ </a>-->
+<!--                            <a href="#" rel="110,140" name="area" class="default">110㎡ - 140㎡</a>-->
+<!--                            <a href="#" rel="140," name="area" class="default">140㎡以上</a>-->
                         </dd>
                     </dl>
                 </div>

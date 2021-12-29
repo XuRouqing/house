@@ -2,6 +2,7 @@ package com.example.house.service;
 
 import com.example.house.dao.DesignerMapper;
 import com.example.house.pojo.Designer;
+import com.example.house.pojo.Index;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,5 +64,15 @@ public class DesignerServiceImp implements DesignerService  {
     @Override
     public void deleteDesigner(Integer id){
         designerMapper.deleteDesigner(id);
+    }
+
+    @Override
+    public List<Index> getDesignerLevel(){
+        return designerMapper.selectDesignerLevel();
+    }
+
+    @Override
+    public List<Index> getDesignerStyle(){
+        return designerMapper.selectDesignerStyle();
     }
 }

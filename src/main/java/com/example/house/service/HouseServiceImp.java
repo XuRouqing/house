@@ -3,6 +3,7 @@ package com.example.house.service;
 import com.example.house.dao.HouseMapper;
 import com.example.house.pojo.Designer;
 import com.example.house.pojo.House;
+import com.example.house.pojo.Index;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,9 +40,9 @@ public class HouseServiceImp implements HouseService  {
     }
 
     @Override
-    public List<House> getHouseByPageAndSTA(int pageNow, int pageCount, String style, String type, String area){
+    public List<House> getHouseByPageAndSTFA(int pageNow, int pageCount, String style, String type, String form, String area){
         PageHelper.startPage(pageNow, pageCount);
-        List<House> houses = houseMapper.selectHouseByPageAndSTA(style, type, area);
+        List<House> houses = houseMapper.selectHouseByPageAndSTFA(style, type, form, area);
         return houses;
     }
 
@@ -58,5 +59,25 @@ public class HouseServiceImp implements HouseService  {
     @Override
     public void deleteHouse(Integer houseId){
         houseMapper.deleteHouse(houseId);
+    }
+
+    @Override
+    public List<Index> getHouseStyleIndex(){
+        return houseMapper.selectHouseStyle();
+    }
+
+    @Override
+    public List<Index> getHouseTypeIndex(){
+        return houseMapper.selectHouseType();
+    }
+
+    @Override
+    public List<Index> getHouseFormIndex(){
+        return houseMapper.selectHouseForm();
+    }
+
+    @Override
+    public List<Index> getHouseAreaIndex(){
+        return houseMapper.selectHouseArea();
     }
 }
