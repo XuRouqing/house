@@ -147,36 +147,36 @@
               <ul>
                 <!--                                    首页-->
                 <li>
-                  <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                  <a th:href="'../'+@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                 </li>
                 <!--                                    精装案例-->
                 <li>
-                  <a th:href="@{fullwidth}">精装案例</a>
+                  <a th:href="'../'+@{fullwidth}">精装案例</a>
                 </li>
                 <!--                                    设计团队-->
                 <li>
-                  <a th:href="@{designer-list}">设计团队</a>
+                  <a th:href="'../'+@{designer-list}">设计团队</a>
                 </li>
-                <!--                                    品质工程-->
+                <!--                                    施工团队-->
                 <li>
-                  <a th:href="@{worker-list}">品质工程</a>
+                  <a th:href="'../'+@{worker-list}">施工团队</a>
                 </li>
                 <!--                                    营销活动-->
                 <li class="drop-holder">
-                  <a th:href="@{discount/1}">营销活动</a>
+                  <a th:href="'../'+@{discount/1}">营销活动</a>
                   <ul class="drop-menu">
                     <li th:each="set : ${setInfo}">
-                      <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                      <a style="font-size: 15px" th:text="${set.name}" th:href="'../'+@{discount/}+${set.setId}"></a>
                     </li>
                   </ul>
                 </li>
-                <!--                                在线预约-->
+                <!--                                    在线预约-->
                 <li>
-                  <a th:href="@{booking}">在线预约</a>
+                  <a th:href="'../'+@{booking}">在线预约</a>
                 </li>
                 <!--                                    联系我们-->
                 <li>
-                  <a th:href="@{contact}">联系我们</a>
+                  <a th:href="'../'+@{contact}">联系我们</a>
                 </li>
               </ul>
             </nav>
@@ -192,7 +192,7 @@
           <div class="col-lg-3 col-6">
 
             <a href="" class="header-logo" style="margin-right: 20px">
-              <img src="Path/picture/dark.png" alt="Header Logo">
+              <img src="../Path/picture/dark.png" alt="Header Logo">
             </a>
 
           </div>
@@ -201,36 +201,36 @@
               <nav class="main-nav">
                 <ul>
                   <li>
-                    <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                    <a th:href="'../'+@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                   </li>
                   <!--                                    精装案例-->
                   <li>
-                    <a th:href="@{fullwidth}">精装案例</a>
+                    <a th:href="'../'+@{fullwidth}">精装案例</a>
                   </li>
                   <!--                                    设计团队-->
                   <li>
-                    <a th:href="@{designer-list}">设计团队</a>
+                    <a th:href="'../'+@{designer-list}">设计团队</a>
                   </li>
-                  <!--                                    品质工程-->
+                  <!--                                    施工团队-->
                   <li>
-                    <a th:href="@{worker-list}">品质工程</a>
+                    <a th:href="'../'+@{worker-list}">施工团队</a>
                   </li>
                   <!--                                    营销活动-->
                   <li class="drop-holder">
-                    <a th:href="@{discount/1}">营销活动</a>
+                    <a th:href="'../'+@{discount/1}">营销活动</a>
                     <ul class="drop-menu">
                       <li th:each="set : ${setInfo}">
-                        <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                        <a style="font-size: 15px" th:text="${set.name}" th:href="'../'+@{discount/}+${set.setId}"></a>
                       </li>
                     </ul>
                   </li>
                   <!--                                    在线预约-->
                   <li>
-                    <a th:href="@{booking}">在线预约</a>
+                    <a th:href="'../'+@{booking}">在线预约</a>
                   </li>
                   <!--                                    联系我们-->
                   <li>
-                    <a th:href="@{contact}">联系我们</a>
+                    <a th:href="'../'+@{contact}">联系我们</a>
                   </li>
                 </ul>
               </nav>
@@ -246,8 +246,8 @@
                     <i class="pe-7s-users"></i>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                    <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                    <li><a class="dropdown-item" th:href="@{login-register}">Login | Register</a>
+                    <li><a class="dropdown-item" th:href="'../'+@{account}">My account</a></li>
+                    <li><a class="dropdown-item" th:href="'../'+@{login-register}">Login | Register</a>
                     </li>
                   </ul>
                 </li>

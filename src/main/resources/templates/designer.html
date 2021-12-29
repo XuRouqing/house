@@ -155,9 +155,9 @@
                 <li>
                   <a th:href="'../'+@{designer-list}">设计团队</a>
                 </li>
-                <!--                                    品质工程-->
+                <!--                                    施工团队-->
                 <li>
-                  <a th:href="'../'+@{worker-list}">品质工程</a>
+                  <a th:href="'../'+@{worker-list}">施工团队</a>
                 </li>
                 <!--                                    营销活动-->
                 <li class="drop-holder">
@@ -209,9 +209,9 @@
                   <li>
                     <a th:href="'../'+@{designer-list}">设计团队</a>
                   </li>
-                  <!--                                    品质工程-->
+                  <!--                                    施工团队-->
                   <li>
-                    <a th:href="'../'+@{worker-list}">品质工程</a>
+                    <a th:href="'../'+@{worker-list}">施工团队</a>
                   </li>
                   <!--                                    营销活动-->
                   <li class="drop-holder">
@@ -669,7 +669,7 @@
           <nav class="user-tabs mb-4">
             <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
               <li class="nav-item">
-                <a class="nav-link active" style="font-size: 20px;color: #abd373">案例</a>
+                <a class="nav-link active" style="font-size: 20px;color: #abd373">代表作</a>
               </li>
             </ul>
           </nav>
@@ -700,7 +700,7 @@
                               </ul>
                               <p class="post-description" th:text="${house.title}">
                               </p>
-                              <a href="#" class="read-more" th:href="@{/case/}+${house.houseId}">查看更多</a>
+                              <a href="#" class="read-more" th:href="@{/case/}+${house.houseId}">详情</a>
                             </div>
                           </div>
                         </div>
