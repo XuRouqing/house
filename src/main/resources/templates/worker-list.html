@@ -175,7 +175,7 @@
                   </li>
                   <!--                                在线预约-->
                   <li>
-                    <a th:href="@{booking}">在线预约</a>
+                    <a th:href="@{bookOnline}">在线预约</a>
                   </li>
                   <!--                                    联系我们-->
                   <li>
@@ -229,7 +229,7 @@
                     </li>
                     <!--                                    在线预约-->
                     <li>
-                      <a th:href="@{booking}">在线预约</a>
+                      <a th:href="@{bookOnline}">在线预约</a>
                     </li>
                     <!--                                    联系我们-->
                     <li>
@@ -605,15 +605,7 @@
           <dt style="width: 80px">工种</dt>
           <dd>
             <a href="#" rel="alltype" name="type" class="all on">全部</a>
-            <a href="#" rel="gongzhang" name="type" class="default">工长</a>
-            <a href="#" rel="cailiao" name="type" class="default">材料</a>
-            <a href="#" rel="chaigai" name="type" class="default">拆改</a>
-            <a href="#" rel="mugong" name="type" class="default">木工</a>
-            <a href="#" rel="shuidian" name="type" class="default">水电</a>
-            <a href="#" rel="fangshui" name="type" class="default">防水</a>
-            <a href="#" rel="niwa" name="type" class="default">泥瓦</a>
-            <a href="#" rel="youqi" name="type" class="default">油漆</a>
-            <a href="#" rel="other" name="type" class="default">其他</a>
+            <a th:each="type : ${workerTypes}" href="#" th:rel="${type.id}" name="type" th:text="${type.name}" class="default"></a>
           </dd>
         </dl>
       </div>

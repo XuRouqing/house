@@ -1,6 +1,7 @@
 package com.example.house.service;
 
 import com.example.house.dao.WorkerMapper;
+import com.example.house.pojo.Index;
 import com.example.house.pojo.Worker;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class WorkerServiceImp implements WorkerService  {
     @Override
     public void deleteWorker(Integer id){
         workerMapper.deleteWorker(id);
+    }
+
+    @Override
+    public List<Index> getWorkerType(){
+        return workerMapper.selectWorkerType();
     }
 }

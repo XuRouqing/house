@@ -39,4 +39,7 @@
         WHERE id=#{id}
     </delete>
 
+    <select id="selectWorkerType" resultType="Index">
+        SELECT * from workertype
+    </select>
 </mapper>

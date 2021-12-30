@@ -349,7 +349,9 @@ public class Controller {
     public String toworkderlist(Model model,@RequestParam(required = false, defaultValue = "") String type,
                                 HttpServletRequest request) {
         List<Worker> workers=workerService.getWorkerByType(type);
+        List<Index> workerTypes = workerService.getWorkerType();
         model.addAttribute("workerInfo",workers);
+        model.addAttribute("workerTypes",workerTypes);
         return "worker-list";
     }
 
@@ -402,4 +404,16 @@ public class Controller {
         }
         return "booking/"+appointment.getDesignerId();
     }
+
+    @RequestMapping("/bookOnline")
+    public String tobookOnline(Model model) {
+        List<Designer> designers = designerService.getDesignerList();
+        List<Worker> workers = workerService.getWorkerList();
+        List<Index> workerTypes = workerService.getWorkerType();
+        model.addAttribute("designers",designers);
+        model.addAttribute("workers",workers);
+        model.addAttribute("workerTypes",workerTypes);
+        return "bookOnline.html";
+    }
+
 }

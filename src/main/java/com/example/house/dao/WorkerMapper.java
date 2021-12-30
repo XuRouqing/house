@@ -1,5 +1,6 @@
 package com.example.house.dao;
 
+import com.example.house.pojo.Index;
 import com.example.house.pojo.Worker;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,4 +18,5 @@ public interface WorkerMapper {
     public List<Worker> selectWorkerByType(String type);
     public void modifyWorker(Worker worker);
     public void deleteWorker(Integer id);
+    public List<Index> selectWorkerType();
 }
