@@ -883,19 +883,26 @@
         });
     };
     var num = 2;
+    var last = document.getElementById("type1");
     function addWorker(){
         $.ajax({
             url: "/queryAllTypes",
             type: "post",
             dataType: "json",
             success: function(data){
-                var div = document.getElementById("worker");
+                if (num<=2){
+                    document.getElementById("type1").classList.add("form-group");
+                }
+                last.classList.add("form-group");
+                var workerDiv = document.getElementById("worker");
+
                 /**
                  * 工种选择框
                  * @type {HTMLDivElement}
                  */
                 var i=0;
                 var j=0;
+                var div = document.createElement("div");
                 var div1 = document.createElement("div");
                 div1.setAttribute("class","col-md-5");
                 var div1_1 = document.createElement("div");
@@ -908,16 +915,10 @@
                 for (var k=0;k<data.length;k++){
                     selectType.options[i++] = new Option(data[k].name, data[k].id);
                 }
-                // var optionType0 = document.createElement("option");
-                // optionType0.setAttribute("text","---请选择工种---");
-                // var optionType = document.createElement("option");
-                // optionType.setAttribute("th:each","type:${workerTypes}");
-                // optionType.setAttribute("th:text","type.name");
-                // optionType.setAttribute("th:id","type.id");
-                // selectType.appendChild(optionType0,optionType);
                 div1_1.appendChild(selectType);
                 div1.appendChild(div1_1);
                 div.appendChild(div1);
+
                 /**
                  * 人员选择框
                  */
@@ -941,24 +942,33 @@
                 var btn = document.createElement("button");
                 btn.setAttribute("type","button");
                 btn.setAttribute("class","my-btn btn btn btn-success glyphicon glyphicon-minus");
-                btn.setAttribute("onclick","deleteWorker()");
+                btn.setAttribute("onclick","deleteWorker(this)");
                 div3.appendChild(btn);
                 div.appendChild(div3);
+
+                workerDiv.appendChild(div);
 
                 /**
                  * 改变样式，增加行间距
                  * @type {string}
                  */
                 var str = "type"+(num-1);
-                var last = document.getElementsByName(str);
-                last[0].classList.add("form-group");
+                last = selectType;
+                // var last = document.getElementById("type1");
                 num++;
             },
             error: function(msg){
                 alert("ajax连接异常："+msg);
             }
         });
-    }
+    };
+    function deleteWorker(now){
+        now.parentNode.parentNode.remove();
+        num--;
+        if (num<=2){
+            document.getElementById("type1").classList.remove("form-group");
+        }
+    };
 </script>
 </body>
 
