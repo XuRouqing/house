@@ -482,7 +482,7 @@
                                         <div class="row" id="worker">
                                             <div class="col-md-5">
                                                 <div>
-                                                    <select class="form-control" name="type1" onChange="redirec(document.bookForm.type1.options.selectedIndex)">
+                                                    <select class="form-control" id="type1" name="type1" onChange="redirec(this)">
                                                         <option>---请选择工种---</option>
                                                         <option th:each="type : ${workerTypes}" th:text="${type.name}" th:value="${type.id}"></option>
                                                     </select>
@@ -490,7 +490,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div>
-                                                    <select class="form-control" name="worker1">
+                                                    <select class="form-control" id="worker1" name="worker1">
                                                         <option>---请选择施工人员---</option>
                                                     </select>
                                                 </div>
@@ -847,17 +847,21 @@
         $('select').searchableSelect();
     });
     //施工人员级联
-    function redirec(x){
+    function redirec(now){
         $.ajax({
             url: "/queryAllWorkers",
             type: "post",
             dataType: "json",
             success: function(data){
                 /*这个方法里是ajax发送请求成功之后执行的代码*/
+                var type1 = now;
+                var s = now.id;
+                s = s.replace("type","worker");
+                var opt = now.options.selectedIndex;
 
-                var type1 = document.bookForm.type1;
-                var text = type1.options[x].text;
-                var worker1 = document.bookForm.worker1;
+                var text = type1.options[opt].text;
+                // var worker1 = document.bookForm.worker1;
+                var worker1 = document.getElementById(s);
                 var j = 1;
                 worker1.options[0] = new Option("---请选择施工人员---");
                 for (i=0;i<data.length;i++) {
@@ -877,7 +881,7 @@
                 alert("ajax连接异常："+msg);
             }
         });
-    }
+    };
     var num = 2;
     function addWorker(){
         $.ajax({
@@ -898,8 +902,8 @@
                 var selectType = document.createElement("select");
                 selectType.setAttribute("class","form-control");
                 selectType.setAttribute("name","type"+num);
-                console.log(selectType.name);
-                selectType.setAttribute("onChange","redirec(document.bookForm.type"+num+".options.selectedIndex)");
+                selectType.setAttribute("id","type"+num);
+                selectType.setAttribute("onChange","redirec(this)");
                 selectType.options[i++] = new Option("---请选择工种---");
                 for (var k=0;k<data.length;k++){
                     selectType.options[i++] = new Option(data[k].name, data[k].id);
@@ -923,9 +927,8 @@
                 var selectWorker = document.createElement("select");
                 selectWorker.setAttribute("class","form-control");
                 selectWorker.setAttribute("name","worker"+num);
-                var optionWorker = document.createElement("option");
-                optionWorker.setAttribute("text","---请选择工种---");
-                selectWorker.appendChild(optionWorker);
+                selectWorker.setAttribute("id","worker"+num);
+                selectWorker.options[0] = new Option("---请选择工种---");
                 div2_1.appendChild(selectWorker);
                 div2.appendChild(div2_1);
                 div.appendChild(div2);
