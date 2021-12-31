@@ -49,6 +49,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/vendor/holder.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie10-viewport-bug-workaround.js"></script>
 
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="Path/css/material.min.css" />
+    <link rel="stylesheet" href="Path/css/bootstrap-material-datetimepicker.css" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -501,12 +506,20 @@
                                         </div>
                                     </div>
                                 </div>
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-form-label col-md-2 form-label">时间</label>-->
+<!--                                    <div class="col-md-10">-->
+<!--                                        <select class="form-control">-->
+<!--                                            <option>-&#45;&#45;请选择-&#45;&#45;</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">时间</label>
                                     <div class="col-md-10">
-                                        <select class="form-control">
-                                            <option>---请选择---</option>
-                                        </select>
+                                        <div class="form-control-wrapper">
+                                            <input type="text" id="date-format" class="form-control floating-label" placeholder="Begin Date Time">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -842,6 +855,58 @@
 <script src="Path/js/jquery-2.1.1.min.js"></script>
 <script src="Path/js/main.js"></script> <!-- Resource jQuery -->
 <script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
+
+
+<script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Path/js/material.min.js"></script>
+<script type="text/javascript" src="Path/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="Path/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $('#date').bootstrapMaterialDatePicker
+        ({
+            time: false
+        });
+
+        $('#time').bootstrapMaterialDatePicker
+        ({
+            date: false,
+            shortTime: true,
+            format: 'HH:mm'
+        });
+
+        $('#date-format').bootstrapMaterialDatePicker
+        ({
+            format: 'YYYY'+'年'+'MMMM'+'DD'+'日'+'dddd'+ '- HH:mm'
+        });
+        $('#date-fr').bootstrapMaterialDatePicker
+        ({
+            format: 'DD/MM/YYYY HH:mm',
+            lang: 'fr',
+            weekStart: 1,
+            cancelText : 'ANNULER'
+        });
+
+        $('#date-end').bootstrapMaterialDatePicker
+        ({
+            weekStart: 0, format: 'DD/MM/YYYY HH:mm'
+        });
+        $('#date-start').bootstrapMaterialDatePicker
+        ({
+            weekStart: 0, format: 'DD/MM/YYYY HH:mm'
+        }).on('change', function(e, date)
+        {
+            $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+        });
+
+        $('#min-date').bootstrapMaterialDatePicker({ format : 'YYYY/MM/DD HH:mm', minDate : new Date() });
+
+        $.material.init()
+    });
+</script>
+
+
 <script>
     $(function(){
         $('select').searchableSelect();
