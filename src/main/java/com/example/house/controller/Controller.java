@@ -3,16 +3,21 @@ package com.example.house.controller;
 
 import com.example.house.pojo.*;
 import com.example.house.service.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import net.sf.json.JSONArray;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.Style;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -406,7 +411,7 @@ public class Controller {
     }
 
     @RequestMapping("/bookOnline")
-    public String tobookOnline(Model model) {
+    public String tobookOnline(Model model, HttpServletResponse resp){
         List<Designer> designers = designerService.getDesignerList();
         List<Worker> workers = workerService.getWorkerList();
         List<Index> workerTypes = workerService.getWorkerType();
@@ -414,6 +419,42 @@ public class Controller {
         model.addAttribute("workers",workers);
         model.addAttribute("workerTypes",workerTypes);
         return "bookOnline.html";
+    }
+    @RequestMapping(value="/queryAllWorkers")
+    public void query(HttpServletResponse resp) {
+        try {
+            /*list集合中存放的是好多student对象*/
+            List<Worker> workers = workerService.getWorkerList();
+            /*将list集合装换成json对象*/
+            JSONArray data = JSONArray.fromObject(workers);
+            //接下来发送数据
+            /*设置编码，防止出现乱码问题*/
+            resp.setCharacterEncoding("utf-8");
+            /*得到输出流*/
+            PrintWriter respWritter = resp.getWriter();
+            /*将JSON格式的对象toString()后发送*/
+            respWritter.append(data.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @RequestMapping(value="/queryAllTypes")
+    public void queryType(HttpServletResponse resp) {
+        try {
+            /*list集合中存放的是好多student对象*/
+            List<Index> workerTypes = workerService.getWorkerType();
+            /*将list集合装换成json对象*/
+            JSONArray data = JSONArray.fromObject(workerTypes);
+            //接下来发送数据
+            /*设置编码，防止出现乱码问题*/
+            resp.setCharacterEncoding("utf-8");
+            /*得到输出流*/
+            PrintWriter respWritter = resp.getWriter();
+            /*将JSON格式的对象toString()后发送*/
+            respWritter.append(data.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

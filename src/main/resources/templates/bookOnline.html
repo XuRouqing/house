@@ -425,7 +425,7 @@
                         <div class="card-header">
                             <h4 class="card-title">在线预约</h4>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="padding: 20px">
                             <form action="#" name="bookForm">
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">称呼</label>
@@ -479,10 +479,10 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">施工人员</label>
                                     <div class="col-lg-10">
-                                        <div class="row">
+                                        <div class="row" id="worker">
                                             <div class="col-md-5">
                                                 <div>
-                                                    <select class="form-control" name="s1" onChange="redirec(document.bookForm.s1.options.selectedIndex)">
+                                                    <select class="form-control" name="type1" onChange="redirec(document.bookForm.type1.options.selectedIndex)">
                                                         <option>---请选择工种---</option>
                                                         <option th:each="type : ${workerTypes}" th:text="${type.name}" th:value="${type.id}"></option>
                                                     </select>
@@ -490,13 +490,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div>
-                                                    <select class="form-control" name="s2">
+                                                    <select class="form-control" name="worker1">
                                                         <option>---请选择施工人员---</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
-                                                <button type="button" class="my-btn btn btn-success glyphicon glyphicon-plus"></button>
+                                                <button type="button" class="my-btn btn btn-success glyphicon glyphicon-plus" onclick="addWorker()"></button>
                                             </div>
                                         </div>
                                     </div>
@@ -846,19 +846,115 @@
     $(function(){
         $('select').searchableSelect();
     });
+    //施工人员级联
     function redirec(x){
-        var data = '[[${workers}]]';
-        // var data = data.slice(1,-1);
-        // var data = data.split(",");
-        var temp = document.bookForm.s2;
-        alert(data);
-        for (i=0;i<data.length;i++) {
+        $.ajax({
+            url: "/queryAllWorkers",
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                /*这个方法里是ajax发送请求成功之后执行的代码*/
 
-            if (data[i].typeValue == temp.innerText) {
-                temp.options[i] = new Option(data[i].name, data[i].id);
+                var type1 = document.bookForm.type1;
+                var text = type1.options[x].text;
+                var worker1 = document.bookForm.worker1;
+                var j = 1;
+                worker1.options[0] = new Option("---请选择施工人员---");
+                for (i=0;i<data.length;i++) {
+                    if (encodeURIComponent(data[i].type)==encodeURIComponent(text)) {
+                        worker1.options[j++] = new Option(data[i].name, data[i].id);
+                    }
+                }
+                if (j==1){
+                    length=worker1.options.length;
+                    for(i=0;i<length;i++){
+                        worker1.removeChild(worker1.options[0]);
+                    }
+                    worker1.options[0] = new Option("---暂无可选施工人员---");
+                }
+            },
+            error: function(msg){
+                alert("ajax连接异常："+msg);
             }
-            temp.options[0].selected = true;
-        }
+        });
+    }
+    var num = 2;
+    function addWorker(){
+        $.ajax({
+            url: "/queryAllTypes",
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                var div = document.getElementById("worker");
+                /**
+                 * 工种选择框
+                 * @type {HTMLDivElement}
+                 */
+                var i=0;
+                var j=0;
+                var div1 = document.createElement("div");
+                div1.setAttribute("class","col-md-5");
+                var div1_1 = document.createElement("div");
+                var selectType = document.createElement("select");
+                selectType.setAttribute("class","form-control");
+                selectType.setAttribute("name","type"+num);
+                console.log(selectType.name);
+                selectType.setAttribute("onChange","redirec(document.bookForm.type"+num+".options.selectedIndex)");
+                selectType.options[i++] = new Option("---请选择工种---");
+                for (var k=0;k<data.length;k++){
+                    selectType.options[i++] = new Option(data[k].name, data[k].id);
+                }
+                // var optionType0 = document.createElement("option");
+                // optionType0.setAttribute("text","---请选择工种---");
+                // var optionType = document.createElement("option");
+                // optionType.setAttribute("th:each","type:${workerTypes}");
+                // optionType.setAttribute("th:text","type.name");
+                // optionType.setAttribute("th:id","type.id");
+                // selectType.appendChild(optionType0,optionType);
+                div1_1.appendChild(selectType);
+                div1.appendChild(div1_1);
+                div.appendChild(div1);
+                /**
+                 * 人员选择框
+                 */
+                var div2 = document.createElement("div");
+                div2.setAttribute("class","col-md-6");
+                var div2_1 = document.createElement("div");
+                var selectWorker = document.createElement("select");
+                selectWorker.setAttribute("class","form-control");
+                selectWorker.setAttribute("name","worker"+num);
+                var optionWorker = document.createElement("option");
+                optionWorker.setAttribute("text","---请选择工种---");
+                selectWorker.appendChild(optionWorker);
+                div2_1.appendChild(selectWorker);
+                div2.appendChild(div2_1);
+                div.appendChild(div2);
+
+                /**
+                 * 删除按钮
+                 */
+                var div3 = document.createElement("div");
+                div3.setAttribute("class","col-md-1");
+                var btn = document.createElement("button");
+                btn.setAttribute("type","button");
+                btn.setAttribute("class","my-btn btn btn btn-success glyphicon glyphicon-minus");
+                btn.setAttribute("onclick","deleteWorker()");
+                div3.appendChild(btn);
+                div.appendChild(div3);
+
+                /**
+                 * 改变样式，增加行间距
+                 * @type {string}
+                 */
+                var str = "type"+(num-1);
+                var last = document.getElementsByName(str);
+                last[0].classList.add("form-group");
+                num++;
+            },
+            error: function(msg){
+                alert("ajax连接异常："+msg);
+            }
+        });
     }
 </script>
 </body>
