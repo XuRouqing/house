@@ -47,6 +47,9 @@ public class Controller {
     @Autowired
     private AppointmentService appointmentService;
 
+    @Autowired
+    private CityService cityService;
+
     @ModelAttribute
     public void addAttributes(Model model) {
         List<Set> set = setService.getSetList();
@@ -415,11 +418,18 @@ public class Controller {
         List<Designer> designers = designerService.getDesignerList();
         List<Worker> workers = workerService.getWorkerList();
         List<Index> workerTypes = workerService.getWorkerType();
+        List<City> provinces = cityService.getProvinceList();
         model.addAttribute("designers",designers);
         model.addAttribute("workers",workers);
         model.addAttribute("workerTypes",workerTypes);
+        model.addAttribute("provinces",provinces);
         return "bookOnline.html";
     }
+
+    /**
+     * 获取工人列表
+     * @param resp
+     */
     @RequestMapping(value="/queryAllWorkers")
     public void query(HttpServletResponse resp) {
         try {
@@ -438,23 +448,39 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 施工人员工种列表
+     * @param resp
+     */
     @RequestMapping(value="/queryAllTypes")
     public void queryType(HttpServletResponse resp) {
         try {
-            /*list集合中存放的是好多student对象*/
             List<Index> workerTypes = workerService.getWorkerType();
-            /*将list集合装换成json对象*/
             JSONArray data = JSONArray.fromObject(workerTypes);
-            //接下来发送数据
-            /*设置编码，防止出现乱码问题*/
             resp.setCharacterEncoding("utf-8");
-            /*得到输出流*/
             PrintWriter respWritter = resp.getWriter();
-            /*将JSON格式的对象toString()后发送*/
             respWritter.append(data.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 获取省下地级市列表
+     * @param resp
+     * @param id
+     */
+    @RequestMapping(value="/queryCity/{id}")
+    public void queryCity(HttpServletResponse resp,@PathVariable int id) {
+        try {
+            List<City> cityList = cityService.getCityListByPid(id);
+            JSONArray data = JSONArray.fromObject(cityList);
+            resp.setCharacterEncoding("utf-8");
+            PrintWriter respWritter = resp.getWriter();
+            respWritter.append(data.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

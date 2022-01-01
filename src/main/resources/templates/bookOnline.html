@@ -54,6 +54,29 @@
     <link rel="stylesheet" href="Path/css/material.min.css" />
     <link rel="stylesheet" href="Path/css/bootstrap-material-datetimepicker.css" />
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+
+    <script async>
+        function fp_ready() {
+            // setting custom defaults
+            Flatpickr.l10n.firstDayOfWeek = 1;
+
+            //Regular flatpickr
+            document.getElementById("flatpickr-tryme").flatpickr();
+
+            // Date format
+            var fpInstance = new Flatpickr(document.createElement("input")),
+                formatOutput = document.getElementById("dateFormatOutput"),
+                now = new Date();
+
+        }
+    </script>
+    <script async src="Path/js/flatpickr.js" onload="fp_ready()"></script>
+
+
+<!--    <link rel="stylesheet" type="text/css" href="assets/site.css">-->
+    <link rel="stylesheet" id=cal_style type="text/css" href="Path/css/flatpickr.min.css">
+
+<!--    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>-->
 </head>
 
 <body>
@@ -433,50 +456,53 @@
                         <div class="card-body" style="padding: 20px">
                             <form action="#" name="bookForm">
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2 form-label">称呼</label>
+                                    <label class="col-form-label col-md-2 form-label">称呼*</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" placeholder="如何称呼您" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2 form-label">性别</label>
+                                    <label class="col-form-label col-md-2 form-label">联系电话*</label>
                                     <div class="col-md-10">
-                                        <span class="radio">
-                                            <label>
-                                                <input type="radio" name="radio"> 男
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="radio"> 女
-                                            </label>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2 form-label">联系电话</label>
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" placeholder="请输入联系电话" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">邮箱</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" placeholder="请输入您的邮箱">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">城市</label>
-                                    <div class="col-md-10">
-                                        <select class="form-control">
-                                            <option>---请选择---</option>
-                                            <option>Option 1</option>
-                                        </select>
+                                    <div class="col-lg-10">
+                                        <div class="row" id="location">
+                                            <div class="col-md-2">
+                                                <div>
+                                                    <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
+                                                        <option>请选择省份</option>
+                                                        <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div>
+                                                    <select class="form-control" id="city" name="city">
+                                                        <option>请选择城市</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="请输入详细地址">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">设计师</label>
                                     <div class="col-md-10">
-                                        <select class="form-control">
-                                            <option>---请选择---</option>
+                                        <select class="form-control" th:placeholder="请选择设计师">
+                                            <option>请选择设计师</option>
                                             <option th:each="designer : ${designers}" th:text="${designer.name}"></option>
                                         </select>
                                     </div>
@@ -488,7 +514,7 @@
                                             <div class="col-md-5">
                                                 <div>
                                                     <select class="form-control" id="type1" name="type1" onChange="redirec(this)">
-                                                        <option>---请选择工种---</option>
+                                                        <option>请选择工种</option>
                                                         <option th:each="type : ${workerTypes}" th:text="${type.name}" th:value="${type.id}"></option>
                                                     </select>
                                                 </div>
@@ -496,7 +522,7 @@
                                             <div class="col-md-6">
                                                 <div>
                                                     <select class="form-control" id="worker1" name="worker1">
-                                                        <option>---请选择施工人员---</option>
+                                                        <option>请选择施工人员</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -506,26 +532,25 @@
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div class="form-group row">-->
-<!--                                    <label class="col-form-label col-md-2 form-label">时间</label>-->
-<!--                                    <div class="col-md-10">-->
-<!--                                        <select class="form-control">-->
-<!--                                            <option>-&#45;&#45;请选择-&#45;&#45;</option>-->
-<!--                                        </select>-->
-<!--                                    </div>-->
-<!--                                </div>-->
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">时间</label>
-                                    <div class="col-md-10">
-                                        <div class="form-control-wrapper">
-                                            <input type="text" id="date-format" class="form-control floating-label" placeholder="Begin Date Time">
+                                    <div class="col-lg-10">
+                                        <div class="row">
+                                        <div class="form-control-wrapper col-md-5">
+                                            <input id="flatpickr-tryme" class="form-control" type="text" placeholder="请选择时间">
                                         </div>
+                                        <div class="form-control-wrapper col-md-7">
+                                            <select id="timeSelect" class="form-control" type="text">
+                                                <option>请选择具体时间</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">备注</label>
                                     <div class="col-md-10">
-                                        <textarea rows="5" cols="5" class="form-control" placeholder="Enter text here"></textarea>
+                                        <textarea rows="5" cols="5" class="form-control" placeholder="备注"></textarea>
                                     </div>
                                 </div>
                                 <div class="submit-section proceed-btn text-right">
@@ -861,50 +886,7 @@
 <script type="text/javascript" src="Path/js/material.min.js"></script>
 <script type="text/javascript" src="Path/js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="Path/js/bootstrap-material-datetimepicker.js"></script>
-<script type="text/javascript">
-    $(document).ready(function()
-    {
-        $('#date').bootstrapMaterialDatePicker
-        ({
-            time: false
-        });
 
-        $('#time').bootstrapMaterialDatePicker
-        ({
-            date: false,
-            shortTime: true,
-            format: 'HH:mm'
-        });
-
-        $('#date-format').bootstrapMaterialDatePicker
-        ({
-            format: 'YYYY'+'年'+'MMMM'+'DD'+'日'+'dddd'+ '- HH:mm'
-        });
-        $('#date-fr').bootstrapMaterialDatePicker
-        ({
-            format: 'DD/MM/YYYY HH:mm',
-            lang: 'fr',
-            weekStart: 1,
-            cancelText : 'ANNULER'
-        });
-
-        $('#date-end').bootstrapMaterialDatePicker
-        ({
-            weekStart: 0, format: 'DD/MM/YYYY HH:mm'
-        });
-        $('#date-start').bootstrapMaterialDatePicker
-        ({
-            weekStart: 0, format: 'DD/MM/YYYY HH:mm'
-        }).on('change', function(e, date)
-        {
-            $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
-        });
-
-        $('#min-date').bootstrapMaterialDatePicker({ format : 'YYYY/MM/DD HH:mm', minDate : new Date() });
-
-        $.material.init()
-    });
-</script>
 
 
 <script>
@@ -928,7 +910,7 @@
                 // var worker1 = document.bookForm.worker1;
                 var worker1 = document.getElementById(s);
                 var j = 1;
-                worker1.options[0] = new Option("---请选择施工人员---");
+                worker1.options[0] = new Option("请选择施工人员");
                 for (i=0;i<data.length;i++) {
                     if (encodeURIComponent(data[i].type)==encodeURIComponent(text)) {
                         worker1.options[j++] = new Option(data[i].name, data[i].id);
@@ -939,7 +921,7 @@
                     for(i=0;i<length;i++){
                         worker1.removeChild(worker1.options[0]);
                     }
-                    worker1.options[0] = new Option("---暂无可选施工人员---");
+                    worker1.options[0] = new Option("暂无可选施工人员");
                 }
             },
             error: function(msg){
@@ -949,6 +931,8 @@
     };
     var num = 2;
     var last = document.getElementById("type1");
+
+    //添加施工人员
     function addWorker(){
         $.ajax({
             url: "/queryAllTypes",
@@ -967,6 +951,13 @@
                  */
                 var i=0;
                 var j=0;
+                var length=worker1.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for(var k=0;k<length;k++){
+                    worker1.removeChild(worker1.options[0]);
+                }
                 var div = document.createElement("div");
                 var div1 = document.createElement("div");
                 div1.setAttribute("class","col-md-5");
@@ -976,7 +967,7 @@
                 selectType.setAttribute("name","type"+num);
                 selectType.setAttribute("id","type"+num);
                 selectType.setAttribute("onChange","redirec(this)");
-                selectType.options[i++] = new Option("---请选择工种---");
+                selectType.options[i++] = new Option("请选择工种");
                 for (var k=0;k<data.length;k++){
                     selectType.options[i++] = new Option(data[k].name, data[k].id);
                 }
@@ -994,7 +985,7 @@
                 selectWorker.setAttribute("class","form-control");
                 selectWorker.setAttribute("name","worker"+num);
                 selectWorker.setAttribute("id","worker"+num);
-                selectWorker.options[0] = new Option("---请选择工种---");
+                selectWorker.options[0] = new Option("请选择工种");
                 div2_1.appendChild(selectWorker);
                 div2.appendChild(div2_1);
                 div.appendChild(div2);
@@ -1027,12 +1018,47 @@
             }
         });
     };
+
+    //删除施工人员
     function deleteWorker(now){
         now.parentNode.parentNode.remove();
         num--;
         if (num<=2){
             document.getElementById("type1").classList.remove("form-group");
         }
+    };
+
+    //城市级联
+    function changeProvince(now){
+        $.ajax({
+            url: "/queryCity/"+now.options[now.options.selectedIndex].value,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                /*这个方法里是ajax发送请求成功之后执行的代码*/
+                var province = now;
+                var city = document.getElementById("city");
+                var opt = now.options.selectedIndex;
+                var j = 0;
+                var length=city.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for(i=0;i<length;i++){
+                    city.removeChild(city.options[0]);
+                }
+                /**
+                 * 添加新选项
+                 */
+                for (i=0;i<data.length;i++) {
+                    // console.log(data[i].district_name);
+                    city.options[j++] = new Option(data[i].district_name, data[i].id);
+                }
+            },
+            error: function(msg){
+                alert("ajax连接异常："+msg);
+            }
+        });
     };
 </script>
 </body>
