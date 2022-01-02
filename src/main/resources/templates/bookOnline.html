@@ -910,12 +910,12 @@
                 // var worker1 = document.bookForm.worker1;
                 var worker1 = document.getElementById(s);
                 var j = 1;
-                worker1.options[0] = new Option("请选择施工人员");
                 for (i=0;i<data.length;i++) {
                     if (encodeURIComponent(data[i].type)==encodeURIComponent(text)) {
                         worker1.options[j++] = new Option(data[i].name, data[i].id);
                     }
                 }
+                worker1.options[0] = new Option("请选择施工人员");
                 if (j==1){
                     length=worker1.options.length;
                     for(i=0;i<length;i++){
@@ -951,13 +951,13 @@
                  */
                 var i=0;
                 var j=0;
-                var length=worker1.options.length;
+                // var length=worker1.options.length;
                 /**
                  * 清空原选择框中选项
                  */
-                for(var k=0;k<length;k++){
-                    worker1.removeChild(worker1.options[0]);
-                }
+                // for(var k=0;k<length;k++){
+                //     worker1.removeChild(worker1.options[0]);
+                // }
                 var div = document.createElement("div");
                 var div1 = document.createElement("div");
                 div1.setAttribute("class","col-md-5");
@@ -985,7 +985,7 @@
                 selectWorker.setAttribute("class","form-control");
                 selectWorker.setAttribute("name","worker"+num);
                 selectWorker.setAttribute("id","worker"+num);
-                selectWorker.options[0] = new Option("请选择工种");
+                selectWorker.options[0] = new Option("请选择施工人员");
                 div2_1.appendChild(selectWorker);
                 div2.appendChild(div2_1);
                 div.appendChild(div2);
