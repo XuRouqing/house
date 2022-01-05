@@ -690,6 +690,10 @@
                                     <div class="line-circle"></div>
                                     <a href="" target="" th:text="${houseInfo.area}+'㎡'"></a>
                                 </li>
+                                <li>
+                                    <div class="line-circle"></div>
+                                    <a href="" target="" th:text="${houseInfo.price}+'元'"></a>
+                                </li>
                             </ul>
                         </div>
                         <div style="margin: 20px 20px 20px 0">
@@ -714,6 +718,32 @@
                                             <li>联系电话<span th:text="${designerInfo.tel}"></span></li>
                                             <li>擅长风格<span th:text="${designerInfo.style}"></span></li>
                                             <li>代表作<span th:text="${designerInfo.represent}" style="max-width:160px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin: 20px 20px 20px 0" th:each="worker : ${wokerInfo}">
+                            <div class="card widget-profile pat-widget-profile">
+                                <div class="card-body">
+                                    <div class="pro-widget-content">
+                                        <div class="profile-info-widget">
+                                            <a th:href="@{/worker/}+${worker.id}" class="booking-doc-img">
+                                                <img th:src="'../Path'+${worker.pic}" alt="Worker Image">
+                                            </a>
+                                            <div class="profile-det-info">
+                                                <h3><a th:href="@{/worker/}+${worker.id}" th:text="${worker.name}"></a></h3>
+                                                <div class="patient-details">
+                                                    <h5><b></b></h5>
+                                                    <h5 class="mb-0"><span th:text="${worker.type}"></span></i></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="patient-info">
+                                        <ul>
+                                            <li>联系电话<span th:text="${worker.tel}"></span></li>
+                                            <li>所在城市<span th:text="${worker.city}"></span></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.SetOrderMapper">
+
+    <insert id="insertSet" parameterType="Set">
+        insert into setorder (setId,customerId,tel,email,city,time)
+        values (#{setId},#{customerId},#{tel},#{email},#{city},NOW())
+    </insert>
+
+
+</mapper>

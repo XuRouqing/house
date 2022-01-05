@@ -6,8 +6,8 @@
 <mapper namespace="com.example.house.dao.SetMapper">
 
     <insert id="insertSet" parameterType="Set">
-        insert into myset (setId,name,pic)
-        values (#{setId},#{name},#{pic})
+        insert into myset (name,pic,discount,describe,time)
+        values (#{name},#{pic},#{discount},#{describe},#{time})
     </insert>
 
     <select id="selectSetById" resultType="Set">
@@ -20,7 +20,7 @@
     </select>
 
     <update id="modifySet" parameterType="Set">
-        UPDATE myset SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        UPDATE myset SET name=#{name},pic=#{pic},discount=#{discount},describe=#{describe},time=#{time}
         WHERE setId=#{setId}
     </update>
 

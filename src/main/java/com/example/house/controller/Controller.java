@@ -50,6 +50,9 @@ public class Controller {
     @Autowired
     private CityService cityService;
 
+    @Autowired
+    private SetOrderService setOrderService;
+
     @ModelAttribute
     public void addAttributes(Model model) {
         List<Set> set = setService.getSetList();
@@ -372,11 +375,22 @@ public class Controller {
 
     @RequestMapping("/discount/{id}")
     public String todiscount(@PathVariable int id, Model model) {
+        Set set = setService.findSetById(id);
         List<SetContent> contents = contentService.getSetContentListBySet(id);
         List<SetConfig> configs = configService.getSetConfigListBySet(id);
+        model.addAttribute("setInfo",set);
         model.addAttribute("contentInfo",contents);
         model.addAttribute("configInfo",configs);
         return "discount";
+    }
+
+    @PostMapping("/discountOrderAdd")
+    public String discountOderAdd(SetOrder setOrder, HttpSession session, HttpServletRequest request, Model model){
+        if(setOrder!=null){
+            setOrderService.addOrder(setOrder);
+            return "redirect:/discount/"+setOrder.getSetId();
+        }
+        return "discount/"+setOrder.getSetId();
     }
 
     @RequestMapping("/contact")
@@ -483,4 +497,5 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
 }

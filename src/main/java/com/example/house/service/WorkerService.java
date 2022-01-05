@@ -11,6 +11,7 @@ public interface WorkerService {
     public List<Worker> getWorkerList();
     public List<Worker> getWorkerByType(String type);
     public Worker findWorkerByName(String name);
+    public List<Worker> findWorkerByHouse(int houseId);
     public void modifyWorker(Worker worker);
     public void deleteWorker(Integer id);
     public List<Index> getWorkerType();

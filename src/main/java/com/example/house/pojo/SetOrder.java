@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ConfigurationProperties(prefix = "set")
-public class Set {
+@ConfigurationProperties(prefix = "setorder")
+public class SetOrder {
+    private int id;
     private int setId;
-    private String name;
-    private String pic;
-    private int rownum;
-    private String discount;
-    private String describe;
+    private int customerId;
+    private String tel;
+    private String email;
+    private String city;
     private String time;
 }

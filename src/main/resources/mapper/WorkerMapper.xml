@@ -29,6 +29,12 @@
         where name = #{name}
     </select>
 
+    <select id="findWorkerByHouse" resultType="Worker">
+        SELECT worker.* FROM worker,house
+        WHERE houseId=#{houseId}
+          AND FIND_IN_SET(worker.id, workerIds)
+    </select>
+
     <update id="modifyWorker" parameterType="Worker">
         UPDATE worker SET name=#{name},gender=#{gender},city=#{city},type=#{type},age=#{age},workingAge=#{workingAge},represent=#{represent},tel=#{tel},pic=#{pic},describe=#{describe},declaration=#{declaration}
         WHERE id=#{id}

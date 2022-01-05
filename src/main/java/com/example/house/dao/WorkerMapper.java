@@ -15,6 +15,7 @@ public interface WorkerMapper {
     Worker selectWorkerById(int id);
     List<Worker> selectWorkerAll();
     public Worker findWorkerByName(@Param("name") String name);
+    public List<Worker> findWorkerByHouse(@Param("houseId") int houseId);
     public List<Worker> selectWorkerByType(String type);
     public void modifyWorker(Worker worker);
     public void deleteWorker(Integer id);

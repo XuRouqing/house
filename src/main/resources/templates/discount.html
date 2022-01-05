@@ -37,7 +37,6 @@
     <link rel="stylesheet" href="../Path/css/scrollbar.css">
     <link rel="stylesheet" href="../Path/css/jquery.mCustomScrollbar.css">
 
-
 </head>
 
 <body>
@@ -580,13 +579,32 @@
     <div class="global-overlay"></div>
 </header>
 <!-- Main Header Area End Here -->
-
+<div class="breadcrumb-area breadcrumb-height" data-bg-image="../Path/image/slider-bg-2.jpg">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="row">
+                <div class="col-lg-6 order-2 order-lg-1 align-self-center">
+                    <div class="slide-content text-black">
+                        <span class="offer" th:text="${setInfo.discount}" style="color: white"></span>
+                        <h2 class="title" th:text="${setInfo.name}" style="color: white"></h2>
+                        <p class="short-desc" th:text="${setInfo.describe}" style="color: white"></p>
+                        <p class="short-desc" th:text="${setInfo.time}" style="color: white"></p>
+                        <div class="btn-wrap">
+                            <button class="btn btn-custom-size xl-size btn-pronia-primary">马上预约</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 整装优惠 -->
-<div class="product-area section-space-top-100">
+<div class="product-area section-space-top-80">
     <div class="container">
         <div class="section-title-wrap">
-            <h2 class="section-title mb-0">套餐一</h2>
+            <h2 class="section-title mb-0" th:text="${setInfo.name}"></h2>
         </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <ul class="nav product-tab-nav tab-style-1" id="myTab" role="tablist">
@@ -977,15 +995,6 @@
     a:hover{
         text-decoration:none
     }
-    .more{
-        height: 40px;
-        width: 200px;
-        border: #abd373 1px solid;
-        background: #abd373;
-        font-size: 15px;
-        color: white;
-        outline: #d5d5d5 1px solid;
-    }
     .scrollbarTitle{
         font-family: "Lobster Two", "Georgia", serif;
         font-weight: 700;
@@ -993,6 +1002,12 @@
     }
     .p1{
         font-size: medium;
+    }
+    .slide-content .short-desc {
+        text-transform: capitalize;
+        font-size: 22px;
+        line-height: 28px;
+        margin-bottom: 15px;
     }
 </style>
 

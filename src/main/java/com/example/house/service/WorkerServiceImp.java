@@ -43,6 +43,11 @@ public class WorkerServiceImp implements WorkerService  {
     }
 
     @Override
+    public List<Worker> findWorkerByHouse(int houseId){
+        return workerMapper.findWorkerByHouse(houseId);
+    }
+
+    @Override
     public void modifyWorker(Worker worker){
         workerMapper.modifyWorker(worker);
     }
