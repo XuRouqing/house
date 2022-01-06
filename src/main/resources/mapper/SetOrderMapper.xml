@@ -5,9 +5,9 @@
 
 <mapper namespace="com.example.house.dao.SetOrderMapper">
 
-    <insert id="insertSet" parameterType="Set">
-        insert into setorder (setId,customerId,tel,email,city,time)
-        values (#{setId},#{customerId},#{tel},#{email},#{city},NOW())
+    <insert id="insertOrder" parameterType="SetOrder">
+        insert into setorder (setId,customerId,customerName,tel,email,province,city,position,time)
+        values (#{setId},#{customerId},#{customerName},#{tel},#{email},#{province},#{city},#{position},NOW())
     </insert>
 
 

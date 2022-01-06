@@ -378,9 +378,11 @@ public class Controller {
         Set set = setService.findSetById(id);
         List<SetContent> contents = contentService.getSetContentListBySet(id);
         List<SetConfig> configs = configService.getSetConfigListBySet(id);
+        List<City> provinces = cityService.getProvinceList();
         model.addAttribute("setInfo",set);
         model.addAttribute("contentInfo",contents);
         model.addAttribute("configInfo",configs);
+        model.addAttribute("provinces",provinces);
         return "discount";
     }
 

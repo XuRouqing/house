@@ -3,9 +3,7 @@ package com.example.house;
 public class TODO {
     /**
      * 整装优惠
-     * TODO 给优惠界面增加预约模态框
      * TODO 前n名优惠，ROWNUM，数据库改造
-     * TODO 优惠时间
      * TODO 具体折扣内容
      * TODO 分区域报名（X）
      * TODO 管理员编辑设计
