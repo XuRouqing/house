@@ -23,7 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
@@ -542,7 +544,7 @@ public class Controller {
             session.setAttribute("code",u.getCode());
             request.getSession().setAttribute("name",u.getName());
             request.getSession().setAttribute("userCode",u.getCode());
-            if (u.getCharacter().equals("admin")){
+            if (u.getRole().equals("admin")){
                 return  "redirect:/index";
             }
             return "redirect:/index";
@@ -558,5 +560,44 @@ public class Controller {
     @RequestMapping("/register")
     public String toRegister() {
         return "register";
+    }
+
+    @PostMapping("/doregister")
+    public String doregister(User user) {
+        if (checkCode(user.getCode())){
+            userService.addUser(user);
+            return "redirect:/login";
+        }
+        return "redirect:/register";
+    }
+
+    public boolean checkCode(String code) {
+        List<User> users=userService.getUserList();
+        boolean flag = true;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getCode().equals(code)){
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    @RequestMapping(value="/queryCode")
+    @ResponseBody
+    public Map<String, Integer> queryCode(@RequestParam("code") String code) {
+        List<User> users = userService.getUserList();
+        Map<String, Integer> map = new HashMap<>();
+        boolean flag = true;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getCode().equals(code)) {
+                flag = false;
+            }
+        }
+        if (flag){
+            map.put("result", 200);
+        }else {
+            map.put("result", 400);
+        }
+        return map;
     }
 }

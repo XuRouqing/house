@@ -6,8 +6,8 @@
 <mapper namespace="com.example.house.dao.UserMapper">
 
     <insert id="insertUser" parameterType="User">
-        insert into user (code,name,character,password)
-        values (#{code},#{name},#{character},#{password})
+        insert into user (code,name,role,password,email)
+        values (#{code},#{name},#{role},#{password},#{email})
     </insert>
 
     <select id="selectUserById" resultType="User">

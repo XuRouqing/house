@@ -775,84 +775,45 @@
 
         <!-- Begin Main Content Area -->
         <main class="main-content">
-            <div class="breadcrumb-area breadcrumb-height" data-bg-image="static/image/1-1-1919x388.jpg">
-                <div class="container h-100">
-                    <div class="row h-100">
-                        <div class="col-lg-12">
-                            <div class="breadcrumb-item">
-                                <h2 class="breadcrumb-heading">Login & Register Page</h2>
-                                <ul>
-                                    <li>
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li>Login | Register</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="login-area section-space-y-axis-100">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <form action="#">
+                        <div>
+                            <form th:action="@{/doregister}" method="post" onsubmit="return checkpas1() && checkcode()">
+<!--                            <form method="post">-->
                                 <div class="login-form">
-                                    <h4 class="login-title">Login</h4>
+                                    <h4 class="login-title">注册</h4>
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <label>Email Address*</label>
-                                            <input type="email" placeholder="Email Address">
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <label>Password</label>
-                                            <input type="password" placeholder="Password">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="check-box">
-                                                <input type="checkbox" id="remember_me">
-                                                <label for="remember_me">Remember me</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 pt-1 mt-md-0">
-                                            <div class="forgotton-password_info">
-                                                <a href="#"> Forgotten pasward?</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 pt-5">
-                                            <button class="btn btn-custom-size lg-size btn-pronia-primary">Login</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-lg-6 pt-5 pt-lg-0">
-                            <form action="#">
-                                <div class="login-form">
-                                    <h4 class="login-title">Register</h4>
-                                    <div class="row">
-                                        <div class="col-md-6 col-12">
-                                            <label>First Name</label>
-                                            <input type="text" placeholder="First Name">
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <label>Last Name</label>
-                                            <input type="text" placeholder="Last Name">
+                                        <div class="col-12">
+                                            <label>昵称</label>
+                                            <input name="name" type="text" placeholder="昵称" required>
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Email Address*</label>
-                                            <input type="email" placeholder="Email Address">
+                                            <label>手机号码</label>
+                                            <input id="code" name="code" type="text" placeholder="手机号码" required>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label>Password</label>
-                                            <input type="password" placeholder="Password">
+                                        <div class="col-md-12">
+                                            <label>邮箱</label>
+                                            <input name="email" type="email" placeholder="邮箱" required>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label>Confirm Password</label>
-                                            <input type="password" placeholder="Confirm Password">
+                                        <div class="col-md-12">
+                                            <label>密码</label>
+                                            <input id="password" name="password" type="password" placeholder="密码" required>
                                         </div>
+                                        <div class="col-md-12">
+                                            <label>确认密码</label>
+                                            <input id="repassword" type="password" placeholder="确认密码" required>
+                                        </div>
+                                        <div class="col-md-12 hidden">
+                                            <label>role</label>
+                                            <input name="role" type="text" value="customer" required>
+                                        </div>
+<!--                                        <div id="tip" class="col-md-12">-->
+<!--                                            <label style="color: red">两次密码不一致</label>-->
+<!--                                        </div>-->
                                         <div class="col-12">
-                                            <button class="btn btn-custom-size lg-size btn-pronia-primary">Register</button>
+<!--                                            <button type="button" class="btn btn-custom-size lg-size btn-pronia-primary" style="line-height: 40px">注册</button>-->
+                                            <button type="submit" class="btn btn-custom-size lg-size btn-pronia-primary" style="line-height: 40px">注册</button>
                                         </div>
                                     </div>
                                 </div>
@@ -865,7 +826,7 @@
         <!-- Main Content Area End Here -->
 
         <!-- Begin Footer Area -->
-        <div class="footer-area" data-bg-image="static/image/1-1920x465.jpg">
+        <div class="footer-area" data-bg-image="/Path/image/1-1920x465.jpg">
             <div class="footer-top section-space-top-100 pb-60">
                 <div class="container">
                     <div class="row">
@@ -1027,105 +988,39 @@
     <script src="Path/js/jquery-2.1.1.min.js"></script>
     <script src="Path/js/main.js"></script> <!-- Resource jQuery -->
     <script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript">
-        (function () {
-
-            var slideMenu = function () {
-                var sp, st, t, m, sa, l, w, gw, ot;
-                return {
-                    destruct: function () {
-                        if (m) {
-                            clearInterval(m.htimer);
-                            clearInterval(m.timer);
-                        }
-                    },
-                    build: function (sm, sw, mt, s, sl, h) {
-                        sp = s;
-                        st = sw;
-                        t = mt;
-                        m = document.getElementById(sm);
-                        sa = m.getElementsByTagName('li');
-                        l = sa.length;
-                        w = m.offsetWidth;
-                        gw = w / l;
-                        ot = Math.floor((w - st) / (l - 1));
-                        var i = 0;
-                        for (i; i < l; i++) {
-                            s = sa[i];
-                            s.style.width = gw + 'px';
-                            this.timer(s)
-                        }
-                        if (sl != null) {
-                            m.timer = setInterval(function () {
-                                slideMenu.slide(sa[sl - 1])
-                            }, t)
-                        }
-                    },
-                    timer: function (s) {
-                        s.onmouseover = function () {
-                            clearInterval(m.htimer);
-                            clearInterval(m.timer);
-                            m.timer = setInterval(function () {
-                                slideMenu.slide(s)
-                            }, t);
-                            //console.log($(this).find('.mask_b').html());
-                            $(this).find('.mask_b').hide();
-                            //console.log($(this).find('.mask_b').attr("style"));
-                        }
-                        s.onmouseout = function () {
-                            clearInterval(m.timer);
-                            clearInterval(m.htimer);
-                            m.htimer = setInterval(function () {
-                                slideMenu.slide(s, true)
-                            }, t);
-                            //console.log($(this).find('.mask_b').html());
-                            $(this).find('.mask_b').show();
-                            //console.log($(this).find('.mask_b').attr("style"));
-                        }
-                    },
-                    slide: function (s, c) {
-                        var cw = parseInt(s.style.width);
-                        if ((cw < st && !c) || (cw > gw && c)) {
-                            var owt = 0;
-                            var i = 0;
-                            for (i; i < l; i++) {
-                                if (sa[i] != s) {
-                                    var o, ow;
-                                    var oi = 0;
-                                    o = sa[i];
-                                    ow = parseInt(o.style.width);
-                                    if (ow < gw && c) {
-                                        oi = Math.floor((gw - ow) / sp);
-                                        oi = (oi > 0) ? oi : 1;
-                                        o.style.width = (ow + oi) + 'px';
-                                        //console.log(o);
-                                        //console.log(o.style.width);
-                                    } else if (ow > ot && !c) {
-                                        oi = Math.floor((ow - ot) / sp);
-                                        oi = (oi > 0) ? oi : 1;
-                                        o.style.width = (ow - oi) + 'px';
-                                        //console.log(o);
-                                        //console.log(o.style.width);
-                                    }
-                                    if (c) {
-                                        owt = owt + (ow + oi)
-                                    } else {
-                                        owt = owt + (ow - oi)
-                                    }
-                                }
-                            }
-                            s.style.width = (w - owt) + 'px';
-                        } else {
-                            if (m.htimer)
-                                clearInterval(m.htimer)
-                            if (m.timer)
-                                clearInterval(m.timer);
-                        }
+    <script>
+        function checkpas1(){//当第一个密码框失去焦点时，触发checkpas1事件
+            var pas1=document.getElementById("password").value;
+            var pas2=document.getElementById("repassword").value;//获取两个密码框的值
+            if(pas1!=pas2) {//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
+                alert("两次输入的密码不一致！");
+                return false;
+            }else{
+                return true;
+            }
+        };
+        function checkcode(){
+            var code = document.getElementById("code").value;
+            $.ajax({
+                url: "/queryCode",
+                type: "post",
+                dataType: "json",
+                data: {code : code},
+                success: function(data){
+                    /*这个方法里是ajax发送请求成功之后执行的代码*/
+                    if (data.result==200){
+                        return true;
+                    }else if (data.result==400){
+                        alert("该手机号已被注册");
+                        return false;
                     }
-                };
-            }();
-            slideMenu.build('sm', 875, 10, 10, 1);
-        })();
+                },
+                error: function(msg){
+                    alert("ajax连接异常："+msg);
+                    return false;
+                }
+            });
+        };
     </script>
 </body>
 <style>

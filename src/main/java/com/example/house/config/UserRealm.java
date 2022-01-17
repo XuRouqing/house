@@ -23,7 +23,7 @@ public class UserRealm extends AuthorizingRealm {
         User currentUser = (User) subject.getPrincipal();
         Set<String> roles=new HashSet<String>();
         roles.add("user");
-        if ("admin".equals(currentUser.getCharacter())){
+        if ("admin".equals(currentUser.getRole())){
             roles.add("admin");
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
