@@ -35,30 +35,37 @@ public class LoginController {
         }
 
         @RequestMapping("/session")
-        public String testSession(HttpSession session) {
+        public String testSession(HttpSession session){
             session.setAttribute("sessionKey", "sessionData--->user");
             return "user";
         }
 
+        @RequestMapping(value = "/login")
+        public String login(HttpSession session){
+            return "login";
+        }
+
         @RequestMapping(value = "/logout")
-        public String sessionOut(HttpSession session) {
+        public String sessionOut(HttpSession session){
             session.invalidate();
-            return "LoginController";
+            return "login";
         }
 
         @PostMapping("/dologin")
         public String dologin(User user, HttpSession session, HttpServletRequest request, Model model) {
-            User u = userService.findUserByNameAndPWD(user.getName(), user.getPassword());
+            User u = userService.findUserByCodeAndPWD(user.getCode(), user.getPassword());
+            System.out.println(u.getName());
             Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), user.getPassword());
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getCode(), user.getPassword());
             try {
                 subject.login(token);
                 token.setRememberMe(true);
-                request.getSession().setAttribute("name", u.getName());
-                if (u.getName().equals("admin")) {
-                    return "redirect:/admin/main";
+                request.getSession().setAttribute("name",u.getName());
+                request.getSession().setAttribute("userCode",u.getCode());
+                if (u.getCharacter().equals("admin")){
+                    return  "redirect:/login";
                 }
-                return "redirect:/user/main";
+                return "redirect:/login";
 //            if (u.getCode().equals("admin")) {
 //                if (userService.login(user.getCode(), user.getPassword())) {
 //                    session.setAttribute("userInfo", u);
@@ -77,10 +84,10 @@ public class LoginController {
 //            }
             } catch (UnknownAccountException e) {
                 model.addAttribute("loginErr", "用户名错误");
-                return "LoginController";
+                return "login";
             } catch (IncorrectCredentialsException e) {
                 model.addAttribute("loginErr", "密码错误");
-                return "LoginController";
+                return "login";
             }
         }
     }

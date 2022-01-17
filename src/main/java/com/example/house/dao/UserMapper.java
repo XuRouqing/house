@@ -13,8 +13,8 @@ public interface UserMapper {
     void insertUser(User user);
     User selectUserById(int id);
     List<User> selectUserAll();
-    public User findUserByNameAndPWD(@Param("name") String name, @Param("password") String password);
-    public User findUserByName(@Param("name") String name);
+    public User findUserByCodeAndPWD(@Param("code") String code, @Param("password") String password);
+    public User findUserByCode(@Param("code") String code);
     public void modifyUser(User user);
     public void deleteUser(Integer id);
 }

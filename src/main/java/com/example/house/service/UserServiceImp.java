@@ -32,18 +32,18 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public boolean login(String name, String password){
-        return this.userMapper.findUserByNameAndPWD(name, password)==null?false:true;
+    public boolean login(String code, String password){
+        return this.userMapper.findUserByCodeAndPWD(code, password)==null?false:true;
     }
 
     @Override
-    public User findUserByNameAndPWD(String name,String password){
-        return userMapper.findUserByNameAndPWD(name,password);
+    public User findUserByCodeAndPWD(String code,String password){
+        return userMapper.findUserByCodeAndPWD(code,password);
     }
 
     @Override
-    public User findUserByName(String name){
-        return userMapper.findUserByName(name);
+    public User findUserByCode(String code){
+        return userMapper.findUserByCode(code);
     }
 
     @Override

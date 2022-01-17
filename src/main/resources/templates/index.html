@@ -75,15 +75,20 @@
                             <li class="dropdown d-none d-lg-block">
                                 <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                         id="settingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                        aria-expanded="false">
-                                    用户
+                                        aria-expanded="false" th:text="${#request.getSession().getAttribute('name')}"
+                                        th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="settingButton">
+                                <a class="btn btn-link dropdown-toggle ht-btn p-0"
+                                        th:href="@{/login}"
+                                        th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                        登录
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                    th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                     <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
-                                    <li><a class="dropdown-item" onclick="logout()">退出</a>
+                                    <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
                                     </li>
                                 </ul>
-                            </li>
                             </li>
                         </ul>
                     </div>
@@ -1259,7 +1264,6 @@
     })();
 </script>
 </body>
-
 <style>
     .main-nav > ul > li > a {
         width: 60px;

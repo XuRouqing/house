@@ -6,8 +6,8 @@
 <mapper namespace="com.example.house.dao.UserMapper">
 
     <insert id="insertUser" parameterType="User">
-        insert into user (name,character,password)
-        values (#{name},#{character},#{password})
+        insert into user (code,name,character,password)
+        values (#{code},#{name},#{character},#{password})
     </insert>
 
     <select id="selectUserById" resultType="User">
@@ -18,15 +18,15 @@
         select * from user
     </select>
 
-    <select id="findUserByNameAndPWD" resultType="User">
+    <select id="findUserByCodeAndPWD" resultType="User">
         select * from user
-        where name = #{name}
+        where code = #{code}
           and password = #{password}
     </select>
 
-    <select id="findUserByName" resultType="User">
+    <select id="findUserByCode" resultType="User">
         select * from user
-        where name = #{name}
+        where code = #{code}
     </select>
 
     <update id="modifyUser" parameterType="User">

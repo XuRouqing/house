@@ -3,10 +3,15 @@ package com.example.house.controller;
 
 import com.example.house.pojo.*;
 import com.example.house.service.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import net.sf.json.JSONArray;
 import org.springframework.ui.Model;
@@ -16,15 +21,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.Style;
 import java.io.PrintWriter;
-import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("")
 public class Controller {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private DesignerService designerService;
@@ -59,6 +66,10 @@ public class Controller {
         model.addAttribute("setInfo",set);
     }
 
+    @RequestMapping(value = "/{page}",method = RequestMethod.GET)
+    public String showPage(@PathVariable String page){
+        return page;
+    }
 
     @RequestMapping("/index")
     public String testSession(HttpSession session, Model model) {
@@ -141,7 +152,6 @@ public class Controller {
         attr.addAttribute("houseForm",houseForm);
         attr.addAttribute("houseArea",houseArea);
         return "redirect:/fullwidth";
-//        return "shop-grid-fullwidth";
     }
 
     @RequestMapping("/fullwidth")
@@ -402,7 +412,7 @@ public class Controller {
 
     @RequestMapping("/login-register")
     public String tologin() {
-        return "login-register.html";
+        return "login.html";
     }
 
     @RequestMapping("/booking/{id}")
@@ -500,4 +510,53 @@ public class Controller {
         }
     }
 
+    @RequestMapping("/session")
+    public String testSession(HttpSession session){
+        session.setAttribute("sessionKey", "sessionData--->user");
+        return "user";
+    }
+
+//    @RequestMapping(value = "/login")
+//    public String login(HttpSession session){
+//        return "login";
+//    }
+
+    @RequestMapping(value = "/logout")
+    public String sessionOut(HttpSession session, HttpServletRequest request){
+        Enumeration em = request.getSession().getAttributeNames();
+        while(em.hasMoreElements()){
+            request.getSession().removeAttribute(em.nextElement().toString());
+        }
+        return "redirect:/index";
+    }
+
+    @PostMapping("/dologin")
+    public String dologin(User user, HttpSession session, HttpServletRequest request, Model model) {
+        User u = userService.findUserByCodeAndPWD(user.getCode(), user.getPassword());
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getCode(), user.getPassword());
+        try {
+            subject.login(token);
+            token.setRememberMe(true);
+            session.setAttribute("name",u.getName());
+            session.setAttribute("code",u.getCode());
+            request.getSession().setAttribute("name",u.getName());
+            request.getSession().setAttribute("userCode",u.getCode());
+            if (u.getCharacter().equals("admin")){
+                return  "redirect:/index";
+            }
+            return "redirect:/index";
+        } catch (UnknownAccountException e) {
+            model.addAttribute("loginErr", "用户名错误");
+            return "login";
+        } catch (IncorrectCredentialsException e) {
+            model.addAttribute("loginErr", "密码错误");
+            return "login";
+        }
+    }
+
+    @RequestMapping("/register")
+    public String toRegister() {
+        return "register";
+    }
 }

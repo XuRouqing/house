@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "user")
 public class User {
     private int id;
+    private String code;
     private String name;
     private String character;
     private String password;
