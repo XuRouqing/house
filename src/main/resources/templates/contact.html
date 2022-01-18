@@ -74,15 +74,20 @@
                             <li class="dropdown d-none d-lg-block">
                                 <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                         id="settingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                        aria-expanded="false">
-                                    用户
+                                        aria-expanded="false" th:text="${#request.getSession().getAttribute('name')}"
+                                        th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="settingButton">
+                                <a class="btn btn-link dropdown-toggle ht-btn p-0"
+                                   th:href="@{/login}"
+                                   th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                    登录
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                    th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                     <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
-                                    <li><a class="dropdown-item" onclick="logout()">退出</a>
+                                    <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
                                     </li>
                                 </ul>
-                            </li>
                             </li>
                         </ul>
                     </div>
@@ -158,8 +163,7 @@
                                     <a th:href="@{discount/1}">营销活动</a>
                                     <ul class="drop-menu">
                                         <li th:each="set : ${setInfo}">
-                                            <a style="font-size: 15px" th:text="${set.name}"
-                                               th:href="@{discount/}+${set.setId}"></a>
+                                            <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -213,8 +217,7 @@
                                         <a th:href="@{discount/1}">营销活动</a>
                                         <ul class="drop-menu">
                                             <li th:each="set : ${setInfo}">
-                                                <a style="font-size: 15px" th:text="${set.name}"
-                                                   th:href="@{discount/}+${set.setId}"></a>
+                                                <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
                                             </li>
                                         </ul>
                                     </li>
@@ -236,13 +239,24 @@
                                 <li class="dropdown d-none d-lg-block">
                                     <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                             id="stickysettingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                            aria-expanded="false">
+                                            aria-expanded="false"
+                                            th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                         <i class="pe-7s-users"></i>
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                                        <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                                        <li><a class="dropdown-item" th:href="@{login-register}">Login | Register</a>
-                                        </li>
+                                    <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
+                                            data-bs-toggle="dropdown" aria-label="setting"
+                                            aria-expanded="false"
+                                            th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                        <i class="pe-7s-users"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                        th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                        <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/logout}">退出</a></li>
+                                    </ul>
+                                    <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                        th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                        <li><a class="dropdown-item" th:href="@{/login}">登录</a></li>
                                     </ul>
                                 </li>
                                 <li class="mobile-menu_wrap d-block d-lg-none">
@@ -324,7 +338,7 @@
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
-                                <a th:href="@{booking}">
+                                <a th:href="@{bookOnline}">
                                     <span class="mm-text">在线预约</span>
                                 </a>
                             </li>

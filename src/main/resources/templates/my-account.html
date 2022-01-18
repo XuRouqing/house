@@ -5,19 +5,44 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pronia - My Account</title>
+    <title>我爱我家装修公司</title>
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop.">
+    <meta name="description"
+          content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-
-
-    <!-- CSS
-    ============================================ -->
-
-    <!-- Minify Version -->
     <link rel="stylesheet" href="Path/css/plugins.min.css">
     <link rel="stylesheet" href="Path/css/style.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="Path/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" type="text/css" href="Path/css/htmleaf-demo.css">
+    <link rel="stylesheet" href="Path/css/search.css"> <!-- Resource style -->
+    <script src="Path/js/modernizr.js"></script> <!-- Modernizr -->
+    <link rel="icon" href="Path/image/newlogo.png">
+    <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/dashboard/">
+    <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/css/ie10-viewport-bug-workaround.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-olOxEXxDwd20BlATUibkEnjPN3sVq2YWmYOnsMYutq7X8YcUdD6y/1I+f+ZOq/47" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="Path/css/dmaku.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-NU/T4JKmgovMiPaK2GP9Y+TVBQxiaiYFJB6igFtfExinKlzVruIK6XtKqxCGXwCG"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie8-responsive-file-warning.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
+            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+            crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/vendor/holder.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 </head>
 
@@ -51,15 +76,20 @@
                                     <li class="dropdown d-none d-lg-block">
                                         <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                                 id="settingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                                aria-expanded="false">
-                                            用户
+                                                aria-expanded="false" th:text="${#request.getSession().getAttribute('name')}"
+                                                th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="settingButton">
+                                        <a class="btn btn-link dropdown-toggle ht-btn p-0"
+                                           th:href="@{/login}"
+                                           th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                            登录
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                            th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                             <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
-                                            <li><a class="dropdown-item" onclick="logout()">退出</a>
+                                            <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
                                             </li>
                                         </ul>
-                                    </li>
                                     </li>
                                 </ul>
                             </div>
@@ -115,86 +145,12 @@
                                 <nav class="main-nav">
                                     <ul>
                                         <!--                                    首页-->
-                                        <li class="drop-holder">
+                                        <li>
                                             <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                         </li>
                                         <!--                                    精装案例-->
-                                        <li class="megamenu-holder">
+                                        <li>
                                             <a th:href="@{fullwidth}">精装案例</a>
-                                            <ul class="drop-menu megamenu">
-                                                <li>
-                                                    <span class="title">Shop Layout</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="shop.html">Shop Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-grid-fullwidth.html">Shop Grid Fullwidth</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-right-sidebar.html">Shop List Right
-                                                                Sidebar</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Product Style</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="single-product-variable.html">Single Product
-                                                                Variable</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-group.html">Single Product Group</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product.html">Single Product Default</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-affiliate.html">Single Product
-                                                                Affiliate</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-sale.html">Single Product Sale</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="single-product-sticky.html">Single Product Sticky</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <span class="title">Product Related</span>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="my-account.html">My Account</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="login.html">Login | Register</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html">Shopping Cart</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="wishlist.html">Wishlist</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="compare.html">Compare</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="checkout.html">Checkout</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
                                         </li>
                                         <!--                                    设计团队-->
                                         <li>
@@ -205,39 +161,22 @@
                                             <a th:href="@{worker-list}">施工团队</a>
                                         </li>
                                         <!--                                    营销活动-->
-                                        <li>
-                                            <a th:href="@{discount}">营销活动</a>
+                                        <li class="drop-holder">
+                                            <a th:href="@{discount/1}">营销活动</a>
+                                            <ul class="drop-menu">
+                                                <li th:each="set : ${setInfo}">
+                                                    <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                                </li>
+                                            </ul>
                                         </li>
-                                        <!--                                    在线预约-->
+                                        <!--                                在线预约-->
                                         <li>
-                                            <a th:href="@{booking}">在线预约</a>
+                                            <a th:href="@{bookOnline}">在线预约</a>
                                         </li>
                                         <!--                                    联系我们-->
                                         <li>
                                             <a th:href="@{contact}">联系我们</a>
                                         </li>
-                                        <!--                                    <li class="drop-holder">-->
-                                        <!--                                        <a href="blog.html">Blog</a>-->
-                                        <!--                                        <ul class="drop-menu">-->
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="blog-listview.html">Blog List View</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="blog-detail.html">Blog Detail</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                        </ul>-->
-                                        <!--                                    </li>-->
-                                        <!--                                    <li class="drop-holder">-->
-                                        <!--                                        <a href="#">Pages</a>-->
-                                        <!--                                        <ul class="drop-menu">-->
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="faq.html">FAQ</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                            <li>-->
-                                        <!--                                                <a href="404.html">Error 404</a>-->
-                                        <!--                                            </li>-->
-                                        <!--                                        </ul>-->
-                                        <!--                                    </li>-->
                                     </ul>
                                 </nav>
                             </div>
@@ -260,86 +199,12 @@
                                 <div class="main-menu">
                                     <nav class="main-nav">
                                         <ul>
-                                            <li class="drop-holder">
+                                            <li>
                                                 <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                             </li>
                                             <!--                                    精装案例-->
-                                            <li class="megamenu-holder">
+                                            <li>
                                                 <a th:href="@{fullwidth}">精装案例</a>
-                                                <ul class="drop-menu megamenu">
-                                                    <li>
-                                                        <span class="title">Shop Layout</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="shop.html">Shop Default</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-grid-fullwidth.html">Shop Grid Fullwidth</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-right-sidebar.html">Shop List Right
-                                                                    Sidebar</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Product Style</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="single-product-variable.html">Single Product
-                                                                    Variable</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-group.html">Single Product Group</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product.html">Single Product Default</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-affiliate.html">Single Product
-                                                                    Affiliate</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-sale.html">Single Product Sale</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-sticky.html">Single Product Sticky</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Product Related</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="my-account.html">My Account</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="login.html">Login | Register</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="cart.html">Shopping Cart</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="wishlist.html">Wishlist</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="compare.html">Compare</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="checkout.html">Checkout</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
                                             </li>
                                             <!--                                    设计团队-->
                                             <li>
@@ -350,12 +215,17 @@
                                                 <a th:href="@{worker-list}">施工团队</a>
                                             </li>
                                             <!--                                    营销活动-->
-                                            <li>
-                                                <a th:href="@{discount}">营销活动</a>
+                                            <li class="drop-holder">
+                                                <a th:href="@{discount/1}">营销活动</a>
+                                                <ul class="drop-menu">
+                                                    <li th:each="set : ${setInfo}">
+                                                        <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                             <!--                                    在线预约-->
                                             <li>
-                                                <a th:href="@{booking}">在线预约</a>
+                                                <a th:href="@{bookOnline}">在线预约</a>
                                             </li>
                                             <!--                                    联系我们-->
                                             <li>
@@ -371,13 +241,24 @@
                                         <li class="dropdown d-none d-lg-block">
                                             <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                                     id="stickysettingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                                    aria-expanded="false">
+                                                    aria-expanded="false"
+                                                    th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                                 <i class="pe-7s-users"></i>
                                             </button>
-                                            <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                                                <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                                                <li><a class="dropdown-item" th:href="@{login}">Login | Register</a>
-                                                </li>
+                                            <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
+                                                    data-bs-toggle="dropdown" aria-label="setting"
+                                                    aria-expanded="false"
+                                                    th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                                <i class="pe-7s-users"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                                th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                                <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
+                                                <li><a class="dropdown-item" th:href="@{/logout}">退出</a></li>
+                                            </ul>
+                                            <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                                th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                                <li><a class="dropdown-item" th:href="@{/login}">登录</a></li>
                                             </ul>
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
@@ -405,34 +286,13 @@
                         <div class="offcanvas-user-info">
                             <ul class="dropdown-wrap">
                                 <li class="dropdown dropdown-left">
-                                    <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="languageButtonTwo"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                        English
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="languageButtonTwo">
-                                        <li><a class="dropdown-item" href="#">French</a></li>
-                                        <li><a class="dropdown-item" href="#">Italian</a></li>
-                                        <li><a class="dropdown-item" href="#">Spanish</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
                                     <button class="btn btn-link dropdown-toggle ht-btn usd-dropdown" type="button"
-                                            id="currencyButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
-                                        USD
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="currencyButtonTwo">
-                                        <li><a class="dropdown-item" href="#">GBP</a></li>
-                                        <li><a class="dropdown-item" href="#">ISO</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                             id="settingButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="pe-7s-users"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
+                                    <ul class="dropdown-menu" aria-labelledby="settingButtonTwo">
                                         <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                                        <li><a class="dropdown-item" th:href="login">Login | Register</a></li>
+                                        <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -445,207 +305,48 @@
                         <div class="offcanvas-menu_area">
                             <nav class="offcanvas-navigation">
                                 <ul class="mobile-menu">
+                                    <li>
+                                        <a th:href="@{index}">
+                                            <span class="mm-text">首页</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{fullwidth}">
+                                            <span class="mm-text">精装案例</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a th:href="@{designer-list}">
+                                            <span class="mm-text">设计团队</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a th:href="@{worker-list}">
+                                            <span class="mm-text">施工团队</span>
+                                        </a>
+                                    </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">
-                                        <span class="mm-text">Home
-                                    <i class="pe-7s-angle-down"></i>
-                                </span>
+                                    <span class="mm-text">营销活动
+                                        <i class="pe-7s-angle-down"></i>
+                                    </span>
                                         </a>
                                         <ul class="sub-menu">
-                                            <li>
-                                                <a href="">
-                                                    <span class="mm-text">Home One</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="index-2.html">
-                                                    <span class="mm-text">Home Two</span>
+                                            <li th:each="set : ${setInfo}">
+                                                <a th:href="@{discount/}+${set.setId}">
+                                                    <span class="mm-text" th:text="${set.name}"></span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#">
-                                        <span class="mm-text">Shop
-                                    <i class="pe-7s-angle-down"></i>
-                                </span>
+                                        <a th:href="@{bookOnline}">
+                                            <span class="mm-text">在线预约</span>
                                         </a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                <span class="mm-text">Shop Layout
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="shop.html">
-                                                            <span class="mm-text">Shop Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-grid-fullwidth.html">
-                                                            <span class="mm-text">Shop Grid Fullwidth</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-right-sidebar.html">
-                                                            <span class="mm-text">Shop Right Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-fullwidth.html">
-                                                            <span class="mm-text">Shop List Fullwidth</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-left-sidebar.html">
-                                                            <span class="mm-text">Shop List Left Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-right-sidebar.html">
-                                                            <span class="mm-text">Shop List Right Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                <span class="mm-text">Product Style
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="single-product.html">
-                                                            <span class="mm-text">Single Product Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-group.html">
-                                                            <span class="mm-text">Single Product Group</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-variable.html">
-                                                            <span class="mm-text">Single Product Variable</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-sale.html">
-                                                            <span class="mm-text">Single Product Sale</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-sticky.html">
-                                                            <span class="mm-text">Single Product Sticky</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-affiliate.html">
-                                                            <span class="mm-text">Single Product Affiliate</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                <span class="mm-text">Product Related
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="my-account.html">
-                                                            <span class="mm-text">My Account</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="login.html">
-                                                            <span class="mm-text">Login | Register</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="cart.html">
-                                                            <span class="mm-text">Shopping Cart</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="wishlist.html">
-                                                            <span class="mm-text">Wishlist</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="compare.html">
-                                                            <span class="mm-text">Compare</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="checkout.html">
-                                                            <span class="mm-text">Checkout</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
-                                        <span class="mm-text">Blog
-                                    <i class="pe-7s-angle-down"></i>
-                                </span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                <span class="mm-text">Blog Holder
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="blog.html">
-                                                            <span class="mm-text">Blog Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-listview.html">Blog List View</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-detail.html">Blog Detail</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
                                     </li>
                                     <li>
                                         <a href="about.html">
-                                            <span class="mm-text">About Us</span>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
-                                        <span class="mm-text">Pages
-                                    <i class="pe-7s-angle-down"></i>
-                                </span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="faq.html">
-                                                    <span class="mm-text">Frequently Questions</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="404.html">
-                                                    <span class="mm-text">Error 404</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">
-                                            <span class="mm-text">Contact</span>
+                                            <span th:href="@{contact}">联系我们</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -750,82 +451,51 @@
 
         <!-- Begin Main Content Area -->
         <main class="main-content">
-            <div class="breadcrumb-area breadcrumb-height" data-bg-image="static/image/1-1-1919x388.jpg">
-                <div class="container h-100">
-                    <div class="row h-100">
-                        <div class="col-lg-12">
-                            <div class="breadcrumb-item">
-                                <h2 class="breadcrumb-heading">My Account Page</h2>
-                                <ul>
-                                    <li>
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li>My Account</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="account-page-area section-space-y-axis-100">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3">
                             <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="account-dashboard-tab" data-bs-toggle="tab" href="#account-dashboard" role="tab" aria-controls="account-dashboard" aria-selected="true">Dashboard</a>
+                                    <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders" role="tab" aria-controls="account-orders" aria-selected="false">我的预约</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders" role="tab" aria-controls="account-orders" aria-selected="false">Orders</a>
+                                    <a class="nav-link" id="account-details-tab" data-bs-toggle="tab" href="#account-details" role="tab" aria-controls="account-details" aria-selected="false">个人信息</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="account-address-tab" data-bs-toggle="tab" href="#account-address" role="tab" aria-controls="account-address" aria-selected="false">Addresses</a>
+                                    <a class="nav-link" id="account-address-tab" data-bs-toggle="tab" href="#account-password" role="tab" aria-controls="account-password" aria-selected="false">修改密码</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="account-details-tab" data-bs-toggle="tab" href="#account-details" role="tab" aria-controls="account-details" aria-selected="false">Account Details</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="account-logout-tab" href="login.html" role="tab" aria-selected="false">Logout</a>
+                                    <a class="nav-link" id="account-logout-tab" th:href="@{/logout}" role="tab" aria-selected="false">退出登录</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-lg-9">
                             <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
-                                <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel" aria-labelledby="account-dashboard-tab">
-                                    <div class="myaccount-dashboard">
-                                        <p>Hello <b>Pronia</b> (not Pronia? <a href="login.html">Sign
-                                                out</a>)</p>
-                                        <p>From your account dashboard you can view your recent orders, manage your shipping and
-                                            billing addresses and <a href="#">edit your password and account details</a>.</p>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
+                                <div class="tab-pane active" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
                                     <div class="myaccount-orders">
-                                        <h4 class="small-title">MY ORDERS</h4>
+                                        <h4 class="small-title">我的预约</h4>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-hover">
                                                 <tbody>
                                                     <tr>
-                                                        <th>ORDER</th>
-                                                        <th>DATE</th>
-                                                        <th>STATUS</th>
-                                                        <th>TOTAL</th>
-                                                        <th></th>
+                                                        <th width="40%">时间</th>
+                                                        <th width="20%">设计师</th>
+                                                        <th width="20%">预约详情</th>
+                                                        <th width="20%">取消预约</th>
                                                     </tr>
                                                     <tr>
                                                         <td><a class="account-order-id" href="#">#5364</a></td>
                                                         <td>Mar 27, 2019</td>
-                                                        <td>On Hold</td>
-                                                        <td>$162.00 for 2 items</td>
-                                                        <td><a href="#" class="btn btn-dark"><span>View</span></a>
+                                                        <td><a href="#" class="btn btn-success"><span>预约详情</span></a>
+                                                        <td><a href="#" class="btn btn-danger"><span>取消预约</span></a>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td><a class="account-order-id" href="#">#5356</a></td>
                                                         <td>Mar 27, 2019</td>
-                                                        <td>On Hold</td>
-                                                        <td>$162.00 for 2 items</td>
-                                                        <td><a href="#" class="btn btn-dark"><span>View</span></a>
+                                                        <td><a href="#" class="btn btn-success"><span>预约详情</span></a>
+                                                        <td><a href="#" class="btn btn-danger"><span>取消预约</span></a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -833,58 +503,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
-                                    <div class="myaccount-address">
-                                        <p>The following addresses will be used on the checkout page by default.</p>
-                                        <div class="row">
-                                            <div class="col">
-                                                <h4 class="small-title">BILLING ADDRESS</h4>
-                                                <address>
-                                                    1234 Heaven Stress, Beverly Hill OldYork UnitedState of Lorem
-                                                </address>
+                                <div class="tab-pane fade" id="account-password" role="tabpanel" aria-labelledby="account-password-tab">
+                                    <div class="myaccount-details">
+                                        <form th:action="@{/editPassword}" method="post" class="myaccount-form" onsubmit="return checkpas()">
+                                            <div class="myaccount-form-inner">
+                                                <div class="single-input hidden">
+                                                    <label>id</label>
+                                                    <input type="text" name="id" th:value="${#request.getSession().getAttribute('id')}">
+                                                </div>
+                                                <div class="single-input">
+                                                    <label>新密码</label>
+                                                    <input id="password" type="password" name="password" placeholder="请输入新的密码" required>
+                                                </div>
+                                                <div class="single-input">
+                                                    <label>确认新密码</label>
+                                                    <input id="repassword" type="password" placeholder="请再输入一次新的密码" required>
+                                                </div>
+                                                <div class="single-input">
+                                                    <button class="btn btn-custom-size lg-size btn-pronia-primary" type="submit">
+                                                        <span>保存</span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="col">
-                                                <h4 class="small-title">SHIPPING ADDRESS</h4>
-                                                <address>
-                                                    1234 Heaven Stress, Beverly Hill OldYork UnitedState of Lorem
-                                                </address>
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="account-details" role="tabpanel" aria-labelledby="account-details-tab">
                                     <div class="myaccount-details">
-                                        <form action="#" class="myaccount-form">
+                                        <form th:action="@{/editAccount}" method="post" class="myaccount-form">
                                             <div class="myaccount-form-inner">
-                                                <div class="single-input single-input-half">
-                                                    <label>First Name*</label>
-                                                    <input type="text">
-                                                </div>
-                                                <div class="single-input single-input-half">
-                                                    <label>Last Name*</label>
-                                                    <input type="text">
+                                                <div class="single-input hidden">
+                                                    <label>id</label>
+                                                    <input type="text" name="id" th:value="${#request.getSession().getAttribute('id')}">
                                                 </div>
                                                 <div class="single-input">
-                                                    <label>Email*</label>
-                                                    <input type="email">
+                                                    <label>昵称</label>
+                                                    <input type="text" name="name" th:value="${#request.getSession().getAttribute('name')}">
                                                 </div>
                                                 <div class="single-input">
-                                                    <label>Current Password(leave blank to leave
-                                                        unchanged)</label>
-                                                    <input type="password">
+                                                    <label>联系电话</label>
+                                                    <input type="text" name="phone" th:value="${#request.getSession().getAttribute('phone')}">
                                                 </div>
                                                 <div class="single-input">
-                                                    <label>New Password (leave blank to leave
-                                                        unchanged)</label>
-                                                    <input type="password">
-                                                </div>
-                                                <div class="single-input">
-                                                    <label>Confirm New Password</label>
-                                                    <input type="password">
+                                                    <label>邮箱</label>
+                                                    <input type="email" name="email" th:value="${#request.getSession().getAttribute('email')}">
                                                 </div>
                                                 <div class="single-input">
                                                     <button class="btn btn-custom-size lg-size btn-pronia-primary" type="submit">
-                                                        <span>SAVE CHANGES</span>
+                                                        <span>保存</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -900,7 +566,7 @@
         <!-- Main Content Area End Here -->
 
         <!-- Begin Footer Area -->
-        <div class="footer-area" data-bg-image="static/image/1-1920x465.jpg">
+        <div class="footer-area" data-bg-image="/Path/image/1-1920x465.jpg">
             <div class="footer-top section-space-top-100 pb-60">
                 <div class="container">
                     <div class="row">
@@ -1052,14 +718,40 @@
 
     </div>
 
-    <!-- Global Vendor, plugins JS -->
-
-    <!-- JS Files
-    ============================================ -->
-
     <!-- Minify Version -->
     <script src="Path/js/plugins.min.js"></script>
-
+    <script src="Path/js/jquery-2.1.1.min.js"></script>
+    <script src="Path/js/main.js"></script> <!-- Resource jQuery -->
+    <script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
+    <script>
+        function checkpas(){//当第一个密码框失去焦点时，触发checkpas1事件
+            var pas1=document.getElementById("password").value;
+            var pas2=document.getElementById("repassword").value;//获取两个密码框的值
+            if(pas1!=pas2) {//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
+                alert("两次输入的密码不一致！");
+                return false;
+            }else{
+                alert("修改密码成功");
+                return true;
+            }
+        };
+    </script>
 </body>
-
+<style>
+    .main-nav>ul>li>a{
+        width: 60px;
+    }
+    .btn.active.focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn:active:focus,.btn:focus{
+        outline:none;
+        box-shadow: none;
+    }
+    a:hover{
+        text-decoration:none
+    }
+    .myaccount-form, .myaccount-form-boxed {
+        padding: 30px;
+        border-radius: 0;
+        border: none;
+    }
+</style>
 </html>

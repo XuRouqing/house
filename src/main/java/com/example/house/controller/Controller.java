@@ -73,6 +73,94 @@ public class Controller {
         return page;
     }
 
+    @RequestMapping("/session")
+    public String testSession(HttpSession session){
+        session.setAttribute("sessionKey", "sessionData--->user");
+        return "user";
+    }
+
+    @RequestMapping(value = "/logout")
+    public String sessionOut(HttpSession session, HttpServletRequest request){
+        Enumeration em = request.getSession().getAttributeNames();
+        while(em.hasMoreElements()){
+            request.getSession().removeAttribute(em.nextElement().toString());
+        }
+        return "redirect:/index";
+    }
+
+    @PostMapping("/dologin")
+    public String dologin(User user, HttpSession session, HttpServletRequest request, Model model) {
+        User u = userService.findUserByCodeAndPWD(user.getCode(), user.getPassword());
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getCode(), user.getPassword());
+        try {
+            subject.login(token);
+            token.setRememberMe(true);
+            request.getSession().setAttribute("id",u.getId());
+            request.getSession().setAttribute("name",u.getName());
+            request.getSession().setAttribute("code",u.getCode());
+            request.getSession().setAttribute("role",u.getRole());
+            request.getSession().setAttribute("email",u.getEmail());
+            request.getSession().setAttribute("phone",u.getPhone());
+            request.getSession().setAttribute("password",u.getPassword());
+            if (u.getRole().equals("admin")){
+                return  "redirect:/index";
+            }
+            return "redirect:/index";
+        } catch (UnknownAccountException e) {
+            model.addAttribute("loginErr", "用户名错误");
+            return "login";
+        } catch (IncorrectCredentialsException e) {
+            model.addAttribute("loginErr", "密码错误");
+            return "login";
+        }
+    }
+
+    @RequestMapping("/register")
+    public String toRegister() {
+        return "register";
+    }
+
+    @PostMapping("/doregister")
+    public String doregister(User user) {
+        if (checkCode(user.getCode())){
+            user.setPhone(user.getCode());
+            userService.addUser(user);
+            return "redirect:/login";
+        }
+        return "redirect:/register";
+    }
+
+    public boolean checkCode(String code) {
+        List<User> users=userService.getUserList();
+        boolean flag = true;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getCode().equals(code)){
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    @RequestMapping(value="/queryCode")
+    @ResponseBody
+    public Map<String, Integer> queryCode(@RequestParam("code") String code) {
+        List<User> users = userService.getUserList();
+        Map<String, Integer> map = new HashMap<>();
+        boolean flag = true;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getCode().equals(code)) {
+                flag = false;
+            }
+        }
+        if (flag){
+            map.put("result", 200);
+        }else {
+            map.put("result", 400);
+        }
+        return map;
+    }
+
     @RequestMapping("/index")
     public String testSession(HttpSession session, Model model) {
         List<Designer> designers=designerService.getTopNDesigner(5);
@@ -83,6 +171,22 @@ public class Controller {
     @RequestMapping("/account")
     public String toAccount() {
         return "my-account";
+    }
+
+    @PostMapping("/editAccount")
+    public String editAccount(User user, HttpServletRequest request) {
+        userService.modifyUser(user);
+        request.getSession().setAttribute("name",user.getName());
+        request.getSession().setAttribute("email",user.getEmail());
+        request.getSession().setAttribute("phone",user.getPhone());
+        return "redirect:/account";
+    }
+
+    @PostMapping("/editPassword")
+    public String editPassword(User user, HttpServletRequest request) {
+        userService.modifyPassword(user);
+        request.getSession().setAttribute("password",user.getPassword());
+        return "redirect:/account";
     }
 
     @RequestMapping("/fullwidth1")
@@ -510,94 +614,5 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @RequestMapping("/session")
-    public String testSession(HttpSession session){
-        session.setAttribute("sessionKey", "sessionData--->user");
-        return "user";
-    }
-
-//    @RequestMapping(value = "/login")
-//    public String login(HttpSession session){
-//        return "login";
-//    }
-
-    @RequestMapping(value = "/logout")
-    public String sessionOut(HttpSession session, HttpServletRequest request){
-        Enumeration em = request.getSession().getAttributeNames();
-        while(em.hasMoreElements()){
-            request.getSession().removeAttribute(em.nextElement().toString());
-        }
-        return "redirect:/index";
-    }
-
-    @PostMapping("/dologin")
-    public String dologin(User user, HttpSession session, HttpServletRequest request, Model model) {
-        User u = userService.findUserByCodeAndPWD(user.getCode(), user.getPassword());
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getCode(), user.getPassword());
-        try {
-            subject.login(token);
-            token.setRememberMe(true);
-            session.setAttribute("name",u.getName());
-            session.setAttribute("code",u.getCode());
-            request.getSession().setAttribute("name",u.getName());
-            request.getSession().setAttribute("userCode",u.getCode());
-            if (u.getRole().equals("admin")){
-                return  "redirect:/index";
-            }
-            return "redirect:/index";
-        } catch (UnknownAccountException e) {
-            model.addAttribute("loginErr", "用户名错误");
-            return "login";
-        } catch (IncorrectCredentialsException e) {
-            model.addAttribute("loginErr", "密码错误");
-            return "login";
-        }
-    }
-
-    @RequestMapping("/register")
-    public String toRegister() {
-        return "register";
-    }
-
-    @PostMapping("/doregister")
-    public String doregister(User user) {
-        if (checkCode(user.getCode())){
-            userService.addUser(user);
-            return "redirect:/login";
-        }
-        return "redirect:/register";
-    }
-
-    public boolean checkCode(String code) {
-        List<User> users=userService.getUserList();
-        boolean flag = true;
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getCode().equals(code)){
-                flag = false;
-            }
-        }
-        return flag;
-    }
-
-    @RequestMapping(value="/queryCode")
-    @ResponseBody
-    public Map<String, Integer> queryCode(@RequestParam("code") String code) {
-        List<User> users = userService.getUserList();
-        Map<String, Integer> map = new HashMap<>();
-        boolean flag = true;
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getCode().equals(code)) {
-                flag = false;
-            }
-        }
-        if (flag){
-            map.put("result", 200);
-        }else {
-            map.put("result", 400);
-        }
-        return map;
     }
 }

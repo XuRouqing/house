@@ -63,7 +63,7 @@
                     <div class="row align-items-center">
                         <div class="col-6">
                             <div class="header-top-left">
-                                <img src="Path/image/location.png" width="20px" height="20px">
+                                <img src="../Path/image/location.png" width="20px" height="20px">
                                 <span class="pronia-offer">城市</span>
                             </div>
                         </div>
@@ -233,13 +233,24 @@
                                         <li class="dropdown d-none d-lg-block">
                                             <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                                     id="stickysettingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                                    aria-expanded="false">
+                                                    aria-expanded="false"
+                                                    th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                                 <i class="pe-7s-users"></i>
                                             </button>
-                                            <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                                                <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                                                <li><a class="dropdown-item" th:href="@{login}">Login | Register</a>
-                                                </li>
+                                            <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
+                                                    data-bs-toggle="dropdown" aria-label="setting"
+                                                    aria-expanded="false"
+                                                    th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                                <i class="pe-7s-users"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                                th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                                <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
+                                                <li><a class="dropdown-item" th:href="@{/logout}">退出</a></li>
+                                            </ul>
+                                            <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                                th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                                <li><a class="dropdown-item" th:href="@{/login}">登录</a></li>
                                             </ul>
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
