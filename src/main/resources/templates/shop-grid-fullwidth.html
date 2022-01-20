@@ -63,7 +63,7 @@
                     <div class="row align-items-center">
                         <div class="col-6">
                             <div class="header-top-left">
-                                <img src="../Path/image/location.png" width="20px" height="20px">
+                                <img src="Path/image/location.png" width="20px" height="20px">
                                 <span class="pronia-offer">城市</span>
                             </div>
                         </div>
@@ -73,15 +73,20 @@
                                     <li class="dropdown d-none d-lg-block">
                                         <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                                 id="settingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                                aria-expanded="false">
-                                            用户
+                                                aria-expanded="false" th:text="${#request.getSession().getAttribute('name')}"
+                                                th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="settingButton">
+                                        <a class="btn btn-link dropdown-toggle ht-btn p-0"
+                                           th:href="@{/login}"
+                                           th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                            登录
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                            th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                             <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
-                                            <li><a class="dropdown-item" onclick="logout()">退出</a>
+                                            <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
                                             </li>
                                         </ul>
-                                    </li>
                                     </li>
                                 </ul>
                             </div>
@@ -278,34 +283,13 @@
                         <div class="offcanvas-user-info">
                             <ul class="dropdown-wrap">
                                 <li class="dropdown dropdown-left">
-                                    <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="languageButtonTwo"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                        English
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="languageButtonTwo">
-                                        <li><a class="dropdown-item" href="#">French</a></li>
-                                        <li><a class="dropdown-item" href="#">Italian</a></li>
-                                        <li><a class="dropdown-item" href="#">Spanish</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
                                     <button class="btn btn-link dropdown-toggle ht-btn usd-dropdown" type="button"
-                                            id="currencyButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
-                                        USD
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="currencyButtonTwo">
-                                        <li><a class="dropdown-item" href="#">GBP</a></li>
-                                        <li><a class="dropdown-item" href="#">ISO</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                             id="settingButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="pe-7s-users"></i>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
+                                    <ul class="dropdown-menu" aria-labelledby="settingButtonTwo">
                                         <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                                        <li><a class="dropdown-item" th:href="login">Login | Register</a></li>
+                                        <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -318,207 +302,48 @@
                         <div class="offcanvas-menu_area">
                             <nav class="offcanvas-navigation">
                                 <ul class="mobile-menu">
+                                    <li>
+                                        <a th:href="@{index}">
+                                            <span class="mm-text">首页</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{fullwidth}">
+                                            <span class="mm-text">精装案例</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a th:href="@{designer-list}">
+                                            <span class="mm-text">设计团队</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a th:href="@{worker-list}">
+                                            <span class="mm-text">施工团队</span>
+                                        </a>
+                                    </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">
-                                        <span class="mm-text">Home
-                                    <i class="pe-7s-angle-down"></i>
-                                </span>
+                                    <span class="mm-text">营销活动
+                                        <i class="pe-7s-angle-down"></i>
+                                    </span>
                                         </a>
                                         <ul class="sub-menu">
-                                            <li>
-                                                <a href="">
-                                                    <span class="mm-text">Home One</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="index-2.html">
-                                                    <span class="mm-text">Home Two</span>
+                                            <li th:each="set : ${setInfo}">
+                                                <a th:href="@{discount/}+${set.setId}">
+                                                    <span class="mm-text" th:text="${set.name}"></span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#">
-                                        <span class="mm-text">Shop
-                                    <i class="pe-7s-angle-down"></i>
-                                </span>
+                                        <a th:href="@{bookOnline}">
+                                            <span class="mm-text">在线预约</span>
                                         </a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                <span class="mm-text">Shop Layout
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="shop.html">
-                                                            <span class="mm-text">Shop Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-grid-fullwidth.html">
-                                                            <span class="mm-text">Shop Grid Fullwidth</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-right-sidebar.html">
-                                                            <span class="mm-text">Shop Right Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-fullwidth.html">
-                                                            <span class="mm-text">Shop List Fullwidth</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-left-sidebar.html">
-                                                            <span class="mm-text">Shop List Left Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-right-sidebar.html">
-                                                            <span class="mm-text">Shop List Right Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                <span class="mm-text">Product Style
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="single-product.html">
-                                                            <span class="mm-text">Single Product Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-group.html">
-                                                            <span class="mm-text">Single Product Group</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-variable.html">
-                                                            <span class="mm-text">Single Product Variable</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-sale.html">
-                                                            <span class="mm-text">Single Product Sale</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-sticky.html">
-                                                            <span class="mm-text">Single Product Sticky</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-affiliate.html">
-                                                            <span class="mm-text">Single Product Affiliate</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                <span class="mm-text">Product Related
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="my-account.html">
-                                                            <span class="mm-text">My Account</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="login.html">
-                                                            <span class="mm-text">Login | Register</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="cart.html">
-                                                            <span class="mm-text">Shopping Cart</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="wishlist.html">
-                                                            <span class="mm-text">Wishlist</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="compare.html">
-                                                            <span class="mm-text">Compare</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="checkout.html">
-                                                            <span class="mm-text">Checkout</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
-                                        <span class="mm-text">Blog
-                                    <i class="pe-7s-angle-down"></i>
-                                </span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                <span class="mm-text">Blog Holder
-                                            <i class="pe-7s-angle-down"></i>
-                                        </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="blog.html">
-                                                            <span class="mm-text">Blog Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-listview.html">Blog List View</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-detail.html">Blog Detail</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
                                     </li>
                                     <li>
                                         <a href="about.html">
-                                            <span class="mm-text">About Us</span>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
-                                        <span class="mm-text">Pages
-                                    <i class="pe-7s-angle-down"></i>
-                                </span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="faq.html">
-                                                    <span class="mm-text">Frequently Questions</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="404.html">
-                                                    <span class="mm-text">Error 404</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">
-                                            <span class="mm-text">Contact</span>
+                                            <span th:href="@{contact}">联系我们</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -631,21 +456,6 @@
                             <a href="#" rel="" name="style" class="all on">全部</a>
                             <a href="#" th:each="index : ${houseStyle}" th:rel="${index.id}"
                                name="style" class="default" th:text="${index.name}"></a>
-<!--                            <a href="#" rel="jianyue" name="style" class="default">简约</a>-->
-<!--                            <a href="#" rel="xiandai" name="style" class="default">现代</a>-->
-<!--                            <a href="#" rel="zhongshi" name="style" class="default">中式</a>-->
-<!--                            <a href="#" rel="oushi" name="style" class="default">欧式</a>-->
-<!--                            <a href="#" rel="meishi" name="style" class="default">美式</a>-->
-<!--                            <a href="#" rel="rishi" name="style" class="default">日式</a>-->
-<!--                            <a href="#" rel="tianyuan" name="style" class="default">田园</a>-->
-<!--                            <a href="#" rel="yijia" name="style" class="default">宜家</a>-->
-<!--                            <a href="#" rel="beiou" name="style" class="default">北欧</a>-->
-<!--                            <a href="#" rel="fugu" name="style" class="default">复古</a>-->
-<!--                            <a href="#" rel="hunda" name="style" class="default">混搭</a>-->
-<!--                            <a href="#" rel="xingudai" name="style" class="default">新古典</a>-->
-<!--                            <a href="#" rel="dizhonghai" name="style" class="default">地中海</a>-->
-<!--                            <a href="#" rel="dongnandya" name="style" class="default">东南亚</a>-->
-<!--                            <a href="#" rel="other" name="style" class="default">其他</a>-->
                         </dd>
                     </dl>
                     <dl class="cation-list">
@@ -654,9 +464,6 @@
                             <a href="#" rel="" name="type" class="all on">全部</a>
                             <a href="#" th:each="index : ${houseType}" th:rel="${index.id}"
                                name="type" class="default" th:text="${index.name}"></a>
-<!--                            <a href="#" rel="quanbao" name="type" class="default">全包</a>-->
-<!--                            <a href="#" rel="banbao" name="type" class="default">半包</a>-->
-<!--                            <a href="#" rel="other" name="type" class="default">其他</a>-->
                         </dd>
                     </dl>
                     <dl class="cation-list">
@@ -665,9 +472,6 @@
                             <a href="#" rel="" name="form" class="all on">全部</a>
                             <a href="#" th:each="index : ${houseForm}" th:rel="${index.id}"
                                name="form" class="default" th:text="${index.name}"></a>
-<!--                            <a href="#" rel="quanbao" name="type" class="default">全包</a>-->
-<!--                            <a href="#" rel="banbao" name="type" class="default">半包</a>-->
-<!--                            <a href="#" rel="other" name="type" class="default">其他</a>-->
                         </dd>
                     </dl>
                     <dl class="cation-list">
@@ -676,12 +480,6 @@
                             <a href="#" rel="" name="area" class="all on">全部</a>
                             <a href="#" th:each="index : ${houseArea}" th:rel="${index.id}"
                                name="area" class="default" th:text="${index.name}"></a>
-<!--                            <a href="#" rel="0,70" name="area" class="default">70㎡以下</a>-->
-<!--                            <a href="#" rel="70,80" name="area" class="default">70㎡ - 80㎡ </a>-->
-<!--                            <a href="#" rel="80,90" name="area" class="default">80㎡ - 90㎡ </a>-->
-<!--                            <a href="#" rel="90,110" name="area" class="default">90㎡ - 110㎡ </a>-->
-<!--                            <a href="#" rel="110,140" name="area" class="default">110㎡ - 140㎡</a>-->
-<!--                            <a href="#" rel="140," name="area" class="default">140㎡以上</a>-->
                         </dd>
                     </dl>
                 </div>
@@ -690,57 +488,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-<!--                            <div class="product-topbar">-->
-<!--                                <ul>-->
-<!--                                    <li class="product-view-wrap">-->
-<!--                                        <ul class="nav" role="tablist">-->
-<!--                                            <li class="grid-view" role="presentation">-->
-<!--                                                <a class="active" id="grid-view-tab" data-bs-toggle="tab" href="#grid-view" role="tab" aria-selected="true">-->
-<!--                                                    <i class="fa fa-th"></i>-->
-<!--                                                </a>-->
-<!--                                            </li>-->
-<!--                                            <li class="list-view" role="presentation">-->
-<!--                                                <a id="list-view-tab" data-bs-toggle="tab" href="#list-view" role="tab" aria-selected="true">-->
-<!--                                                    <i class="fa fa-th-list"></i>-->
-<!--                                                </a>-->
-<!--                                            </li>-->
-<!--                                        </ul>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
                             <div class="tab-content">
-<!--                                <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">-->
-<!--                                    <div class="product-grid-view row g-y-20">-->
-<!--                                        <div class="col-lg-3 col-md-4 col-sm-6" th:each="house : ${houseInfo}">-->
-<!--                                            <div class="product-item">-->
-<!--                                                <div class="post-slide">-->
-<!--                                                    <div class="post-header">-->
-<!--                                                        <p style="height: 50px" class="post-title">-->
-<!--                                                            <a style="font-size: 15px;color: #616161" th:href="@{/case/}+${house.houseId}" th:text="${house.title}"></a>-->
-<!--                                                        </p>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="pic">-->
-<!--                                                        <img style="height: 120px;width: 190px" th:src="'Path'+${house.mainPic}" alt=""/>-->
-<!--                                                    </div>-->
-<!--                                                    <ul class="post-bar">-->
-<!--                                                        <li><i class="fa fa-users"></i> <a th:href="@{/designer/}+${house.designerId}" th:text="${house.designer}"></a></li>-->
-<!--                                                        <li><i class="fa fa-clock-o" th:text="${house.time}"></i></li>-->
-<!--                                                    </ul>-->
-<!--                                                    <p class="post-description myText" th:text="${house.describe}">-->
-<!--                                                    </p>-->
-<!--                                                    <a th:href="@{/case/}+${house.houseId}" class="read-more">详情</a>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
                                 <div id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
                                     <div class="product-list-view row g-y-30">
                                         <div class="col-12" th:each="house : ${houseInfo}">
                                             <div class="product-item">
                                                 <div class="post-slide">
                                                     <div class="post-header">
-<!--                                                        <a href="#" class="subtitle">Lorem ipsum</a>-->
                                                         <h3 class="post-title"><a th:href="@{/case/}+${house.houseId}" th:text="${house.title}"></a></h3>
                                                     </div>
                                                     <div class="pic">
