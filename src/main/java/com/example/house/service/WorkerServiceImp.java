@@ -38,7 +38,7 @@ public class WorkerServiceImp implements WorkerService  {
     }
 
     @Override
-    public Worker findWorkerByName(String name){
+    public List<Worker> findWorkerByName(String name){
         return workerMapper.findWorkerByName(name);
     }
 

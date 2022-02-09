@@ -26,7 +26,7 @@
 
     <select id="findWorkerByName" resultType="Worker">
         select * from worker
-        where name = #{name}
+        where (name like CONCAT(CONCAT('%',#{name},'%')) or #{name}='')
     </select>
 
     <select id="findWorkerByHouse" resultType="Worker">

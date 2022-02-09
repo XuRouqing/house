@@ -31,7 +31,7 @@
 
     <select id="findDesignerByName" resultType="Designer">
         select * from designer
-        where name = #{name}
+        where (name like CONCAT(CONCAT('%',#{name},'%')) or #{name}='')
     </select>
 
     <update id="modifyDesigner" parameterType="Designer">

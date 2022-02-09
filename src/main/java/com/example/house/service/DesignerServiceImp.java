@@ -52,7 +52,7 @@ public class DesignerServiceImp implements DesignerService  {
     }
 
     @Override
-    public Designer findDesignerByName(String name){
+    public List<Designer> findDesignerByName(String name){
         return designerMapper.findDesignerByName(name);
     }
 

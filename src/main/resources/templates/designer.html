@@ -116,17 +116,14 @@
             </nav> <!-- .cd-main-nav-wrapper -->
             <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
             <div id="search" class="cd-main-search">
-              <form>
-                <input type="search" placeholder="Search...">
+              <form th:action="@{../searchDesigner}" method="post">
+                <input type="search" name="searchText" placeholder="Search...">
                 <div class="cd-select">
-                  <select name="select-category">
-                    <option value="all-categories">全部</option>
-                    <option value="category1">房型</option>
-                    <option value="category2">风格</option>
-                    <option value="category2">类型</option>
-                    <option value="category3">设计师</option>
+                  <select name="category">
+                    <option value="designer">设计师</option>
+                    <option value="worker">施工人员</option>
                   </select>
-                  <span class="selected-value">全部</span>
+                  <span class="selected-value">设计师</span>
                 </div>
               </form>
               <a href="#0" class="close cd-text-replace">Close Form</a>

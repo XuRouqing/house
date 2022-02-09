@@ -10,7 +10,7 @@ public interface WorkerService {
     public Worker findWorkerById(Integer id);
     public List<Worker> getWorkerList();
     public List<Worker> getWorkerByType(String type);
-    public Worker findWorkerByName(String name);
+    public List<Worker> findWorkerByName(String name);
     public List<Worker> findWorkerByHouse(int houseId);
     public void modifyWorker(Worker worker);
     public void deleteWorker(Integer id);

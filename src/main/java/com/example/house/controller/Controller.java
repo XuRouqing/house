@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -487,6 +488,23 @@ public class Controller {
         Worker worker = workerService.findWorkerById(id);
         model.addAttribute("workerInfo",worker);
         return "worker";
+    }
+
+    @RequestMapping("/searchDesigner")
+    public String searchdesigner(Model model,
+                                 @RequestParam(required = false, defaultValue = "") String category,
+                                 @Param("searchText") String searchText,
+                                 HttpServletRequest request){
+        if (category.equals("designer")){
+            List<Designer> designerList = designerService.findDesignerByName(searchText);
+            model.addAttribute("designerInfo",designerList);
+            return "search-designer";
+        }
+        else{
+            List<Worker> workerList = workerService.findWorkerByName(searchText);
+            model.addAttribute("workerInfo",workerList);
+            return "search-worker";
+        }
     }
 
     @RequestMapping("/discount/{id}")

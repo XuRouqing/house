@@ -97,6 +97,40 @@
               <i class="pe-7s-call"></i>
               <a href="tel://+00-123-456-789">+00 123 456 789</a>
             </div>
+            <a class="header-logo">
+              <img src="Path/picture/dark.png" alt="Header Logo">
+            </a>
+            <!--                            搜索框-->
+            <nav class="cd-main-nav-wrapper">
+              <a href="#search" class="cd-search-trigger cd-text-replace">Search</a>
+            </nav> <!-- .cd-main-nav-wrapper -->
+            <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
+            <div id="search" class="cd-main-search">
+              <form th:action="@{/searchDesigner}" method="post">
+                <input type="search" name="searchText" placeholder="Search...">
+                <div class="cd-select">
+                  <select name="category">
+                    <option value="designer">设计师</option>
+                    <option value="worker">施工人员</option>
+                  </select>
+                  <span class="selected-value">设计师</span>
+                </div>
+              </form>
+              <a href="#0" class="close cd-text-replace">Close Form</a>
+            </div> <!-- .cd-main-search -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-12">
+          <div class="header-middle-wrap position-relative cd-main-header">
+            <div class="header-contact d-none d-lg-flex">
+              <i class="pe-7s-call"></i>
+              <a href="tel://+00-123-456-789">+00 123 456 789</a>
+            </div>
             <a href="" class="header-logo">
               <img src="Path/picture/dark.png" alt="Header Logo">
             </a>
