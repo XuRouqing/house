@@ -17,8 +17,8 @@ public class ShiroConfig {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
         bean.setSecurityManager(defaultWebSecurityManager);
         Map<String,String> filterMap=new LinkedHashMap<>();
-        filterMap.put("/admin/*","authc,roles[admin]");
-        filterMap.put("/admin/*/*","authc,roles[admin]");
+//        filterMap.put("/admin/*","authc,roles[admin]");
+//        filterMap.put("/admin/*/*","authc,roles[admin]");
         filterMap.put("/user/main","user");
         filterMap.put("/user/account","user");
         filterMap.put("/user/set","user");
@@ -28,7 +28,7 @@ public class ShiroConfig {
         filterMap.put("/user/billList/*","user");
         filterMap.put("/user/addBill/*","user");
         bean.setFilterChainDefinitionMap(filterMap);
-        bean.setLoginUrl("/user/login");
+        bean.setLoginUrl("/login");
         bean.setUnauthorizedUrl("/user/noauth");
         return bean;
     }

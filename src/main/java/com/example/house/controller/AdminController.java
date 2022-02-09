@@ -30,6 +30,11 @@ public class AdminController {
     @Autowired
     private WorkerService workerService;
 
+    @RequestMapping("/index")
+    public String toindex(Model model) {
+        return "Admin/index";
+    }
+
     @RequestMapping("/worker/{id}")
     public String toworker(@PathVariable int id, Model model) {
         Worker worker = workerService.findWorkerById(id);
