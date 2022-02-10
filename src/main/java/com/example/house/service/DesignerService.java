@@ -17,4 +17,5 @@ public interface DesignerService {
     public void deleteDesigner(Integer id);
     public List<Index> getDesignerLevel();
     public List<Index> getDesignerStyle();
+    public int getDesignerNum();
 }

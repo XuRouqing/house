@@ -15,4 +15,5 @@ public interface WorkerService {
     public void modifyWorker(Worker worker);
     public void deleteWorker(Integer id);
     public List<Index> getWorkerType();
+    public int getWorkerNum();
 }

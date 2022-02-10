@@ -75,4 +75,9 @@ public class DesignerServiceImp implements DesignerService  {
     public List<Index> getDesignerStyle(){
         return designerMapper.selectDesignerStyle();
     }
+
+    @Override
+    public int getDesignerNum(){
+        return designerMapper.selectDesignerNum();
+    }
 }

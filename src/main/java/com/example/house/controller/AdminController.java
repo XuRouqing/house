@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sun.security.krb5.internal.crypto.Des;
 
 import java.util.List;
 
@@ -32,6 +33,14 @@ public class AdminController {
 
     @RequestMapping("/index")
     public String toindex(Model model) {
+        int workerNum = workerService.getWorkerNum();
+        int designerNum = designerService.getDesignerNum();
+        List<Designer> designers = designerService.getDesignerList();
+        List<Worker> workers = workerService.getWorkerList();
+        model.addAttribute("workerNum",workerNum);
+        model.addAttribute("designerNum",designerNum);
+        model.addAttribute("workers",workers);
+        model.addAttribute("designers",designers);
         return "Admin/index";
     }
 

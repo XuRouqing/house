@@ -23,4 +23,5 @@ public interface DesignerMapper {
     public void deleteDesigner(Integer id);
     public List<Index> selectDesignerLevel();
     public List<Index> selectDesignerStyle();
+    public int selectDesignerNum();
 }

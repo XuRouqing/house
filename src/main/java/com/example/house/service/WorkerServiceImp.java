@@ -61,4 +61,9 @@ public class WorkerServiceImp implements WorkerService  {
     public List<Index> getWorkerType(){
         return workerMapper.selectWorkerType();
     }
+
+    @Override
+    public int getWorkerNum(){
+        return workerMapper.selectWorkerNum();
+    }
 }

@@ -20,4 +20,5 @@ public interface WorkerMapper {
     public void modifyWorker(Worker worker);
     public void deleteWorker(Integer id);
     public List<Index> selectWorkerType();
+    public int selectWorkerNum();
 }

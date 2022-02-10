@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
     <head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -308,11 +308,11 @@
 											<i class="fe fe-users"></i>
 										</span>
 										<div class="dash-count">
-											<h3>168</h3>
+											<h3 th:text="${designerNum}"></h3>
 										</div>
 									</div>
 									<div class="dash-widget-info">
-										<h6 class="text-muted">Doctors</h6>
+										<h6 class="text-muted">设计师</h6>
 										<div class="progress progress-sm">
 											<div class="progress-bar bg-primary w-50"></div>
 										</div>
@@ -328,12 +328,12 @@
 											<i class="fe fe-credit-card"></i>
 										</span>
 										<div class="dash-count">
-											<h3>487</h3>
+											<h3 th:text="${workerNum}"></h3>
 										</div>
 									</div>
 									<div class="dash-widget-info">
 
-										<h6 class="text-muted">Patients</h6>
+										<h6 class="text-muted">施工人员</h6>
 										<div class="progress progress-sm">
 											<div class="progress-bar bg-success w-50"></div>
 										</div>
@@ -354,7 +354,7 @@
 									</div>
 									<div class="dash-widget-info">
 
-										<h6 class="text-muted">Appointment</h6>
+										<h6 class="text-muted">用户人数</h6>
 										<div class="progress progress-sm">
 											<div class="progress-bar bg-danger w-50"></div>
 										</div>
@@ -375,7 +375,7 @@
 									</div>
 									<div class="dash-widget-info">
 
-										<h6 class="text-muted">Revenue</h6>
+										<h6 class="text-muted">预约数量</h6>
 										<div class="progress progress-sm">
 											<div class="progress-bar bg-warning w-50"></div>
 										</div>
@@ -420,104 +420,30 @@
 							<!-- Recent Orders -->
 							<div class="card card-table flex-fill">
 								<div class="card-header">
-									<h4 class="card-title">Doctors List</h4>
+									<h4 class="card-title">设计师列表</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-hover table-center mb-0">
 											<thead>
 												<tr>
-													<th>Doctor Name</th>
-													<th>Speciality</th>
-													<th>Earned</th>
-													<th>Reviews</th>
+													<th>设计师姓名</th>
+													<th>联系电话</th>
+													<th>邮箱</th>
+													<th>所在城市</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
+												<tr th:each="i:${#numbers.sequence(0,4)}">
 													<td>
 														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Ruby Perrin</a>
+															<a th:href="@{/designer/}+${designers[i].id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" alt="Designer Image" th:src="${designers[i].pic}"></a>
+															<a th:href="@{/designer/}+${designers[i].id}" th:text="${designers[i].name}"></a>
 														</h2>
 													</td>
-													<td>Dental</td>
-													<td>$3200.00</td>
-													<td>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star-o text-secondary"></i>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-02.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Darren Elder</a>
-														</h2>
-													</td>
-													<td>Dental</td>
-													<td>$3100.00</td>
-													<td>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star-o text-secondary"></i>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-03.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Deborah Angel</a>
-														</h2>
-													</td>
-													<td>Cardiology</td>
-													<td>$4000.00</td>
-													<td>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star-o text-secondary"></i>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-04.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Sofia Brient</a>
-														</h2>
-													</td>
-													<td>Urology</td>
-													<td>$3200.00</td>
-													<td>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star-o text-secondary"></i>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-05.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Marvin Campbell</a>
-														</h2>
-													</td>
-													<td>Orthopaedics</td>
-													<td>$3500.00</td>
-													<td>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star-o text-secondary"></i>
-													</td>
+													<td th:text="${designers[i].tel}"></td>
+													<td th:text="${designers[i].email}"></td>
+													<td th:text="${designers[i].location}"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -532,75 +458,31 @@
 							<!-- Feed Activity -->
 							<div class="card  card-table flex-fill">
 								<div class="card-header">
-									<h4 class="card-title">Patients List</h4>
+									<h4 class="card-title">工人列表</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-hover table-center mb-0">
 											<thead>
 												<tr>
-													<th>Patient Name</th>
-													<th>Phone</th>
-													<th>Last Visit</th>
-													<th>Paid</th>
+													<th>工人名字</th>
+													<th>联系电话</th>
+													<th>工种</th>
+													<th>所在城市</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient1.jpg" alt="User Image"></a>
-															<a href="profile.html">Charlene Reed </a>
-														</h2>
-													</td>
-													<td>8286329170</td>
-													<td>20 Oct 2019</td>
-													<td class="text-right">$100.00</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient2.jpg" alt="User Image"></a>
-															<a href="profile.html">Travis Trimble </a>
-														</h2>
-													</td>
-													<td>2077299974</td>
-													<td>22 Oct 2019</td>
-													<td class="text-right">$200.00</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient3.jpg" alt="User Image"></a>
-															<a href="profile.html">Carl Kelly</a>
-														</h2>
-													</td>
-													<td>2607247769</td>
-													<td>21 Oct 2019</td>
-													<td class="text-right">$250.00</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient4.jpg" alt="User Image"></a>
-															<a href="profile.html"> Michelle Fairfax</a>
-														</h2>
-													</td>
-													<td>5043686874</td>
-													<td>21 Sep 2019</td>
-													<td class="text-right">$150.00</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient5.jpg" alt="User Image"></a>
-															<a href="profile.html">Gina Moore</a>
-														</h2>
-													</td>
-													<td>9548207887</td>
-													<td>18 Sep 2019</td>
-													<td class="text-right">$350.00</td>
-												</tr>
+											<tr th:each="i:${#numbers.sequence(0,4)}">
+												<td>
+													<h2 class="table-avatar">
+														<a th:href="@{/worker/}+${workers[i].id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" alt="Designer Image" th:src="${workers[i].pic}"></a>
+														<a th:href="@{/worker/}+${workers[i].id}" th:text="${workers[i].name}"></a>
+													</h2>
+												</td>
+												<td th:text="${workers[i].type}"></td>
+												<td th:text="${workers[i].tel}"></td>
+												<td th:text="${workers[i].city}"></td>
+											</tr>
 											</tbody>
 										</table>
 									</div>

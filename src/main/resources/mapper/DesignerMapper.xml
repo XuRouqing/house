@@ -51,4 +51,8 @@
     <select id="selectDesignerStyle" resultType="Index">
         SELECT * from styleindex
     </select>
+
+    <select id="selectDesignerNum" resultType="int">
+        SELECT count(*) from designer
+    </select>
 </mapper>

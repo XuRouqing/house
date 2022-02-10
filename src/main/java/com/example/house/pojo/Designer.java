@@ -20,6 +20,7 @@ public class Designer {
     private String style;//擅长风格
     private String represent;//代表作
     private String tel;
+    private String email;
     private int age;
     private String pic;
     private String form;

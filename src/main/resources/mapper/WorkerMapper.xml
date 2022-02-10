@@ -48,4 +48,8 @@
     <select id="selectWorkerType" resultType="Index">
         SELECT * from workertype
     </select>
+
+    <select id="selectWorkerNum" resultType="int">
+        SELECT count(*) from worker
+    </select>
 </mapper>
