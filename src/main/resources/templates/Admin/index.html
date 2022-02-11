@@ -433,20 +433,39 @@
 													<th>所在城市</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr th:each="i:${#numbers.sequence(0,4)}">
-													<td>
-														<h2 class="table-avatar">
-															<a th:href="@{/designer/}+${designers[i].id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" alt="Designer Image" th:src="${designers[i].pic}"></a>
-															<a th:href="@{/designer/}+${designers[i].id}" th:text="${designers[i].name}"></a>
-														</h2>
-													</td>
-													<td th:text="${designers[i].tel}"></td>
-													<td th:text="${designers[i].email}"></td>
-													<td th:text="${designers[i].location}"></td>
-												</tr>
+											<tbody id="tbody_designer">
+<!--												<tr th:each="i:${#numbers.sequence(0,4)}">-->
+<!--													<td>-->
+<!--														<h2 class="table-avatar">-->
+<!--															<a th:href="@{/designer/}+${designers[i].id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" alt="Designer Image" th:src="${designers[i].pic}"></a>-->
+<!--															<a th:href="@{/designer/}+${designers[i].id}" th:text="${designers[i].name}"></a>-->
+<!--														</h2>-->
+<!--													</td>-->
+<!--													<td th:text="${designers[i].tel}"></td>-->
+<!--													<td th:text="${designers[i].email}"></td>-->
+<!--													<td th:text="${designers[i].location}"></td>-->
+<!--												</tr>-->
 											</tbody>
 										</table>
+										<div class="pagination-area" style="text-align: center">
+											<nav aria-label="Page navigation example" style="margin: 0 auto">
+												<ul class="pagination justify-content-center">
+													<li>
+														<a class="page-link" aria-label="Previous" onclick="designerPrePage()">
+															<span aria-hidden="true">&laquo;</span>
+														</a>
+													</li>
+													<li class="page-item">
+														<a id="designerPageNow" class="page-link"></a>
+													</li>
+													<li>
+														<a class="page-link"aria-label="Next" onclick="designerNextPage()">
+															<span aria-hidden="true">&raquo</span>
+														</a>
+													</li>
+												</ul>
+											</nav>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -471,20 +490,39 @@
 													<th>所在城市</th>
 												</tr>
 											</thead>
-											<tbody>
-											<tr th:each="i:${#numbers.sequence(0,4)}">
-												<td>
-													<h2 class="table-avatar">
-														<a th:href="@{/worker/}+${workers[i].id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" alt="Designer Image" th:src="${workers[i].pic}"></a>
-														<a th:href="@{/worker/}+${workers[i].id}" th:text="${workers[i].name}"></a>
-													</h2>
-												</td>
-												<td th:text="${workers[i].type}"></td>
-												<td th:text="${workers[i].tel}"></td>
-												<td th:text="${workers[i].city}"></td>
-											</tr>
+											<tbody id="tbody_worker">
+<!--											<tr th:each="i:${#numbers.sequence(0,4)}">-->
+<!--												<td>-->
+<!--													<h2 class="table-avatar">-->
+<!--														<a th:href="@{/worker/}+${workers[i].id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" alt="Designer Image" th:src="${workers[i].pic}"></a>-->
+<!--														<a th:href="@{/worker/}+${workers[i].id}" th:text="${workers[i].name}"></a>-->
+<!--													</h2>-->
+<!--												</td>-->
+<!--												<td th:text="${workers[i].type}"></td>-->
+<!--												<td th:text="${workers[i].tel}"></td>-->
+<!--												<td th:text="${workers[i].city}"></td>-->
+<!--											</tr>-->
 											</tbody>
 										</table>
+										<div class="pagination-area" style="text-align: center">
+											<nav aria-label="Page navigation example" style="margin: 0 auto">
+												<ul class="pagination justify-content-center">
+													<li>
+														<a class="page-link" aria-label="Previous" onclick="workerPrePage()">
+															<span aria-hidden="true">&laquo;</span>
+														</a>
+													</li>
+													<li class="page-item">
+														<a id="workerPageNow" class="page-link"></a>
+													</li>
+													<li>
+														<a class="page-link"aria-label="Next" onclick="workerNextPage()">
+															<span aria-hidden="true">&raquo</span>
+														</a>
+													</li>
+												</ul>
+											</nav>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -496,151 +534,278 @@
 						<div class="col-md-12">
 
 							<!-- Recent Orders -->
-							<div class="card card-table">
-								<div class="card-header">
-									<h4 class="card-title">Appointment List</h4>
-								</div>
+							<div class="card">
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-hover table-center mb-0">
+										<table class="datatable table table-hover table-center mb-0">
 											<thead>
-												<tr>
-													<th>Doctor Name</th>
-													<th>Speciality</th>
-													<th>Patient Name</th>
-													<th>Apointment Time</th>
-													<th>Status</th>
-													<th class="text-right">Amount</th>
-												</tr>
+											<tr>
+												<th>Doctor Name</th>
+												<th>Speciality</th>
+												<th>Patient Name</th>
+												<th>Apointment Time</th>
+												<th>Status</th>
+												<th class="text-right">Amount</th>
+											</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Ruby Perrin</a>
-														</h2>
-													</td>
-													<td>Dental</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient1.jpg" alt="User Image"></a>
-															<a href="profile.html">Charlene Reed </a>
-														</h2>
-													</td>
-													<td>9 Nov 2019 <span class="text-primary d-block">11.00 AM - 11.15 AM</span></td>
-													<td>
-														<div class="status-toggle">
-															<input type="checkbox" id="status_1" class="check" checked>
-															<label for="status_1" class="checktoggle">checkbox</label>
-														</div>
-													</td>
-													<td class="text-right">
-														$200.00
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-02.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Darren Elder</a>
-														</h2>
-													</td>
-													<td>Dental</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient2.jpg" alt="User Image"></a>
-															<a href="profile.html">Travis Trimble </a>
-														</h2>
-													</td>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Ruby Perrin</a>
+													</h2>
+												</td>
+												<td>Dental</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
+														<a href="profile.html">Charlene Reed </a>
+													</h2>
+												</td>
+												<td>9 Nov 2019 <span class="text-primary d-block">11.00 AM - 11.15 AM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_1" class="check" checked>
+														<label for="status_1" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$200.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Darren Elder</a>
+													</h2>
+												</td>
+												<td>Dental</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
+														<a href="profile.html">Travis Trimble </a>
+													</h2>
+												</td>
 
-													<td>5 Nov 2019 <span class="text-primary d-block">11.00 AM - 11.35 AM</span></td>
-													<td>
-														<div class="status-toggle">
-															<input type="checkbox" id="status_2" class="check" checked>
-															<label for="status_2" class="checktoggle">checkbox</label>
-														</div>
-													</td>
-													<td class="text-right">
-														$300.00
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-03.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Deborah Angel</a>
-														</h2>
-													</td>
-													<td>Cardiology</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient3.jpg" alt="User Image"></a>
-															<a href="profile.html">Carl Kelly</a>
-														</h2>
-													</td>
-													<td>11 Nov 2019 <span class="text-primary d-block">12.00 PM - 12.15 PM</span></td>
-													<td>
-														<div class="status-toggle">
-															<input type="checkbox" id="status_3" class="check" checked>
-															<label for="status_3" class="checktoggle">checkbox</label>
-														</div>
-													</td>
-													<td class="text-right">
-														$150.00
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-04.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Sofia Brient</a>
-														</h2>
-													</td>
-													<td>Urology</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient4.jpg" alt="User Image"></a>
-															<a href="profile.html"> Michelle Fairfax</a>
-														</h2>
-													</td>
-													<td>7 Nov 2019<span class="text-primary d-block">1.00 PM - 1.20 PM</span></td>
-													<td>
-														<div class="status-toggle">
-															<input type="checkbox" id="status_4" class="check" checked>
-															<label for="status_4" class="checktoggle">checkbox</label>
-														</div>
-													</td>
-													<td class="text-right">
-														$150.00
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/doctors/doctor-thumb-05.jpg" alt="User Image"></a>
-															<a href="profile.html">Dr. Marvin Campbell</a>
-														</h2>
-													</td>
-													<td>Orthopaedics</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../Path/admin/img/patients/patient5.jpg" alt="User Image"></a>
-															<a href="profile.html">Gina Moore</a>
-														</h2>
-													</td>
+												<td>5 Nov 2019 <span class="text-primary d-block">11.00 AM - 11.35 AM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_2" class="check" checked>
+														<label for="status_2" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$300.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-03.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Deborah Angel</a>
+													</h2>
+												</td>
+												<td>Cardiology</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
+														<a href="profile.html">Carl Kelly</a>
+													</h2>
+												</td>
+												<td>11 Nov 2019 <span class="text-primary d-block">12.00 PM - 12.15 PM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_3" class="check" checked>
+														<label for="status_3" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$150.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-04.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Sofia Brient</a>
+													</h2>
+												</td>
+												<td>Urology</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
+														<a href="profile.html"> Michelle Fairfax</a>
+													</h2>
+												</td>
+												<td>7 Nov 2019 <span class="text-primary d-block">1.00 PM - 1.20 PM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_4" class="check" checked>
+														<label for="status_4" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$150.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-05.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Marvin Campbell</a>
+													</h2>
+												</td>
+												<td>Orthopaedics</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
+														<a href="profile.html">Gina Moore</a>
+													</h2>
+												</td>
 
-													<td>15 Nov 2019 <span class="text-primary d-block">1.00 PM - 1.15 PM</span></td>
-													<td>
-														<div class="status-toggle">
-															<input type="checkbox" id="status_5" class="check" checked>
-															<label for="status_5" class="checktoggle">checkbox</label>
-														</div>
-													</td>
-													<td class="text-right">
-														$200.00
-													</td>
-												</tr>
+												<td>15 Nov 2019 <span class="text-primary d-block">1.00 PM - 1.15 PM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_5" class="check" checked>
+														<label for="status_5" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$200.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-06.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Katharine Berthold</a>
+													</h2>
+												</td>
+												<td>Orthopaedics</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient6.jpg" alt="User Image"></a>
+														<a href="profile.html">Elsie Gilley</a>
+													</h2>
+												</td>
+
+												<td>16 Nov 2019 <span class="text-primary d-block">1.00 PM - 1.15 PM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_5" class="check" checked>
+														<label for="status_5" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$250.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-07.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Linda Tobin</a>
+													</h2>
+												</td>
+												<td>Neurology</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient7.jpg" alt="User Image"></a>
+														<a href="profile.html">Joan Gardner</a>
+													</h2>
+												</td>
+
+												<td>18 Nov 2019 <span class="text-primary d-block">1.10 PM - 1.25 PM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_5" class="check" checked>
+														<label for="status_5" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$260.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-08.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Paul Richard</a>
+													</h2>
+												</td>
+												<td>Dermatology</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient8.jpg" alt="User Image"></a>
+														<a href="profile.html"> Daniel Griffing</a>
+													</h2>
+												</td>
+
+												<td>18 Nov 2019 <span class="text-primary d-block">11.10 AM - 11.25 AM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_5" class="check" checked>
+														<label for="status_5" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$260.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-09.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. John Gibbs</a>
+													</h2>
+												</td>
+												<td>Dental</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient9.jpg" alt="User Image"></a>
+														<a href="profile.html">Walter Roberson</a>
+													</h2>
+												</td>
+
+												<td>21 Nov 2019 <span class="text-primary d-block">12.10 PM - 12.25 PM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_5" class="check" checked>
+														<label for="status_5" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$300.00
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-10.jpg" alt="User Image"></a>
+														<a href="profile.html">Dr. Olga Barlow</a>
+													</h2>
+												</td>
+												<td>Dental</td>
+												<td>
+													<h2 class="table-avatar">
+														<a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient10.jpg" alt="User Image"></a>
+														<a href="profile.html">Robert Rhodes</a>
+													</h2>
+												</td>
+
+												<td>23 Nov 2019 <span class="text-primary d-block">12.10 PM - 12.25 PM</span></td>
+												<td>
+													<div class="status-toggle">
+														<input type="checkbox" id="status_5" class="check" checked>
+														<label for="status_5" class="checktoggle">checkbox</label>
+													</div>
+												</td>
+												<td class="text-right">
+													$300.00
+												</td>
+											</tr>
 											</tbody>
 										</table>
 									</div>
@@ -675,5 +840,174 @@
 		<!-- Custom JS -->
 		<script  src="../Path/admin/js/script.js"></script>
 
-    </body>
+		<!-- Datatables JS -->
+		<!-- Datatables JS -->
+		<script src="../Path/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+		<script src="../Path/admin/plugins/datatables/datatables.min.js"></script>
+		<script th:inline="javascript">
+			var designerPageNow = 1;
+			var workerPageNow = 1;
+			$(function(){
+				getDesignerPage();
+				getWorkerPage();
+			})
+			function getDesignerPage(){
+				$.ajax({
+					async : false,
+					cache : false,
+					type:'POST',
+					data:{pageNow:designerPageNow,pageCount:'5'},
+					url:"/admin/designerList" ,
+					success:function (result) {
+						/**
+						 * 找到并清空原先页码中的数字，并将其替换为当前页码
+						 * @type {HTMLElement}
+						 */
+						var designerPage = document.getElementById("designerPageNow");
+						designerPage.innerHTML="";
+						designerPage.appendChild(document.createTextNode(designerPageNow));
+						//将List 转成json,传到界面。js中使用eval（result）将list转成js数组。
+						var s = JSON.stringify(result);
+						var keyList = eval(s);
+						// var link = '[[@{/designer/}]]';
+						/**
+						 * 局部刷新列表
+						 * @type {HTMLElement}
+						 */
+						//找到列表索要展示的父类，并将原先的内容清空
+						var tbody_designer = document.getElementById("tbody_designer");
+						tbody_designer.innerHTML="";
+						/**
+						 * 当获取到的当前页码的数据小于等于0条时，说明该页无数据，前一页为最后一页
+						 * 将当前页面设为第一页，并重新读取第一页的数据，结束本次操作
+						 */
+						if (keyList.length <=0 ){
+							designerPageNow = 1;
+							getDesignerPage();
+							return;
+						}
+						/**
+						 * 创建列表元素并将数据写入列表
+						 */
+						for (var i = 0; i < keyList.length; i++) {
+							var tr = document.createElement("tr");
+							var td1 = document.createElement("td");
+							var td1_h2 = document.createElement("h2");
+							td1_h2.setAttribute("class","table-avatar");
+							var td1_h2_a1 = document.createElement("a");
+							var td1_h2_a2 = document.createElement("a");
+							// td1_h2_a1.setAttribute("href",keyList[i].id);
+							td1_h2_a1.setAttribute("class","avatar avatar-sm mr-2");
+							var img = document.createElement("img");
+							img.setAttribute("src",keyList[i].pic)
+							img.setAttribute("class","avatar-img rounded-circle");
+							td1_h2_a1.appendChild(img);
+							td1_h2_a2.appendChild(document.createTextNode(keyList[i].name));
+							td1_h2.appendChild(td1_h2_a1);
+							td1_h2.appendChild(td1_h2_a2);
+							td1.append(td1_h2);
+							var td2 = document.createElement("td");
+							td2.appendChild(document.createTextNode(keyList[i].tel));
+							var td3 = document.createElement("td");
+							td3.appendChild(document.createTextNode(keyList[i].email));
+							var td4 = document.createElement("td");
+							td4.appendChild(document.createTextNode(keyList[i].location));
+							tr.appendChild(td1);
+							tr.appendChild(td2);
+							tr.appendChild(td3);
+							tr.appendChild(td4);
+							tbody_designer.appendChild(tr);
+						}
+					},error:function (e) {
+						console.log(e);
+					}
+				});
+			}
+
+			/**
+			 * 获取前一页的设计师数据
+			 */
+			function designerPrePage(){
+				designerPageNow -= 1;
+				if (designerPageNow <= 0){
+					designerPageNow = 1;
+				}
+				getDesignerPage();
+			}
+			function designerNextPage(){
+				designerPageNow += 1;
+				getDesignerPage();
+			}
+			function getWorkerPage(){
+				$.ajax({
+					async : false,
+					cache : false,
+					type:'POST',
+					data:{pageNow:workerPageNow,pageCount:'5'},
+					url:"/admin/workerList" ,
+					success:function (result) {
+						var workerPage = document.getElementById("workerPageNow");
+						workerPage.innerHTML="";
+						workerPage.appendChild(document.createTextNode(workerPageNow));
+						//将List 转成json,传到界面。js中使用eval（result）将list转成js数组。
+						var s = JSON.stringify(result);
+						var keyList = eval(s);
+						var tbody_worker = document.getElementById("tbody_worker");
+						tbody_worker.innerHTML="";
+						if (keyList.length <=0 ){
+							workerPageNow = 1;
+							getWorkerPage();
+							return;
+						}
+						for (var i = 0; i < keyList.length; i++) {
+							var tr = document.createElement("tr");
+							var td1 = document.createElement("td");
+							var td1_h2 = document.createElement("h2");
+							td1_h2.setAttribute("class","table-avatar");
+							var td1_h2_a1 = document.createElement("a");
+							var td1_h2_a2 = document.createElement("a");
+							// td1_h2_a1.setAttribute("href",keyList[i].id);
+							td1_h2_a1.setAttribute("class","avatar avatar-sm mr-2");
+							var img = document.createElement("img");
+							img.setAttribute("src",keyList[i].pic)
+							img.setAttribute("class","avatar-img rounded-circle");
+							td1_h2_a1.appendChild(img);
+							td1_h2_a2.appendChild(document.createTextNode(keyList[i].name));
+							td1_h2.appendChild(td1_h2_a1);
+							td1_h2.appendChild(td1_h2_a2);
+							td1.append(td1_h2);
+							var td2 = document.createElement("td");
+							td2.appendChild(document.createTextNode(keyList[i].tel));
+							var td3 = document.createElement("td");
+							td3.appendChild(document.createTextNode(keyList[i].type));
+							var td4 = document.createElement("td");
+							td4.appendChild(document.createTextNode(keyList[i].city));
+							tr.appendChild(td1);
+							tr.appendChild(td2);
+							tr.appendChild(td3);
+							tr.appendChild(td4);
+							tbody_worker.appendChild(tr);
+						}
+						// for (var i = 0; i < keyList.length; i++) {
+						// 	alert(keyList[i].id);
+						// 	alert(keyList[i].name);
+						// }
+					},error:function (e) {
+						console.log(e);
+					}
+				});
+			}
+			function workerPrePage(){
+				workerPageNow -= 1;
+				if (workerPageNow <= 0){
+					workerPageNow = 1;
+				}
+				getWorkerPage();
+			}
+			function workerNextPage(){
+				workerPageNow += 1;
+				getWorkerPage();
+			}
+		</script>
+	</body>
 </html>

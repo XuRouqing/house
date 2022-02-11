@@ -249,15 +249,7 @@ public class Controller {
         if(pageNow==0){
             pageNow=1;
         }
-        List<Index> houseStyle = houseService.getHouseStyleIndex();
-        List<Index> houseType = houseService.getHouseTypeIndex();
-        List<Index> houseForm = houseService.getHouseFormIndex();
-        List<Index> houseArea = houseService.getHouseAreaIndex();
         attr.addAttribute("pageNow",pageNow);
-        attr.addAttribute("houseStyle",houseStyle);
-        attr.addAttribute("houseType",houseType);
-        attr.addAttribute("houseForm",houseForm);
-        attr.addAttribute("houseArea",houseArea);
         return "redirect:/fullwidth";
     }
 
@@ -388,11 +380,7 @@ public class Controller {
         if(pageNow==0){
             pageNow=1;
         }
-        List<Index> levelIndex = designerService.getDesignerLevel();
-        List<Index> styleIndex = designerService.getDesignerStyle();
         attr.addAttribute("pageNow",pageNow);
-        attr.addAttribute("levelIndex",levelIndex);
-        attr.addAttribute("styleIndex",styleIndex);
         return "redirect:/designer-list";
     }
 

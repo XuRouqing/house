@@ -8,10 +8,10 @@ import com.example.house.service.DesignerService;
 import com.example.house.service.HouseService;
 import com.example.house.service.RoomService;
 import com.example.house.service.WorkerService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import sun.security.krb5.internal.crypto.Des;
 
 import java.util.List;
@@ -49,5 +49,21 @@ public class AdminController {
         Worker worker = workerService.findWorkerById(id);
         model.addAttribute("workerInfo",worker);
         return "Admin/worker";
+    }
+
+    @ResponseBody
+    @RequestMapping("/designerList")
+    public List<Designer> getDesignerList(@RequestParam("pageNow") int pageNow,
+                                          @RequestParam("pageCount") int pageCount){
+        List<Designer> designerList = designerService.getDesignerListByPage(pageNow,pageCount);
+        return designerList;
+    }
+
+    @ResponseBody
+    @RequestMapping("/workerList")
+    public List<Worker> getWorkerList(@RequestParam("pageNow") int pageNow,
+                                          @RequestParam("pageCount") int pageCount){
+        List<Worker> workerList = workerService.getWorkerListByPage(pageNow,pageCount);
+        return workerList;
     }
 }

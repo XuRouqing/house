@@ -1,6 +1,7 @@
 package com.example.house.service;
 
 import com.example.house.dao.WorkerMapper;
+import com.example.house.pojo.Designer;
 import com.example.house.pojo.Index;
 import com.example.house.pojo.Worker;
 import com.github.pagehelper.PageHelper;
@@ -45,6 +46,13 @@ public class WorkerServiceImp implements WorkerService  {
     @Override
     public List<Worker> findWorkerByHouse(int houseId){
         return workerMapper.findWorkerByHouse(houseId);
+    }
+
+    @Override
+    public List<Worker> getWorkerListByPage(int pageNow, int pageCount){
+        PageHelper.startPage(pageNow, pageCount);
+        List<Worker> workerList = workerMapper.selectWorkerAll();
+        return workerList;
     }
 
     @Override
