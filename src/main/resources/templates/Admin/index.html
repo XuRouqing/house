@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>我爱我家装修公司</title>
 		<!-- Favicon -->
-		<link rel="shortcut icon" type="image/x-icon" href="../Path/admin/img/favicon.png">
+		<link rel="shortcut icon" type="image/x-icon" href="../Path/image/newlogo.png">
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -175,16 +175,16 @@
 								<span>Main</span>
 							</li>
 							<li class="active">
-								<a href="index.html"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+								<a th:href="@{/admin/index}"><i class="fe fe-home"></i> <span>首页</span></a>
 							</li>
 							<li>
-								<a href="appointment-list.html"><i class="fe fe-layout"></i> <span>Appointments</span></a>
+								<a th:href="@{/admin/designerList}"><i class="fe fe-layout"></i> <span>设计师列表</span></a>
 							</li>
 							<li>
-								<a href="specialities.html"><i class="fe fe-users"></i> <span>Specialities</span></a>
+								<a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
 							</li>
 							<li>
-								<a href="doctor-list.html"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
+								<a th:href="@{/admin/appointmentList}"><i class="fe fe-user-plus"></i> <span>预约列表</span></a>
 							</li>
 							<li>
 								<a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
@@ -290,10 +290,7 @@
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="page-title">Welcome Admin!</h3>
-								<ul class="breadcrumb">
-									<li class="breadcrumb-item active">Dashboard</li>
-								</ul>
+								<h3 class="page-title">欢迎 管理员!</h3>
 							</div>
 						</div>
 					</div>
@@ -427,10 +424,10 @@
 										<table class="table table-hover table-center mb-0">
 											<thead>
 												<tr>
-													<th>设计师姓名</th>
+													<th>姓名</th>
+													<th>等级</th>
 													<th>联系电话</th>
 													<th>邮箱</th>
-													<th>所在城市</th>
 												</tr>
 											</thead>
 											<tbody id="tbody_designer">
@@ -484,7 +481,7 @@
 										<table class="table table-hover table-center mb-0">
 											<thead>
 												<tr>
-													<th>工人名字</th>
+													<th>姓名</th>
 													<th>联系电话</th>
 													<th>工种</th>
 													<th>所在城市</th>
@@ -517,7 +514,7 @@
 													</li>
 													<li>
 														<a class="page-link"aria-label="Next" onclick="workerNextPage()">
-															<span aria-hidden="true">&raquo</span>
+															<span aria-hidden="true">&raquo;</span>
 														</a>
 													</li>
 												</ul>
@@ -857,7 +854,7 @@
 					cache : false,
 					type:'POST',
 					data:{pageNow:designerPageNow,pageCount:'5'},
-					url:"/admin/designerList" ,
+					url:"/admin/getdesignerList" ,
 					success:function (result) {
 						/**
 						 * 找到并清空原先页码中的数字，并将其替换为当前页码
@@ -907,11 +904,11 @@
 							td1_h2.appendChild(td1_h2_a2);
 							td1.append(td1_h2);
 							var td2 = document.createElement("td");
-							td2.appendChild(document.createTextNode(keyList[i].tel));
+							td2.appendChild(document.createTextNode(keyList[i].level));
 							var td3 = document.createElement("td");
-							td3.appendChild(document.createTextNode(keyList[i].email));
+							td3.appendChild(document.createTextNode(keyList[i].tel));
 							var td4 = document.createElement("td");
-							td4.appendChild(document.createTextNode(keyList[i].location));
+							td4.appendChild(document.createTextNode(keyList[i].email));
 							tr.appendChild(td1);
 							tr.appendChild(td2);
 							tr.appendChild(td3);
@@ -944,7 +941,7 @@
 					cache : false,
 					type:'POST',
 					data:{pageNow:workerPageNow,pageCount:'5'},
-					url:"/admin/workerList" ,
+					url:"/admin/getworkerList" ,
 					success:function (result) {
 						var workerPage = document.getElementById("workerPageNow");
 						workerPage.innerHTML="";

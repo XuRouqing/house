@@ -1,19 +1,14 @@
 package com.example.house.controller;
 
-import com.example.house.pojo.Designer;
-import com.example.house.pojo.House;
-import com.example.house.pojo.Room;
-import com.example.house.pojo.Worker;
-import com.example.house.service.DesignerService;
-import com.example.house.service.HouseService;
-import com.example.house.service.RoomService;
-import com.example.house.service.WorkerService;
+import com.example.house.pojo.*;
+import com.example.house.service.*;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sun.security.krb5.internal.crypto.Des;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
@@ -30,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private WorkerService workerService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/index")
     public String toindex(Model model) {
@@ -52,7 +50,7 @@ public class AdminController {
     }
 
     @ResponseBody
-    @RequestMapping("/designerList")
+    @RequestMapping("/getdesignerList")
     public List<Designer> getDesignerList(@RequestParam("pageNow") int pageNow,
                                           @RequestParam("pageCount") int pageCount){
         List<Designer> designerList = designerService.getDesignerListByPage(pageNow,pageCount);
@@ -60,10 +58,38 @@ public class AdminController {
     }
 
     @ResponseBody
-    @RequestMapping("/workerList")
+    @RequestMapping("/getworkerList")
     public List<Worker> getWorkerList(@RequestParam("pageNow") int pageNow,
                                           @RequestParam("pageCount") int pageCount){
         List<Worker> workerList = workerService.getWorkerListByPage(pageNow,pageCount);
         return workerList;
+    }
+
+    @RequestMapping("/designerList")
+    public String todesignerList(Model model) {
+        List<Designer> designers = designerService.getDesignerList();
+        model.addAttribute("designers",designers);
+        return "Admin/designer-list";
+    }
+
+    @RequestMapping("/designer/{id}")
+    public String todesigner(Model model,
+                             @PathVariable int id) {
+        Designer designer = designerService.findDesignerById(id);
+        model.addAttribute("designer",designer);
+        return "Admin/designer";
+    }
+
+    @RequestMapping("/modifyDesigner1")
+    public String tobookOnline(Model model, Designer designer){
+        designerService.modifyDesignerMain(designer);
+        return  "redirect:/admin/designer/"+designer.getId();
+    }
+
+    @RequestMapping("/workerList")
+    public String toworkerList(Model model) {
+        List<Worker> workers = workerService.getWorkerList();
+        model.addAttribute("workers",workers);
+        return "Admin/worker-list";
     }
 }

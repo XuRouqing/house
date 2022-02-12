@@ -13,6 +13,8 @@ public interface DesignerService {
     public List<Designer> getDesignerByPageAndSL(int pageNow, int pageCount, String style, String level);
     public List<Designer> getTopNDesigner(int n);
     public List<Designer> findDesignerByName(String name);
+    public void modifyDesignerALL(Designer designer);
+    public void modifyDesignerMain(Designer designer);
     public void modifyDesigner(Designer designer);
     public void deleteDesigner(Integer id);
     public List<Index> getDesignerLevel();

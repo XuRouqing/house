@@ -185,7 +185,7 @@ public class Controller {
 
     @PostMapping("/editPassword")
     public String editPassword(User user, HttpServletRequest request) {
-        userService.modifyPassword(user);
+        userService.modifyPassword(user.getId(),user.getPassword());
         request.getSession().setAttribute("password",user.getPassword());
         return "redirect:/account";
     }

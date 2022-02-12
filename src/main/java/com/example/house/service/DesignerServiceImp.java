@@ -57,6 +57,18 @@ public class DesignerServiceImp implements DesignerService  {
     }
 
     @Override
+    public void modifyDesignerALL(Designer designer){
+        designerMapper.modifyDesignerAll(designer);
+    }
+
+
+    @Override
+    public void modifyDesignerMain(Designer designer){
+        designerMapper.modifyDesignerMain(designer);
+    }
+
+
+    @Override
     public void modifyDesigner(Designer designer){
         designerMapper.modifyDesigner(designer);
     }

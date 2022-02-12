@@ -34,8 +34,18 @@
         where (name like CONCAT(CONCAT('%',#{name},'%')) or #{name}='')
     </select>
 
+    <update id="modifyDesignerAll" parameterType="Designer">
+        UPDATE designer SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},email=#{email},age=#{age},form=#{form}
+        WHERE id=#{id}
+    </update>
+
+    <update id="modifyDesignerMain" parameterType="Designer">
+        UPDATE designer SET name=#{name},tel=#{tel},email=#{email},location=#{location}
+        WHERE id=#{id}
+    </update>
+
     <update id="modifyDesigner" parameterType="Designer">
-        UPDATE designer SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        UPDATE designer SET gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},form=#{form}
         WHERE id=#{id}
     </update>
 

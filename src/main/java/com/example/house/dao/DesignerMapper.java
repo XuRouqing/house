@@ -19,6 +19,8 @@ public interface DesignerMapper {
     public List<Designer> findDesignerByName(@Param("name") String name);
     public List<Designer> selectDesignerBySL(String style, String level);
     public List<Designer> selectTopNDesigner(int n);
+    public void modifyDesignerAll(Designer designer);
+    public void modifyDesignerMain(Designer designer);
     public void modifyDesigner(Designer designer);
     public void deleteDesigner(Integer id);
     public List<Index> selectDesignerLevel();

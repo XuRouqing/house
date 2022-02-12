@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "designer")
 public class Designer {
     private int id;
+    private int userId;
     private String name;
     private String gender;
     private int workingAge;

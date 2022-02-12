@@ -16,6 +16,6 @@ public interface UserMapper {
     public User findUserByCodeAndPWD(@Param("code") String code, @Param("password") String password);
     public User findUserByCode(@Param("code") String code);
     public void modifyUser(User user);
-    public void modifyPassword(User user);
+    public void modifyPassword(int id,String password);
     public void deleteUser(Integer id);
 }
