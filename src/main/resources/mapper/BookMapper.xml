@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.house.dao.BookMapper">
+
+    <insert id="insertBook" parameterType="Book">
+        insert into book (customerId,name,tel,email,province,city,location,designerId,workers,time,remarks)
+        values (#{customerId},#{name},#{tel},#{email},#{province},#{city},#{location},#{designerId},#{workers},#{time},#{remarks})
+    </insert>
+
+
+</mapper>

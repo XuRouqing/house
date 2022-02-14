@@ -40,7 +40,7 @@
     </update>
 
     <update id="modifyDesignerMain" parameterType="Designer">
-        UPDATE designer SET name=#{name},tel=#{tel},email=#{email},location=#{location}
+        UPDATE designer SET name=#{name},tel=#{tel},email=#{email},location=#{location},pic=#{pic}
         WHERE id=#{id}
     </update>
 

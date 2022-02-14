@@ -467,23 +467,23 @@
                             <h4 class="card-title">在线预约</h4>
                         </div>
                         <div class="card-body" style="padding: 20px">
-                            <form action="#" name="bookForm">
+                            <form name="bookForm" id="bookForm" onsubmit="sub()">
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">称呼*</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" placeholder="如何称呼您"  th:value="${#request.getSession().getAttribute('name')}" required>
+                                        <input name="name" type="text" class="form-control" placeholder="如何称呼您"  th:value="${#request.getSession().getAttribute('name')}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">联系电话*</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" placeholder="请输入联系电话" th:value="${#request.getSession().getAttribute('phone')}" required>
+                                        <input name="tel" type="text" class="form-control" placeholder="请输入联系电话" th:value="${#request.getSession().getAttribute('phone')}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">邮箱</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" placeholder="请输入您的邮箱" th:value="${#request.getSession().getAttribute('email')}">
+                                        <input name="email" type="text" class="form-control" placeholder="请输入您的邮箱" th:value="${#request.getSession().getAttribute('email')}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -506,7 +506,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" placeholder="请输入详细地址">
+                                                <input type="text" class="form-control" placeholder="请输入详细地址" name="location">
                                             </div>
                                         </div>
                                     </div>
@@ -514,9 +514,9 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">设计师</label>
                                     <div class="col-md-10">
-                                        <select class="form-control" th:placeholder="请选择设计师">
-                                            <option>请选择设计师</option>
-                                            <option th:each="designer : ${designers}" th:text="${designer.name}"></option>
+                                        <select class="form-control" th:placeholder="请选择设计师" name="designer">
+                                            <option th:value="0">请选择设计师</option>
+                                            <option th:each="designer : ${designers}" th:text="${designer.name}" th:value="${designer.id}"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -534,14 +534,15 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div>
-                                                    <select class="form-control" id="worker1" name="worker1">
-                                                        <option>请选择施工人员</option>
+                                                    <select class="form-control" id="worker1" name="worker">
+                                                        <option th:value="0">请选择施工人员</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
                                                 <button type="button" class="my-btn btn btn-success glyphicon glyphicon-plus" onclick="addWorker()"></button>
                                             </div>
+                                            <input id="workers" name="workers" class="hidden">
                                         </div>
                                     </div>
                                 </div>
@@ -563,13 +564,13 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">备注</label>
                                     <div class="col-md-10">
-                                        <textarea rows="5" cols="5" class="form-control" placeholder="备注"></textarea>
+                                        <textarea name="describe" rows="5" cols="5" class="form-control" placeholder="备注"></textarea>
                                     </div>
                                 </div>
                                 <input name="customerId" class="hidden" th:value="${#request.getSession().getAttribute('id')}">
                                 <div class="submit-section proceed-btn text-right">
                                     <button class="btn submit-btn" data-toggle="modal"
-                                            data-target=".bs-example-modal-lg" onclick="openmodal()">预约</button>
+                                            data-target=".bs-example-modal-lg">预约</button>
                                 </div>
                             </form>
                         </div>
@@ -978,7 +979,7 @@
                 var div1_1 = document.createElement("div");
                 var selectType = document.createElement("select");
                 selectType.setAttribute("class","form-control");
-                selectType.setAttribute("name","type"+num);
+                selectType.setAttribute("name","type");
                 selectType.setAttribute("id","type"+num);
                 selectType.setAttribute("onChange","redirec(this)");
                 selectType.options[i++] = new Option("请选择工种");
@@ -997,7 +998,7 @@
                 var div2_1 = document.createElement("div");
                 var selectWorker = document.createElement("select");
                 selectWorker.setAttribute("class","form-control");
-                selectWorker.setAttribute("name","worker"+num);
+                selectWorker.setAttribute("name","worker");
                 selectWorker.setAttribute("id","worker"+num);
                 selectWorker.options[0] = new Option("请选择施工人员");
                 div2_1.appendChild(selectWorker);
@@ -1032,6 +1033,37 @@
             }
         });
     };
+
+    /**
+     * 提交表单
+     **/
+    function sub(){
+        var wokers = document.getElementById("workers");
+        var workerDoms = document.getElementsByName("worker");
+        var s = "";
+        for (var i = 0; i < workerDoms.length; i++) {
+            s += workerDoms[i].value;
+            s += ",";
+        }
+        s = s.substring(0,s.length-1);
+        wokers.value = s;
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/addBook" ,//url
+            data: $('#bookForm').serialize(),
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result == 200) {
+                    alert("插入成功");
+                }
+                ;
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
+    }
 
     //删除施工人员
     function deleteWorker(now){

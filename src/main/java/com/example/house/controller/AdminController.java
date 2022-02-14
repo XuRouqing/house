@@ -81,7 +81,7 @@ public class AdminController {
     }
 
     @RequestMapping("/modifyDesigner1")
-    public String tobookOnline(Model model, Designer designer){
+    public String modifyDesigner1(Model model, Designer designer){
         designerService.modifyDesignerMain(designer);
         return  "redirect:/admin/designer/"+designer.getId();
     }

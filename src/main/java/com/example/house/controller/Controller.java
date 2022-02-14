@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -62,6 +63,9 @@ public class Controller {
 
     @Autowired
     private SetOrderService setOrderService;
+
+    @Autowired
+    private BookService bookService;
 
     @ModelAttribute
     public void addAttributes(Model model) {
@@ -562,6 +566,23 @@ public class Controller {
         model.addAttribute("workerTypes",workerTypes);
         model.addAttribute("provinces",provinces);
         return "bookOnline.html";
+    }
+
+    @ResponseBody
+    @PostMapping("/addBook")
+    public void addBook(Book book, HttpServletResponse resp) throws IOException {
+        try {
+            bookService.addBook(book);
+            //给后台传输插入成功的消息
+            resp.setCharacterEncoding("utf-8");
+            PrintWriter respWritter = resp.getWriter();
+            respWritter.append("200");
+        } catch (Exception e) {
+            resp.setCharacterEncoding("utf-8");
+            PrintWriter respWritter = resp.getWriter();
+            respWritter.append("400");
+            e.printStackTrace();
+        }
     }
 
     /**
