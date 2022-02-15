@@ -18,6 +18,7 @@ public class Designer {
     private String gender;
     private int workingAge;
     private String level;//等级
+    private int levelValue;//等级
     private String style;//擅长风格
     private String represent;//代表作
     private String tel;

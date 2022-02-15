@@ -76,7 +76,9 @@ public class AdminController {
     public String todesigner(Model model,
                              @PathVariable int id) {
         Designer designer = designerService.findDesignerById(id);
+        List<Index> designerLevel = designerService.getDesignerLevel();
         model.addAttribute("designer",designer);
+        model.addAttribute("designerLevel",designerLevel);
         return "Admin/designer";
     }
 
