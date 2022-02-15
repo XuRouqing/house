@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import sun.security.krb5.internal.crypto.Des;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/admin")
@@ -77,8 +80,17 @@ public class AdminController {
                              @PathVariable int id) {
         Designer designer = designerService.findDesignerById(id);
         List<Index> designerLevel = designerService.getDesignerLevel();
+        List<Index> designerStyle = designerService.getDesignerStyle();
+        String styleValue = designer.getStyleValue();
+        String[] styleList = styleValue.split("、");
+        List<Integer> styleListInt = new ArrayList<>();
+        for (int i = 0; i < styleList.length; i++) {
+            styleListInt.add(Integer.parseInt(styleList[i]));
+        }
         model.addAttribute("designer",designer);
         model.addAttribute("designerLevel",designerLevel);
+        model.addAttribute("designerStyle",designerStyle);
+        model.addAttribute("styleList",styleListInt);
         return "Admin/designer";
     }
 
