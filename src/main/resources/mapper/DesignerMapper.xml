@@ -11,7 +11,10 @@
     </insert>
 
     <select id="selectDesignerById" resultType="Designer">
-        select * from designer where id = #{id}
+        SELECT designer.*, level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR '、') style FROM designer,designerlevel LEVEL,styleindex style
+        WHERE designer.levelValue = level.id
+          AND FIND_IN_SET(style.id,designer.styleValue)
+          AND designer.id = #{id}
     </select>
 
     <select id="selectDesignerAll" resultType="Designer">
@@ -46,7 +49,7 @@
     </update>
 
     <update id="modifyDesigner" parameterType="Designer">
-        UPDATE designer SET gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},form=#{form}
+        UPDATE designer SET workingAge=#{workingAge},levelValue=#{levelValue},styleValue=#{styleValue},represent=#{represent},form=#{form}
         WHERE id=#{id}
     </update>
 

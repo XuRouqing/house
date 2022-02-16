@@ -413,6 +413,7 @@
 																		</div>
 																	</div>
 																	<input name="id" type="hidden" class="hidden" th:value="${designer.id}">
+																	<input name="pic" type="hidden" class="hidden" th:value="${designer.pic}">
 																</div>
 																<button type="submit" class="btn btn-primary btn-block col-12">保存</button>
 															</form>
@@ -433,7 +434,7 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<form>
+															<form th:action="@{../modifyDesigner2}" method="post">
 																<div class="row form-row">
 																	<div class="col-12 col-sm-6">
 																		<div class="form-group">
@@ -444,13 +445,13 @@
 																	<div class="col-12 col-sm-6">
 																		<div class="form-group">
 																			<label>设计师ID</label>
-																			<input type="text"  class="form-control" th:value="${designer.id}" readonly>
+																			<input name="id" type="text"  class="form-control" th:value="${designer.id}" readonly>
 																		</div>
 																	</div>
 																	<div class="col-12">
 																		<div class="form-group">
 																			<label>工龄</label>
-																			<input type="text" class="form-control" th:value="${designer.workingAge}">
+																			<input name="workingAge" type="text" class="form-control" th:value="${designer.workingAge}">
 																		</div>
 																	</div>
 																	<div class="col-12">
@@ -465,29 +466,30 @@
 																	<div class="col-12">
 																		<div class="form-group">
 																			<label>风格</label>
-																			<select class="form-control" id="styleValue" name="styleValue" multiple="multiple" style="width: 100%">
+																			<select class="form-control" id="styleValue" multiple="multiple" style="width: 100%">
 																				<option name="styleOpt" th:each="style : ${designerStyle}" th:text="${style.name}" th:value="${style.id}"
 																						th:data_id="${style.id}">
 																			</select>
+																			<input type="hidden" id="designerStyle" name="styleValue">
 																		</div>
 																	</div>
 																	<div class="col-12">
 																		<div class="form-group">
 																			<label>代表作</label>
-																			<input type="text" class="form-control" th:value="${designer.represent}">
+																			<input name="represent" type="text" class="form-control" th:value="${designer.represent}">
 																		</div>
 																	</div>
 																	<div class="col-12">
 																		<div class="form-group">
 																			<label>宣言</label>
-																			<input type="text" class="form-control" th:value="${designer.form}">
+																			<input name="form" type="text" class="form-control" th:value="${designer.form}">
 																		</div>
 																	</div>
 <!--																	<div class="col-12">-->
 <!--																		<h5 class="form-title"><span>Address</span></h5>-->
 <!--																	</div>-->
 																</div>
-																<button type="submit" class="btn btn-primary btn-block">代表作</button>
+																<button type="submit" class="btn btn-primary btn-block" onclick="test()">保存</button>
 															</form>
 														</div>
 													</div>
@@ -553,6 +555,19 @@
 						opt[i].click();
 					}
 				}
+			}
+			function test(){
+				var styleText = "";
+				var style = document.getElementsByName("multiselect_styleValue");
+				for (var i = 0; i < style.length; i++) {
+					if (style[i].getAttribute("aria-selected")=="true"){
+						styleText += style[i].value + ",";
+					}
+					// console.log(style[i].value);
+				}
+				styleText = styleText.substring(0, styleText.length - 1);
+				var formText = document.getElementById("designerStyle");
+				formText.value = styleText;
 			}
 		</script>
     </body>

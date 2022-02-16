@@ -81,8 +81,9 @@ public class AdminController {
         Designer designer = designerService.findDesignerById(id);
         List<Index> designerLevel = designerService.getDesignerLevel();
         List<Index> designerStyle = designerService.getDesignerStyle();
+        //获取设计师的风格列表并将其转为数组
         String styleValue = designer.getStyleValue();
-        String[] styleList = styleValue.split("、");
+        String[] styleList = styleValue.split(",");
         List<Integer> styleListInt = new ArrayList<>();
         for (int i = 0; i < styleList.length; i++) {
             styleListInt.add(Integer.parseInt(styleList[i]));
@@ -97,6 +98,12 @@ public class AdminController {
     @RequestMapping("/modifyDesigner1")
     public String modifyDesigner1(Model model, Designer designer){
         designerService.modifyDesignerMain(designer);
+        return  "redirect:/admin/designer/"+designer.getId();
+    }
+
+    @RequestMapping("/modifyDesigner2")
+    public String modifyDesigner2(Model model, Designer designer){
+        designerService.modifyDesigner(designer);
         return  "redirect:/admin/designer/"+designer.getId();
     }
 
