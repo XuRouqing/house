@@ -12,4 +12,5 @@ public interface CityMapper {
     public List<City> selectCityAll();//getCityList
     public List<City> selectProvince();//
     public List<City> selectCityByPid(int id);//
+    public City selectCityById(int id);//
 }

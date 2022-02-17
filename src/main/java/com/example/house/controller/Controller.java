@@ -642,4 +642,22 @@ public class Controller {
             e.printStackTrace();
         }
     }
+    /**
+     * 获取当前城市的省
+     * @param resp
+     * @param id
+     */
+    @RequestMapping(value="/queryCityNow/{id}")
+    public void queryCityNow(HttpServletResponse resp,@PathVariable int id) {
+        try {
+            City cityNow = cityService.getCityListById(id);
+            City province = cityService.getCityListById(cityNow.getPid());
+            JSONArray data = JSONArray.fromObject(province);
+            resp.setCharacterEncoding("utf-8");
+            PrintWriter respWritter = resp.getWriter();
+            respWritter.append(data.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

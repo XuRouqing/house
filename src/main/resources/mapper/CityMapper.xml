@@ -19,5 +19,10 @@
         where pid = #{id}
     </select>
 
+    <select id="selectCityById" resultType="City">
+        select * from district
+        where id = #{id}
+    </select>
+
 
 </mapper>

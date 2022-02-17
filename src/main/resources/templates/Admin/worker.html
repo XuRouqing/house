@@ -415,14 +415,26 @@
                                   <input name="tel" type="text" class="form-control" th:value="${workerInfo.tel}">
                                 </div>
                               </div>
-                              <div class="col-12">
+                              <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                  <label>地址</label>
-                                  <input name="location" type="text" class="form-control" th:value="${workerInfo.city}">
+                                  <label>所在城市</label>
+                                  <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
+                                    <option>请选择省份</option>
+                                    <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}" th:selected="${province.id} == ${provinceNow.id}"></option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                  <label>所在城市</label>
+                                  <select class="form-control" id="city" name="city">
+                                    <option>请选择城市</option>
+                                  </select>
                                 </div>
                               </div>
                               <input name="id" type="hidden" class="hidden" th:value="${workerInfo.id}">
                               <input name="pic" type="hidden" class="hidden" th:value="${workerInfo.pic}">
+                              <input id="cityId_hidden" type="hidden" class="hidden" th:value="${workerInfo.cityId}">
                             </div>
                             <button type="submit" class="btn btn-primary btn-block col-12">保存</button>
                           </form>
@@ -445,11 +457,9 @@
                         <div class="modal-body">
                           <form th:action="@{../modifyWorker2}" method="post">
                             <div class="row form-row">
-                              <div class="col-12 col-sm-6">
-                              </div>
-                              <div class="col-12 col-sm-6">
+                              <div class="col-12">
                                 <div class="form-group">
-                                  <label>设计师ID</label>
+                                  <label>ID</label>
                                   <input name="id" type="text"  class="form-control" th:value="${workerInfo.id}" readonly>
                                 </div>
                               </div>
@@ -463,7 +473,7 @@
                                 <div class="form-group">
                                   <label>工种</label>
                                   <select class="form-control" name="levelValue">
-                                    <option th:each="type : ${workerType}" th:text="${type.name}" th:value="${type.id}" th:selected="${workerInfo.type} == ${type.id}">
+                                    <option th:each="type : ${workerType}" th:text="${type.name}" th:value="${type.id}" th:selected="${workerInfo.typeValue} == ${type.id}">
                                     </option>
                                   </select>
                                 </div>
@@ -528,9 +538,47 @@
 <!-- Select2 JS -->
 <script src="../../Path/admin/js/select2.min.js"></script>
 
-<script src="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../../Path/admin/js/jquery.multiselect.js"></script>
-
+<script>
+  var cityNowId = document.getElementById("cityId_hidden").value;
+  $(function () {
+    var provinceNow = document.getElementById("province");
+    changeProvince(provinceNow);
+  });
+  function changeProvince(now){
+    $.ajax({
+      url: "/queryCity/"+now.options[now.options.selectedIndex].value,
+      type: "post",
+      dataType: "json",
+      success: function(data){
+        /*这个方法里是ajax发送请求成功之后执行的代码*/
+        var province = now;
+        var city = document.getElementById("city");
+        var opt = now.options.selectedIndex;
+        var j = 0;
+        var length=city.options.length;
+        /**
+         * 清空原选择框中选项
+         */
+        for(i=0;i<length;i++){
+          city.removeChild(city.options[0]);
+        }
+        /**
+         * 添加新选项
+         */
+        for (i=0;i<data.length;i++) {
+          // console.log(data[i].district_name);
+          city.options[j++] = new Option(data[i].district_name, data[i].id);
+          if (data[i].id == cityNowId){
+            city.options[j-1].selected = true;
+          }
+        }
+      },
+      error: function(msg){
+        alert("ajax连接异常："+msg);
+      }
+    });
+  };
+</script>
 
 </body>
 </html>

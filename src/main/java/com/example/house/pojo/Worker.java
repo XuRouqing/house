@@ -16,7 +16,9 @@ public class Worker {
     private String name;
     private String gender;
     private String city;
+    private int cityId;
     private String type;//工种
+    private String typeValue;//工种
     private int age;
     private int workingAge;
     private String represent;

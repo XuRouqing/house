@@ -6,19 +6,21 @@
 <mapper namespace="com.example.house.dao.WorkerMapper">
 
     <insert id="insertWorker" parameterType="Worker">
-        insert into worker (name,gender,city,typeValue,age,workingAge,represent,tel,pic,describe,#{declaration})
-        values (#{name},#{gender},#{city},#{typeValue},#{age},#{workingAge},#{represent},#{tel},#{pic},#{describe},#{declaration})
+        insert into worker (name,gender,cityId,typeValue,age,workingAge,represent,tel,pic,describe,#{declaration})
+        values (#{name},#{gender},#{cityId},#{typeValue},#{age},#{workingAge},#{represent},#{tel},#{pic},#{describe},#{declaration})
     </insert>
 
     <select id="selectWorkerById" resultType="Worker">
-        select worker.*, type.name type from worker ,workertype type
-        where worker.id = #{id}
-            and worker.typeValue = type.id
+        SELECT worker.*, type.name TYPE, district.district_name city FROM worker ,workertype TYPE, district
+        WHERE worker.id = #{id}
+          AND worker.typeValue = type.id
+          AND district.id = worker.cityId
     </select>
 
     <select id="selectWorkerAll" resultType="Worker">
-        select worker.*, type.name type from worker ,workertype type
-            where worker.typeValue = type.id
+        SELECT worker.*, type.name TYPE, district.district_name city FROM worker ,workertype TYPE, district
+        WHERE worker.typeValue = type.id
+          AND district.id = worker.cityId
     </select>
 
     <select id="selectWorkerByType" resultType="Worker">

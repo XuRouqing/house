@@ -31,4 +31,9 @@ public class CityServiceImp implements CityService  {
         return cityMapper.selectCityByPid(id);
     }
 
+    @Override
+    public City getCityListById(int id){
+        return cityMapper.selectCityById(id);
+    }
+
 }

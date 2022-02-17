@@ -32,6 +32,9 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CityService cityService;
+
     @RequestMapping("/index")
     public String toindex(Model model) {
         int workerNum = workerService.getWorkerNum();
@@ -122,8 +125,14 @@ public class AdminController {
     public String toworker(@PathVariable int id, Model model) {
         Worker worker = workerService.findWorkerById(id);
         List<Index> workerType = workerService.getWorkerType();
+        List<City> provinces = cityService.getProvinceList();
+        City cityNow = cityService.getCityListById(worker.getCityId());
+        City provinceNow = cityService.getCityListById(cityNow.getPid());
         model.addAttribute("workerInfo",worker);
         model.addAttribute("workerType",workerType);
+        model.addAttribute("provinces",provinces);
+        model.addAttribute("cityNow",cityNow);
+        model.addAttribute("provinceNow",provinceNow);
         return "Admin/worker";
     }
 
