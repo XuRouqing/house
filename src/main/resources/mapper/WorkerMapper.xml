@@ -6,27 +6,31 @@
 <mapper namespace="com.example.house.dao.WorkerMapper">
 
     <insert id="insertWorker" parameterType="Worker">
-        insert into worker (name,gender,city,type,age,workingAge,represent,tel,pic,describe,#{declaration})
-        values (#{name},#{gender},#{city},#{type},#{age},#{workingAge},#{represent},#{tel},#{pic},#{describe},#{declaration})
+        insert into worker (name,gender,city,typeValue,age,workingAge,represent,tel,pic,describe,#{declaration})
+        values (#{name},#{gender},#{city},#{typeValue},#{age},#{workingAge},#{represent},#{tel},#{pic},#{describe},#{declaration})
     </insert>
 
     <select id="selectWorkerById" resultType="Worker">
-        select * from worker where id = #{id}
+        select worker.*, type.name type from worker ,workertype type
+        where worker.id = #{id}
+            and worker.typeValue = type.id
     </select>
 
     <select id="selectWorkerAll" resultType="Worker">
-        select * from worker
+        select worker.*, type.name type from worker ,workertype type
+            where worker.typeValue = type.id
     </select>
 
     <select id="selectWorkerByType" resultType="Worker">
-        select * from worker
+        select worker.*, type.name type from worker ,workertype type
         where 1=1
             and (typeValue like CONCAT(CONCAT('%',#{type},'%')) or #{type}='')
+            and worker.typeValue = type.id
     </select>
 
     <select id="findWorkerByName" resultType="Worker">
-        select * from worker
-        where (name like CONCAT(CONCAT('%',#{name},'%')) or #{name}='')
+        select worker.*, type.name type from worker ,workertype type
+        where (name like CONCAT(CONCAT('%',#{name},'%')) or #{name}='') and worker.typeValue = type.id
     </select>
 
     <select id="findWorkerByHouse" resultType="Worker">
@@ -36,7 +40,7 @@
     </select>
 
     <update id="modifyWorker" parameterType="Worker">
-        UPDATE worker SET name=#{name},gender=#{gender},city=#{city},type=#{type},age=#{age},workingAge=#{workingAge},represent=#{represent},tel=#{tel},pic=#{pic},describe=#{describe},declaration=#{declaration}
+        UPDATE worker SET name=#{name},gender=#{gender},city=#{city},typeValue=#{typeValue},age=#{age},workingAge=#{workingAge},represent=#{represent},tel=#{tel},pic=#{pic},describe=#{describe},declaration=#{declaration}
         WHERE id=#{id}
     </update>
 

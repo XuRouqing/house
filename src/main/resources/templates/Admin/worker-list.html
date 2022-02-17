@@ -305,13 +305,15 @@
 										<table class="datatable table table-hover table-center mb-0">
 											<thead>
 												<tr>
+
 													<th style="width: 5%">ID</th>
-													<th style="width: 15%">姓名</th>
+													<th style="width: 20%">姓名</th>
 													<th style="width: 10%">性别</th>
 													<th style="width: 10%">工龄</th>
-													<th style="width: 20%">工种</th>
+													<th style="width: 10%">工种</th>
 													<th style="width: 20%">联系电话</th>
-													<th style="width: 20%">所在城市</th>
+													<th style="width: 25%">所在城市</th>
+													<th>操作</th>
 												</tr>
 											</thead>
 											<tbody id="tbody">
@@ -319,8 +321,8 @@
 													<td th:text="${worker.id}"></td>
 													<td>
 														<h2 class="table-avatar">
-															<a th:href="@{/worker/}+${worker.id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" th:src="${worker.pic}" alt="User Image"></a>
-															<a th:href="@{/worker/}+${worker.id}" th:text="${worker.name}"></a>
+															<a th:href="@{/admin/worker/}+${worker.id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" th:src="${worker.pic}" alt="User Image"></a>
+															<a th:href="@{/admin/worker/}+${worker.id}" th:text="${worker.name}"></a>
 														</h2>
 													</td>
 													<td th:text="${worker.gender}"></td>
@@ -328,6 +330,16 @@
 													<td th:text="${worker.type}"></td>
 													<td th:text="${worker.tel}"></td>
 													<td th:text="${worker.city}"></td>
+													<td class="text-right">
+														<div class="actions">
+															<a th:href="@{/admin/worker/}+${worker.id}" class="btn btn-sm bg-success-light mr-2">
+																<i class="fe fe-pencil"></i> 编辑
+															</a>
+															<button class="btn btn-sm bg-danger-light" data-toggle="modal" th:attr="data-id=${worker.id},data-name=${worker.name}"  href="#delete_modal">
+																<i class="fe fe-trash"></i> 删除
+															</button>
+														</div>
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -341,8 +353,31 @@
 				</div>
 			</div>
 			<!-- /Page Wrapper -->
+			<!-- Delete Modal -->
+			<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+				<div class="modal-dialog modal-dialog-centered" role="document" >
+					<div class="modal-content">
+						<!--	<div class="modal-header">
+                                <h5 class="modal-title">Delete</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>-->
+						<div class="modal-body">
+							<div class="form-content p-2">
+								<h4 class="modal-title">删除</h4>
+								<p class="mb-4">确定要删除ID为<span id="p_id"></span>的工人<span id="p_name"></span>吗?</p>
+								<button id="delButton" type="button" class="btn btn-primary">确认</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Delete Modal -->
 
-        </div>
+
+		</div>
 		<!-- /Main Wrapper -->
 
 		<!-- jQuery -->
@@ -361,5 +396,40 @@
 
 		<!-- Custom JS -->
 		<script  src="../Path/admin/js/script.js"></script>
+
+		<script>
+			var id;
+			var name;
+			$('#delete_modal').on('show.bs.modal',function(event){
+				var button = $(event.relatedTarget);
+				var modal = $(this);
+				id = button.data("id");
+				name = button.data("name");
+				var p_id = document.getElementById("p_id");
+				p_id.appendChild(document.createTextNode(id));
+				var p_name = document.getElementById("p_name");
+				p_name.appendChild(document.createTextNode(name));
+			});
+			$('#delButton').on('click',function(){
+				$(this).button('complete');
+				$.ajax({
+					url:'/admin/delDesigner',
+					type:'post',
+					data: {id:id},
+					error:function(){
+						alert('出现错误！');
+					},success:function(data){
+						if (data.indexOf('error') < 0){
+							//模态框隐藏
+							$('#delete_modal').modal('hide');
+							alert("删除成功");
+							location.reload();
+						}else{
+							alert(data);
+						}
+					}
+				});
+			});
+		</script>
     </body>
 </html>

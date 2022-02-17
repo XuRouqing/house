@@ -45,13 +45,6 @@ public class AdminController {
         return "Admin/index";
     }
 
-    @RequestMapping("/worker/{id}")
-    public String toworker(@PathVariable int id, Model model) {
-        Worker worker = workerService.findWorkerById(id);
-        model.addAttribute("workerInfo",worker);
-        return "Admin/worker";
-    }
-
     @ResponseBody
     @RequestMapping("/getdesignerList")
     public List<Designer> getDesignerList(@RequestParam("pageNow") int pageNow,
@@ -107,10 +100,41 @@ public class AdminController {
         return  "redirect:/admin/designer/"+designer.getId();
     }
 
+    @ResponseBody
+    @RequestMapping("/delDesigner")
+    public String delDesigner(Model model, int id){
+        try {
+            designerService.deleteDesigner(id);
+            return "success";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
     @RequestMapping("/workerList")
     public String toworkerList(Model model) {
         List<Worker> workers = workerService.getWorkerList();
         model.addAttribute("workers",workers);
         return "Admin/worker-list";
+    }
+
+    @RequestMapping("/worker/{id}")
+    public String toworker(@PathVariable int id, Model model) {
+        Worker worker = workerService.findWorkerById(id);
+        List<Index> workerType = workerService.getWorkerType();
+        model.addAttribute("workerInfo",worker);
+        model.addAttribute("workerType",workerType);
+        return "Admin/worker";
+    }
+
+    @ResponseBody
+    @RequestMapping("/delWorker")
+    public String delWorker(Model model, int id){
+        try {
+            workerService.deleteWorker(id);
+            return "success";
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
 }

@@ -18,7 +18,10 @@
     </select>
 
     <select id="selectDesignerAll" resultType="Designer">
-        select * from designer
+        SELECT designer.*, level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR ',') style FROM designer,designerlevel LEVEL,styleindex style
+        WHERE designer.levelValue = level.id
+          AND FIND_IN_SET(style.id,designer.styleValue)
+        GROUP BY designer.id
     </select>
 
     <select id="selectDesignerBySL" resultType="Designer">
