@@ -6,21 +6,23 @@
 <mapper namespace="com.example.house.dao.WorkerMapper">
 
     <insert id="insertWorker" parameterType="Worker">
-        insert into worker (name,gender,cityId,typeValue,age,workingAge,represent,tel,pic,describe,#{declaration})
-        values (#{name},#{gender},#{cityId},#{typeValue},#{age},#{workingAge},#{represent},#{tel},#{pic},#{describe},#{declaration})
+        insert into worker (name,gender,cityId,typeValue,age,workingAge,represent,tel,pic,des,#{declaration})
+        values (#{name},#{gender},#{cityId},#{typeValue},#{age},#{workingAge},#{represent},#{tel},#{pic},#{des},#{declaration})
     </insert>
 
     <select id="selectWorkerById" resultType="Worker">
-        SELECT worker.*, type.name TYPE, district.district_name city FROM worker ,workertype TYPE, district
+        SELECT worker.*, type.name TYPE,CONCAT(d2.district_name,d1.district_name) city FROM worker ,workertype TYPE, district d1, district d2
         WHERE worker.id = #{id}
           AND worker.typeValue = type.id
-          AND district.id = worker.cityId
+          AND d1.id = worker.cityId
+          AND d1.pid = d2.id
     </select>
 
     <select id="selectWorkerAll" resultType="Worker">
-        SELECT worker.*, type.name TYPE, district.district_name city FROM worker ,workertype TYPE, district
+        SELECT worker.*, type.name TYPE, CONCAT(d2.district_name,d1.district_name) city FROM worker ,workertype TYPE, district d1, district d2
         WHERE worker.typeValue = type.id
-          AND district.id = worker.cityId
+          AND d1.id = worker.cityId
+          AND d1.pid = d2.id
     </select>
 
     <select id="selectWorkerByType" resultType="Worker">
@@ -41,8 +43,18 @@
           AND FIND_IN_SET(worker.id, workerIds)
     </select>
 
+    <update id="modifyWorkerAll" parameterType="Worker">
+        UPDATE worker SET name=#{name},gender=#{gender},cityId=#{cityId},typeValue=#{typeValue},age=#{age},workingAge=#{workingAge},represent=#{represent},tel=#{tel},pic=#{pic},des=#{des},declaration=#{declaration}
+        WHERE id=#{id}
+    </update>
+
+    <update id="modifyWorkerMain" parameterType="Worker">
+        UPDATE worker SET name=#{name},tel=#{tel},cityId=#{cityId},pic=#{pic}
+        WHERE id=#{id}
+    </update>
+
     <update id="modifyWorker" parameterType="Worker">
-        UPDATE worker SET name=#{name},gender=#{gender},city=#{city},typeValue=#{typeValue},age=#{age},workingAge=#{workingAge},represent=#{represent},tel=#{tel},pic=#{pic},describe=#{describe},declaration=#{declaration}
+        UPDATE worker SET typeValue=#{typeValue},workingAge=#{workingAge},des=#{des},represent=#{represent},declaration=#{declaration}
         WHERE id=#{id}
     </update>
 

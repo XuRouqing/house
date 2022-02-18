@@ -24,6 +24,6 @@ public class Worker {
     private String represent;
     private String tel;
     private String pic;
-    private String describe;
+    private String des;
     private String declaration;
 }

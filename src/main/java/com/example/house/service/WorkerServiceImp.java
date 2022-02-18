@@ -1,7 +1,7 @@
 package com.example.house.service;
 
 import com.example.house.dao.WorkerMapper;
-import com.example.house.pojo.Designer;
+import com.example.house.pojo.Worker;
 import com.example.house.pojo.Index;
 import com.example.house.pojo.Worker;
 import com.github.pagehelper.PageHelper;
@@ -53,6 +53,17 @@ public class WorkerServiceImp implements WorkerService  {
         PageHelper.startPage(pageNow, pageCount);
         List<Worker> workerList = workerMapper.selectWorkerAll();
         return workerList;
+    }
+
+
+    @Override
+    public void modifyWorkerALL(Worker worker){
+        workerMapper.modifyWorkerAll(worker);
+    }
+
+    @Override
+    public void modifyWorkerMain(Worker worker){
+        workerMapper.modifyWorkerMain(worker);
     }
 
     @Override

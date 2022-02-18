@@ -136,9 +136,22 @@ public class AdminController {
         return "Admin/worker";
     }
 
+    @RequestMapping("/modifyWorker1")
+    public String modifyWorker1(Model model, Worker worker){
+        workerService.modifyWorkerMain(worker);
+        return  "redirect:/admin/worker/"+worker.getId();
+    }
+
+    @RequestMapping("/modifyWorker2")
+    public String modifyWorker2(Model model, Worker worker){
+        workerService.modifyWorker(worker);
+        return  "redirect:/admin/worker/"+worker.getId();
+    }
+
     @ResponseBody
     @RequestMapping("/delWorker")
     public String delWorker(Model model, int id){
+        System.out.println(id);
         try {
             workerService.deleteWorker(id);
             return "success";

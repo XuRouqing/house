@@ -61,12 +61,10 @@ public class DesignerServiceImp implements DesignerService  {
         designerMapper.modifyDesignerAll(designer);
     }
 
-
     @Override
     public void modifyDesignerMain(Designer designer){
         designerMapper.modifyDesignerMain(designer);
     }
-
 
     @Override
     public void modifyDesigner(Designer designer){
