@@ -10,5 +10,8 @@
         values (#{setId},#{customerId},#{customerName},#{tel},#{email},#{province},#{city},#{position},NOW())
     </insert>
 
+    <select id="selectSetOrderNum" resultType="int">
+        select count(*) from setorder
+    </select>
 
 </mapper>

@@ -27,6 +27,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public int getUserNum(){
+        return userMapper.selectUserNum();
+    }
+
+    @Override
     public List<User> getUserList(){
         return userMapper.selectUserAll();
     }

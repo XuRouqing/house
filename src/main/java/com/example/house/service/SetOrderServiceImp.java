@@ -21,5 +21,10 @@ public class SetOrderServiceImp implements SetOrderService  {
         this.setOrderMapper.insertOrder(order);
     }
 
+    @Override
+    public int getSetOrderNum(){
+        return this.setOrderMapper.selectSetOrderNum();
+    }
+
 
 }

@@ -6,12 +6,17 @@
 <mapper namespace="com.example.house.dao.AppointmentMapper">
 
     <insert id="insertAppointment" parameterType="Appointment">
-        insert into appointment (designerId,customerId,date,time,customerTel,customerName,customerEmail,message,location)
-        values (#{designerId},#{customerId},#{date},#{time},#{customerTel},#{customerName},#{customerEmail},#{message},#{location})
+        insert into appointment (designerId,customerId,date,day,time,customerTel,customerName,customerEmail,message,location,status)
+        values (#{designerId},#{customerId},#{date},#{day},#{time},#{customerTel},#{customerName},#{customerEmail},#{message},#{location},#{status})
     </insert>
 
+    <select id="selectAppointmentNum" resultType="int">
+        select count(*) from appointment
+    </select>
+
     <select id="selectAppointmentAll" resultType="Appointment">
-        select * from appointment
+        select a.*,d.name designerName from appointment a, designer d
+        where a.designerId = d.id
     </select>
 
     <select id="selectAppointmentByDesigner" resultType="Appointment">

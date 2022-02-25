@@ -184,7 +184,7 @@
 								<a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
 							</li>
 							<li>
-								<a th:href="@{/admin/appointmentList}"><i class="fe fe-user-plus"></i> <span>预约列表</span></a>
+								<a th:href="@{/admin/appointmentList}"><i class="fe fe-user-plus"></i> <span>设计师预约列表</span></a>
 							</li>
 							<li>
 								<a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
@@ -346,7 +346,7 @@
 											<i class="fe fe-money"></i>
 										</span>
 										<div class="dash-count">
-											<h3>485</h3>
+											<h3 th:text="${userNum}"></h3>
 										</div>
 									</div>
 									<div class="dash-widget-info">
@@ -367,7 +367,7 @@
 											<i class="fe fe-folder"></i>
 										</span>
 										<div class="dash-count">
-											<h3>$62523</h3>
+											<h3 th:text="${orderNum}"></h3>
 										</div>
 									</div>
 									<div class="dash-widget-info">

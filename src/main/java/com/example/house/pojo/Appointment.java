@@ -16,13 +16,16 @@ import java.util.Date;
 public class Appointment {
     private int appointmentId;
     private int designerId;
+    private String designerName;
     private int customerId;
     private String date;
     private String time;
+    private String day;
     private String customerTel;
     private String customerName;
     private String customerEmail;
     private String message;
     private String location;
+    private int status;
 
 }

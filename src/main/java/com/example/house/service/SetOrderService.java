@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface SetOrderService {
     public void addOrder(SetOrder order);
+    public int getSetOrderNum();
 }

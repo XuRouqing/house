@@ -35,16 +35,28 @@ public class AdminController {
     @Autowired
     private CityService cityService;
 
+    @Autowired
+    private AppointmentService appointmentService;
+
+    @Autowired
+    private SetOrderService setOrderService;
+
     @RequestMapping("/index")
     public String toindex(Model model) {
         int workerNum = workerService.getWorkerNum();
         int designerNum = designerService.getDesignerNum();
         List<Designer> designers = designerService.getDesignerList();
         List<Worker> workers = workerService.getWorkerList();
+        int appointmentNum = appointmentService.getAppointmentNum();
+        int setOrderNum = setOrderService.getSetOrderNum();
+        int orderNum = appointmentNum+setOrderNum;
+        int userNum = userService.getUserNum();
         model.addAttribute("workerNum",workerNum);
         model.addAttribute("designerNum",designerNum);
         model.addAttribute("workers",workers);
         model.addAttribute("designers",designers);
+        model.addAttribute("orderNum",orderNum);
+        model.addAttribute("userNum",userNum);
         return "Admin/index";
     }
 
@@ -158,5 +170,12 @@ public class AdminController {
         }catch (Exception e){
             return e.getMessage();
         }
+    }
+
+    @RequestMapping("/appointmentList")
+    public String toappointmentList(Model model) {
+        List<Appointment> appointments = appointmentService.getAppointmentList();
+        model.addAttribute("appointments",appointments);
+        return "Admin/appointment-list";
     }
 }

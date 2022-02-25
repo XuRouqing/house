@@ -12,6 +12,7 @@ import java.util.List;
 public interface UserMapper {
     void insertUser(User user);
     User selectUserById(int id);
+    int selectUserNum();
     List<User> selectUserAll();
     public User findUserByCodeAndPWD(@Param("code") String code, @Param("password") String password);
     public User findUserByCode(@Param("code") String code);

@@ -56,11 +56,12 @@
       var date = document.getElementById("date");
       $(date).text(select.attributes["value"].value);
       $(date).val(select.attributes["value"].value);
-      // var time = document.getElementById("time");
-      // $(date).text(select.attributes["value"].value.slice(0,-2));
-      // $(date).val(select.attributes["value"].value.slice(0,-2));
-      // $(time).text(select.attributes["value"].value.slice(-2));
-      // $(time).val(select.attributes["value"].value.slice(-2));
+      var time = document.getElementById("time");
+      var day = document.getElementById("day");
+      $(day).text(select.attributes["value"].value.slice(0,-2));
+      $(day).val(select.attributes["value"].value.slice(0,-2));
+      $(time).text(select.attributes["value"].value.slice(-2));
+      $(time).val(select.attributes["value"].value.slice(-2));
     }
     function goback() {
       $('#mymodal').modal("hide");
@@ -735,7 +736,7 @@
                   <!-- Time Slot -->
                   <div id="time-slot" class="time-slot">
                     <ul id="clearfix" class="clearfix">
-                      <li th:each="num : ${#numbers.sequence(0,6)}">
+                      <li th:each="num : ${#numbers.sequence(1,7)}">
                         <p th:id="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'yyyy-MM-dd')+'AM'}"
                            th:value="${#dates.format(new java.util.Date().getTime()+num*24*60*60*1000,'yyyy-MM-dd')+'AM'}"
                            class="timing noDate" onclick="change(this)">
@@ -776,19 +777,21 @@
                     <div class="form-field me-lg-30 mb-35 mb-lg-0">
                       <p id="selectTime">时间</p>
                       <input type="hidden" name="date" id="date">
+                      <input type="hidden" name="day" id="day">
                       <input type="hidden" name="time" id="time">
+                      <input type="hidden" name="status" th:value="0">
                     </div>
                     <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                      <input type="text" name="customerName" id="customerName" placeholder="称呼*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
+                      <input type="text" name="customerName" id="customerName" placeholder="称呼*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" th:value="${#request.getSession().getAttribute('name')}" required>
                     </div>
                     <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                      <input type="text" name="customerTel" id="customerTel" placeholder="联系电话*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
+                      <input type="text" name="customerTel" id="customerTel" placeholder="联系电话*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" th:value="${#request.getSession().getAttribute('phone')}" required>
                     </div>
                     <div class="form-field">
                       <input type="text" name="location" id="location" placeholder="地址*" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" required>
                     </div>
                     <div class="form-field">
-                      <input type="text" name="customerEmail" id="customerEmail" placeholder="邮箱" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off">
+                      <input type="text" name="customerEmail" id="customerEmail" placeholder="邮箱" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="input-field" autocomplete="off" th:value="${#request.getSession().getAttribute('email')}">
                     </div>
                     <div class="form-field mb-5">
                       <textarea name="message" id="message" placeholder="备注" style="font-family: 微软雅黑;font-style: normal;font-size: 20px;" class="textarea-field"></textarea>
@@ -1142,7 +1145,7 @@
     var week = "week" + (i+1);
     var day = "day" + (i+1);
     var date = new Date();
-    date.setTime(date.getTime()+i*24*60*60*1000);
+    date.setTime(date.getTime()+(i+1)*24*60*60*1000);
     var y= date.getFullYear();
     var m = date.getMonth()+1;
     var d = date.getDate();

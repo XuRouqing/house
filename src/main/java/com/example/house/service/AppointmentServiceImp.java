@@ -21,6 +21,11 @@ public class AppointmentServiceImp implements AppointmentService  {
     }
 
     @Override
+    public int getAppointmentNum() {
+        return this.appointmentMapper.selectAppointmentNum();
+    }
+
+    @Override
     public List<Appointment> getAppointmentList() {
         return this.appointmentMapper.selectAppointmentAll();
     }

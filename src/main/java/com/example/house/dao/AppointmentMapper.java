@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper
 public interface AppointmentMapper {
     void insertAppointment(Appointment appointment);
+    int selectAppointmentNum();
     List<Appointment> selectAppointmentAll();
     List<Appointment> selectAppointmentByDesigner(int designerId);
     List<Appointment> selectAppointmentByCustomer(int customerId);
