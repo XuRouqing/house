@@ -14,19 +14,38 @@
         select count(*) from appointment
     </select>
 
+    <delete id="deleteAppointment" parameterType="Appointment">
+        DELETE FROM appointment
+        WHERE appointmentId=#{id}
+    </delete>
+
     <select id="selectAppointmentAll" resultType="Appointment">
         select a.*,d.name designerName from appointment a, designer d
         where a.designerId = d.id
+        order by a.day desc
     </select>
 
     <select id="selectAppointmentByDesigner" resultType="Appointment">
         select * from appointment
         where designerId = #{designerId}
+        order by day desc
     </select>
 
     <select id="selectAppointmentByCustomer" resultType="Appointment">
         select * from appointment
         where customerId = #{customerId}
+        order by day desc
     </select>
+
+    <update id="updateAppointmentStatus" parameterType="Appointment">
+        UPDATE appointment SET status=#{status}
+        WHERE appointmentId=#{id}
+    </update>
+
+
+    <update id="updateAppointmentStatusEveryday" parameterType="Appointment">
+        UPDATE appointment SET STATUS = 1 WHERE
+        0 > DATEDIFF(DAY , SYSDATE())
+    </update>
 
 </mapper>

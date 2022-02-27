@@ -40,4 +40,19 @@ public class AppointmentServiceImp implements AppointmentService  {
         return this.appointmentMapper.selectAppointmentByCustomer(customerId);
     }
 
+    @Override
+    public void updateAppointmentStatus(int id, int status) {
+        this.appointmentMapper.updateAppointmentStatus(id, status);
+    }
+
+    @Override
+    public void updateAppointmentStatusEveryday() {
+        this.appointmentMapper.updateAppointmentStatusEveryday();
+    }
+
+    @Override
+    public void deleteAppointment(Integer id) {
+        this.appointmentMapper.deleteAppointment(id);
+    }
+
 }

@@ -26,6 +26,48 @@
   <script src="../Path/admin/js/html5shiv.min.js"></script>
   <script src="../Path/admin/js/respond.min.js"></script>
   <![endif]-->
+
+  <style>
+    /* Switch开关样式 */
+    input[type='checkbox'].switch {
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      position: relative;
+      width: 40px;
+      height: 20px;
+      background: #ccc;
+      border-radius: 10px;
+      transition: border-color .3s, background-color .3s;
+    }
+
+    input[type='checkbox'].switch::after {
+      content: '';
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0, 0, 2px, #999;
+      transition: .4s;
+      top: 2px;
+      position: absolute;
+      left: 2px;
+    }
+
+    input[type='checkbox'].switch:checked {
+      background: rgb(19, 206, 102);
+    }
+
+    /* 当input[type=checkbox]被选中时：伪元素显示下面样式 位置发生变化 */
+    input[type='checkbox'].switch:checked::after {
+      content: '';
+      position: absolute;
+      left: 55%;
+      top: 2px;
+    }
+  </style>
 </head>
 <body>
 
@@ -306,11 +348,12 @@
                   <thead>
                   <tr>
                     <th style="width: 10%">ID</th>
-                    <th style="width: 20%">日期</th>
+                    <th style="width: 20%" class="sorting_desc" aria-sort="descending" aria-label="日期: 日期: activate to sort column ascending">日期</th>
                     <th style="width: 15%">设计师</th>
                     <th style="width: 15%">顾客</th>
                     <th style="width: 20%">顾客联系电话</th>
-                    <th style="width: 20%">地址</th>
+                    <th style="width: 15%">地址</th>
+                    <th style="width: 15%">状态</th>
                     <th>操作</th>
                   </tr>
                   </thead>
@@ -322,12 +365,19 @@
                     <td th:text="${appointment.customerName}"></td>
                     <td th:text="${appointment.customerTel}"></td>
                     <td th:text="${appointment.location}"></td>
+                    <td>
+                      <input th:if="${appointment.status} eq 1" th:attr="data-id=${appointment.appointmentId}" checked type="checkbox" class="switch" th:value="${appointment.status}" onclick="changeStatus(this)">
+                      <input th:if="${appointment.status} eq 0" th:attr="data-id=${appointment.appointmentId}" type="checkbox" class="switch" th:value="${appointment.status}" onclick="changeStatus(this)">
+                    </td>
                     <td class="text-right">
                       <div class="actions">
-                        <a th:href="@{/admin/appointment/}+${appointment.appointmentId}" class="btn btn-sm bg-success-light mr-2">
+                        <a href="#edit_modal" data-toggle="modal" th:attr="data-id=${appointment.appointmentId}" class="btn btn-sm bg-success-light mr-2">
                           <i class="fe fe-pencil"></i> 编辑
                         </a>
-                        <button class="btn btn-sm bg-danger-light" data-toggle="modal" th:attr="data-id=${appointment.appointmentId}" href="#delete_modal">
+                        <button class="btn btn-sm bg-danger-light" data-toggle="modal"
+                                th:attr="data-id=${appointment.appointmentId},data-day=${appointment.day},data-time=${appointment.time},data-designer=${appointment.designerId},
+                                    data-customer=${appointment.customerName},data-tel=${appointment.customerTel},data-location=${appointment.location},data-email=${appointment.customerEmail}"
+                                href="#delete_modal">
                           <i class="fe fe-trash"></i> 删除
                         </button>
                       </div>
@@ -346,7 +396,7 @@
   </div>
   <!-- /Page Wrapper -->
   <!-- Edit Details Modal -->
-  <div class="modal fade" id="edit_invoice_report" aria-hidden="true" role="dialog">
+  <div class="modal fade" id="edit_modal" aria-hidden="true" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document" >
       <div class="modal-content">
         <div class="modal-header">
@@ -354,6 +404,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          <span></span>
         </div>
         <div class="modal-body">
           <form>
@@ -404,7 +455,7 @@
         <div class="modal-body">
           <div class="form-content p-2">
             <h4 class="modal-title">删除</h4>
-            <p class="mb-4">确定要删除ID为<span id="p_id"></span>的设计师<span id="p_name"></span>吗?</p>
+            <p class="mb-4">确定要删除ID为<span id="p_id"></span>的预约订单吗?</p>
             <button id="delButton" type="button" class="btn btn-primary">确认</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
           </div>
@@ -444,13 +495,11 @@
     name = button.data("name");
     var p_id = document.getElementById("p_id");
     p_id.appendChild(document.createTextNode(id));
-    var p_name = document.getElementById("p_name");
-    p_name.appendChild(document.createTextNode(name));
   });
   $('#delButton').on('click',function(){
     $(this).button('complete');
     $.ajax({
-      url:'/admin/delDesigner',
+      url:'/admin/delAppointment',
       type:'post',
       data: {id:id},
       error:function(){
@@ -467,6 +516,50 @@
       }
     });
   });
+  function changeStatus(obj){
+    var id = obj.getAttribute("data-id");
+    var status = obj.value;
+    if (status == 0){
+      var a = confirm("是否确认该订单已完成？");
+      if (a == true){
+        $.ajax({
+          url:'/admin/changeAppointmentStatus',
+          type:'post',
+          data: {id:id,status:1},
+          error:function(){
+            alert('出现错误！');
+          },success:function(data){
+            if (data.indexOf('error') < 0){
+              alert("该订单已完成");
+              location.reload();
+            }else{
+              alert(data);
+            }
+          }
+        });
+      }
+    }
+    else if (obj.value == 1){
+      var a = confirm("是否确认该订单未完成？");
+      if (a == true){
+        $.ajax({
+          url:'/admin/changeAppointmentStatus',
+          type:'post',
+          data: {id:id,status:0},
+          error:function(){
+            alert('出现错误！');
+          },success:function(data){
+            if (data.indexOf('error') < 0){
+              alert("该订单状态已更改");
+              location.reload();
+            }else{
+              alert(data);
+            }
+          }
+        });
+      }
+    }
+  }
 </script>
 </body>
 </html>

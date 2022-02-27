@@ -89,7 +89,10 @@
                           aria-expanded="false">
                     用户
                   </button>
-                  <ul class="dropdown-menu" aria-labelledby="settingButton">
+                  <ul class="dropdown-menu" aria-labelledby="settingButton"
+                      th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                    <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/admin/index}">管理员界面</a></li>
+                    <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'designer'}" th:href="@{/admin/index}">设计师界面</a></li>
                     <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
                     <li><a class="dropdown-item" onclick="logout()">退出</a>
                     </li>

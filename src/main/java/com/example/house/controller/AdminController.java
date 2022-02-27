@@ -176,6 +176,29 @@ public class AdminController {
     public String toappointmentList(Model model) {
         List<Appointment> appointments = appointmentService.getAppointmentList();
         model.addAttribute("appointments",appointments);
+        appointmentService.updateAppointmentStatusEveryday();
         return "Admin/appointment-list";
+    }
+
+    @ResponseBody
+    @RequestMapping("/changeAppointmentStatus")
+    public String changeAppointmentStatus(Model model, int id, int status){
+        try {
+            appointmentService.updateAppointmentStatus(id,status);
+            return "success";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/delAppointment")
+    public String delAppointment(Model model, int id){
+        try {
+            appointmentService.deleteAppointment(id);
+            return "success";
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
 }

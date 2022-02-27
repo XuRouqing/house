@@ -12,7 +12,10 @@ import java.util.List;
 public interface AppointmentMapper {
     void insertAppointment(Appointment appointment);
     int selectAppointmentNum();
+    public void deleteAppointment(Integer id);
     List<Appointment> selectAppointmentAll();
     List<Appointment> selectAppointmentByDesigner(int designerId);
     List<Appointment> selectAppointmentByCustomer(int customerId);
+    void updateAppointmentStatus(int id, int status);
+    void updateAppointmentStatusEveryday();
 }
