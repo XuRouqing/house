@@ -33,6 +33,7 @@ public class FileUploadController {
     @RequestMapping("/upload")
     public ModelAndView update(@RequestParam("pic") MultipartFile multipartFile){
         SimpleDateFormat sdf = null;
+        System.out.println(multipartFile);
         try{
             sdf = new SimpleDateFormat("yyyyMMddHHmmss");
             String timeStamp = sdf.format(new Date());

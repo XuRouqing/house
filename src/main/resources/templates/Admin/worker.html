@@ -186,7 +186,7 @@
             <a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
           </li>
           <li>
-            <a th:href="@{/admin/appointmentList}"><i class="fe fe-user-plus"></i> <span>设计师设计师设计师设计师设计师预约列表</span></a>
+            <a th:href="@{/admin/appointmentList}"><i class="fe fe-user-plus"></i> <span>设计师预约列表</span></a>
           </li>
           <li>
             <a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
@@ -401,12 +401,18 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <form th:action="@{../modifyWorker1}" method="post">
+                          <form th:action="@{../modifyWorker1}" method="post" enctype="multipart/form-data">
                             <div class="row form-row">
                               <div class="col-12">
                                 <div class="form-group">
                                   <label>姓名</label>
                                   <input name="name" type="text" class="form-control" th:value="${workerInfo.name}">
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label>照片</label>
+                                  <input name="filePic" type="file" class="form-control">
                                 </div>
                               </div>
                               <div class="col-12">

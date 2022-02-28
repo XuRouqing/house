@@ -12,6 +12,7 @@ class TimerTask {
 
     /**
      * 每天凌晨执行一次
+     * 更新订单状态，默认过期的订单都已完成
      */
     @Scheduled(cron = "0 0 0 * * ?")
     public void scheduledTask(){

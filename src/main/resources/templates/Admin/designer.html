@@ -408,13 +408,19 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form th:action="@{../modifyDesigner1}" method="post">
+                                                    <form th:action="@{../modifyDesigner1}" method="post" enctype="multipart/form-data">
                                                         <div class="row form-row">
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label>姓名</label>
                                                                     <input name="name" type="text" class="form-control"
                                                                            th:value="${designer.name}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>照片</label>
+                                                                    <input name="filePic" type="file" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12">

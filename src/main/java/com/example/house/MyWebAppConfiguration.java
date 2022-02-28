@@ -14,7 +14,7 @@ public class MyWebAppConfiguration extends WebMvcConfigurerAdapter {
          *这是图片的物理路径  "file:/+本地图片的地址"
          * @Date： Create in 14:08 2017/12/20
          */
-        registry.addResourceHandler("/Path/**").addResourceLocations("file:/D:/College/毕设/house/src/main/resources/static/");
+        registry.addResourceHandler("/Path/**").addResourceLocations("file:/D:/College/Graduation project/house/src/main/resources/static/");
         super.addResourceHandlers(registry);
     }
 }

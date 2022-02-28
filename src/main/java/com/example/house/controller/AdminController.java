@@ -4,13 +4,19 @@ import com.example.house.pojo.*;
 import com.example.house.service.*;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import sun.security.krb5.internal.crypto.Des;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,8 +109,28 @@ public class AdminController {
         return "Admin/designer";
     }
 
+    @Value("${user.file.path}")
+    private String filePath;
+
     @RequestMapping("/modifyDesigner1")
-    public String modifyDesigner1(Model model, Designer designer){
+    public String modifyDesigner1(Model model, Designer designer,
+                                  @RequestParam("filePic") MultipartFile multipartFile){
+        if (!multipartFile.isEmpty()){
+            SimpleDateFormat sdf = null;
+            String pic = "";
+            try{
+                sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                String timeStamp = sdf.format(new Date());
+                String fileName = multipartFile.getOriginalFilename();//获取文件名称
+                String suffixName=fileName.substring(fileName.lastIndexOf("."));
+                File file = new File(filePath+timeStamp+suffixName);
+                pic = "/userPic/"+timeStamp+suffixName;
+                multipartFile.transferTo(file);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            designer.setPic(pic);
+        }
         designerService.modifyDesignerMain(designer);
         return  "redirect:/admin/designer/"+designer.getId();
     }
@@ -149,7 +175,24 @@ public class AdminController {
     }
 
     @RequestMapping("/modifyWorker1")
-    public String modifyWorker1(Model model, Worker worker){
+    public String modifyWorker1(Model model, Worker worker,
+            @RequestParam("filePic") MultipartFile multipartFile){
+        if (!multipartFile.isEmpty()){
+            SimpleDateFormat sdf = null;
+            String pic = "";
+            try{
+                sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                String timeStamp = sdf.format(new Date());
+                String fileName = multipartFile.getOriginalFilename();//获取文件名称
+                String suffixName=fileName.substring(fileName.lastIndexOf("."));
+                File file = new File(filePath+timeStamp+suffixName);
+                pic = "/userPic/"+timeStamp+suffixName;
+                multipartFile.transferTo(file);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            worker.setPic(pic);
+        }
         workerService.modifyWorkerMain(worker);
         return  "redirect:/admin/worker/"+worker.getId();
     }
