@@ -660,4 +660,15 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    @RequestMapping("/addCase")
+    public String addCase(Model model, HttpServletResponse resp){
+        List<Designer> designers = designerService.getDesignerList();
+        List<Worker> workers = workerService.getWorkerList();
+        List<Index> workerTypes = workerService.getWorkerType();
+        model.addAttribute("designers",designers);
+        model.addAttribute("workers",workers);
+        model.addAttribute("workerTypes",workerTypes);
+        return "addCase.html";
+    }
 }
