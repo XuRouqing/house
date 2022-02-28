@@ -671,4 +671,10 @@ public class Controller {
         model.addAttribute("workerTypes",workerTypes);
         return "addCase.html";
     }
+
+    @RequestMapping("/fileTest")
+    public String test(Model model, HttpServletResponse resp){
+
+        return "fileTest.html";
+    }
 }
