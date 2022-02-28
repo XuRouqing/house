@@ -666,9 +666,19 @@ public class Controller {
         List<Designer> designers = designerService.getDesignerList();
         List<Worker> workers = workerService.getWorkerList();
         List<Index> workerTypes = workerService.getWorkerType();
+        List<Index> houseStyle = houseService.getHouseStyleIndex();
+        List<Index> houseArea = houseService.getHouseAreaIndex();
+        List<Index> houseForm = houseService.getHouseFormIndex();
+        List<Index> houseType = houseService.getHouseTypeIndex();
+        List<City> provinces = cityService.getProvinceList();
         model.addAttribute("designers",designers);
         model.addAttribute("workers",workers);
         model.addAttribute("workerTypes",workerTypes);
+        model.addAttribute("houseStyle",houseStyle);
+        model.addAttribute("houseArea",houseArea);
+        model.addAttribute("houseForm",houseForm);
+        model.addAttribute("houseType",houseType);
+        model.addAttribute("provinces",provinces);
         return "addCase.html";
     }
 

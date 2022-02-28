@@ -50,9 +50,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="Path/css/material.min.css" />
-    <link rel="stylesheet" href="Path/css/bootstrap-material-datetimepicker.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="Path/css/material.min.css"/>
+    <link rel="stylesheet" href="Path/css/bootstrap-material-datetimepicker.css"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 
     <script async>
@@ -73,10 +73,10 @@
     <script async src="Path/js/flatpickr.js" onload="fp_ready()"></script>
 
 
-<!--    <link rel="stylesheet" type="text/css" href="assets/site.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="assets/site.css">-->
     <link rel="stylesheet" id=cal_style type="text/css" href="Path/css/flatpickr.min.css">
 
-<!--    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>-->
+    <!--    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>-->
 </head>
 
 <body>
@@ -118,8 +118,12 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="settingButton"
                                     th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                    <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/admin/index}">管理员界面</a></li>
-                                    <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'designer'}" th:href="@{/admin/index}">设计师界面</a></li>
+                                    <li><a class="dropdown-item"
+                                           th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                           th:href="@{/admin/index}">管理员界面</a></li>
+                                    <li><a class="dropdown-item"
+                                           th:if="${#request.getSession().getAttribute('role') eq 'designer'}"
+                                           th:href="@{/admin/index}">设计师界面</a></li>
                                     <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
                                     <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
                                     </li>
@@ -196,7 +200,8 @@
                                     <a th:href="@{discount/1}">营销活动</a>
                                     <ul class="drop-menu">
                                         <li th:each="set : ${setInfo}">
-                                            <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                            <a style="font-size: 15px" th:text="${set.name}"
+                                               th:href="@{discount/}+${set.setId}"></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -250,7 +255,8 @@
                                         <a th:href="@{discount/1}">营销活动</a>
                                         <ul class="drop-menu">
                                             <li th:each="set : ${setInfo}">
-                                                <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                                <a style="font-size: 15px" th:text="${set.name}"
+                                                   th:href="@{discount/}+${set.setId}"></a>
                                             </li>
                                         </ul>
                                     </li>
@@ -338,12 +344,12 @@
                         <ul class="mobile-menu">
                             <li>
                                 <a th:href="@{index}">
-                                        <span class="mm-text">首页</span>
+                                    <span class="mm-text">首页</span>
                                 </a>
                             </li>
                             <li>
                                 <a th:href="@{fullwidth}">
-                                        <span class="mm-text">精装案例</span>
+                                    <span class="mm-text">精装案例</span>
                                 </a>
                             </li>
                             <li class="menu-item-has-children">
@@ -466,74 +472,95 @@
                 <div class="col-lg-12">
                     <div class="card" style="margin: 20px">
                         <div class="card-header">
-                            <h4 class="card-title">在线预约</h4>
+                            <h4 class="card-title">增加案例</h4>
                         </div>
                         <div class="card-body" style="padding: 20px">
                             <form name="bookForm" id="bookForm" onsubmit="sub()">
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">案例主图</label>
-                                    <div class="col-md-10">
-                                        <input name="name" type="text" class="form-control" placeholder="主图" required>
+                                    <div class="col-md-10 file">
+                                        选择文件
+                                        <input id="mainPic" name="mainPic" type="file" class="form-control"
+                                               placeholder="主图" required>
+                                        <div id="image-holder"></div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">标题</label>
                                     <div class="col-md-10">
-                                        <input name="tel" type="text" class="form-control" placeholder="标题" required>
+                                        <input name="title" type="text" class="form-control" placeholder="标题" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">描述</label>
                                     <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="描述">
+                                        <input name="describe" type="text" class="form-control" placeholder="描述">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">风格</label>
                                     <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="风格">
+                                        <select class="form-control" name="styleValue">
+                                            <option th:each="style : ${houseStyle}" th:text="${style.name}"
+                                                    th:value="${style.id}"></option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">户型</label>
                                     <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="户型">
+                                        <input name="houseType" type="text" class="form-control" placeholder="户型">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">面积</label>
                                     <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="面积">
+                                        <select class="form-control" name="areaValue">
+                                            <option th:each="area : ${houseArea}" th:text="${area.name}"
+                                                    th:value="${area.id}"></option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">装修类别</label>
                                     <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="装修类别">
+                                        <select class="form-control" name="styleValue">
+                                            <option th:each="form : ${houseForm}" th:text="${form.name}"
+                                                    th:value="${form.id}"></option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">原始户型图</label>
-                                    <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="原始户型图">
+                                    <div class="col-md-10 file">
+                                        选择文件
+                                        <input id="original" name="original" type="file" class="form-control"
+                                               placeholder="原始户型图" required>
+                                        <div id="original-image-holder"></div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">平面图</label>
-                                    <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="平面图">
+                                    <div class="col-md-10 file">
+                                        选择文件
+                                        <input id="plane" name="plane" type="file" class="form-control"
+                                               placeholder="平面图" required>
+                                        <div id="plane-image-holder"></div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">价格</label>
                                     <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="价格">
+                                        <input name="price" type="text" class="form-control" placeholder="价格">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">类型</label>
                                     <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="类型">
+                                        <select class="form-control" name="typeValue">
+                                            <option th:each="type : ${houseType}" th:text="${type.name}"
+                                                    th:value="${type.id}"></option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -542,9 +569,12 @@
                                         <div class="row" id="location">
                                             <div class="col-md-2">
                                                 <div>
-                                                    <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
+                                                    <select class="form-control" id="province" name="province"
+                                                            onChange="changeProvince(this)">
                                                         <option>请选择省份</option>
-                                                        <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}"></option>
+                                                        <option th:each="province : ${provinces}"
+                                                                th:text="${province.district_name}"
+                                                                th:value="${province.id}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -556,7 +586,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" placeholder="请输入详细地址" name="location">
+                                                <input type="text" class="form-control" placeholder="请输入详细地址"
+                                                       name="location">
                                             </div>
                                         </div>
                                     </div>
@@ -566,7 +597,8 @@
                                     <div class="col-md-10">
                                         <select class="form-control" th:placeholder="请选择设计师" name="designer">
                                             <option th:value="0">请选择设计师</option>
-                                            <option th:each="designer : ${designers}" th:text="${designer.name}" th:value="${designer.id}"></option>
+                                            <option th:each="designer : ${designers}" th:text="${designer.name}"
+                                                    th:value="${designer.id}"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -576,9 +608,11 @@
                                         <div class="row" id="worker">
                                             <div class="col-md-5">
                                                 <div>
-                                                    <select class="form-control" id="type1" name="type1" onChange="redirec(this)">
+                                                    <select class="form-control" id="type1" name="type1"
+                                                            onChange="redirec(this)">
                                                         <option>请选择工种</option>
-                                                        <option th:each="type : ${workerTypes}" th:text="${type.name}" th:value="${type.id}"></option>
+                                                        <option th:each="type : ${workerTypes}" th:text="${type.name}"
+                                                                th:value="${type.id}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -590,31 +624,101 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
-                                                <button type="button" class="my-btn btn btn-success glyphicon glyphicon-plus" onclick="addWorker()"></button>
+                                                <button type="button"
+                                                        class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                        onclick="addWorker()"></button>
                                             </div>
                                             <input id="workers" name="workers" class="hidden">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row" id="house_rooms">
+                                    <div id="room0">
+                                        <label class="col-form-label col-md-2 form-label">房间</label>
+                                        <div class="col-lg-10">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" placeholder="房间类别"
+                                                           name="roomType">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" placeholder="具体类别"
+                                                           name="specificType">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" placeholder="房间风格"
+                                                           name="style">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" placeholder="房间价格"
+                                                           name="price">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <button type="button"
+                                                            class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                            onclick="addRoom()">添加房间
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="room0_pic0" class="row">
+                                            <label class="col-form-label col-md-3 form-label"></label>
+                                            <div class="col-md-3 file">
+                                                选择文件
+                                                <input id="roomPic" name="room" type="file" class="form-control"
+                                                       placeholder="房间照片" required>
+                                                <div id="roomPic-holder"></div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input name="room" type="text" class="form-control"
+                                                       placeholder="描述">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" style="margin: 0"
+                                                        class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                        onclick="addRoomPic()">添加房间照片
+                                                </button>
+                                            </div>
+                                        </div>
+<!--                                        <div id="room0_pic1" class="row" style="margin-top: 10px">-->
+<!--                                            <label class="col-form-label col-md-3 form-label"></label>-->
+<!--                                            <div class="col-md-6 file">-->
+<!--                                                选择文件-->
+<!--                                                <input name="room" type="file" class="form-control"-->
+<!--                                                       placeholder="房间照片" required>-->
+<!--                                                <div></div>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-md-2">-->
+<!--                                                <button type="button" style="margin: 0"-->
+<!--                                                        class="my-btn btn btn-success glyphicon glyphicon-plus"-->
+<!--                                                        onclick="addRoomPic()">添加房间照片-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">时间</label>
                                     <div class="col-lg-10">
                                         <div class="row">
-                                        <div class="form-control-wrapper col-md-5">
-                                            <input id="flatpickr-tryme" class="form-control" type="text" placeholder="请选择时间">
+                                            <div class="form-control-wrapper col-md-10">
+                                                <input id="flatpickr-tryme" class="form-control" type="text"
+                                                       placeholder="时间">
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">备注</label>
                                     <div class="col-md-10">
-                                        <textarea name="describe" rows="5" cols="5" class="form-control" placeholder="备注"></textarea>
+                                        <textarea name="describe" rows="5" cols="5" class="form-control"
+                                                  placeholder="备注"></textarea>
                                     </div>
                                 </div>
                                 <div class="submit-section proceed-btn text-right">
                                     <button class="btn submit-btn" data-toggle="modal"
-                                            data-target=".bs-example-modal-lg">预约</button>
+                                            data-target=".bs-example-modal-lg">预约
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -947,44 +1051,44 @@
 <script type="text/javascript" src="Path/js/bootstrap-material-datetimepicker.js"></script>
 
 
-
 <script>
-    $(function(){
+    $(function () {
         $('select').searchableSelect();
     });
+
     //施工人员级联
-    function redirec(now){
+    function redirec(now) {
         $.ajax({
             url: "/queryAllWorkers",
             type: "post",
             dataType: "json",
-            success: function(data){
+            success: function (data) {
                 /*这个方法里是ajax发送请求成功之后执行的代码*/
                 var type1 = now;
                 var s = now.id;
-                s = s.replace("type","worker");
+                s = s.replace("type", "worker");
                 var opt = now.options.selectedIndex;
 
                 var text = type1.options[opt].text;
                 // var worker1 = document.bookForm.worker1;
                 var worker1 = document.getElementById(s);
                 var j = 1;
-                for (i=0;i<data.length;i++) {
-                    if (encodeURIComponent(data[i].type)==encodeURIComponent(text)) {
+                for (i = 0; i < data.length; i++) {
+                    if (encodeURIComponent(data[i].type) == encodeURIComponent(text)) {
                         worker1.options[j++] = new Option(data[i].name, data[i].id);
                     }
                 }
                 worker1.options[0] = new Option("请选择施工人员");
-                if (j==1){
-                    length=worker1.options.length;
-                    for(i=0;i<length;i++){
+                if (j == 1) {
+                    length = worker1.options.length;
+                    for (i = 0; i < length; i++) {
                         worker1.removeChild(worker1.options[0]);
                     }
                     worker1.options[0] = new Option("暂无可选施工人员");
                 }
             },
-            error: function(msg){
-                alert("ajax连接异常："+msg);
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
             }
         });
     };
@@ -992,13 +1096,13 @@
     var last = document.getElementById("type1");
 
     //添加施工人员
-    function addWorker(){
+    function addWorker() {
         $.ajax({
             url: "/queryAllTypes",
             type: "post",
             dataType: "json",
-            success: function(data){
-                if (num<=2){
+            success: function (data) {
+                if (num <= 2) {
                     document.getElementById("type1").classList.add("form-group");
                 }
                 last.classList.add("form-group");
@@ -1008,26 +1112,26 @@
                  * 工种选择框
                  * @type {HTMLDivElement}
                  */
-                var i=0;
-                var j=0;
+                var i = 0;
+                var j = 0;
                 // var length=worker1.options.length;
                 /**
                  * 清空原选择框中选项
                  */
-                // for(var k=0;k<length;k++){
-                //     worker1.removeChild(worker1.options[0]);
-                // }
+                    // for(var k=0;k<length;k++){
+                    //     worker1.removeChild(worker1.options[0]);
+                    // }
                 var div = document.createElement("div");
                 var div1 = document.createElement("div");
-                div1.setAttribute("class","col-md-5");
+                div1.setAttribute("class", "col-md-5");
                 var div1_1 = document.createElement("div");
                 var selectType = document.createElement("select");
-                selectType.setAttribute("class","form-control");
-                selectType.setAttribute("name","type");
-                selectType.setAttribute("id","type"+num);
-                selectType.setAttribute("onChange","redirec(this)");
+                selectType.setAttribute("class", "form-control");
+                selectType.setAttribute("name", "type");
+                selectType.setAttribute("id", "type" + num);
+                selectType.setAttribute("onChange", "redirec(this)");
                 selectType.options[i++] = new Option("请选择工种");
-                for (var k=0;k<data.length;k++){
+                for (var k = 0; k < data.length; k++) {
                     selectType.options[i++] = new Option(data[k].name, data[k].id);
                 }
                 div1_1.appendChild(selectType);
@@ -1038,12 +1142,12 @@
                  * 人员选择框
                  */
                 var div2 = document.createElement("div");
-                div2.setAttribute("class","col-md-6");
+                div2.setAttribute("class", "col-md-6");
                 var div2_1 = document.createElement("div");
                 var selectWorker = document.createElement("select");
-                selectWorker.setAttribute("class","form-control");
-                selectWorker.setAttribute("name","worker");
-                selectWorker.setAttribute("id","worker"+num);
+                selectWorker.setAttribute("class", "form-control");
+                selectWorker.setAttribute("name", "worker");
+                selectWorker.setAttribute("id", "worker" + num);
                 selectWorker.options[0] = new Option("请选择施工人员");
                 div2_1.appendChild(selectWorker);
                 div2.appendChild(div2_1);
@@ -1053,11 +1157,11 @@
                  * 删除按钮
                  */
                 var div3 = document.createElement("div");
-                div3.setAttribute("class","col-md-1");
+                div3.setAttribute("class", "col-md-1");
                 var btn = document.createElement("button");
-                btn.setAttribute("type","button");
-                btn.setAttribute("class","my-btn btn btn btn-success glyphicon glyphicon-minus");
-                btn.setAttribute("onclick","deleteWorker(this)");
+                btn.setAttribute("type", "button");
+                btn.setAttribute("class", "my-btn btn btn btn-success glyphicon glyphicon-minus");
+                btn.setAttribute("onclick", "deleteWorker(this)");
                 div3.appendChild(btn);
                 div.appendChild(div3);
 
@@ -1067,13 +1171,13 @@
                  * 改变样式，增加行间距
                  * @type {string}
                  */
-                var str = "type"+(num-1);
+                var str = "type" + (num - 1);
                 last = selectType;
                 // var last = document.getElementById("type1");
                 num++;
             },
-            error: function(msg){
-                alert("ajax连接异常："+msg);
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
             }
         });
     };
@@ -1081,7 +1185,7 @@
     /**
      * 提交表单
      **/
-    function sub(){
+    function sub() {
         var wokers = document.getElementById("workers");
         var workerDoms = document.getElementsByName("worker");
         var s = "";
@@ -1089,12 +1193,12 @@
             s += workerDoms[i].value;
             s += ",";
         }
-        s = s.substring(0,s.length-1);
+        s = s.substring(0, s.length - 1);
         wokers.value = s;
         $.ajax({
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
-            url: "/addBook" ,//url
+            url: "/addBook",//url
             data: $('#bookForm').serialize(),
             success: function (result) {
                 console.log(result);//打印服务端返回的数据(调试用)
@@ -1103,53 +1207,165 @@
                 }
                 ;
             },
-            error : function() {
+            error: function () {
                 alert("异常！");
             }
         });
     }
 
     //删除施工人员
-    function deleteWorker(now){
+    function deleteWorker(now) {
         now.parentNode.parentNode.remove();
         num--;
-        if (num<=2){
+        if (num <= 2) {
             document.getElementById("type1").classList.remove("form-group");
         }
     };
 
     //城市级联
-    function changeProvince(now){
+    function changeProvince(now) {
         $.ajax({
-            url: "/queryCity/"+now.options[now.options.selectedIndex].value,
+            url: "/queryCity/" + now.options[now.options.selectedIndex].value,
             type: "post",
             dataType: "json",
-            success: function(data){
+            success: function (data) {
                 /*这个方法里是ajax发送请求成功之后执行的代码*/
                 var province = now;
                 var city = document.getElementById("city");
                 var opt = now.options.selectedIndex;
                 var j = 0;
-                var length=city.options.length;
+                var length = city.options.length;
                 /**
                  * 清空原选择框中选项
                  */
-                for(i=0;i<length;i++){
+                for (i = 0; i < length; i++) {
                     city.removeChild(city.options[0]);
                 }
                 /**
                  * 添加新选项
                  */
-                for (i=0;i<data.length;i++) {
+                for (i = 0; i < data.length; i++) {
                     // console.log(data[i].district_name);
                     city.options[j++] = new Option(data[i].district_name, data[i].id);
                 }
             },
-            error: function(msg){
-                alert("ajax连接异常："+msg);
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
             }
         });
     };
+
+    $("#mainPic").on('change', function () {
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = $("#image-holder");
+            image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+            }
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
+    });
+
+    $("#original").on('change', function () {
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = $("#original-image-holder");
+            image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+            }
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
+    });
+
+    $("#plane").on('change', function () {
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = $("#plane-image-holder");
+            image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+            }
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
+    });
+
+    var room=1;
+    var pic=1;
+    function addRoomPic(){
+        var room0 = document.getElementById("room0");
+        var div = document.createElement("div");
+        div.setAttribute("id","room"+room+"_pic"+pic);
+        div.setAttribute("class","row");
+        div.setAttribute("style","margin-top: 10px");
+
+        var label = document.createElement("label");
+        label.setAttribute("class","col-form-label col-md-3 form-label");
+
+        div.appendChild(label);
+
+        var divFile = document.createElement("div");
+        divFile.setAttribute("class","col-md-3 file");
+        divFile.appendChild(document.createTextNode("选择文件"));
+
+        var input = document.createElement("input");
+        input.setAttribute("name","room");
+        input.setAttribute("type","file");
+        input.setAttribute("class","form-control");
+
+        var divImage = document.createElement("div");
+        divImage.setAttribute("id","room"+room+"_pic"+pic+"_image_holder");
+
+        divFile.appendChild(input);
+        divFile.appendChild(divImage);
+
+        var divDescribe = document.createElement("div");
+        divDescribe.setAttribute("class","col-md-3");
+
+        var inputDescribe = document.createElement("input");
+        inputDescribe.setAttribute("name","describe");
+        inputDescribe.setAttribute("type","text");
+        inputDescribe.setAttribute("class","form-control");
+        inputDescribe.setAttribute("placeholder","描述");
+
+        divDescribe.appendChild(inputDescribe);
+
+        div.appendChild(divFile);
+        div.appendChild(divDescribe);
+
+        var divBtn = document.createElement("div");
+        divBtn.setAttribute("class","col-md-2");
+        var btn = document.createElement("button");
+        btn.setAttribute("type","button");
+        btn.setAttribute("style","margin: 0");
+        btn.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
+        btn.setAttribute("onclick","addRoomPic()");
+        btn.appendChild(document.createTextNode("添加房间照片"));
+        divBtn.appendChild(btn);
+        div.appendChild(divBtn);
+        room0.appendChild(div);
+        room++;
+        pic++;
+    }
 </script>
 </body>
 
@@ -1166,6 +1382,7 @@
     a:hover {
         text-decoration: none
     }
+
     .submit-section .submit-btn {
         padding: 12px 30px;
         font-weight: 600;
@@ -1175,18 +1392,51 @@
         background-color: #09e5ab;
         border: 1px solid #09e5ab;
     }
+
     .submit-btn:hover {
         background-color: #09dca4;
         border: 1px solid #09e5ab;
     }
+
     .form-label {
         font-size: 16px;
         font-weight: normal;
     }
+
     .my-btn {
         color: #fff;
         background-color: #09e5ab;
         border-color: #09e5ab;
+        padding: 4px 20px;
+    }
+
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #ffffff;
+        border: 1px solid #d1eeff;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+    }
+
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+        -ms-filter: 'alpha(opacity=0)';
+    }
+
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
     }
 </style>
 
