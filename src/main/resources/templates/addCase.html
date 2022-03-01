@@ -475,7 +475,7 @@
                             <h4 class="card-title">增加案例</h4>
                         </div>
                         <div class="card-body" style="padding: 20px">
-                            <form name="bookForm" id="bookForm" onsubmit="sub()">
+                            <form th:action="@{/saveCase}" method="post" enctype="multipart/form-data" name="bookForm" id="bookForm" onsubmit="sub()">
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">案例主图</label>
                                     <div class="col-md-10 file">
@@ -634,25 +634,25 @@
                                 </div>
                                 <div id="house_rooms">
                                     <div class="form-group row" id="house_room0">
-                                        <div id="room0">
+                                        <div id="room1">
                                             <label class="col-form-label col-md-2 form-label">房间</label>
                                             <div class="col-lg-10">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <input type="text" class="form-control" placeholder="房间类别"
-                                                               name="roomType">
+                                                               name="room1_type">
                                                     </div>
                                                     <div class="col-md-3">
                                                         <input type="text" class="form-control" placeholder="具体类别"
-                                                               name="specificType">
+                                                               name="room1_specificType">
                                                     </div>
                                                     <div class="col-md-2">
                                                         <input type="text" class="form-control" placeholder="房间风格"
-                                                               name="style">
+                                                               name="room1_style">
                                                     </div>
                                                     <div class="col-md-2">
                                                         <input type="text" class="form-control" placeholder="房间价格"
-                                                               name="price">
+                                                               name="room1_price">
                                                     </div>
                                                     <div class="col-md-1">
                                                         <button type="button"
@@ -662,25 +662,26 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="room0_pic0_div" class="row">
+                                            <div id="room1_pic1_div" class="row">
                                                 <label class="col-form-label col-md-3 form-label"></label>
                                                 <div class="col-md-3 file">
                                                     选择文件
-                                                    <input id="room0_pic0" type="file" class="form-control"
-                                                           data-room="0" data-pic="0"
+                                                    <input id="room1_pic1" type="file" class="form-control"
+                                                           name="room1_pic1"
+                                                           data-room="1" data-pic="1"
                                                            onchange="changePic(this)"
                                                            placeholder="房间照片" required>
-                                                    <div id="room0_pic0_imageHolder"></div>
+                                                    <div id="room1_pic1_imageHolder"></div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input id="room0_pic0_describe" type="text" class="form-control"
+                                                    <input id="room1_pic1_describe" name="room1_pic1_describe" type="text" class="form-control"
                                                            placeholder="描述">
                                                 </div>
                                                 <div class="col-md-2">
                                                     <button type="button" style="margin: 0"
-                                                            id="room0_pic0_btn"
-                                                            data-room="0"
-                                                            data-pic="0"
+                                                            id="room1_pic1_btn"
+                                                            data-room="1"
+                                                            data-pic="1"
                                                             class="my-btn btn btn-success glyphicon glyphicon-plus"
                                                             onclick="addRoomPic(this)">添加房间照片
                                                     </button>
@@ -708,7 +709,7 @@
                                     </div>
                                 </div>
                                 <div class="submit-section proceed-btn text-right">
-                                    <button class="btn submit-btn" data-toggle="modal"
+                                    <button type="submit" class="btn submit-btn" data-toggle="modal"
                                             data-target=".bs-example-modal-lg">预约
                                     </button>
                                 </div>
@@ -1286,7 +1287,6 @@
     $("#plane").on('change', function () {
         if (typeof (FileReader) != "undefined") {
             var image_holder = $("#plane-image-holder");
-            console.log(image_holder);
             image_holder.empty();
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1303,15 +1303,15 @@
         }
     });
 
-    var room = 0;//用于表示当前房间个数
-    var roomPic = new Array();//用于存放room[i]中的照片个数，从下标0开始，即当只有一个房间时显示为0
-    roomPic[0] = 0;
+    var room = 1;//用于表示当前房间个数
+    var roomPic = new Array();//用于存放room[i]中的照片个数，从下标1开始，即当只有一个房间时显示为1
+    roomPic[1] = 1;
     var house_rooms = document.getElementById("house_rooms");
 
     //添加房间
     function addRoom(){
         room++;
-        roomPic[room] = 0;//初始化数组
+        roomPic[room] = 1;//初始化数组
         //房间i
         var house_roomi = document.createElement("div");
         house_roomi.setAttribute("class","form_group row");
@@ -1338,7 +1338,7 @@
         div0_1_type_input.setAttribute("type","text");
         div0_1_type_input.setAttribute("class","form-control");
         div0_1_type_input.setAttribute("placeholder","房间类别");
-        div0_1_type_input.setAttribute("name","roomType");
+        div0_1_type_input.setAttribute("name","room"+room+"_type");
 
         div0_1_type.appendChild(div0_1_type_input);
         div0_1.appendChild(div0_1_type);
@@ -1352,7 +1352,7 @@
         div0_1_specificType_input.setAttribute("type","text");
         div0_1_specificType_input.setAttribute("class","form-control");
         div0_1_specificType_input.setAttribute("placeholder","具体类别");
-        div0_1_specificType_input.setAttribute("name","specificType");
+        div0_1_specificType_input.setAttribute("name","room"+room+"_specificType");
 
         div0_1_specificType.appendChild(div0_1_specificType_input);
         div0_1.appendChild(div0_1_specificType);
@@ -1366,7 +1366,7 @@
         div0_1_style_input.setAttribute("type","text");
         div0_1_style_input.setAttribute("class","form-control");
         div0_1_style_input.setAttribute("placeholder","房间风格");
-        div0_1_style_input.setAttribute("name","style");
+        div0_1_style_input.setAttribute("name","room"+room+"_style");
 
         div0_1_style.appendChild(div0_1_style_input);
         div0_1.appendChild(div0_1_style);
@@ -1380,7 +1380,7 @@
         div0_1_price_input.setAttribute("type","text");
         div0_1_price_input.setAttribute("class","form-control");
         div0_1_price_input.setAttribute("placeholder","房间价格");
-        div0_1_price_input.setAttribute("name","price");
+        div0_1_price_input.setAttribute("name","room"+room+"_price");
 
         div0_1_price.appendChild(div0_1_price_input);
         div0_1.appendChild(div0_1_price);
@@ -1424,6 +1424,7 @@
         roomi_pici_div_div1_input.setAttribute("class","form-control");
         roomi_pici_div_div1_input.setAttribute("placeholder","房间照片")
         roomi_pici_div_div1_input.setAttribute("id","room"+room+"_pic"+roomPic[room]);
+        roomi_pici_div_div1_input.setAttribute("name","room"+room+"_pic"+roomPic[room]);
         roomi_pici_div_div1_input.setAttribute("data-room",room);
         roomi_pici_div_div1_input.setAttribute("data-pic",roomPic[room]);
         roomi_pici_div_div1_input.setAttribute("onChange","changePic(this)");
@@ -1449,6 +1450,7 @@
         roomi_pici_div_div2_input.setAttribute("type","text");
         roomi_pici_div_div2_input.setAttribute("class","form-control");
         roomi_pici_div_div2_input.setAttribute("id","room"+room+"_pic"+roomPic[room]+"_describe");
+        roomi_pici_div_div2_input.setAttribute("name","room"+room+"_pic"+roomPic[room]+"_describe");
         roomi_pici_div_div2_input.setAttribute("placeholder","描述");
         //房间照片描述输入框
 
@@ -1512,12 +1514,14 @@
         input.setAttribute("type","file");
         input.setAttribute("class","form-control");
         input.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]);
+        input.setAttribute("name",room0.id+"_pic"+roomPic[nowRoom]);
         input.setAttribute("data-room",nowRoom);
         input.setAttribute("data-pic",roomPic[nowRoom]);
         input.setAttribute("onChange","changePic(this)");
 
         var divImage = document.createElement("div");
         divImage.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]+"_imageHolder");
+        divImage.setAttribute("name",room0.id+"_pic"+roomPic[nowRoom]+"_imageHolder");
 
         divFile.appendChild(input);
         divFile.appendChild(divImage);
@@ -1530,6 +1534,7 @@
         inputDescribe.setAttribute("type","text");
         inputDescribe.setAttribute("class","form-control");
         inputDescribe.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]+"_describe");
+        inputDescribe.setAttribute("name",room0.id+"_pic"+roomPic[nowRoom]+"_describe");
         inputDescribe.setAttribute("placeholder","描述");
 
         divDescribe.appendChild(inputDescribe);
@@ -1562,7 +1567,7 @@
             var image_holder = document.getElementById("room"+nowRoom+"_pic"+nowPic+"_imageHolder");
             console.log("room"+nowRoom+"_pic"+nowPic+"_imageHolder");
             console.log(image_holder);
-            // image_holder.empty();
+            image_holder.innerHTML="";
             var reader = new FileReader();
             reader.onload = function (e) {
                 $("<img />", {

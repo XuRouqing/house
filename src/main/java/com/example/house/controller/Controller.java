@@ -2,6 +2,7 @@ package com.example.house.controller;
 
 
 import com.example.house.pojo.*;
+import com.example.house.pojo.Set;
 import com.example.house.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -15,19 +16,22 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import net.sf.json.JSONArray;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
@@ -680,6 +684,77 @@ public class Controller {
         model.addAttribute("houseType",houseType);
         model.addAttribute("provinces",provinces);
         return "addCase.html";
+    }
+
+//    @ResponseBody
+//    @PostMapping("/addCase")
+//    public void addCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
+//        try {
+//            Enumeration<String> parameterNames = request.getParameterNames();
+//            while (parameterNames.hasMoreElements()){
+//                String key = parameterNames.nextElement();
+//                System.out.println(key+":"+request.getParameter(key));
+//            }
+//            //给后台传输插入成功的消息
+//            resp.setCharacterEncoding("utf-8");
+//            PrintWriter respWritter = resp.getWriter();
+//            respWritter.append("200");
+//        } catch (Exception e) {
+//            resp.setCharacterEncoding("utf-8");
+//            PrintWriter respWritter = resp.getWriter();
+//            respWritter.append("400");
+//            e.printStackTrace();
+//        }
+//    }
+
+    @Value("${room.file.path}")
+    private String filePath;
+
+
+//    @PostMapping("/saveCase")
+//    public String saveCase(HttpServletResponse resp, HttpServletRequest request) {
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+//        if(multipartResolver.isMultipart(request)){
+//            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+//            Iterator<String> iter = multiRequest.getFileNames();
+//            while(iter.hasNext()){
+//                MultipartFile file = multiRequest.getFile(iter.next());
+//                System.out.println(file.getOriginalFilename());
+//            }
+//        }
+//        Enumeration<String> parameterNames = request.getParameterNames();
+//        while (parameterNames.hasMoreElements()) {
+//            String key = parameterNames.nextElement();
+//            System.out.println(key + ":" + request.getParameter(key));
+//        }
+//        return "redirect:/addCase";
+//    }
+
+    @PostMapping("/saveCase")
+    public String saveCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        if(multipartResolver.isMultipart(request)){
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+            Iterator<String> iter = multiRequest.getFileNames();
+            SimpleDateFormat sdf = null;
+            String pic = "";
+            while(iter.hasNext()){
+                sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+                String timeStamp = sdf.format(new Date());
+                MultipartFile file = multiRequest.getFile(iter.next());
+                String fileName = file.getOriginalFilename();//获取文件名称
+                String suffixName=fileName.substring(fileName.lastIndexOf("."));//获取文件后缀
+                File image = new File(filePath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+                file.transferTo(image);//上传文件
+                System.out.println(file.getOriginalFilename());
+            }
+        }
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String key = parameterNames.nextElement();
+            System.out.println(key + ":" + request.getParameter(key));
+        }
+        return "redirect:/addCase";
     }
 
     @RequestMapping("/fileTest")
