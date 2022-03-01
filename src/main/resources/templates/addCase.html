@@ -632,69 +632,61 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row" id="house_rooms">
-                                    <div id="room0">
-                                        <label class="col-form-label col-md-2 form-label">房间</label>
-                                        <div class="col-lg-10">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control" placeholder="房间类别"
-                                                           name="roomType">
+                                <div id="house_rooms">
+                                    <div class="form-group row" id="house_room0">
+                                        <div id="room0">
+                                            <label class="col-form-label col-md-2 form-label">房间</label>
+                                            <div class="col-lg-10">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" placeholder="房间类别"
+                                                               name="roomType">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" placeholder="具体类别"
+                                                               name="specificType">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" class="form-control" placeholder="房间风格"
+                                                               name="style">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" class="form-control" placeholder="房间价格"
+                                                               name="price">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <button type="button"
+                                                                class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                                onclick="addRoom()">添加房间
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="room0_pic0_div" class="row">
+                                                <label class="col-form-label col-md-3 form-label"></label>
+                                                <div class="col-md-3 file">
+                                                    选择文件
+                                                    <input id="room0_pic0" type="file" class="form-control"
+                                                           data-room="0" data-pic="0"
+                                                           onchange="changePic(this)"
+                                                           placeholder="房间照片" required>
+                                                    <div id="room0_pic0_imageHolder"></div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" placeholder="具体类别"
-                                                           name="specificType">
+                                                    <input id="room0_pic0_describe" type="text" class="form-control"
+                                                           placeholder="描述">
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input type="text" class="form-control" placeholder="房间风格"
-                                                           name="style">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="text" class="form-control" placeholder="房间价格"
-                                                           name="price">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <button type="button"
+                                                    <button type="button" style="margin: 0"
+                                                            id="room0_pic0_btn"
+                                                            data-room="0"
+                                                            data-pic="0"
                                                             class="my-btn btn btn-success glyphicon glyphicon-plus"
-                                                            onclick="addRoom()">添加房间
+                                                            onclick="addRoomPic(this)">添加房间照片
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="room0_pic0" class="row">
-                                            <label class="col-form-label col-md-3 form-label"></label>
-                                            <div class="col-md-3 file">
-                                                选择文件
-                                                <input id="roomPic" name="room" type="file" class="form-control"
-                                                       placeholder="房间照片" required>
-                                                <div id="roomPic-holder"></div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input name="room" type="text" class="form-control"
-                                                       placeholder="描述">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" style="margin: 0"
-                                                        class="my-btn btn btn-success glyphicon glyphicon-plus"
-                                                        onclick="addRoomPic()">添加房间照片
-                                                </button>
-                                            </div>
-                                        </div>
-<!--                                        <div id="room0_pic1" class="row" style="margin-top: 10px">-->
-<!--                                            <label class="col-form-label col-md-3 form-label"></label>-->
-<!--                                            <div class="col-md-6 file">-->
-<!--                                                选择文件-->
-<!--                                                <input name="room" type="file" class="form-control"-->
-<!--                                                       placeholder="房间照片" required>-->
-<!--                                                <div></div>-->
-<!--                                            </div>-->
-<!--                                            <div class="col-md-2">-->
-<!--                                                <button type="button" style="margin: 0"-->
-<!--                                                        class="my-btn btn btn-success glyphicon glyphicon-plus"-->
-<!--                                                        onclick="addRoomPic()">添加房间照片-->
-<!--                                                </button>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -1294,6 +1286,7 @@
     $("#plane").on('change', function () {
         if (typeof (FileReader) != "undefined") {
             var image_holder = $("#plane-image-holder");
+            console.log(image_holder);
             image_holder.empty();
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1303,18 +1296,206 @@
                 }).appendTo(image_holder);
             }
             image_holder.show();
+            console.log($(this));
             reader.readAsDataURL($(this)[0].files[0]);
         } else {
             alert("你的浏览器不支持FileReader.");
         }
     });
 
-    var room=1;
-    var pic=1;
-    function addRoomPic(){
-        var room0 = document.getElementById("room0");
+    var room = 0;//用于表示当前房间个数
+    var roomPic = new Array();//用于存放room[i]中的照片个数，从下标0开始，即当只有一个房间时显示为0
+    roomPic[0] = 0;
+    var house_rooms = document.getElementById("house_rooms");
+
+    //添加房间
+    function addRoom(){
+        room++;
+        roomPic[room] = 0;//初始化数组
+        //房间i
+        var house_roomi = document.createElement("div");
+        house_roomi.setAttribute("class","form_group row");
+        house_roomi.setAttribute("id","house_room"+room);
+
+        var roomi = document.createElement("div");
+        roomi.setAttribute("id","room"+room);
+
+        var label = document.createElement("label");
+        label.setAttribute("class","col-form-label col-md-2 form-label");
+        label.appendChild(document.createTextNode("房间"));
+
+        //第一列
+        var div0 = document.createElement("div");
+        div0.setAttribute("class","col-lg-10");
+        var div0_1 = document.createElement("div");
+        div0_1.setAttribute("class","row");
+
+        var div0_1_type = document.createElement("div");
+        div0_1_type.setAttribute("class","col-md-3");
+
+        //房间类别
+        var div0_1_type_input = document.createElement("input");
+        div0_1_type_input.setAttribute("type","text");
+        div0_1_type_input.setAttribute("class","form-control");
+        div0_1_type_input.setAttribute("placeholder","房间类别");
+        div0_1_type_input.setAttribute("name","roomType");
+
+        div0_1_type.appendChild(div0_1_type_input);
+        div0_1.appendChild(div0_1_type);
+        //房间类别
+
+        //具体类别
+        var div0_1_specificType = document.createElement("div");
+        div0_1_specificType.setAttribute("class","col-md-3");
+
+        var div0_1_specificType_input = document.createElement("input");
+        div0_1_specificType_input.setAttribute("type","text");
+        div0_1_specificType_input.setAttribute("class","form-control");
+        div0_1_specificType_input.setAttribute("placeholder","具体类别");
+        div0_1_specificType_input.setAttribute("name","specificType");
+
+        div0_1_specificType.appendChild(div0_1_specificType_input);
+        div0_1.appendChild(div0_1_specificType);
+        //具体类别
+
+        //房间风格
+        var div0_1_style = document.createElement("div");
+        div0_1_style.setAttribute("class","col-md-2");
+
+        var div0_1_style_input = document.createElement("input");
+        div0_1_style_input.setAttribute("type","text");
+        div0_1_style_input.setAttribute("class","form-control");
+        div0_1_style_input.setAttribute("placeholder","房间风格");
+        div0_1_style_input.setAttribute("name","style");
+
+        div0_1_style.appendChild(div0_1_style_input);
+        div0_1.appendChild(div0_1_style);
+        //房间风格
+
+        //房间价格
+        var div0_1_price = document.createElement("div");
+        div0_1_price.setAttribute("class","col-md-2");
+
+        var div0_1_price_input = document.createElement("input");
+        div0_1_price_input.setAttribute("type","text");
+        div0_1_price_input.setAttribute("class","form-control");
+        div0_1_price_input.setAttribute("placeholder","房间价格");
+        div0_1_price_input.setAttribute("name","price");
+
+        div0_1_price.appendChild(div0_1_price_input);
+        div0_1.appendChild(div0_1_price);
+        //房间价格
+
+        //添加房间块
+        var div0_1_addRoom = document.createElement("div");
+        div0_1_addRoom.setAttribute("class","col-md-1");
+
+        //添加房间按钮
+        var div0_1_addRoom_btn = document.createElement("button");
+        div0_1_addRoom_btn.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
+        div0_1_addRoom_btn.setAttribute("onclick","addRoom()");
+        div0_1_addRoom_btn.appendChild(document.createTextNode("添加房间"));
+        //添加房间按钮
+
+        div0_1_addRoom.appendChild(div0_1_addRoom_btn);
+        div0_1.appendChild(div0_1_addRoom);
+        //添加房间块
+
+        div0.appendChild(div0_1);
+        //第一列
+
+        //第二列，房间照片
+        var roomi_pici_div = document.createElement("div");
+        roomi_pici_div.setAttribute("class","row");
+        roomi_pici_div.setAttribute("id","room"+room+"_pic"+roomPic[room]+"_div");
+
+        var roomi_pici_label = document.createElement("label");
+        roomi_pici_label.setAttribute("class","col-form-label col-md-3 form-label");
+
+        roomi_pici_div.appendChild(roomi_pici_label);
+
+        var roomi_pici_div_div1 = document.createElement("div");
+        roomi_pici_div_div1.setAttribute("class","col-md-3 file");
+        roomi_pici_div_div1.appendChild(document.createTextNode("选择文件"));
+
+        //房间图片input框
+        var roomi_pici_div_div1_input = document.createElement("input");
+        roomi_pici_div_div1_input.setAttribute("type","file");
+        roomi_pici_div_div1_input.setAttribute("class","form-control");
+        roomi_pici_div_div1_input.setAttribute("placeholder","房间照片")
+        roomi_pici_div_div1_input.setAttribute("id","room"+room+"_pic"+roomPic[room]);
+        roomi_pici_div_div1_input.setAttribute("data-room",room);
+        roomi_pici_div_div1_input.setAttribute("data-pic",roomPic[room]);
+        roomi_pici_div_div1_input.setAttribute("onChange","changePic(this)");
+
+        roomi_pici_div_div1.appendChild(roomi_pici_div_div1_input);
+        //房间图片input框
+
+        //房间图片显示区
+        var roomi_pici_div_div1_imageHolder = document.createElement("div");
+        roomi_pici_div_div1_imageHolder.setAttribute("id","room"+room+"_pic"+roomPic[room]+"_imageHolder");
+        //id
+
+        roomi_pici_div_div1.appendChild(roomi_pici_div_div1_imageHolder);
+        //房间图片显示区
+        roomi_pici_div.appendChild(roomi_pici_div_div1);
+
+        //房间照片描述
+        var roomi_pici_div_div2 = document.createElement("div");
+        roomi_pici_div_div2.setAttribute("class","col-md-3");
+
+        //房间照片描述输入框
+        var roomi_pici_div_div2_input = document.createElement("input");
+        roomi_pici_div_div2_input.setAttribute("type","text");
+        roomi_pici_div_div2_input.setAttribute("class","form-control");
+        roomi_pici_div_div2_input.setAttribute("id","room"+room+"_pic"+roomPic[room]+"_describe");
+        roomi_pici_div_div2_input.setAttribute("placeholder","描述");
+        //房间照片描述输入框
+
+        roomi_pici_div_div2.appendChild(roomi_pici_div_div2_input);
+        //房间照片描述
+
+        roomi_pici_div.appendChild(roomi_pici_div_div2);
+
+        //添加房间照片按钮div
+        var roomi_pici_div_div3 = document.createElement("div");
+        roomi_pici_div_div3.setAttribute("class","col-md-2");
+
+        //添加房间照片按钮
+        var roomi_pici_div_div3_btn = document.createElement("button");
+        roomi_pici_div_div3_btn.setAttribute("type","button");
+        roomi_pici_div_div3_btn.setAttribute("style","margin: 0");
+        roomi_pici_div_div3_btn.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
+        roomi_pici_div_div3_btn.setAttribute("onclick","addRoomPic(this)");
+        roomi_pici_div_div3_btn.setAttribute("id","room"+room+"_pic"+roomPic[room]+"_btn");
+        roomi_pici_div_div3_btn.setAttribute("data-room",room);
+        roomi_pici_div_div3_btn.setAttribute("data-pic",roomPic[room]);
+        roomi_pici_div_div3_btn.appendChild(document.createTextNode("添加房间照片"));
+        //添加房间照片按钮
+        roomi_pici_div_div3.appendChild(roomi_pici_div_div3_btn);
+        //添加房间照片按钮div
+
+        roomi_pici_div.appendChild(roomi_pici_div_div3);
+
+        roomi.appendChild(label);
+        roomi.appendChild(div0);
+        roomi.appendChild(roomi_pici_div);
+        //第二列，房间照片
+
+        house_roomi.appendChild(roomi);
+        house_rooms.appendChild(house_roomi);
+
+    }
+
+    //添加房间照片
+    function addRoomPic(now){
+        var nowRoom = parseInt(now.getAttribute("data-room"));
+        var nowPic = now.getAttribute("data-pic");
+        roomPic[nowRoom]++;
+
+        var room0 = now.parentNode.parentNode.parentNode;
         var div = document.createElement("div");
-        div.setAttribute("id","room"+room+"_pic"+pic);
+        div.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]+"_div");
         div.setAttribute("class","row");
         div.setAttribute("style","margin-top: 10px");
 
@@ -1328,12 +1509,15 @@
         divFile.appendChild(document.createTextNode("选择文件"));
 
         var input = document.createElement("input");
-        input.setAttribute("name","room");
         input.setAttribute("type","file");
         input.setAttribute("class","form-control");
+        input.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]);
+        input.setAttribute("data-room",nowRoom);
+        input.setAttribute("data-pic",roomPic[nowRoom]);
+        input.setAttribute("onChange","changePic(this)");
 
         var divImage = document.createElement("div");
-        divImage.setAttribute("id","room"+room+"_pic"+pic+"_image_holder");
+        divImage.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]+"_imageHolder");
 
         divFile.appendChild(input);
         divFile.appendChild(divImage);
@@ -1345,6 +1529,7 @@
         inputDescribe.setAttribute("name","describe");
         inputDescribe.setAttribute("type","text");
         inputDescribe.setAttribute("class","form-control");
+        inputDescribe.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]+"_describe");
         inputDescribe.setAttribute("placeholder","描述");
 
         divDescribe.appendChild(inputDescribe);
@@ -1358,13 +1543,39 @@
         btn.setAttribute("type","button");
         btn.setAttribute("style","margin: 0");
         btn.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
-        btn.setAttribute("onclick","addRoomPic()");
+        btn.setAttribute("onclick","addRoomPic(this)");
+        btn.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]+"_btn");
+        btn.setAttribute("data-room",room);
+        btn.setAttribute("data-pic",roomPic[nowRoom]);
         btn.appendChild(document.createTextNode("添加房间照片"));
         divBtn.appendChild(btn);
         div.appendChild(divBtn);
         room0.appendChild(div);
-        room++;
-        pic++;
+    }
+
+    function changePic(now){
+        console.log(now.id);
+        var nowRoom = parseInt(now.getAttribute("data-room"));
+        var nowPic = parseInt(now.getAttribute("data-pic"));
+        console.log(nowRoom + "    " + nowPic);
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = document.getElementById("room"+nowRoom+"_pic"+nowPic+"_imageHolder");
+            console.log("room"+nowRoom+"_pic"+nowPic+"_imageHolder");
+            console.log(image_holder);
+            // image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+            }
+            // image_holder.show();
+            console.log(now.files[0]);
+            reader.readAsDataURL(now.files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
     }
 </script>
 </body>
