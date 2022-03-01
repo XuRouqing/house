@@ -71,6 +71,9 @@ public class Controller {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private RoomPicService roomPicService;
+
     @ModelAttribute
     public void addAttributes(Model model) {
         List<Set> set = setService.getSetList();
@@ -708,24 +711,39 @@ public class Controller {
 //    }
 
     @Value("${room.file.path}")
-    private String filePath;
-
+    private String roomPath;
+    @Value("${mainPic.file.path}")
+    private String mainPicPath;
+    @Value("${original.file.path}")
+    private String originalPath;
+    @Value("${plane.file.path}")
+    private String planePath;
 
 //    @PostMapping("/saveCase")
-//    public String saveCase(HttpServletResponse resp, HttpServletRequest request) {
+//    public String saveCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
 //        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 //        if(multipartResolver.isMultipart(request)){
 //            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 //            Iterator<String> iter = multiRequest.getFileNames();
+//            SimpleDateFormat sdf = null;
+//            String pic = "";
 //            while(iter.hasNext()){
+//                sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+//                String timeStamp = sdf.format(new Date());
 //                MultipartFile file = multiRequest.getFile(iter.next());
-//                System.out.println(file.getOriginalFilename());
+//                String name = file.getName();//获取图片input的id，用于判断该图片属于哪个字段
+//                System.out.println(file.getName());
+//                String fileName = file.getOriginalFilename();//获取文件名称
+//                String suffixName=fileName.substring(fileName.lastIndexOf("."));//获取文件后缀
+//                File image = new File(filePath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+//                file.transferTo(image);//上传文件
+////                System.out.println(file.getOriginalFilename());
 //            }
 //        }
 //        Enumeration<String> parameterNames = request.getParameterNames();
 //        while (parameterNames.hasMoreElements()) {
 //            String key = parameterNames.nextElement();
-//            System.out.println(key + ":" + request.getParameter(key));
+////            System.out.println(key + ":" + request.getParameter(key));
 //        }
 //        return "redirect:/addCase";
 //    }
@@ -733,6 +751,10 @@ public class Controller {
     @PostMapping("/saveCase")
     public String saveCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        String mainPic;
+        String original;
+        String plane;
+        Enumeration<String> parameterNames = request.getParameterNames();
         if(multipartResolver.isMultipart(request)){
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
             Iterator<String> iter = multiRequest.getFileNames();
@@ -742,20 +764,59 @@ public class Controller {
                 sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
                 String timeStamp = sdf.format(new Date());
                 MultipartFile file = multiRequest.getFile(iter.next());
+                String name = file.getName();//获取图片input的id，用于判断该图片属于哪个字段
+//                System.out.println(file.getName());
                 String fileName = file.getOriginalFilename();//获取文件名称
                 String suffixName=fileName.substring(fileName.lastIndexOf("."));//获取文件后缀
-                File image = new File(filePath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
-                file.transferTo(image);//上传文件
-                System.out.println(file.getOriginalFilename());
+//                File image = new File(filePath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+//                file.transferTo(image);//上传文件
+                File image;
+                switch (name){
+                    case "mainPic":
+                        image = new File(mainPicPath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+                        file.transferTo(image);//上传文件
+                        mainPic = "/mainPic/"+timeStamp+suffixName;//设置mainPic字段，house.mainPic=mainPic
+                        break;
+                    case "original":
+                        image = new File(originalPath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+                        file.transferTo(image);//上传文件
+                        original = "/original/"+timeStamp+suffixName;
+                        break;
+                    case "plane":
+                        image = new File(planePath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+                        file.transferTo(image);//上传文件
+                        plane = "/plane/"+timeStamp+suffixName;
+                        break;
+                    default:
+                        image = new File(roomPath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+                        file.transferTo(image);//上传文件
+                        /**
+                         * roomPic封装
+                         */
+                        RoomPic roomPic = new RoomPic();
+                        String roomId = name.substring(4, name.indexOf('_'));//所属房间
+                        String picId = name.substring(name.lastIndexOf('c')+1);//该房间的第几张图片,用于对应图片的describe
+                        String href = "/room/"+timeStamp+suffixName;
+                        String des = request.getParameter(name+"_describe");//获取该图片的describe
+                        roomPic.setRoomId(Integer.parseInt(roomId));
+                        roomPic.setHref(href);
+                        roomPic.setDes(des);
+                        roomPicService.addRoomPic(roomPic);//数据库中写入roomPic数据
+//                        System.out.println(roomPic);
+//                        System.out.println(request.getParameter(name+"_describe"));
+                        break;
+                }
+//                System.out.println(file.getOriginalFilename());
             }
         }
-        Enumeration<String> parameterNames = request.getParameterNames();
+//        Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String key = parameterNames.nextElement();
-            System.out.println(key + ":" + request.getParameter(key));
+//            System.out.println(key + ":" + request.getParameter(key));
         }
         return "redirect:/addCase";
     }
+
 
     @RequestMapping("/fileTest")
     public String test(Model model, HttpServletResponse resp){

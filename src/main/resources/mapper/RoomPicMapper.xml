@@ -6,8 +6,8 @@
 <mapper namespace="com.example.house.dao.RoomPicMapper">
 
     <insert id="insertRoomPic" parameterType="RoomPic">
-        insert into RoomPic (roomId,href,describe)
-        values (#{roomId},#{href},#{describe})
+        insert into RoomPic (roomId,href,des)
+        values (#{roomId},#{href},#{des})
     </insert>
 
     <select id="selectRoomPicById" resultType="RoomPic">
@@ -24,7 +24,7 @@
     </select>
 
     <update id="modifyRoomPic" parameterType="RoomPic">
-        UPDATE RoomPic SET roomId=#{roomId},href=#{href},describe=#{describe}}
+        UPDATE RoomPic SET roomId=#{roomId},href=#{href},des=#{des}}
         WHERE picId=#{picId}
     </update>
 

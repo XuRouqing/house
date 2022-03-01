@@ -16,5 +16,5 @@ public class RoomPic {
     private int picId;
     private int roomId;
     private String href;
-    private String describe;
+    private String des;
 }
