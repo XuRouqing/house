@@ -13,7 +13,9 @@ public class WebConfig implements WebMvcConfigurer {
         //解决方法:将虚拟路径/userPic/
         //向绝对路径 (D:/College/Graduation project/house/src/main/resources/static/userPic/)映射
         String path="D:/College/Graduation project/house/src/main/resources/static/userPic/";
+        String workerPath="D:/College/Graduation project/house/src/main/resources/static/workerPic/";
         registry.addResourceHandler("/userPic/**").addResourceLocations("file:"+path);
+        registry.addResourceHandler("/workerPic/**").addResourceLocations("file:"+workerPath);
     }
 }
 

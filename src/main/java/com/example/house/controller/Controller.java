@@ -452,25 +452,10 @@ public class Controller {
         return "designer-list";
     }
 
-//    @RequestMapping("/designer-list")
-//    public String todesignerlist(Model model, @RequestParam(required = true,defaultValue = "1") Integer pageNow,
-//                                 @RequestParam(required = false,defaultValue = "8") Integer pageSize, HttpServletRequest request){
-//        PageHelper.startPage(pageNow,5);
-//        List<Designer> designers=designerService.getDesignerListByPage(pageNow,pageSize);
-//        PageInfo<Designer> designerPageInfo=new PageInfo<>(designers);
-//        model.addAttribute("pageInfo",designerPageInfo);
-//        model.addAttribute("designerInfo",designers);
-//        return "designer-list";
-//    }
-
-//    @RequestMapping("/designer")
-//    public String todesigner() {
-//        return "designer.html";
-//    }
-
     @RequestMapping("/designer/{id}")
     public String todesigner(@PathVariable int id, Model model) {
         Designer designer=designerService.findDesignerById(id);
+        System.out.println(designer);
         List<House> houses=houseService.findHouseByDesignerId(id);
         model.addAttribute("designerInfo",designer);
         model.addAttribute("houseInfo",houses);

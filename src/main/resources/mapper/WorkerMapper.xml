@@ -6,7 +6,7 @@
 <mapper namespace="com.example.house.dao.WorkerMapper">
 
     <insert id="insertWorker" parameterType="Worker">
-        insert into worker (name,gender,cityId,typeValue,age,workingAge,represent,tel,pic,des,#{declaration})
+        insert into worker (name,gender,cityId,typeValue,age,workingAge,represent,tel,pic,des,declaration)
         values (#{name},#{gender},#{cityId},#{typeValue},#{age},#{workingAge},#{represent},#{tel},#{pic},#{des},#{declaration})
     </insert>
 

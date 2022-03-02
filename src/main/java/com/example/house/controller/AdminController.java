@@ -3,6 +3,7 @@ package com.example.house.controller;
 import com.example.house.pojo.*;
 import com.example.house.service.*;
 import com.github.pagehelper.PageInfo;
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -85,7 +86,11 @@ public class AdminController {
     @RequestMapping("/designerList")
     public String todesignerList(Model model) {
         List<Designer> designers = designerService.getDesignerList();
+        List<Index> designerLevel = designerService.getDesignerLevel();
+        List<Index> designerStyle = designerService.getDesignerStyle();
         model.addAttribute("designers",designers);
+        model.addAttribute("designerLevel",designerLevel);
+        model.addAttribute("designerStyle",designerStyle);
         return "Admin/designer-list";
     }
 
@@ -141,6 +146,39 @@ public class AdminController {
         return  "redirect:/admin/designer/"+designer.getId();
     }
 
+    @RequestMapping("/addDesigner")
+    public String addDesigner(Model model, Designer designer,
+                                  @RequestParam("filePic") MultipartFile multipartFile){
+        if (!multipartFile.isEmpty()){
+            SimpleDateFormat sdf = null;
+            String pic = "";
+            try{
+                sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                String timeStamp = sdf.format(new Date());
+                String fileName = multipartFile.getOriginalFilename();//获取文件名称
+                String suffixName=fileName.substring(fileName.lastIndexOf("."));
+                File file = new File(filePath+timeStamp+suffixName);
+                pic = "/userPic/"+timeStamp+suffixName;
+                multipartFile.transferTo(file);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            //新建设计师的时候自动创建user，作为设计师的账号
+            User user = new User();
+            user.setCode(designer.getTel());
+            user.setName(designer.getName());
+            user.setRole("designer");
+            user.setPassword("123");
+            user.setEmail(designer.getEmail());
+            user.setPhone(designer.getTel());
+            userService.addUser(user);
+            designer.setPic(pic);
+            designer.setUserId(user.getId());
+            designerService.addDesigner(designer);
+        }
+        return  "redirect:/admin/workerList";
+    }
+
     @ResponseBody
     @RequestMapping("/delDesigner")
     public String delDesigner(Model model, int id){
@@ -152,10 +190,17 @@ public class AdminController {
         }
     }
 
+    @Value("${worker.file.path}")
+    private String workerFilePath;
+
     @RequestMapping("/workerList")
     public String toworkerList(Model model) {
         List<Worker> workers = workerService.getWorkerList();
+        List<Index> workerType = workerService.getWorkerType();
+        List<City> provinces = cityService.getProvinceList();
         model.addAttribute("workers",workers);
+        model.addAttribute("workerType",workerType);
+        model.addAttribute("provinces",provinces);
         return "Admin/worker-list";
     }
 
@@ -203,10 +248,32 @@ public class AdminController {
         return  "redirect:/admin/worker/"+worker.getId();
     }
 
+    @RequestMapping("/addWorker")
+    public String addWorker(Model model, Worker worker,
+                                @RequestParam("filePic") MultipartFile multipartFile){
+        if (!multipartFile.isEmpty()){
+            SimpleDateFormat sdf = null;
+            String pic = "";
+            try{
+                sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                String timeStamp = sdf.format(new Date());
+                String fileName = multipartFile.getOriginalFilename();//获取文件名称
+                String suffixName=fileName.substring(fileName.lastIndexOf("."));
+                File file = new File(workerFilePath+timeStamp+suffixName);
+                pic = "/workerPic/"+timeStamp+suffixName;
+                multipartFile.transferTo(file);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            worker.setPic(pic);
+        }
+        workerService.addWorker(worker);
+        return  "redirect:/admin/workerList";
+    }
+
     @ResponseBody
     @RequestMapping("/delWorker")
     public String delWorker(Model model, int id){
-        System.out.println(id);
         try {
             workerService.deleteWorker(id);
             return "success";

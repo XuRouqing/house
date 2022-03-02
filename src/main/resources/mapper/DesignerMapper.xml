@@ -6,8 +6,8 @@
 <mapper namespace="com.example.house.dao.DesignerMapper">
 
     <insert id="insertDesigner" parameterType="Designer">
-        insert into designer (name,gender,workingAge,levleValue,style,styleValue,represent,tel,age,pic,form)
-        values (#{name},#{gender},#{workingAge},#{levelValue},#{style},#{styleValue},#{represent},#{tel},#{age},#{pic},#{form})
+        insert into designer (userId,name,gender,workingAge,levelValue,styleValue,represent,tel,email,age,pic,form,location)
+        values (#{userId},#{name},#{gender},#{workingAge},#{levelValue},#{styleValue},#{represent},#{tel},#{email},#{age},#{pic},#{form},#{location})
     </insert>
 
     <select id="selectDesignerById" resultType="Designer">
@@ -18,18 +18,20 @@
     </select>
 
     <select id="selectDesignerAll" resultType="Designer">
-        SELECT designer.*, level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR ',') style FROM designer,designerlevel LEVEL,styleindex style
+        SELECT designer.*, level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR ',') style FROM designer,designerlevel level,styleindex style
         WHERE designer.levelValue = level.id
           AND FIND_IN_SET(style.id,designer.styleValue)
         GROUP BY designer.id
     </select>
 
     <select id="selectDesignerBySL" resultType="Designer">
-        select designer.*,designerlevel.name level from designer, designerlevel
+        select designer.*,level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR '、') style from designer, designerlevel level,styleindex style
         where 1=1
             and (styleValue like CONCAT(CONCAT('%',#{style},'%')) or #{style}='')
             and (levelValue=#{level} or #{level}='')
-            and designer.levelValue = designerlevel.id
+            and designer.levelValue = level.id
+            and FIND_IN_SET(style.id,designer.styleValue)
+        GROUP BY designer.id
     </select>
 
     <select id="selectTopNDesigner" resultType="Designer">
@@ -52,7 +54,7 @@
     </update>
 
     <update id="modifyDesigner" parameterType="Designer">
-        UPDATE designer SET workingAge=#{workingAge},levelValue=#{levelValue},styleValue=#{styleValue},represent=#{represent},form=#{form}
+        UPDATE designer SET userId=#{userId},workingAge=#{workingAge},levelValue=#{levelValue},styleValue=#{styleValue},represent=#{represent},form=#{form}
         WHERE id=#{id}
     </update>
 

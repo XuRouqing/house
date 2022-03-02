@@ -45,7 +45,7 @@
     </select>
 
     <select id="findHouseByDesignerId" resultType="House">
-        SELECT house.*,housearea.name AREA,houseform.name form,housetype.name,styleindex.name type,designer.name designer
+        SELECT house.*,housearea.name AREA,houseform.name form,housetype.name type,styleindex.name style,designer.name designer
         FROM house, housearea ,houseform ,housetype, styleindex, designer
         WHERE house.areaValue = housearea.id
           AND house.formValue = houseform.id
