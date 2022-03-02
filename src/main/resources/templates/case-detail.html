@@ -648,9 +648,9 @@
                         <div style="margin-bottom: 40px">
                             <h3 style="font-weight: normal;color: #384d4d" th:text="${houseInfo.title}"></h3>
                         </div>
-                        <div style="margin: 70px 0" th:if="${not #strings.isEmpty(houseInfo.describe)}">
+                        <div style="margin: 70px 0" th:if="${not #strings.isEmpty(houseInfo.des)}">
                             <h3 style="margin-bottom: 20px">方案说明</h3>
-                            <p th:text="${houseInfo.describe}"></p>
+                            <p th:text="${houseInfo.des}"></p>
                         </div>
                         <div class="case-work-process" th:if="${not #strings.isEmpty(houseInfo.original)}">
                             <div class="section-title-wrap">
@@ -677,7 +677,7 @@
                             <div class="case-article-img">
                                 <img style="width: 100%" th:src="'../../Path'+${pic.href}" alt="Images">
                             </div>
-                            <p th:text="${pic.describe}"></p>
+                            <p th:text="${pic.des}"></p>
                         </div>
                     </div>
                 </div>
@@ -698,7 +698,7 @@
                                 </li>
                                 <li>
                                     <div class="line-circle"></div>
-                                    <a href="" target="" th:text="${houseInfo.area}+'㎡'"></a>
+                                    <a href="" target="" th:text="${houseInfo.area}"></a>
                                 </li>
                                 <li>
                                     <div class="line-circle"></div>

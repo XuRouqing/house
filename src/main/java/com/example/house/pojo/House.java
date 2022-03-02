@@ -17,7 +17,7 @@ public class House {
     private String style;//风格
     private String styleValue;
     private String houseType;//户型
-    private double area;
+    private String area;
     private String areaValue;
     private String formValue;
     private String city;
@@ -32,7 +32,7 @@ public class House {
     private String typeValue;
     private String roomIds;
     private String title;
-    private String describe;
+    private String des;
     private String mainPic;
     private String designer;
 }

@@ -38,9 +38,11 @@
     </select>
 
     <select id="findWorkerByHouse" resultType="Worker">
-        SELECT worker.* FROM worker,house
+        SELECT worker.*, CONCAT(d2.district_name,d1.district_name) city FROM worker, house, district d1, district d2
         WHERE houseId=#{houseId}
           AND FIND_IN_SET(worker.id, workerIds)
+          AND d1.id = worker.cityId
+          AND d1.pid = d2.id
     </select>
 
     <update id="modifyWorkerAll" parameterType="Worker">

@@ -266,12 +266,13 @@ public class Controller {
 
     @RequestMapping("/fullwidth")
     public String tofullwidth(Model model, @RequestParam(required = true,defaultValue = "1") Integer pageNow,
-                                 @RequestParam(required = false, defaultValue = "8") Integer pageSize,
-                                 @RequestParam(required = false, defaultValue = "") String style,
-                                 @RequestParam(required = false, defaultValue = "") String type,
-                                 @RequestParam(required = false, defaultValue = "") String form,
-                                 @RequestParam(required = false, defaultValue = "") String area,
-                                 HttpServletRequest request){
+                              @RequestParam(required = false, defaultValue = "8") Integer pageSize,
+                              @RequestParam(required = false, defaultValue = "") String style,
+                              @RequestParam(required = false, defaultValue = "") String type,
+                              @RequestParam(required = false, defaultValue = "") String form,
+                              @RequestParam(required = false, defaultValue = "") String area,
+                              HttpServletRequest request){
+        System.out.println(style);
         String refUrl=request.getHeader("Referer").toString();
         int typeP=refUrl.indexOf("type");
         String typeT="";
@@ -348,6 +349,7 @@ public class Controller {
         model.addAttribute("houseArea",houseArea);
         return "shop-grid-fullwidth";
     }
+
 
     @RequestMapping("/designer-list1")
     public String designerlist(HttpServletRequest request,
@@ -798,10 +800,10 @@ public class Controller {
                         String picId = name.substring(name.lastIndexOf('c')+1);//该房间的第几张图片,用于对应图片的describe
                         String href = "/room/"+timeStamp+suffixName;
                         String des = request.getParameter(name+"_describe");//获取该图片的describe
-                        roomPic.setRoomId(Integer.parseInt(roomId));
+//                        roomPic.setRoomId(Integer.parseInt(roomId));
                         roomPic.setHref(href);
                         roomPic.setDes(des);
-                        roomPicService.addRoomPic(roomPic);//数据库中写入roomPic数据
+//                        roomPicService.addRoomPic(roomPic);//数据库中写入roomPic数据
 //                        System.out.println(roomPic);
 //                        System.out.println(request.getParameter(name+"_describe"));
                         break;
@@ -813,6 +815,9 @@ public class Controller {
         while (parameterNames.hasMoreElements()) {
             String key = parameterNames.nextElement();
 //            System.out.println(key + ":" + request.getParameter(key));
+            if (key.startsWith("room1")){
+                System.out.println(key+":"+request.getParameter(key));
+            }
         }
         return "redirect:/addCase";
     }
