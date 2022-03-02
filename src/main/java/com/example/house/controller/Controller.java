@@ -74,6 +74,9 @@ public class Controller {
     @Autowired
     private RoomPicService roomPicService;
 
+    @Autowired
+    private RoomService roomService;
+
     @ModelAttribute
     public void addAttributes(Model model) {
         List<Set> set = setService.getSetList();
@@ -691,27 +694,6 @@ public class Controller {
         return "addCase.html";
     }
 
-//    @ResponseBody
-//    @PostMapping("/addCase")
-//    public void addCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
-//        try {
-//            Enumeration<String> parameterNames = request.getParameterNames();
-//            while (parameterNames.hasMoreElements()){
-//                String key = parameterNames.nextElement();
-//                System.out.println(key+":"+request.getParameter(key));
-//            }
-//            //给后台传输插入成功的消息
-//            resp.setCharacterEncoding("utf-8");
-//            PrintWriter respWritter = resp.getWriter();
-//            respWritter.append("200");
-//        } catch (Exception e) {
-//            resp.setCharacterEncoding("utf-8");
-//            PrintWriter respWritter = resp.getWriter();
-//            respWritter.append("400");
-//            e.printStackTrace();
-//        }
-//    }
-
     @Value("${room.file.path}")
     private String roomPath;
     @Value("${mainPic.file.path}")
@@ -721,35 +703,6 @@ public class Controller {
     @Value("${plane.file.path}")
     private String planePath;
 
-//    @PostMapping("/saveCase")
-//    public String saveCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
-//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-//        if(multipartResolver.isMultipart(request)){
-//            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-//            Iterator<String> iter = multiRequest.getFileNames();
-//            SimpleDateFormat sdf = null;
-//            String pic = "";
-//            while(iter.hasNext()){
-//                sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-//                String timeStamp = sdf.format(new Date());
-//                MultipartFile file = multiRequest.getFile(iter.next());
-//                String name = file.getName();//获取图片input的id，用于判断该图片属于哪个字段
-//                System.out.println(file.getName());
-//                String fileName = file.getOriginalFilename();//获取文件名称
-//                String suffixName=fileName.substring(fileName.lastIndexOf("."));//获取文件后缀
-//                File image = new File(filePath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
-//                file.transferTo(image);//上传文件
-////                System.out.println(file.getOriginalFilename());
-//            }
-//        }
-//        Enumeration<String> parameterNames = request.getParameterNames();
-//        while (parameterNames.hasMoreElements()) {
-//            String key = parameterNames.nextElement();
-////            System.out.println(key + ":" + request.getParameter(key));
-//        }
-//        return "redirect:/addCase";
-//    }
-
     @PostMapping("/saveCase")
     public String saveCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
@@ -757,37 +710,66 @@ public class Controller {
         String original;
         String plane;
         Enumeration<String> parameterNames = request.getParameterNames();
+        /**
+         * 封装house
+         */
+        House house = new House();
+        house.setStyleValue(request.getParameter("styleValue"));
+        house.setHouseType(request.getParameter("houseType"));
+        house.setAreaValue(request.getParameter("areaValue"));
+        house.setFormValue(request.getParameter("formValue"));
+        house.setCity(request.getParameter("city"));
+        house.setLocal(request.getParameter("location"));
+        house.setTime(request.getParameter("time"));
+        house.setPrice(Double.parseDouble(request.getParameter("price")));
+        house.setDesignerId(Integer.parseInt(request.getParameter("designer")));
+        house.setWorkerIds(request.getParameter("workerIds"));
+        house.setTypeValue(request.getParameter("typeValue"));
+        house.setTitle(request.getParameter("title"));
+        house.setDes(request.getParameter("describe"));
+        /**
+         * 房间封装
+         */
+        int roomNum = Integer.parseInt(request.getParameter("roomNum"));
+        Room[] rooms = new Room[roomNum+1];
+        for (int i = 1; i <= roomNum;i++){
+            rooms[i] = new Room();
+            rooms[i].setRoomType(request.getParameter("room"+i+"_type"));
+            rooms[i].setSpecificType(request.getParameter("room"+i+"_specificType"));
+            rooms[i].setStyle(request.getParameter("room"+i+"_style"));
+            rooms[i].setPrice(Integer.parseInt(request.getParameter("room"+i+"_price")));
+            roomService.addRoom(rooms[i]);
+        }
         if(multipartResolver.isMultipart(request)){
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
             Iterator<String> iter = multiRequest.getFileNames();
             SimpleDateFormat sdf = null;
-            String pic = "";
             while(iter.hasNext()){
                 sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
                 String timeStamp = sdf.format(new Date());
                 MultipartFile file = multiRequest.getFile(iter.next());
                 String name = file.getName();//获取图片input的id，用于判断该图片属于哪个字段
-//                System.out.println(file.getName());
                 String fileName = file.getOriginalFilename();//获取文件名称
                 String suffixName=fileName.substring(fileName.lastIndexOf("."));//获取文件后缀
-//                File image = new File(filePath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
-//                file.transferTo(image);//上传文件
                 File image;
                 switch (name){
                     case "mainPic":
                         image = new File(mainPicPath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
                         file.transferTo(image);//上传文件
                         mainPic = "/mainPic/"+timeStamp+suffixName;//设置mainPic字段，house.mainPic=mainPic
+                        house.setMainPic(mainPic);
                         break;
                     case "original":
                         image = new File(originalPath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
                         file.transferTo(image);//上传文件
                         original = "/original/"+timeStamp+suffixName;
+                        house.setOriginal(original);
                         break;
                     case "plane":
                         image = new File(planePath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
                         file.transferTo(image);//上传文件
                         plane = "/plane/"+timeStamp+suffixName;
+                        house.setPlane(plane);
                         break;
                     default:
                         image = new File(roomPath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
@@ -796,28 +778,24 @@ public class Controller {
                          * roomPic封装
                          */
                         RoomPic roomPic = new RoomPic();
-                        String roomId = name.substring(4, name.indexOf('_'));//所属房间
-                        String picId = name.substring(name.lastIndexOf('c')+1);//该房间的第几张图片,用于对应图片的describe
+                        int roomInex = Integer.parseInt(name.substring(4, name.indexOf('_')));//所属房间
+                        int roomId = rooms[roomInex].getRoomId();
                         String href = "/room/"+timeStamp+suffixName;
                         String des = request.getParameter(name+"_describe");//获取该图片的describe
-//                        roomPic.setRoomId(Integer.parseInt(roomId));
+                        roomPic.setRoomId(roomId);
                         roomPic.setHref(href);
                         roomPic.setDes(des);
-//                        roomPicService.addRoomPic(roomPic);//数据库中写入roomPic数据
-//                        System.out.println(roomPic);
-//                        System.out.println(request.getParameter(name+"_describe"));
+                        roomPicService.addRoomPic(roomPic);//数据库中写入roomPic数据
                         break;
                 }
-//                System.out.println(file.getOriginalFilename());
             }
         }
-//        Enumeration<String> parameterNames = request.getParameterNames();
-        while (parameterNames.hasMoreElements()) {
-            String key = parameterNames.nextElement();
-//            System.out.println(key + ":" + request.getParameter(key));
-            if (key.startsWith("room1")){
-                System.out.println(key+":"+request.getParameter(key));
-            }
+        houseService.addHouse(house);
+        int houseId = house.getHouseId();
+        //为room添加houseid
+        for (int i=1;i<=roomNum;i++){
+            rooms[i].setHouseId(houseId);
+            roomService.modifyRoom(rooms[i]);
         }
         return "redirect:/addCase";
     }

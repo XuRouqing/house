@@ -6,8 +6,11 @@
 <mapper namespace="com.example.house.dao.RoomMapper">
 
     <insert id="insertRoom" parameterType="Room">
-        insert into room (roomId,roomType,specificType,style,price)
-        values (#{roomId},#{roomType},#{specificType},#{style},#{price})
+        <selectKey keyProperty="roomId" resultType="int" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into room (houseId,roomType,specificType,style,price)
+        values (#{houseId},#{roomType},#{specificType},#{style},#{price})
     </insert>
 
     <select id="selectRoomById" resultType="Room">
@@ -59,7 +62,7 @@
     </select>
 
     <update id="modifyRoom" parameterType="Room">
-        UPDATE room SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        UPDATE room SET houseId=#{houseId},roomType=#{roomType},specificType=#{specificType},style=#{style},price=#{price}
         WHERE roomId=#{roomId}
     </update>
 

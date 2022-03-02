@@ -6,8 +6,11 @@
 <mapper namespace="com.example.house.dao.HouseMapper">
 
     <insert id="insertHouse" parameterType="House">
-        insert into house (style,houseType,area,city,local,time,original,plane,price,designerId,workerIds,type,roomIds)
-        values (#{style},#{houseType},#{area},#{city},#{local},#{time},#{original},#{plane},#{price},#{designerId},#{workerIds},#{type},#{roomIds})
+        <selectKey keyProperty="houseId" resultType="int" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into house (styleValue,houseType,areaValue,formValue,city,time,original,plane,price,designerId,workerIds,typeValue,title,des,mainPic)
+        values (#{styleValue},#{houseType},#{areaValue},#{formValue},#{city},#{time},#{original},#{plane},#{price},#{designerId},#{workerIds},#{typeValue},#{title},#{des},#{mainPic})
     </insert>
 
     <select id="selectHouseById" resultType="House">

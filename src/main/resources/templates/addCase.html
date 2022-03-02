@@ -524,7 +524,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">装修类别</label>
                                     <div class="col-md-10">
-                                        <select class="form-control" name="styleValue">
+                                        <select class="form-control" name="formValue">
                                             <option th:each="form : ${houseForm}" th:text="${form.name}"
                                                     th:value="${form.id}"></option>
                                         </select>
@@ -566,7 +566,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">城市</label>
                                     <div class="col-lg-10">
-                                        <div class="row" id="location">
+                                        <div class="row" id="local">
                                             <div class="col-md-2">
                                                 <div>
                                                     <select class="form-control" id="province" name="province"
@@ -628,7 +628,7 @@
                                                         class="my-btn btn btn-success glyphicon glyphicon-plus"
                                                         onclick="addWorker()"></button>
                                             </div>
-                                            <input id="workers" name="workers" class="hidden">
+                                            <input id="workerIds" name="workerIds" class="hidden">
                                         </div>
                                     </div>
                                 </div>
@@ -686,6 +686,7 @@
                                                             onclick="addRoomPic(this)">添加房间照片
                                                     </button>
                                                 </div>
+                                                <input name="roomNum" id="roomNum" class="hidden">
                                             </div>
                                         </div>
                                     </div>
@@ -695,19 +696,19 @@
                                     <div class="col-lg-10">
                                         <div class="row">
                                             <div class="form-control-wrapper col-md-10">
-                                                <input id="flatpickr-tryme" class="form-control" type="text"
+                                                <input id="flatpickr-tryme" class="form-control" type="text" name="time"
                                                        placeholder="时间">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2 form-label">备注</label>
-                                    <div class="col-md-10">
-                                        <textarea name="describe" rows="5" cols="5" class="form-control"
-                                                  placeholder="备注"></textarea>
-                                    </div>
-                                </div>
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-form-label col-md-2 form-label">备注</label>-->
+<!--                                    <div class="col-md-10">-->
+<!--                                        <textarea name="describe" rows="5" cols="5" class="form-control"-->
+<!--                                                  placeholder="备注"></textarea>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="submit-section proceed-btn text-right">
                                     <button type="submit" class="btn submit-btn" data-toggle="modal"
                                             data-target=".bs-example-modal-lg">预约
@@ -1175,37 +1176,6 @@
         });
     };
 
-    /**
-     * 提交表单
-     **/
-    function sub() {
-        var wokers = document.getElementById("workers");
-        var workerDoms = document.getElementsByName("worker");
-        var s = "";
-        for (var i = 0; i < workerDoms.length; i++) {
-            s += workerDoms[i].value;
-            s += ",";
-        }
-        s = s.substring(0, s.length - 1);
-        wokers.value = s;
-        $.ajax({
-            type: "POST",//方法类型
-            dataType: "json",//预期服务器返回的数据类型
-            url: "/addBook",//url
-            data: $('#bookForm').serialize(),
-            success: function (result) {
-                console.log(result);//打印服务端返回的数据(调试用)
-                if (result == 200) {
-                    alert("插入成功");
-                }
-                ;
-            },
-            error: function () {
-                alert("异常！");
-            }
-        });
-    }
-
     //删除施工人员
     function deleteWorker(now) {
         now.parentNode.parentNode.remove();
@@ -1581,6 +1551,39 @@
         } else {
             alert("你的浏览器不支持FileReader.");
         }
+    }
+
+    /**
+     * 提交表单
+     **/
+    function sub() {
+        var wokers = document.getElementById("workerIds");
+        var workerDoms = document.getElementsByName("worker");
+        var roomNum = document.getElementById("roomNum");
+        roomNum.value = room;
+        var s = "";
+        for (var i = 0; i < workerDoms.length; i++) {
+            s += workerDoms[i].value;
+            s += ",";
+        }
+        s = s.substring(0, s.length - 1);
+        wokers.value = s;
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/addBook",//url
+            data: $('#bookForm').serialize(),
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result == 200) {
+                    alert("插入成功");
+                }
+                ;
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
     }
 </script>
 </body>
