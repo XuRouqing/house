@@ -6,8 +6,8 @@
 <mapper namespace="com.example.house.dao.SetConfigMapper">
 
     <insert id="insertSetConfig" parameterType="SetConfig">
-        insert into setConfig (setId,category,pic)
-        values (#{setId},#{category},#{pic})
+        insert into setConfig (setId,contentId,category,brand)
+        values (#{setId},#{contentId},#{category},#{brand})
     </insert>
 
     <select id="selectSetConfigById" resultType="SetConfig">

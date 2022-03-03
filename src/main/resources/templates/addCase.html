@@ -1532,11 +1532,8 @@
         console.log(now.id);
         var nowRoom = parseInt(now.getAttribute("data-room"));
         var nowPic = parseInt(now.getAttribute("data-pic"));
-        console.log(nowRoom + "    " + nowPic);
         if (typeof (FileReader) != "undefined") {
             var image_holder = document.getElementById("room"+nowRoom+"_pic"+nowPic+"_imageHolder");
-            console.log("room"+nowRoom+"_pic"+nowPic+"_imageHolder");
-            console.log(image_holder);
             image_holder.innerHTML="";
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1568,22 +1565,22 @@
         }
         s = s.substring(0, s.length - 1);
         wokers.value = s;
-        $.ajax({
-            type: "POST",//方法类型
-            dataType: "json",//预期服务器返回的数据类型
-            url: "/addBook",//url
-            data: $('#bookForm').serialize(),
-            success: function (result) {
-                console.log(result);//打印服务端返回的数据(调试用)
-                if (result == 200) {
-                    alert("插入成功");
-                }
-                ;
-            },
-            error: function () {
-                alert("异常！");
-            }
-        });
+        // $.ajax({
+        //     type: "POST",//方法类型
+        //     dataType: "json",//预期服务器返回的数据类型
+        //     url: "/addBook",//url
+        //     data: $('#bookForm').serialize(),
+        //     success: function (result) {
+        //         console.log(result);//打印服务端返回的数据(调试用)
+        //         if (result == 200) {
+        //             alert("插入成功");
+        //         }
+        //         ;
+        //     },
+        //     error: function () {
+        //         alert("异常！");
+        //     }
+        // });
     }
 </script>
 </body>

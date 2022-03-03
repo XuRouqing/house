@@ -6,8 +6,11 @@
 <mapper namespace="com.example.house.dao.SetMapper">
 
     <insert id="insertSet" parameterType="Set">
-        insert into myset (name,pic,discount,describe,time)
-        values (#{name},#{pic},#{discount},#{describe},#{time})
+        <selectKey keyProperty="setId" resultType="int" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into myset (name,discount,des,time)
+        values (#{name},#{discount},#{des},#{time})
     </insert>
 
     <select id="selectSetById" resultType="Set">
@@ -20,7 +23,7 @@
     </select>
 
     <update id="modifySet" parameterType="Set">
-        UPDATE myset SET name=#{name},pic=#{pic},discount=#{discount},describe=#{describe},time=#{time}
+        UPDATE myset SET name=#{name},pic=#{pic},discount=#{discount},des=#{des},time=#{time}
         WHERE setId=#{setId}
     </update>
 

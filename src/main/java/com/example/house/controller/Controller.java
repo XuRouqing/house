@@ -509,6 +509,84 @@ public class Controller {
         return "discount";
     }
 
+    @RequestMapping("/addDiscount")
+    public String addDiscount(Model model, HttpServletResponse resp){
+        return "/addDiscount.html";
+    }
+
+    @Value("${setImage.file.path}")
+    private String setPath;
+
+    @PostMapping("/saveDiscount")
+    public String saveDiscount(HttpServletResponse resp, HttpServletRequest request) throws IOException {
+        //获取表单数据
+        Enumeration<String> parameterNames = request.getParameterNames();
+//
+//        while (parameterNames.hasMoreElements()) {
+//            String key = parameterNames.nextElement();
+//            System.out.println(key + ":" + request.getParameter(key));
+//        }
+
+        int contentNum = Integer.parseInt(request.getParameter("contentNum"));
+
+        //获取contentArray,每个content的config个数
+        String arrayTemp = request.getParameter("contentArrays");
+        String[] contentArrayString = arrayTemp.split(",");
+        int[] contentArray = new int[contentArrayString.length-1];
+        for (int i = 1; i < contentArrayString.length; i++) {
+            contentArray[i-1] = Integer.parseInt(contentArrayString[i]);
+        }
+        SetContent[] contents = new SetContent[contentNum];
+        int setContentIndex = 0;
+        Set set = new Set();
+        set.setName(request.getParameter("name"));
+        set.setDiscount(request.getParameter("discount"));
+        set.setDes(request.getParameter("des"));
+        set.setTime(request.getParameter("time"));
+        setService.addSet(set);
+        int setId = set.getSetId();
+//        //图片文件操作
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        if(multipartResolver.isMultipart(request)) {
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+            Iterator<String> iter = multiRequest.getFileNames();
+            SimpleDateFormat sdf = null;
+            while(iter.hasNext()) {
+                sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+                String timeStamp = sdf.format(new Date());
+                MultipartFile file = multiRequest.getFile(iter.next());
+                String name = file.getName();//获取图片input的id，用于判断该图片属于哪个字段
+                String fileName = file.getOriginalFilename();//获取文件名称
+                String suffixName=fileName.substring(fileName.lastIndexOf("."));//获取文件后缀
+                File image;
+                image = new File(setPath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+                file.transferTo(image);//上传文件
+                SetContent setContent = new SetContent();
+                int contentInex = Integer.parseInt(name.substring(7, name.indexOf('_')));//所属content
+                String href = "/setImage/"+timeStamp+suffixName;
+                String contentName = request.getParameter("content"+contentInex+"_name");//获取该content的name
+                setContent.setPic(href);
+                setContent.setName(contentName);
+                setContent.setSetId(setId);
+                contents[setContentIndex++] = setContent;
+                contentService.addSetContent(setContent);
+            }
+        }
+
+        for (int i = 0; i < contentArray.length; i++) {
+            int configNum = contentArray[i];
+            for (int j = 1; j <= configNum; j++) {
+                SetConfig config = new SetConfig();
+                config.setSetId(setId);
+                config.setContentId(contents[i].getContentId());
+                config.setCategory(request.getParameter("content"+(i+1)+"_config"+j+"_category"));
+                config.setBrand(request.getParameter("content"+(i+1)+"_config"+j+"_brand"));
+                configService.addSetConfig(config);
+            }
+        }
+        return "redirect:/addDiscount";
+    }
+
     @PostMapping("/discountOrderAdd")
     public String discountOderAdd(SetOrder setOrder, HttpSession session, HttpServletRequest request, Model model){
         if(setOrder!=null){

@@ -6,6 +6,9 @@
 <mapper namespace="com.example.house.dao.SetContentMapper">
 
     <insert id="insertSetContent" parameterType="SetContent">
+        <selectKey keyProperty="contentId" resultType="int" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
         insert into setContent (setId,name,pic)
         values (#{setId},#{name},#{pic})
     </insert>

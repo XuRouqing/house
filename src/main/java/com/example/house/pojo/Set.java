@@ -17,6 +17,6 @@ public class Set {
     private String pic;
     private int rownum;
     private String discount;
-    private String describe;
+    private String des;
     private String time;
 }
