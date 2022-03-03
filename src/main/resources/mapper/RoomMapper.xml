@@ -42,7 +42,7 @@
             <id property="picId" column="picId"/>
             <result property="roomId" column="roomId"/>
             <result property="href" column="href"/>
-            <result property="describe" column="describe"/>
+            <result property="des" column="des"/>
         </collection>
     </resultMap>
 
