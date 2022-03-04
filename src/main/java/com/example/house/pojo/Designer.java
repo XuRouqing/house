@@ -28,5 +28,6 @@ public class Designer {
     private String pic;
     private String form;
     private String location;
+    private String city;
 
 }

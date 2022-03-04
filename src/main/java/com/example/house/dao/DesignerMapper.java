@@ -26,4 +26,7 @@ public interface DesignerMapper {
     public List<Index> selectDesignerLevel();
     public List<Index> selectDesignerStyle();
     public int selectDesignerNum();
+    public int selectHouseNumByDesignerId(int id);
+    public int selectOrderNumByDesignerId(int id);
+    public Designer selectDesignerByUserId(int id);
 }

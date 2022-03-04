@@ -55,4 +55,13 @@ public class AppointmentServiceImp implements AppointmentService  {
         this.appointmentMapper.deleteAppointment(id);
     }
 
+    @Override
+    public List<Appointment> getAppointmentByDesignerId(int id) {
+        return this.appointmentMapper.selectAppointmentByDesignerId(id);
+    }
+
+    @Override
+    public List<Appointment> getAppointmentAllByDesignerId(int id) {
+        return this.appointmentMapper.selectAppointmentAllByDesignerId(id);
+    }
 }

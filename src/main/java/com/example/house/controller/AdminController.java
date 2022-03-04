@@ -107,10 +107,16 @@ public class AdminController {
         for (int i = 0; i < styleList.length; i++) {
             styleListInt.add(Integer.parseInt(styleList[i]));
         }
+        List<City> provinces = cityService.getProvinceList();
+        City cityNow = cityService.getCityListById(Integer.parseInt(designer.getLocation()));
+        City provinceNow = cityService.getCityListById(cityNow.getPid());
         model.addAttribute("designer",designer);
         model.addAttribute("designerLevel",designerLevel);
         model.addAttribute("designerStyle",designerStyle);
         model.addAttribute("styleList",styleListInt);
+        model.addAttribute("provinces",provinces);
+        model.addAttribute("cityNow",cityNow);
+        model.addAttribute("provinceNow",provinceNow);
         return "Admin/designer";
     }
 

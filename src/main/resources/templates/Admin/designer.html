@@ -40,10 +40,10 @@
         <!-- Logo -->
         <div class="header-left">
             <a href="index.html" class="logo">
-                <img src="../../Path/admin/img/logo.png" alt="Logo">
+                <img src="../../Path/image/newlogo.png" alt="Logo">
             </a>
             <a href="index.html" class="logo logo-small">
-                <img src="../../Path/admin/img/logo-small.png" alt="Logo" width="30" height="30">
+                <img src="../../Path/image/newlogo.png" alt="Logo" width="30" height="30">
             </a>
         </div>
         <!-- /Logo -->
@@ -329,7 +329,7 @@
                                 <h6 class="text-muted" th:text="${designer.tel}"></h6>
                                 <h6 class="text-muted" th:text="${designer.email}"></h6>
                                 <div class="user-Location"><i class="fa fa-map-marker"></i><span
-                                        th:text="${designer.location}"></span></div>
+                                        th:text="${designer.city}"></span></div>
                             </div>
                             <div class="col-auto profile-btn">
                                 <a class="btn btn-primary" data-toggle="modal" href="#edit_personal_details_1">
@@ -437,14 +437,24 @@
                                                                            th:value="${designer.email}">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12">
+                                                            <div class="col-12 col-sm-6">
                                                                 <div class="form-group">
-                                                                    <label>地址</label>
-                                                                    <input name="location" type="text"
-                                                                           class="form-control"
-                                                                           th:value="${designer.location}">
+                                                                    <label>所在省份</label>
+                                                                    <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
+                                                                        <option>请选择省份</option>
+                                                                        <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}" th:selected="${province.id} == ${provinceNow.id}"></option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>所在城市</label>
+                                                                    <select class="form-control" id="location" name="location">
+                                                                        <option>请选择城市</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <input id="location_hidden" th:value="${designer.location}" type="hidden">
                                                             <input name="id" type="hidden" class="hidden"
                                                                    th:value="${designer.id}">
                                                             <input name="pic" type="hidden" class="hidden"
@@ -626,6 +636,45 @@
         var formText = document.getElementById("designerStyle");
         formText.value = styleText;
     }
+    var cityNowId = document.getElementById("location_hidden").value;
+    $(function () {
+        var provinceNow = document.getElementById("province");
+        changeProvince(provinceNow);
+    });
+    function changeProvince(now){
+        $.ajax({
+            url: "/queryCity/"+now.options[now.options.selectedIndex].value,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                /*这个方法里是ajax发送请求成功之后执行的代码*/
+                var province = now;
+                var city = document.getElementById("location");
+                var opt = now.options.selectedIndex;
+                var j = 0;
+                var length=city.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for(i=0;i<length;i++){
+                    city.removeChild(city.options[0]);
+                }
+                /**
+                 * 添加新选项
+                 */
+                for (i=0;i<data.length;i++) {
+                    // console.log(data[i].district_name);
+                    city.options[j++] = new Option(data[i].district_name, data[i].id);
+                    if (data[i].id == cityNowId){
+                        city.options[j-1].selected = true;
+                    }
+                }
+            },
+            error: function(msg){
+                alert("ajax连接异常："+msg);
+            }
+        });
+    };
 </script>
 </body>
 <style>

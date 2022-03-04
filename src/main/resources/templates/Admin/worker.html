@@ -423,7 +423,7 @@
                               </div>
                               <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                  <label>所在城市</label>
+                                  <label>所在省份</label>
                                   <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
                                     <option>请选择省份</option>
                                     <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}" th:selected="${province.id} == ${provinceNow.id}"></option>

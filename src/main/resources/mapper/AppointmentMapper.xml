@@ -42,10 +42,18 @@
         WHERE appointmentId=#{id}
     </update>
 
-
     <update id="updateAppointmentStatusEveryday" parameterType="Appointment">
         UPDATE appointment SET STATUS = 1 WHERE
-        0 > DATEDIFF(DAY , SYSDATE())
+        0 > DATEDIFF(day , SYSDATE())
     </update>
+
+    <select id="selectAppointmentByDesignerId" resultType="Appointment">
+        select * from appointment where designerId = #{id}
+            and status = 0
+    </select>
+
+    <select id="selectAppointmentAllByDesignerId" resultType="Appointment">
+        select * from appointment where designerId = #{id}
+    </select>
 
 </mapper>

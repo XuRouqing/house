@@ -18,4 +18,6 @@ public interface AppointmentMapper {
     List<Appointment> selectAppointmentByCustomer(int customerId);
     void updateAppointmentStatus(int id, int status);
     void updateAppointmentStatusEveryday();
+    public List<Appointment> selectAppointmentByDesignerId(int id);
+    public List<Appointment> selectAppointmentAllByDesignerId(int id);
 }

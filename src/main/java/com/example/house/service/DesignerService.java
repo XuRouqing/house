@@ -20,4 +20,7 @@ public interface DesignerService {
     public List<Index> getDesignerLevel();
     public List<Index> getDesignerStyle();
     public int getDesignerNum();
+    public int getHouseNumByDesignerId(int id);
+    public int getOrderNumByDesignerId(int id);
+    public Designer getDesignerByUserId(int id);
 }

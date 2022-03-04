@@ -11,40 +11,52 @@
     </insert>
 
     <select id="selectDesignerById" resultType="Designer">
-        SELECT designer.*, level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR '、') style FROM designer,designerlevel LEVEL,styleindex style
+        SELECT designer.*, level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR '、') style, CONCAT(d2.district_name,d1.district_name) city FROM designer,designerlevel LEVEL,styleindex style, district d1, district d2
         WHERE designer.levelValue = level.id
           AND FIND_IN_SET(style.id,designer.styleValue)
           AND designer.id = #{id}
+          AND d1.id = designer.location
+          AND d1.pid = d2.id
     </select>
 
     <select id="selectDesignerAll" resultType="Designer">
-        SELECT designer.*, level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR ',') style FROM designer,designerlevel level,styleindex style
+        SELECT designer.*, level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR ',') style, CONCAT(d2.district_name,d1.district_name) city FROM designer,designerlevel level,styleindex style, district d1, district d2
         WHERE designer.levelValue = level.id
           AND FIND_IN_SET(style.id,designer.styleValue)
+          AND d1.id = designer.location
+          AND d1.pid = d2.id
         GROUP BY designer.id
     </select>
 
     <select id="selectDesignerBySL" resultType="Designer">
-        select designer.*,level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR '、') style from designer, designerlevel level,styleindex style
+        select designer.*,level.name LEVEL,GROUP_CONCAT(style.name SEPARATOR '、') style, CONCAT(d2.district_name,d1.district_name) city from designer, designerlevel level,styleindex style, district d1, district d2
         where 1=1
-            and (styleValue like CONCAT(CONCAT('%',#{style},'%')) or #{style}='')
-            and (levelValue=#{level} or #{level}='')
-            and designer.levelValue = level.id
-            and FIND_IN_SET(style.id,designer.styleValue)
+          and (styleValue like CONCAT(CONCAT('%',#{style},'%')) or #{style}='')
+          and (levelValue=#{level} or #{level}='')
+          and designer.levelValue = level.id
+          and FIND_IN_SET(style.id,designer.styleValue)
+          AND d1.id = designer.location
+          AND d1.pid = d2.id
         GROUP BY designer.id
     </select>
 
     <select id="selectTopNDesigner" resultType="Designer">
-        select * from designer limit #{n}
+        SELECT designer.*, CONCAT(d2.district_name,d1.district_name) city FROM designer, district d1, district d2
+        WHERE 1=1
+          AND d1.id = designer.location
+          AND d1.pid = d2.id
+            LIMIT #{n}
     </select>
 
     <select id="findDesignerByName" resultType="Designer">
-        select * from designer
+        select designer.*, CONCAT(d2.district_name,d1.district_name) city from designer, district d1, district d2
         where (name like CONCAT(CONCAT('%',#{name},'%')) or #{name}='')
+          AND d1.id = designer.location
+          AND d1.pid = d2.id
     </select>
 
     <update id="modifyDesignerAll" parameterType="Designer">
-        UPDATE designer SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},email=#{email},age=#{age},form=#{form}
+        UPDATE designer SET name=#{name},gender=#{gender},workingAge=#{workingAge},levelValue=#{levelValue},styleValue=#{styleValue},represent=#{represent},tel=#{tel},email=#{email},age=#{age},form=#{form},pic=#{pic}
         WHERE id=#{id}
     </update>
 
@@ -74,4 +86,26 @@
     <select id="selectDesignerNum" resultType="int">
         SELECT count(*) from designer
     </select>
+
+    <select id="selectHouseNumByDesignerId" resultType="int">
+        SELECT count(*) from house where designerId = #{id}
+    </select>
+
+    <select id="selectOrderNumByDesignerId" resultType="int">
+        SELECT SUM(sum1) total FROM(
+            SELECT count(*) as sum1 FROM appointment WHERE designerId = #{id}
+            UNION ALL
+            SELECT count(*) as sum1 FROM book WHERE designerId = #{id})
+            as total
+    </select>
+
+    <select id="selectDesignerByUserId" resultType="Designer">
+        select designer.*, CONCAT(d2.district_name,d1.district_name) city
+        from designer, district d1, district d2
+        where userId = #{id}
+          AND d1.id = designer.location
+          AND d1.pid = d2.id
+    </select>
+
+
 </mapper>

@@ -90,4 +90,21 @@ public class DesignerServiceImp implements DesignerService  {
     public int getDesignerNum(){
         return designerMapper.selectDesignerNum();
     }
+
+    @Override
+    public int getHouseNumByDesignerId(int id){
+        return designerMapper.selectHouseNumByDesignerId(id);
+    }
+
+
+    @Override
+    public int getOrderNumByDesignerId(int id){
+        return designerMapper.selectOrderNumByDesignerId(id);
+    }
+
+    @Override
+    public Designer getDesignerByUserId(int id){
+        return designerMapper.selectDesignerByUserId(id);
+    }
+
 }

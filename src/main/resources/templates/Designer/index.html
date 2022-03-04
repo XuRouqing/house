@@ -16,21 +16,15 @@
     <!-- Feathericon CSS -->
     <link rel="stylesheet" href="../Path/admin/css/feathericon.min.css">
 
-    <!-- Datatables CSS -->
-    <link rel="stylesheet" href="../Path/admin/plugins/datatables/datatables.min.css">
+    <link rel="stylesheet" href="../Path/admin/plugins/morris/morris.css">
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="../Path/admin/css/style.css">
-
-    <!-- Select2 CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/select2.min.css">
 
     <!--[if lt IE 9]>
     <script src="../Path/admin/js/html5shiv.min.js"></script>
     <script src="../Path/admin/js/respond.min.js"></script>
     <![endif]-->
-
-    <link rel="stylesheet" type="text/css" href="../Path/admin/css/jquery.multiselect.css"/>
 </head>
 <body>
 
@@ -156,23 +150,22 @@
             <!-- User Menu -->
             <li class="nav-item dropdown has-arrow">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                    <span class="user-img"><img class="rounded-circle" src="../Path/admin/img/profiles/avatar-01.jpg"
-                                                width="31" alt="Ryan Taylor"></span>
+                    <span class="user-img"><img class="rounded-circle" src="../Path/admin/img/profiles/admin.png"
+                                                width="31" alt="设计师"></span>
                 </a>
                 <div class="dropdown-menu">
                     <div class="user-header">
                         <div class="avatar avatar-sm">
-                            <img src="../Path/admin/img/profiles/avatar-01.jpg" alt="User Image"
+                            <img src="../Path/admin/img/profiles/admin.png" alt="User Image"
                                  class="avatar-img rounded-circle">
                         </div>
                         <div class="user-text">
-                            <h6>Ryan Taylor</h6>
-                            <p class="text-muted mb-0">Administrator</p>
+                            <h6 th:text="${#request.getSession().getAttribute('name')}"></h6>
+                            <p class="text-muted mb-0">设计师</p>
                         </div>
                     </div>
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="settings.html">设置</a>
+                    <a class="dropdown-item" th:href="@{/index}">游客界面</a>
                 </div>
             </li>
             <!-- /User Menu -->
@@ -191,17 +184,14 @@
                     <li class="menu-title">
                         <span>Main</span>
                     </li>
-                    <li>
-                        <a th:href="@{/admin/index}"><i class="fe fe-home"></i> <span>首页</span></a>
-                    </li>
                     <li class="active">
-                        <a th:href="@{/admin/designerList}"><i class="fe fe-layout"></i> <span>设计师列表</span></a>
+                        <a th:href="@{/designer/index}"><i class="fe fe-home"></i> <span>首页</span></a>
                     </li>
                     <li>
-                        <a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
+                        <a th:href="@{/designer/account}"><i class="fe fe-layout"></i> <span>个人信息</span></a>
                     </li>
                     <li>
-                        <a th:href="@{/admin/appointmentList}"><i class="fe fe-user-plus"></i> <span>设计师预约列表</span></a>
+                        <a th:href="@{/designer/appointmentList}"><i class="fe fe-layout"></i> <span>预约列表</span></a>
                     </li>
                     <li>
                         <a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
@@ -232,8 +222,8 @@
                         <a href="#"><i class="fe fe-document"></i> <span> Authentication </span> <span
                                 class="menu-arrow"></span></a>
                         <ul style="display: none;">
-                            <li><a href="login.html"> Login </a></li>
-                            <li><a href="register.html"> Register </a></li>
+                            <li><a href="../login.html"> Login </a></li>
+                            <li><a href="../register.html"> Register </a></li>
                             <li><a href="forgot-password.html"> Forgot Password </a></li>
                             <li><a href="lock-screen.html"> Lock Screen </a></li>
                         </ul>
@@ -307,22 +297,63 @@
 
     <!-- Page Wrapper -->
     <div class="page-wrapper">
+
         <div class="content container-fluid">
 
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row">
-                    <div class="col-sm-11">
-                        <h3 class="page-title">设计师列表</h3>
-                    </div>
-                    <div class="col-sm-1">
-                        <a class="btn btn-sm bg-primary-light mr-2" data-toggle="modal" href="#edit_personal_details">
-                            <i class="fe fe-plus"></i> 添加
-                        </a>
+                    <div class="col-sm-12">
+                        <h3 class="page-title">欢迎 设计师!</h3>
                     </div>
                 </div>
             </div>
             <!-- /Page Header -->
+
+            <div class="row">
+                <div class="col-xl-6 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dash-widget-header">
+										<span class="dash-widget-icon text-success">
+											<i class="fe fe-credit-card"></i>
+										</span>
+                                <div class="dash-count">
+                                    <h3 th:text="${houseNum}"></h3>
+                                </div>
+                            </div>
+                            <div class="dash-widget-info">
+
+                                <h6 class="text-muted">案例个数</h6>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-success w-50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dash-widget-header">
+										<span class="dash-widget-icon text-warning border-warning">
+											<i class="fe fe-folder"></i>
+										</span>
+                                <div class="dash-count">
+                                    <h3 th:text="${orderNum}"></h3>
+                                </div>
+                            </div>
+                            <div class="dash-widget-info">
+
+                                <h6 class="text-muted">预约数量</h6>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-warning w-50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
 
@@ -333,50 +364,44 @@
                                 <table class="datatable table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th style="width: 5%">ID</th>
-                                        <th style="width: 15%">姓名</th>
-                                        <th style="width: 10%">性别</th>
-                                        <th style="width: 10%">工龄</th>
-                                        <th style="width: 20%">等级</th>
-                                        <th style="width: 20%">联系电话</th>
-                                        <th style="width: 20%">邮箱</th>
+                                        <th width="20%">时间</th>
+                                        <th width="15%">客户名字</th>
+                                        <th width="15%">客户电话</th>
+                                        <th width="20%">客户邮箱</th>
+                                        <th width="20%">地点</th>
+                                        <th width="10%">状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="tbody">
-                                    <tr th:each="designer : ${designers}">
-                                        <td th:text="${designer.id}"></td>
+                                    <tbody>
+                                    <tr name="alist" th:each="appointment : ${appointments}">
+                                        <td><span th:text="${appointment.day}"></span> <span
+                                                class="text-primary d-block" th:text="${appointment.time}"></span></td>
+                                        <td th:text="${appointment.customerName}"></td>
+                                        <td th:text="${appointment.customerTel}"></td>
+                                        <td th:text="${appointment.customerEmail}"></td>
+                                        <td th:text="${appointment.location}"></td>
                                         <td>
-                                            <h2 class="table-avatar">
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
-                                                                                      th:src="${designer.pic}"
-                                                                                      alt="User Image"></a>
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   th:text="${designer.name}"></a>
-                                            </h2>
+                                            <div class="status-toggle">
+                                                <input type="checkbox" id="status_1" class="check"
+                                                       th:attr="data-id=${appointment.appointmentId}"
+                                                       th:value="${appointment.status}" onclick="changeStatus(this)">
+                                                <label for="status_1" class="checktoggle">checkbox</label>
+                                            </div>
                                         </td>
-                                        <td th:text="${designer.gender}"></td>
-                                        <td th:text="${designer.workingAge}"></td>
-                                        <td th:text="${designer.level}"></td>
-                                        <td th:text="${designer.tel}"></td>
-                                        <td th:text="${designer.email}"></td>
-                                        <td class="text-right">
+                                        <td>
                                             <div class="actions">
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="fe fe-pencil"></i> 编辑
-                                                </a>
                                                 <button class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                        th:attr="data-id=${designer.id},data-name=${designer.name}"
+                                                        th:attr="data-id=${appointment.appointmentId}"
                                                         href="#delete_modal">
                                                     <i class="fe fe-trash"></i> 删除
-                                                </button>
                                             </div>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div id="no_data" th:if="${appointmentNum}==0" align="center" style="margin: 20px">
+                                    <span>暂无待处理订单</span></div>
                             </div>
                         </div>
                     </div>
@@ -384,135 +409,10 @@
 
                 </div>
             </div>
+
         </div>
     </div>
     <!-- /Page Wrapper -->
-    <!-- Edit Details Modal -->
-    <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">添加设计师</h5>
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form th:action="@{/admin/addDesigner}" method="post" enctype="multipart/form-data">
-                        <div class="row form-row">
-                            <div class="col-12">
-                                <h5 class="form-title"><span>基本信息</span></h5>
-                            </div>
-<!--                            <div class="col-12">-->
-<!--                                <div class="form-group">-->
-<!--                                    <label>用户ID</label>-->
-<!--                                    <input name="userId" type="text" class="form-control">-->
-<!--                                </div>-->
-<!--                            </div>-->
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>姓名</label>
-                                    <input name="name" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>性别</label>
-                                    <input name="gender" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                            <div class="form-group">
-                                <label>照片</label>
-                                <input name="filePic" type="file" class="form-control" required>
-                            </div>
-                        </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>年龄</label>
-                                    <input name="age" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>工龄</label>
-                                    <input name="workingAge" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>地址</label>
-                                    <input name="location" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <h5 class="form-title"><span>联系方式</span></h5>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>联系电话</label>
-                                    <input name="tel" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>邮箱</label>
-                                    <input name="email" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <h5 class="form-title"><span>设计师信息</span></h5>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>等级</label>
-                                    <select class="form-control" name="levelValue">
-                                        <option th:each="level : ${designerLevel}"
-                                                th:text="${level.name}"
-                                                th:value="${level.id}">
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>风格</label>
-                                    <select class="form-control" id="styleValue"
-                                            multiple="multiple" style="width: 100%">
-                                        <option name="styleOpt"
-                                                th:each="style : ${designerStyle}"
-                                                th:text="${style.name}"
-                                                th:value="${style.id}"
-                                                th:data_id="${style.id}">
-                                    </select>
-                                    <input type="hidden" id="designerStyle"
-                                           name="styleValue">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>代表作</label>
-                                    <input name="represent" type="text"
-                                           class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>备注</label>
-                                    <input name="form" type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block"
-                                onclick="test()">保存
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Edit Details Modal -->
 
     <!-- Delete Modal -->
     <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
@@ -527,7 +427,7 @@
                 <div class="modal-body">
                     <div class="form-content p-2">
                         <h4 class="modal-title">删除</h4>
-                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的设计师<span id="p_name"></span>吗?</p>
+                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的预约订单吗?</p>
                         <button id="delButton" type="button" class="btn btn-primary">确认</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
@@ -536,7 +436,6 @@
         </div>
     </div>
     <!-- /Delete Modal -->
-
 </div>
 <!-- /Main Wrapper -->
 
@@ -550,19 +449,18 @@
 <!-- Slimscroll JS -->
 <script src="../Path/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<!-- Datatables JS -->
-<script src="../Path/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../Path/admin/plugins/datatables/datatables.min.js"></script>
+<script src="../Path/admin/plugins/raphael/raphael.min.js"></script>
+<script src="../Path/admin/plugins/morris/morris.min.js"></script>
+<script src="../Path/admin/js/chart.morris.js"></script>
 
 <!-- Custom JS -->
 <script src="../Path/admin/js/script.js"></script>
 
-<!-- Select2 JS -->
-<script src="../Path/admin/js/select2.min.js"></script>
-
-<script src="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../Path/admin/js/jquery.multiselect.js"></script>
-<script>
+<!-- Datatables JS -->
+<!-- Datatables JS -->
+<script src="../Path/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../Path/admin/plugins/datatables/datatables.min.js"></script>
+<script th:inline="javascript">
     var id;
     var name;
     $('#delete_modal').on('show.bs.modal', function (event) {
@@ -572,13 +470,11 @@
         name = button.data("name");
         var p_id = document.getElementById("p_id");
         p_id.appendChild(document.createTextNode(id));
-        var p_name = document.getElementById("p_name");
-        p_name.appendChild(document.createTextNode(name));
     });
     $('#delButton').on('click', function () {
         $(this).button('complete');
         $.ajax({
-            url: '/admin/delDesigner',
+            url: '/designer/delAppointment',
             type: 'post',
             data: {id: id},
             error: function () {
@@ -595,66 +491,32 @@
             }
         });
     });
-    $(function () {
-        $("#styleValue").multiselect({
-            checkAllText: "全选",
-            uncheckAllText: "全不选",
-            selectedList: 8
-        });
-        ifSelected();
-    });
 
-    function test() {
-        var styleText = "";
-        var style = document.getElementsByName("multiselect_styleValue");
-        for (var i = 0; i < style.length; i++) {
-            if (style[i].getAttribute("aria-selected") == "true") {
-                styleText += style[i].value + ",";
-            }
-            // console.log(style[i].value);
+    function changeStatus(obj) {
+        var id = obj.getAttribute("data-id");
+        var a = confirm("是否确认该订单已完成？确认后不可修改");
+        if (a == false) {
+            obj.checked = false;
+        } else if (a == true) {
+            $.ajax({
+                url: '/designer/changeAppointmentStatus',
+                type: 'post',
+                data: {id: id, status: 1},
+                error: function () {
+                    alert('出现错误！');
+                }, success: function (data) {
+                    if (data.indexOf('error') < 0) {
+                        alert("该订单已完成");
+                        obj.parentNode.parentNode.parentNode.remove();
+                        // location.reload();
+                    } else {
+                        alert(data);
+                    }
+                }
+            });
         }
-        styleText = styleText.substring(0, styleText.length - 1);
-        var formText = document.getElementById("designerStyle");
-        formText.value = styleText;
+
     }
 </script>
 </body>
-<style>
-    .ui-widget-content {
-        border: 1px solid #ddd;
-        background: white;
-        color: #333;
-    }
-
-    .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-        border: 1px solid #a4ecfc;
-        background: white;
-        color: #333;
-        font-size: 15px;
-        height: 40px;
-        border-radius: 7px;
-        padding: 0.375rem 0.75rem;
-    }
-
-    ul {
-        list-style-type: none;
-    }
-
-    .ui-multiselect {
-        border: 1px solid #ddd;
-        box-shadow: none;
-        color: #333;
-        font-size: 15px;
-        height: 40px;
-        display: block;
-        width: 100%;
-        padding: 0.375rem 0.75rem;
-        font-weight: 400;
-        line-height: 1.5;
-        background-color: #fff;
-        background-clip: padding-box;
-        border-radius: 0.25rem;
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    }
-</style>
 </html>

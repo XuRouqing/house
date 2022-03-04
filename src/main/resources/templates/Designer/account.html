@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我爱我家装修公司</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Doccure - Basic Inputs</title>
+
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="../Path/image/newlogo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../Path/admin/img/favicon.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -16,21 +17,14 @@
     <!-- Feathericon CSS -->
     <link rel="stylesheet" href="../Path/admin/css/feathericon.min.css">
 
-    <!-- Datatables CSS -->
-    <link rel="stylesheet" href="../Path/admin/plugins/datatables/datatables.min.css">
-
     <!-- Main CSS -->
     <link rel="stylesheet" href="../Path/admin/css/style.css">
-
-    <!-- Select2 CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/select2.min.css">
 
     <!--[if lt IE 9]>
     <script src="../Path/admin/js/html5shiv.min.js"></script>
     <script src="../Path/admin/js/respond.min.js"></script>
     <![endif]-->
-
-    <link rel="stylesheet" type="text/css" href="../Path/admin/css/jquery.multiselect.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Path/admin/css/jquery.multiselect.css"/>
 </head>
 <body>
 
@@ -43,10 +37,10 @@
         <!-- Logo -->
         <div class="header-left">
             <a href="index.html" class="logo">
-                <img src="../Path/image/newlogo.png" alt="Logo">
+                <img src="../Path/admin/img/logo.png" alt="Logo">
             </a>
             <a href="index.html" class="logo logo-small">
-                <img src="../Path/image/newlogo.png" alt="Logo" width="30" height="30">
+                <img src="../Path/admin/img/logo-small.png" alt="Logo" width="30" height="30">
             </a>
         </div>
         <!-- /Logo -->
@@ -192,16 +186,13 @@
                         <span>Main</span>
                     </li>
                     <li>
-                        <a th:href="@{/admin/index}"><i class="fe fe-home"></i> <span>首页</span></a>
+                        <a th:href="@{/designer/index}"><i class="fe fe-home"></i> <span>首页</span></a>
                     </li>
                     <li class="active">
-                        <a th:href="@{/admin/designerList}"><i class="fe fe-layout"></i> <span>设计师列表</span></a>
+                        <a th:href="@{/designer/account}"><i class="fe fe-layout"></i> <span>个人信息</span></a>
                     </li>
                     <li>
-                        <a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
-                    </li>
-                    <li>
-                        <a th:href="@{/admin/appointmentList}"><i class="fe fe-user-plus"></i> <span>设计师预约列表</span></a>
+                        <a th:href="@{/designer/appointmentList}"><i class="fe fe-layout"></i> <span>预约列表</span></a>
                     </li>
                     <li>
                         <a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
@@ -216,8 +207,7 @@
                         <a href="settings.html"><i class="fe fe-vector"></i> <span>Settings</span></a>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-document"></i> <span> Reports</span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-document"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="invoice-report.html">Invoice Reports</a></li>
                         </ul>
@@ -229,8 +219,7 @@
                         <a href="profile.html"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-document"></i> <span> Authentication </span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-document"></i> <span> Authentication </span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="login.html"> Login </a></li>
                             <li><a href="register.html"> Register </a></li>
@@ -239,8 +228,7 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-warning"></i> <span> Error Pages </span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-warning"></i> <span> Error Pages </span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="error-404.html">404 Error </a></li>
                             <li><a href="error-500.html">500 Error </a></li>
@@ -256,8 +244,7 @@
                         <a href="components.html"><i class="fe fe-vector"></i> <span>Components</span></a>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-layout"></i> <span> Forms </span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-layout"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
                             <li><a href="form-input-groups.html">Input Groups </a></li>
@@ -268,24 +255,21 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="#"><i class="fe fe-table"></i> <span> Tables </span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="#"><i class="fe fe-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="tables-basic.html">Basic Tables </a></li>
                             <li><a href="data-tables.html">Data Table </a></li>
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Multi Level</span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li class="submenu">
                                 <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
                                 <ul style="display: none;">
                                     <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
                                     <li class="submenu">
-                                        <a href="javascript:void(0);"> <span> Level 2</span> <span
-                                                class="menu-arrow"></span></a>
+                                        <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
                                         <ul style="display: none;">
                                             <li><a href="javascript:void(0);">Level 3</a></li>
                                             <li><a href="javascript:void(0);">Level 3</a></li>
@@ -312,230 +296,156 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row">
-                    <div class="col-sm-11">
-                        <h3 class="page-title">设计师列表</h3>
-                    </div>
-                    <div class="col-sm-1">
-                        <a class="btn btn-sm bg-primary-light mr-2" data-toggle="modal" href="#edit_personal_details">
-                            <i class="fe fe-plus"></i> 添加
-                        </a>
+                    <div class="col-sm-12">
+                        <h3 class="page-title">个人信息</h3>
                     </div>
                 </div>
             </div>
             <!-- /Page Header -->
+
             <div class="row">
-                <div class="col-md-12">
-
-                    <!-- Recent Orders -->
+                <div class="col-lg-12">
                     <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">个人信息修改</h4>
+                        </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="datatable table table-hover table-center mb-0">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 5%">ID</th>
-                                        <th style="width: 15%">姓名</th>
-                                        <th style="width: 10%">性别</th>
-                                        <th style="width: 10%">工龄</th>
-                                        <th style="width: 20%">等级</th>
-                                        <th style="width: 20%">联系电话</th>
-                                        <th style="width: 20%">邮箱</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="tbody">
-                                    <tr th:each="designer : ${designers}">
-                                        <td th:text="${designer.id}"></td>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
-                                                                                      th:src="${designer.pic}"
-                                                                                      alt="User Image"></a>
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   th:text="${designer.name}"></a>
-                                            </h2>
-                                        </td>
-                                        <td th:text="${designer.gender}"></td>
-                                        <td th:text="${designer.workingAge}"></td>
-                                        <td th:text="${designer.level}"></td>
-                                        <td th:text="${designer.tel}"></td>
-                                        <td th:text="${designer.email}"></td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="fe fe-pencil"></i> 编辑
-                                                </a>
-                                                <button class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                        th:attr="data-id=${designer.id},data-name=${designer.name}"
-                                                        href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> 删除
-                                                </button>
+                            <form th:action="@{/designer/modifyAccount}" method="post" enctype="multipart/form-data">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">姓名</label>
+                                    <div class="col-md-10">
+                                        <input name="name" th:value="${designer.name}" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">照片</label>
+                                    <div class="col-md-10">
+                                        <div class="file" style="width: 100%">
+                                            <input id="filePic" name="filePic" type="file" class="form-control">
+                                            请选择文件
+                                            <div id="image-holder">
+                                                <img th:src="${designer.pic}">
                                             </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Recent Orders -->
+                                        </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Page Wrapper -->
-    <!-- Edit Details Modal -->
-    <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">添加设计师</h5>
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form th:action="@{/admin/addDesigner}" method="post" enctype="multipart/form-data">
-                        <div class="row form-row">
-                            <div class="col-12">
-                                <h5 class="form-title"><span>基本信息</span></h5>
-                            </div>
-<!--                            <div class="col-12">-->
-<!--                                <div class="form-group">-->
-<!--                                    <label>用户ID</label>-->
-<!--                                    <input name="userId" type="text" class="form-control">-->
-<!--                                </div>-->
-<!--                            </div>-->
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>姓名</label>
-                                    <input name="name" type="text" class="form-control" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>性别</label>
-                                    <input name="gender" type="text" class="form-control" required>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">性别</label>
+                                    <div class="col-md-10">
+                                        <div class="radio">
+                                            <label th:if="${designer.gender} eq '男'">
+                                                <input type="radio" name="gender" th:value="男" checked>男
+                                                <input type="radio" name="gender" th:value="女">女
+                                            </label>
+                                            <label th:if="${designer.gender} eq '女'">
+                                                <input type="radio" name="gender" th:value="男">男
+                                                <input type="radio" name="gender" th:value="女" checked>女
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                            <div class="form-group">
-                                <label>照片</label>
-                                <input name="filePic" type="file" class="form-control" required>
-                            </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">年龄</label>
+                                    <div class="col-md-10">
+                                        <input name="age" th:value="${designer.age}" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">工龄</label>
+                                    <div class="col-md-10">
+                                        <input name="workingAge" th:value="${designer.workingAge}" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">等级</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" name="levelValue">
+                                            <option th:each="level : ${designerLevel}"
+                                                    th:text="${level.name}"
+                                                    th:value="${level.id}"
+                                                    th:selected="${designer.levelValue} == ${level.id}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">风格</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="styleValue"
+                                                multiple="multiple" style="width: 100%">
+                                            <option name="styleOpt" id="styleOpt"
+                                                    th:each="style : ${styleIndex}"
+                                                    th:text="${style.name}"
+                                                    th:value="${style.id}"
+                                                    th:data_id="${style.id}">
+                                        </select>
+                                        <input type="hidden" id="designerStyle"
+                                               name="styleValue">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">代表作</label>
+                                    <div class="col-md-10">
+                                        <input name="represent" th:value="${designer.represent}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">联系电话</label>
+                                    <div class="col-md-10">
+                                        <input name="tel" th:value="${designer.tel}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">邮箱</label>
+                                    <div class="col-md-10">
+                                        <input name="email" th:value="${designer.email}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">地址(所在城市)</label>
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
+                                                <option>请选择省份</option>
+                                                <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}" th:selected="${province.id} == ${provinceNow.id}"></option>
+                                            </select>
+                                        </div>
+                                        <input id="location_hidden" th:value="${designer.location}" type="hidden">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <select class="form-control" id="location" name="location">
+                                                <option>请选择城市</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">备注</label>
+                                    <div class="col-md-10">
+                                        <textarea name="form" rows="5" cols="5" class="form-control"
+                                                  th:value="${designer.form}"
+                                                  placeholder="备注"></textarea>
+                                    </div>
+                                </div>
+                                <input name="id" th:value="${designer.id}" type="hidden">
+                                <input name="userId" th:value="${designer.userId}" type="hidden">
+                                <input name="pic" th:value="${designer.pic}" type="hidden">
+                                <div class="submit-section proceed-btn text-right">
+                                    <button type="submit" class="btn submit-btn" data-toggle="modal"
+                                            data-target=".bs-example-modal-lg" onclick="sub()">保存
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>年龄</label>
-                                    <input name="age" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>工龄</label>
-                                    <input name="workingAge" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>地址</label>
-                                    <input name="location" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <h5 class="form-title"><span>联系方式</span></h5>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>联系电话</label>
-                                    <input name="tel" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>邮箱</label>
-                                    <input name="email" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <h5 class="form-title"><span>设计师信息</span></h5>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>等级</label>
-                                    <select class="form-control" name="levelValue">
-                                        <option th:each="level : ${designerLevel}"
-                                                th:text="${level.name}"
-                                                th:value="${level.id}">
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>风格</label>
-                                    <select class="form-control" id="styleValue"
-                                            multiple="multiple" style="width: 100%">
-                                        <option name="styleOpt"
-                                                th:each="style : ${designerStyle}"
-                                                th:text="${style.name}"
-                                                th:value="${style.id}"
-                                                th:data_id="${style.id}">
-                                    </select>
-                                    <input type="hidden" id="designerStyle"
-                                           name="styleValue">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>代表作</label>
-                                    <input name="represent" type="text"
-                                           class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>备注</label>
-                                    <input name="form" type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block"
-                                onclick="test()">保存
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Edit Details Modal -->
-
-    <!-- Delete Modal -->
-    <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <!--	<div class="modal-header">
-                        <h5 class="modal-title">Delete</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>-->
-                <div class="modal-body">
-                    <div class="form-content p-2">
-                        <h4 class="modal-title">删除</h4>
-                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的设计师<span id="p_name"></span>吗?</p>
-                        <button id="delButton" type="button" class="btn btn-primary">确认</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-    <!-- /Delete Modal -->
+    <!-- /Main Wrapper -->
 
 </div>
 <!-- /Main Wrapper -->
@@ -550,51 +460,13 @@
 <!-- Slimscroll JS -->
 <script src="../Path/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<!-- Datatables JS -->
-<script src="../Path/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../Path/admin/plugins/datatables/datatables.min.js"></script>
-
 <!-- Custom JS -->
 <script src="../Path/admin/js/script.js"></script>
 
-<!-- Select2 JS -->
-<script src="../Path/admin/js/select2.min.js"></script>
-
 <script src="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../Path/admin/js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="../../Path/admin/js/jquery.multiselect.js"></script>
 <script>
-    var id;
-    var name;
-    $('#delete_modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var modal = $(this);
-        id = button.data("id");
-        name = button.data("name");
-        var p_id = document.getElementById("p_id");
-        p_id.appendChild(document.createTextNode(id));
-        var p_name = document.getElementById("p_name");
-        p_name.appendChild(document.createTextNode(name));
-    });
-    $('#delButton').on('click', function () {
-        $(this).button('complete');
-        $.ajax({
-            url: '/admin/delDesigner',
-            type: 'post',
-            data: {id: id},
-            error: function () {
-                alert('出现错误！');
-            }, success: function (data) {
-                if (data.indexOf('error') < 0) {
-                    //模态框隐藏
-                    $('#delete_modal').modal('hide');
-                    alert("删除成功");
-                    location.reload();
-                } else {
-                    alert(data);
-                }
-            }
-        });
-    });
+    let styleList = [[${styleList}]];
     $(function () {
         $("#styleValue").multiselect({
             checkAllText: "全选",
@@ -604,7 +476,76 @@
         ifSelected();
     });
 
-    function test() {
+    //加载默认选项
+    function ifSelected() {
+        var opt = document.getElementsByName("multiselect_styleValue");
+        for (var i = 0; i < opt.length; i++) {
+            if (styleList.indexOf(parseInt(opt[i].value)) >= 0) {
+                // 模拟点击元素，在加载时选择
+                opt[i].click();
+            }
+        }
+    }
+
+    $("#filePic").on('change', function () {
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = $("#image-holder");
+            image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+            }
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
+    });
+
+    var cityNowId = document.getElementById("location_hidden").value;
+    $(function () {
+        var provinceNow = document.getElementById("province");
+        changeProvince(provinceNow);
+    });
+    function changeProvince(now){
+        $.ajax({
+            url: "/queryCity/"+now.options[now.options.selectedIndex].value,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                /*这个方法里是ajax发送请求成功之后执行的代码*/
+                var province = now;
+                var city = document.getElementById("location");
+                var opt = now.options.selectedIndex;
+                var j = 0;
+                var length=city.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for(i=0;i<length;i++){
+                    city.removeChild(city.options[0]);
+                }
+                /**
+                 * 添加新选项
+                 */
+                for (i=0;i<data.length;i++) {
+                    // console.log(data[i].district_name);
+                    city.options[j++] = new Option(data[i].district_name, data[i].id);
+                    if (data[i].id == cityNowId){
+                        city.options[j-1].selected = true;
+                    }
+                }
+            },
+            error: function(msg){
+                alert("ajax连接异常："+msg);
+            }
+        });
+    };
+
+    function sub() {
         var styleText = "";
         var style = document.getElementsByName("multiselect_styleValue");
         for (var i = 0; i < style.length; i++) {
@@ -620,6 +561,32 @@
 </script>
 </body>
 <style>
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #ffffff;
+        border: 1px solid #d1eeff;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+    }
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+        -ms-filter: 'alpha(opacity=0)';
+    }
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
     .ui-widget-content {
         border: 1px solid #ddd;
         background: white;
