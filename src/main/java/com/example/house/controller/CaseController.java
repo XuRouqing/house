@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -183,5 +184,16 @@ public class CaseController {
             roomService.modifyRoom(rooms[i]);
         }
         return "redirect:/case/addCase";
+    }
+
+    @ResponseBody
+    @PostMapping("/delCase")
+    public String delCase(Model model, int id){
+        try {
+            houseService.deleteHouse(id);
+            return "success";
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
 }

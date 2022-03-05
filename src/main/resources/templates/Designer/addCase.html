@@ -1,0 +1,1050 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>设计师-添加案例</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../Path/admin/img/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="../Path/admin/css/font-awesome.min.css">
+
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="../Path/admin/css/feathericon.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../Path/admin/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../Path/admin/js/html5shiv.min.js"></script>
+    <script src="../Path/admin/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../../Path/admin/css/jquery.multiselect.css"/>
+</head>
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+    <!-- Header -->
+    <div class="header">
+
+        <!-- Logo -->
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <img src="../Path/admin/img/logo.png" alt="Logo">
+            </a>
+            <a href="index.html" class="logo logo-small">
+                <img src="../Path/admin/img/logo-small.png" alt="Logo" width="30" height="30">
+            </a>
+        </div>
+        <!-- /Logo -->
+
+        <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fe fe-text-align-left"></i>
+        </a>
+
+        <div class="top-nav-search">
+            <form>
+                <input type="text" class="form-control" placeholder="Search here">
+                <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <a class="mobile_btn" id="mobile_btn">
+            <i class="fa fa-bars"></i>
+        </a>
+        <!-- /Mobile Menu Toggle -->
+
+        <!-- Header Right Menu -->
+        <ul class="nav user-menu">
+
+            <!-- Notifications -->
+            <li class="nav-item dropdown noti-dropdown">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
+                </a>
+                <div class="dropdown-menu notifications">
+                    <div class="topnav-dropdown-header">
+                        <span class="notification-title">Notifications</span>
+                        <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                    </div>
+                    <div class="noti-content">
+                        <ul class="notification-list">
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media">
+												<span class="avatar avatar-sm">
+													<img class="avatar-img rounded-circle" alt="User Image"
+                                                         src="../Path/admin/img/doctors/doctor-thumb-01.jpg">
+												</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">Dr. Ruby Perrin</span>
+                                                Schedule <span class="noti-title">her appointment</span></p>
+                                            <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media">
+												<span class="avatar avatar-sm">
+													<img class="avatar-img rounded-circle" alt="User Image"
+                                                         src="../Path/admin/img/patients/patient1.jpg">
+												</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">Charlene Reed</span> has
+                                                booked her appointment to <span
+                                                        class="noti-title">Dr. Ruby Perrin</span></p>
+                                            <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media">
+												<span class="avatar avatar-sm">
+													<img class="avatar-img rounded-circle" alt="User Image"
+                                                         src="../Path/admin/img/patients/patient2.jpg">
+												</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent
+                                                a amount of $210 for his <span class="noti-title">appointment</span></p>
+                                            <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media">
+												<span class="avatar avatar-sm">
+													<img class="avatar-img rounded-circle" alt="User Image"
+                                                         src="../Path/admin/img/patients/patient3.jpg">
+												</span>
+                                        <div class="media-body">
+                                            <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a
+                                                message <span class="noti-title"> to his doctor</span></p>
+                                            <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="topnav-dropdown-footer">
+                        <a href="#">View all Notifications</a>
+                    </div>
+                </div>
+            </li>
+            <!-- /Notifications -->
+
+            <!-- User Menu -->
+            <li class="nav-item dropdown has-arrow">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img"><img class="rounded-circle" src="../Path/admin/img/profiles/avatar-01.jpg"
+                                                width="31" alt="Ryan Taylor"></span>
+                </a>
+                <div class="dropdown-menu">
+                    <div class="user-header">
+                        <div class="avatar avatar-sm">
+                            <img src="../Path/admin/img/profiles/avatar-01.jpg" alt="User Image"
+                                 class="avatar-img rounded-circle">
+                        </div>
+                        <div class="user-text">
+                            <h6>Ryan Taylor</h6>
+                            <p class="text-muted mb-0">Administrator</p>
+                        </div>
+                    </div>
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="login.html">Logout</a>
+                </div>
+            </li>
+            <!-- /User Menu -->
+
+        </ul>
+        <!-- /Header Right Menu -->
+
+    </div>
+    <!-- /Header -->
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-title">
+                        <span>Main</span>
+                    </li>
+                    <li>
+                        <a th:href="@{/designer/index}"><i class="fe fe-home"></i> <span>首页</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/designer/account}"><i class="fe fe-user"></i> <span>个人信息</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/designer/appointmentList}"><i class="fe fe-document"></i> <span>预约列表</span></a>
+                    </li>
+                    <li class="active">
+                        <a th:href="@{/designer/caseList}"><i class="fe fe-layout"></i> <span>案例列表</span></a>
+                    </li>
+                    <li>
+                        <a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
+                    </li>
+                    <li>
+                        <a href="reviews.html"><i class="fe fe-star-o"></i> <span>Reviews</span></a>
+                    </li>
+                    <li>
+                        <a href="transactions-list.html"><i class="fe fe-activity"></i> <span>Transactions</span></a>
+                    </li>
+                    <li>
+                        <a href="settings.html"><i class="fe fe-vector"></i> <span>Settings</span></a>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-document"></i> <span> Reports</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="invoice-report.html">Invoice Reports</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title">
+                        <span>Pages</span>
+                    </li>
+                    <li>
+                        <a href="profile.html"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-document"></i> <span> Authentication </span> <span
+                                class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="login.html"> Login </a></li>
+                            <li><a href="register.html"> Register </a></li>
+                            <li><a href="forgot-password.html"> Forgot Password </a></li>
+                            <li><a href="lock-screen.html"> Lock Screen </a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-warning"></i> <span> Error Pages </span> <span
+                                class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="error-404.html">404 Error </a></li>
+                            <li><a href="error-500.html">500 Error </a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="blank-page.html"><i class="fe fe-file"></i> <span>Blank Page</span></a>
+                    </li>
+                    <li class="menu-title">
+                        <span>UI Interface</span>
+                    </li>
+                    <li>
+                        <a href="components.html"><i class="fe fe-vector"></i> <span>Components</span></a>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-layout"></i> <span> Forms </span> <span
+                                class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
+                            <li><a href="form-input-groups.html">Input Groups </a></li>
+                            <li><a href="form-horizontal.html">Horizontal Form </a></li>
+                            <li><a href="form-vertical.html"> Vertical Form </a></li>
+                            <li><a href="form-mask.html"> Form Mask </a></li>
+                            <li><a href="form-validation.html"> Form Validation </a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="#"><i class="fe fe-table"></i> <span> Tables </span> <span
+                                class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a href="tables-basic.html">Basic Tables </a></li>
+                            <li><a href="data-tables.html">Data Table </a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu">
+                        <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Multi Level</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
+                                    <li class="submenu">
+                                        <a href="javascript:void(0);"> <span> Level 2</span> <span
+                                                class="menu-arrow"></span></a>
+                                        <ul style="display: none;">
+                                            <li><a href="javascript:void(0);">Level 3</a></li>
+                                            <li><a href="javascript:void(0);">Level 3</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="javascript:void(0);"> <span>Level 2</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"> <span>Level 1</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">个人信息</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">增加案例</h4>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/designer/saveCase}" method="post" enctype="multipart/form-data" onsubmit="sub()">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">案例主图</label>
+                                    <div class="col-md-10">
+                                        <div class="file" style="width: 100%">
+                                            请选择文件
+                                            <input id="mainPic" name="mainPic" type="file" class="form-control">
+                                            <div id="image-holder"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">描述</label>
+                                    <div class="col-md-10">
+                                        <input name="describe" type="text" class="form-control" placeholder="描述">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">风格</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" name="styleValue">
+                                            <option th:each="style : ${houseStyle}" th:text="${style.name}"
+                                                    th:value="${style.id}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">户型</label>
+                                    <div class="col-md-10">
+                                        <input name="houseType" type="text" class="form-control" placeholder="户型">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">面积</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" name="areaValue">
+                                            <option th:each="area : ${houseArea}" th:text="${area.name}"
+                                                    th:value="${area.id}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">装修类别</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" name="formValue">
+                                            <option th:each="form : ${houseForm}" th:text="${form.name}"
+                                                    th:value="${form.id}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">原始户型图</label>
+                                    <div class="col-md-10">
+                                        <div class="file" style="width: 100%">
+                                            <input id="original" name="original" type="file" class="form-control">
+                                            请选择文件
+                                            <div id="original-image-holder"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">平面图</label>
+                                    <div class="col-md-10">
+                                        <div class="file" style="width: 100%">
+                                            <input id="plane" name="plane" type="file" class="form-control">
+                                            请选择文件
+                                            <div id="plane-image-holder"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">价格</label>
+                                    <div class="col-md-10">
+                                        <input name="price" type="text" class="form-control" placeholder="价格">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">类型</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" name="typeValue">
+                                            <option th:each="type : ${houseType}" th:text="${type.name}"
+                                                    th:value="${type.id}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">城市</label>
+                                    <div class="col-lg-10">
+                                        <div class="row" id="local">
+                                            <div class="col-md-2">
+                                                <div>
+                                                    <select class="form-control" id="province" name="province"
+                                                            onChange="changeProvince(this)">
+                                                        <option>请选择省份</option>
+                                                        <option th:each="province : ${provinces}"
+                                                                th:text="${province.district_name}"
+                                                                th:value="${province.id}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div>
+                                                    <select class="form-control" id="city" name="city">
+                                                        <option>请选择城市</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="请输入详细地址"
+                                                       name="location">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="house_rooms">
+                                    <div id="house_room1">
+                                        <div id="room1" class="form-group">
+                                            <div class="row">
+                                                <label class="col-form-label col-md-2 form-label">房间</label>
+                                                <div class="col-lg-10">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" placeholder="房间类别"
+                                                                   name="room1_type">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="text" class="form-control" placeholder="具体类别"
+                                                                   name="room1_specificType">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control" placeholder="房间风格"
+                                                                   name="room1_style">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control" placeholder="房间价格"
+                                                                   name="room1_price">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button type="button"
+                                                                    class="btn btn-success glyphicon glyphicon-plus"
+                                                                    onclick="addRoom()">添加
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="room1_pic1_div" class="row" style="margin-top: 10px">
+                                                <label class="col-form-label col-md-3 form-label"></label>
+                                                <div class="col-md-3 file">选择文件<input type="file" class="form-control"
+                                                                                      id="room_pic1" name="room1_pic1"
+                                                                                      data-room="1" data-pic="1"
+                                                                                      onchange="changePic(this)">
+                                                    <div id="room1_pic1_imageHolder" name="room1_pic1_imageHolder"></div>
+                                                </div>
+                                                <div class="col-md-3"><input name="room1_pic1_describe" type="text"
+                                                                             class="form-control" id="room1_pic1_describe"
+                                                                             placeholder="描述"></div>
+                                                <div class="col-md-2">
+                                                    <button type="button" style="margin: 0"
+                                                            class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                            onclick="addRoomPic(this)" id="room1_pic1_btn" data-room="1"
+                                                            data-pic="2">添加房间照片
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <input name="roomNum" id="roomNum" type="hidden">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">时间</label>
+                                    <div class="col-lg-10">
+                                        <div class="row">
+                                            <div class="form-control-wrapper col-md-12">
+                                                <input id="flatpickr-tryme" class="form-control" type="text" name="time"
+                                                       placeholder="时间">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="submit-section proceed-btn text-right">
+                                    <button type="submit" class="btn submit-btn" data-toggle="modal"
+                                            data-target=".bs-example-modal-lg" onclick="sub()">保存
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /Main Wrapper -->
+
+</div>
+<!-- /Main Wrapper -->
+
+<!-- jQuery -->
+<script src="../Path/admin/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap Core JS -->
+<script src="../Path/admin/js/popper.min.js"></script>
+<script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Slimscroll JS -->
+<script src="../Path/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom JS -->
+<script src="../Path/admin/js/script.js"></script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../Path/admin/js/jquery.multiselect.js"></script>
+<script>
+    $(function () {
+        $("#styleValue").multiselect({
+            checkAllText: "全选",
+            uncheckAllText: "全不选",
+            selectedList: 8
+        });
+        ifSelected();
+    });
+
+    //加载默认选项
+    function ifSelected() {
+        var opt = document.getElementsByName("multiselect_styleValue");
+        for (var i = 0; i < opt.length; i++) {
+            if (styleList.indexOf(parseInt(opt[i].value)) >= 0) {
+                // 模拟点击元素，在加载时选择
+                opt[i].click();
+            }
+        }
+    };
+
+    $("#mainPic").on('change', function () {
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = $("#image-holder");
+            image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+            }
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
+    });
+
+    $("#original").on('change', function () {
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = $("#original-image-holder");
+            image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+            }
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
+    });
+
+    $("#plane").on('change', function () {
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = $("#plane-image-holder");
+            image_holder.empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image"
+                }).appendTo(image_holder);
+            }
+            image_holder.show();
+            console.log($(this));
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
+    });
+
+    function changePic(now){
+        console.log(now.id);
+        var nowRoom = parseInt(now.getAttribute("data-room"));
+        var nowPic = parseInt(now.getAttribute("data-pic"));
+        if (typeof (FileReader) != "undefined") {
+            var image_holder = document.getElementById("room"+nowRoom+"_pic"+nowPic+"_imageHolder");
+            image_holder.innerHTML="";
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image",
+                    "style": "width:100%"
+                }).appendTo(image_holder);
+            }
+            // image_holder.show();
+            console.log(now.files[0]);
+            reader.readAsDataURL(now.files[0]);
+        } else {
+            alert("你的浏览器不支持FileReader.");
+        }
+    }
+
+    var room = 1;//用于表示当前房间个数
+    var roomPic = new Array();//用于存放room[i]中的照片个数，从下标1开始，即当只有一个房间时显示为1
+    roomPic[1] = 1;
+    var house_rooms = document.getElementById("house_rooms");
+
+    //添加房间
+    function addRoom() {
+        room++;
+        roomPic[room] = 1;//初始化数组
+        //房间i
+        var house_roomi = document.createElement("div");
+        house_roomi.setAttribute("id", "house_room" + room);
+
+        var roomi = document.createElement("div");
+        roomi.setAttribute("id", "room" + room);
+        roomi.setAttribute("class", "form-group");
+
+        var roomi_divRow = document.createElement("div");
+        roomi_divRow.setAttribute("class","row");
+
+        var label = document.createElement("label");
+        label.setAttribute("class", "col-form-label col-md-2 form-label");
+        label.appendChild(document.createTextNode("房间"));
+
+        //第一列
+        var div0 = document.createElement("div");
+        div0.setAttribute("class", "col-lg-10");
+        var div0_1 = document.createElement("div");
+        div0_1.setAttribute("class", "row");
+
+        var div0_1_type = document.createElement("div");
+        div0_1_type.setAttribute("class", "col-md-3");
+
+        //房间类别
+        var div0_1_type_input = document.createElement("input");
+        div0_1_type_input.setAttribute("type", "text");
+        div0_1_type_input.setAttribute("class", "form-control");
+        div0_1_type_input.setAttribute("placeholder", "房间类别");
+        div0_1_type_input.setAttribute("name", "room" + room + "_type");
+
+        div0_1_type.appendChild(div0_1_type_input);
+        div0_1.appendChild(div0_1_type);
+        //房间类别
+
+        //具体类别
+        var div0_1_specificType = document.createElement("div");
+        div0_1_specificType.setAttribute("class", "col-md-3");
+
+        var div0_1_specificType_input = document.createElement("input");
+        div0_1_specificType_input.setAttribute("type", "text");
+        div0_1_specificType_input.setAttribute("class", "form-control");
+        div0_1_specificType_input.setAttribute("placeholder", "具体类别");
+        div0_1_specificType_input.setAttribute("name", "room" + room + "_specificType");
+
+        div0_1_specificType.appendChild(div0_1_specificType_input);
+        div0_1.appendChild(div0_1_specificType);
+        //具体类别
+
+        //房间风格
+        var div0_1_style = document.createElement("div");
+        div0_1_style.setAttribute("class", "col-md-2");
+
+        var div0_1_style_input = document.createElement("input");
+        div0_1_style_input.setAttribute("type", "text");
+        div0_1_style_input.setAttribute("class", "form-control");
+        div0_1_style_input.setAttribute("placeholder", "房间风格");
+        div0_1_style_input.setAttribute("name", "room" + room + "_style");
+
+        div0_1_style.appendChild(div0_1_style_input);
+        div0_1.appendChild(div0_1_style);
+        //房间风格
+
+        //房间价格
+        var div0_1_price = document.createElement("div");
+        div0_1_price.setAttribute("class", "col-md-2");
+
+        var div0_1_price_input = document.createElement("input");
+        div0_1_price_input.setAttribute("type", "text");
+        div0_1_price_input.setAttribute("class", "form-control");
+        div0_1_price_input.setAttribute("placeholder", "房间价格");
+        div0_1_price_input.setAttribute("name", "room" + room + "_price");
+
+        div0_1_price.appendChild(div0_1_price_input);
+        div0_1.appendChild(div0_1_price);
+        //房间价格
+
+        //添加房间块
+        var div0_1_addRoom = document.createElement("div");
+        div0_1_addRoom.setAttribute("class", "col-md-2");
+
+        //添加房间按钮
+        var div0_1_addRoom_btn = document.createElement("button");
+        div0_1_addRoom_btn.setAttribute("class", "btn btn-success glyphicon glyphicon-plus");
+        div0_1_addRoom_btn.setAttribute("onclick", "addRoom()");
+        div0_1_addRoom_btn.appendChild(document.createTextNode("添加"));
+        //添加房间按钮
+
+        div0_1_addRoom.appendChild(div0_1_addRoom_btn);
+        div0_1.appendChild(div0_1_addRoom);
+        //添加房间块
+
+        div0.appendChild(div0_1);
+        //第一列
+
+        //第二列，房间照片
+        var roomi_pici_div = document.createElement("div");
+        roomi_pici_div.setAttribute("class", "row");
+        roomi_pici_div.setAttribute("id", "room" + room + "_pic" + roomPic[room] + "_div");
+        roomi_pici_div.setAttribute("style", "margin-top: 10px");
+
+        var roomi_pici_label = document.createElement("label");
+        roomi_pici_label.setAttribute("class", "col-form-label col-md-3 form-label");
+
+        roomi_pici_div.appendChild(roomi_pici_label);
+
+        var roomi_pici_div_div1 = document.createElement("div");
+        roomi_pici_div_div1.setAttribute("class", "col-md-3 file");
+        roomi_pici_div_div1.appendChild(document.createTextNode("选择文件"));
+
+        //房间图片input框
+        var roomi_pici_div_div1_input = document.createElement("input");
+        roomi_pici_div_div1_input.setAttribute("type", "file");
+        roomi_pici_div_div1_input.setAttribute("class", "form-control");
+        roomi_pici_div_div1_input.setAttribute("placeholder", "房间照片")
+        roomi_pici_div_div1_input.setAttribute("id", "room" + room + "_pic" + roomPic[room]);
+        roomi_pici_div_div1_input.setAttribute("name", "room" + room + "_pic" + roomPic[room]);
+        roomi_pici_div_div1_input.setAttribute("data-room", room);
+        roomi_pici_div_div1_input.setAttribute("data-pic", roomPic[room]);
+        roomi_pici_div_div1_input.setAttribute("onChange", "changePic(this)");
+
+        roomi_pici_div_div1.appendChild(roomi_pici_div_div1_input);
+        //房间图片input框
+
+        //房间图片显示区
+        var roomi_pici_div_div1_imageHolder = document.createElement("div");
+        roomi_pici_div_div1_imageHolder.setAttribute("id", "room" + room + "_pic" + roomPic[room] + "_imageHolder");
+        //id
+
+        roomi_pici_div_div1.appendChild(roomi_pici_div_div1_imageHolder);
+        //房间图片显示区
+        roomi_pici_div.appendChild(roomi_pici_div_div1);
+
+        //房间照片描述
+        var roomi_pici_div_div2 = document.createElement("div");
+        roomi_pici_div_div2.setAttribute("class", "col-md-3");
+
+        //房间照片描述输入框
+        var roomi_pici_div_div2_input = document.createElement("input");
+        roomi_pici_div_div2_input.setAttribute("type", "text");
+        roomi_pici_div_div2_input.setAttribute("class", "form-control");
+        roomi_pici_div_div2_input.setAttribute("id", "room" + room + "_pic" + roomPic[room] + "_describe");
+        roomi_pici_div_div2_input.setAttribute("name", "room" + room + "_pic" + roomPic[room] + "_describe");
+        roomi_pici_div_div2_input.setAttribute("placeholder", "描述");
+        //房间照片描述输入框
+
+        roomi_pici_div_div2.appendChild(roomi_pici_div_div2_input);
+        //房间照片描述
+
+        roomi_pici_div.appendChild(roomi_pici_div_div2);
+
+        //添加房间照片按钮div
+        var roomi_pici_div_div3 = document.createElement("div");
+        roomi_pici_div_div3.setAttribute("class", "col-md-2");
+
+        //添加房间照片按钮
+        var roomi_pici_div_div3_btn = document.createElement("button");
+        roomi_pici_div_div3_btn.setAttribute("type", "button");
+        roomi_pici_div_div3_btn.setAttribute("style", "margin: 0");
+        roomi_pici_div_div3_btn.setAttribute("class", "my-btn btn btn-success glyphicon glyphicon-plus");
+        roomi_pici_div_div3_btn.setAttribute("onclick", "addRoomPic(this)");
+        roomi_pici_div_div3_btn.setAttribute("id", "room" + room + "_pic" + roomPic[room] + "_btn");
+        roomi_pici_div_div3_btn.setAttribute("data-room", room);
+        roomi_pici_div_div3_btn.setAttribute("data-pic", roomPic[room]);
+        roomi_pici_div_div3_btn.appendChild(document.createTextNode("添加房间照片"));
+        //添加房间照片按钮
+        roomi_pici_div_div3.appendChild(roomi_pici_div_div3_btn);
+        //添加房间照片按钮div
+
+        roomi_pici_div.appendChild(roomi_pici_div_div3);
+
+        roomi_divRow.appendChild(label);
+        roomi_divRow.appendChild(div0);
+        // roomi_divRow.appendChild(roomi_pici_div);
+        roomi.appendChild(roomi_divRow);
+        roomi.appendChild(roomi_pici_div);
+        //第二列，房间照片
+
+        house_roomi.appendChild(roomi);
+        house_rooms.appendChild(house_roomi);
+
+    }
+
+    //添加房间照片
+    function addRoomPic(now) {
+        var nowRoom = parseInt(now.getAttribute("data-room"));
+        var nowPic = now.getAttribute("data-pic");
+        roomPic[nowRoom]++;
+
+        var room0 = now.parentNode.parentNode.parentNode;
+        var div = document.createElement("div");
+        div.setAttribute("id", room0.id + "_pic" + roomPic[nowRoom] + "_div");
+        div.setAttribute("class", "row");
+        div.setAttribute("style", "margin-top: 10px");
+
+        var label = document.createElement("label");
+        label.setAttribute("class", "col-form-label col-md-3 form-label");
+
+        div.appendChild(label);
+
+        var divFile = document.createElement("div");
+        divFile.setAttribute("class", "col-md-3 file");
+        divFile.appendChild(document.createTextNode("选择文件"));
+
+        var input = document.createElement("input");
+        input.setAttribute("type", "file");
+        input.setAttribute("class", "form-control");
+        input.setAttribute("id", room0.id + "_pic" + roomPic[nowRoom]);
+        input.setAttribute("name", room0.id + "_pic" + roomPic[nowRoom]);
+        input.setAttribute("data-room", nowRoom);
+        input.setAttribute("data-pic", roomPic[nowRoom]);
+        input.setAttribute("onChange", "changePic(this)");
+
+        var divImage = document.createElement("div");
+        divImage.setAttribute("id", room0.id + "_pic" + roomPic[nowRoom] + "_imageHolder");
+        divImage.setAttribute("name", room0.id + "_pic" + roomPic[nowRoom] + "_imageHolder");
+
+        divFile.appendChild(input);
+        divFile.appendChild(divImage);
+
+        var divDescribe = document.createElement("div");
+        divDescribe.setAttribute("class", "col-md-3");
+
+        var inputDescribe = document.createElement("input");
+        inputDescribe.setAttribute("name", "describe");
+        inputDescribe.setAttribute("type", "text");
+        inputDescribe.setAttribute("class", "form-control");
+        inputDescribe.setAttribute("id", room0.id + "_pic" + roomPic[nowRoom] + "_describe");
+        inputDescribe.setAttribute("name", room0.id + "_pic" + roomPic[nowRoom] + "_describe");
+        inputDescribe.setAttribute("placeholder", "描述");
+
+        divDescribe.appendChild(inputDescribe);
+
+        div.appendChild(divFile);
+        div.appendChild(divDescribe);
+
+        var divBtn = document.createElement("div");
+        divBtn.setAttribute("class", "col-md-2");
+        var btn = document.createElement("button");
+        btn.setAttribute("type", "button");
+        btn.setAttribute("style", "margin: 0");
+        btn.setAttribute("class", "my-btn btn btn-success glyphicon glyphicon-plus");
+        btn.setAttribute("onclick", "addRoomPic(this)");
+        btn.setAttribute("id", room0.id + "_pic" + roomPic[nowRoom] + "_btn");
+        btn.setAttribute("data-room", room);
+        btn.setAttribute("data-pic", roomPic[nowRoom]);
+        btn.appendChild(document.createTextNode("添加房间照片"));
+        divBtn.appendChild(btn);
+        div.appendChild(divBtn);
+        room0.appendChild(div);
+    }
+
+    var cityNowId = document.getElementById("location_hidden").value;
+    $(function () {
+        var provinceNow = document.getElementById("province");
+        changeProvince(provinceNow);
+    });
+
+    function changeProvince(now) {
+        $.ajax({
+            url: "/queryCity/" + now.options[now.options.selectedIndex].value,
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                /*这个方法里是ajax发送请求成功之后执行的代码*/
+                var province = now;
+                var city = document.getElementById("city");
+                var opt = now.options.selectedIndex;
+                var j = 0;
+                var length = city.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for (i = 0; i < length; i++) {
+                    city.removeChild(city.options[0]);
+                }
+                /**
+                 * 添加新选项
+                 */
+                for (i = 0; i < data.length; i++) {
+                    // console.log(data[i].district_name);
+                    city.options[j++] = new Option(data[i].district_name, data[i].id);
+                    if (data[i].id == cityNowId) {
+                        city.options[j - 1].selected = true;
+                    }
+                }
+            },
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
+            }
+        });
+    };
+
+    function sub() {
+        var wokers = document.getElementById("workerIds");
+        var workerDoms = document.getElementsByName("worker");
+        var roomNum = document.getElementById("roomNum");
+        roomNum.value = room;
+        var s = "";
+        for (var i = 0; i < workerDoms.length; i++) {
+            s += workerDoms[i].value;
+            s += ",";
+        }
+        s = s.substring(0, s.length - 1);
+        wokers.value = s;
+        // $.ajax({
+        //     type: "POST",//方法类型
+        //     dataType: "json",//预期服务器返回的数据类型
+        //     url: "/addBook",//url
+        //     data: $('#bookForm').serialize(),
+        //     success: function (result) {
+        //         console.log(result);//打印服务端返回的数据(调试用)
+        //         if (result == 200) {
+        //             alert("插入成功");
+        //         }
+        //         ;
+        //     },
+        //     error: function () {
+        //         alert("异常！");
+        //     }
+        // });
+    }
+
+    //styleList
+    // function sub() {
+    //     var styleText = "";
+    //     var style = document.getElementsByName("multiselect_styleValue");
+    //     for (var i = 0; i < style.length; i++) {
+    //         if (style[i].getAttribute("aria-selected") == "true") {
+    //             styleText += style[i].value + ",";
+    //         }
+    //         // console.log(style[i].value);
+    //     }
+    //     styleText = styleText.substring(0, styleText.length - 1);
+    //     var formText = document.getElementById("designerStyle");
+    //     formText.value = styleText;
+    // }
+</script>
+</body>
+<style>
+    .file {
+        position: relative;
+        display: inline-block;
+        background: #ffffff;
+        border: 1px solid #d1eeff;
+        border-radius: 4px;
+        padding: 4px 12px;
+        overflow: hidden;
+        color: #1E88C7;
+        text-decoration: none;
+        text-indent: 0;
+    }
+
+    .file input {
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+        -ms-filter: 'alpha(opacity=0)';
+    }
+
+    .file:hover {
+        background: #AADFFD;
+        border-color: #78C3F3;
+        color: #004974;
+        text-decoration: none;
+    }
+
+    .ui-widget-content {
+        border: 1px solid #ddd;
+        background: white;
+        color: #333;
+    }
+
+    .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+        border: 1px solid #a4ecfc;
+        background: white;
+        color: #333;
+        font-size: 15px;
+        height: 40px;
+        border-radius: 7px;
+        padding: 0.375rem 0.75rem;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    .ui-multiselect {
+        border: 1px solid #ddd;
+        box-shadow: none;
+        color: #333;
+        font-size: 15px;
+        height: 40px;
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-weight: 400;
+        line-height: 1.5;
+        background-color: #fff;
+        background-clip: padding-box;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+</style>
+</html>
