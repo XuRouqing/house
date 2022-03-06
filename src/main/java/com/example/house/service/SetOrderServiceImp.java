@@ -27,4 +27,20 @@ public class SetOrderServiceImp implements SetOrderService  {
     }
 
 
+    @Override
+    public List<SetOrder> getSetOrderAll(){
+        return this.setOrderMapper.selectSetOrderAll();
+    }
+
+    @Override
+    public void delSetOrder(int id){
+        this.setOrderMapper.delSetOrder(id);
+    }
+
+    @Override
+    public void updateSetOrderStatus(int id, int status){
+        this.setOrderMapper.updateSetOrderStatus(id,status);
+    }
+
+
 }

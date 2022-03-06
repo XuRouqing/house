@@ -22,4 +22,6 @@ public class SetOrder {
     private String city;
     private String position;
     private String time;
+    private int status;
+    private String location;
 }

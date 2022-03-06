@@ -4,6 +4,7 @@ import com.example.house.pojo.*;
 import com.example.house.service.*;
 import com.github.pagehelper.PageInfo;
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -56,30 +57,30 @@ public class AdminController {
         List<Worker> workers = workerService.getWorkerList();
         int appointmentNum = appointmentService.getAppointmentNum();
         int setOrderNum = setOrderService.getSetOrderNum();
-        int orderNum = appointmentNum+setOrderNum;
+        int orderNum = appointmentNum + setOrderNum;
         int userNum = userService.getUserNum();
-        model.addAttribute("workerNum",workerNum);
-        model.addAttribute("designerNum",designerNum);
-        model.addAttribute("workers",workers);
-        model.addAttribute("designers",designers);
-        model.addAttribute("orderNum",orderNum);
-        model.addAttribute("userNum",userNum);
+        model.addAttribute("workerNum", workerNum);
+        model.addAttribute("designerNum", designerNum);
+        model.addAttribute("workers", workers);
+        model.addAttribute("designers", designers);
+        model.addAttribute("orderNum", orderNum);
+        model.addAttribute("userNum", userNum);
         return "Admin/index";
     }
 
     @ResponseBody
     @RequestMapping("/getdesignerList")
     public List<Designer> getDesignerList(@RequestParam("pageNow") int pageNow,
-                                          @RequestParam("pageCount") int pageCount){
-        List<Designer> designerList = designerService.getDesignerListByPage(pageNow,pageCount);
+                                          @RequestParam("pageCount") int pageCount) {
+        List<Designer> designerList = designerService.getDesignerListByPage(pageNow, pageCount);
         return designerList;
     }
 
     @ResponseBody
     @RequestMapping("/getworkerList")
     public List<Worker> getWorkerList(@RequestParam("pageNow") int pageNow,
-                                          @RequestParam("pageCount") int pageCount){
-        List<Worker> workerList = workerService.getWorkerListByPage(pageNow,pageCount);
+                                      @RequestParam("pageCount") int pageCount) {
+        List<Worker> workerList = workerService.getWorkerListByPage(pageNow, pageCount);
         return workerList;
     }
 
@@ -88,9 +89,9 @@ public class AdminController {
         List<Designer> designers = designerService.getDesignerList();
         List<Index> designerLevel = designerService.getDesignerLevel();
         List<Index> designerStyle = designerService.getDesignerStyle();
-        model.addAttribute("designers",designers);
-        model.addAttribute("designerLevel",designerLevel);
-        model.addAttribute("designerStyle",designerStyle);
+        model.addAttribute("designers", designers);
+        model.addAttribute("designerLevel", designerLevel);
+        model.addAttribute("designerStyle", designerStyle);
         return "Admin/designer-list";
     }
 
@@ -110,13 +111,13 @@ public class AdminController {
         List<City> provinces = cityService.getProvinceList();
         City cityNow = cityService.getCityListById(Integer.parseInt(designer.getLocation()));
         City provinceNow = cityService.getCityListById(cityNow.getPid());
-        model.addAttribute("designer",designer);
-        model.addAttribute("designerLevel",designerLevel);
-        model.addAttribute("designerStyle",designerStyle);
-        model.addAttribute("styleList",styleListInt);
-        model.addAttribute("provinces",provinces);
-        model.addAttribute("cityNow",cityNow);
-        model.addAttribute("provinceNow",provinceNow);
+        model.addAttribute("designer", designer);
+        model.addAttribute("designerLevel", designerLevel);
+        model.addAttribute("designerStyle", designerStyle);
+        model.addAttribute("styleList", styleListInt);
+        model.addAttribute("provinces", provinces);
+        model.addAttribute("cityNow", cityNow);
+        model.addAttribute("provinceNow", provinceNow);
         return "Admin/designer";
     }
 
@@ -125,48 +126,48 @@ public class AdminController {
 
     @RequestMapping("/modifyDesigner1")
     public String modifyDesigner1(Model model, Designer designer,
-                                  @RequestParam("filePic") MultipartFile multipartFile){
-        if (!multipartFile.isEmpty()){
+                                  @RequestParam("filePic") MultipartFile multipartFile) {
+        if (!multipartFile.isEmpty()) {
             SimpleDateFormat sdf = null;
             String pic = "";
-            try{
+            try {
                 sdf = new SimpleDateFormat("yyyyMMddHHmmss");
                 String timeStamp = sdf.format(new Date());
                 String fileName = multipartFile.getOriginalFilename();//获取文件名称
-                String suffixName=fileName.substring(fileName.lastIndexOf("."));
-                File file = new File(filePath+timeStamp+suffixName);
-                pic = "/userPic/"+timeStamp+suffixName;
+                String suffixName = fileName.substring(fileName.lastIndexOf("."));
+                File file = new File(filePath + timeStamp + suffixName);
+                pic = "/userPic/" + timeStamp + suffixName;
                 multipartFile.transferTo(file);
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             designer.setPic(pic);
         }
         designerService.modifyDesignerMain(designer);
-        return  "redirect:/admin/designer/"+designer.getId();
+        return "redirect:/admin/designer/" + designer.getId();
     }
 
     @RequestMapping("/modifyDesigner2")
-    public String modifyDesigner2(Model model, Designer designer){
+    public String modifyDesigner2(Model model, Designer designer) {
         designerService.modifyDesigner(designer);
-        return  "redirect:/admin/designer/"+designer.getId();
+        return "redirect:/admin/designer/" + designer.getId();
     }
 
     @RequestMapping("/addDesigner")
     public String addDesigner(Model model, Designer designer,
-                                  @RequestParam("filePic") MultipartFile multipartFile){
-        if (!multipartFile.isEmpty()){
+                              @RequestParam("filePic") MultipartFile multipartFile) {
+        if (!multipartFile.isEmpty()) {
             SimpleDateFormat sdf = null;
             String pic = "";
-            try{
+            try {
                 sdf = new SimpleDateFormat("yyyyMMddHHmmss");
                 String timeStamp = sdf.format(new Date());
                 String fileName = multipartFile.getOriginalFilename();//获取文件名称
-                String suffixName=fileName.substring(fileName.lastIndexOf("."));
-                File file = new File(filePath+timeStamp+suffixName);
-                pic = "/userPic/"+timeStamp+suffixName;
+                String suffixName = fileName.substring(fileName.lastIndexOf("."));
+                File file = new File(filePath + timeStamp + suffixName);
+                pic = "/userPic/" + timeStamp + suffixName;
                 multipartFile.transferTo(file);
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             //新建设计师的时候自动创建user，作为设计师的账号
@@ -182,16 +183,16 @@ public class AdminController {
             designer.setUserId(user.getId());
             designerService.addDesigner(designer);
         }
-        return  "redirect:/admin/workerList";
+        return "redirect:/admin/workerList";
     }
 
     @ResponseBody
     @RequestMapping("/delDesigner")
-    public String delDesigner(Model model, int id){
+    public String delDesigner(Model model, int id) {
         try {
             designerService.deleteDesigner(id);
             return "success";
-        }catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
@@ -204,9 +205,9 @@ public class AdminController {
         List<Worker> workers = workerService.getWorkerList();
         List<Index> workerType = workerService.getWorkerType();
         List<City> provinces = cityService.getProvinceList();
-        model.addAttribute("workers",workers);
-        model.addAttribute("workerType",workerType);
-        model.addAttribute("provinces",provinces);
+        model.addAttribute("workers", workers);
+        model.addAttribute("workerType", workerType);
+        model.addAttribute("provinces", provinces);
         return "Admin/worker-list";
     }
 
@@ -217,73 +218,73 @@ public class AdminController {
         List<City> provinces = cityService.getProvinceList();
         City cityNow = cityService.getCityListById(worker.getCityId());
         City provinceNow = cityService.getCityListById(cityNow.getPid());
-        model.addAttribute("workerInfo",worker);
-        model.addAttribute("workerType",workerType);
-        model.addAttribute("provinces",provinces);
-        model.addAttribute("cityNow",cityNow);
-        model.addAttribute("provinceNow",provinceNow);
+        model.addAttribute("workerInfo", worker);
+        model.addAttribute("workerType", workerType);
+        model.addAttribute("provinces", provinces);
+        model.addAttribute("cityNow", cityNow);
+        model.addAttribute("provinceNow", provinceNow);
         return "Admin/worker";
     }
 
     @RequestMapping("/modifyWorker1")
     public String modifyWorker1(Model model, Worker worker,
-            @RequestParam("filePic") MultipartFile multipartFile){
-        if (!multipartFile.isEmpty()){
+                                @RequestParam("filePic") MultipartFile multipartFile) {
+        if (!multipartFile.isEmpty()) {
             SimpleDateFormat sdf = null;
             String pic = "";
-            try{
+            try {
                 sdf = new SimpleDateFormat("yyyyMMddHHmmss");
                 String timeStamp = sdf.format(new Date());
                 String fileName = multipartFile.getOriginalFilename();//获取文件名称
-                String suffixName=fileName.substring(fileName.lastIndexOf("."));
-                File file = new File(filePath+timeStamp+suffixName);
-                pic = "/userPic/"+timeStamp+suffixName;
+                String suffixName = fileName.substring(fileName.lastIndexOf("."));
+                File file = new File(filePath + timeStamp + suffixName);
+                pic = "/userPic/" + timeStamp + suffixName;
                 multipartFile.transferTo(file);
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             worker.setPic(pic);
         }
         workerService.modifyWorkerMain(worker);
-        return  "redirect:/admin/worker/"+worker.getId();
+        return "redirect:/admin/worker/" + worker.getId();
     }
 
     @RequestMapping("/modifyWorker2")
-    public String modifyWorker2(Model model, Worker worker){
+    public String modifyWorker2(Model model, Worker worker) {
         workerService.modifyWorker(worker);
-        return  "redirect:/admin/worker/"+worker.getId();
+        return "redirect:/admin/worker/" + worker.getId();
     }
 
     @RequestMapping("/addWorker")
     public String addWorker(Model model, Worker worker,
-                                @RequestParam("filePic") MultipartFile multipartFile){
-        if (!multipartFile.isEmpty()){
+                            @RequestParam("filePic") MultipartFile multipartFile) {
+        if (!multipartFile.isEmpty()) {
             SimpleDateFormat sdf = null;
             String pic = "";
-            try{
+            try {
                 sdf = new SimpleDateFormat("yyyyMMddHHmmss");
                 String timeStamp = sdf.format(new Date());
                 String fileName = multipartFile.getOriginalFilename();//获取文件名称
-                String suffixName=fileName.substring(fileName.lastIndexOf("."));
-                File file = new File(workerFilePath+timeStamp+suffixName);
-                pic = "/workerPic/"+timeStamp+suffixName;
+                String suffixName = fileName.substring(fileName.lastIndexOf("."));
+                File file = new File(workerFilePath + timeStamp + suffixName);
+                pic = "/workerPic/" + timeStamp + suffixName;
                 multipartFile.transferTo(file);
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             worker.setPic(pic);
         }
         workerService.addWorker(worker);
-        return  "redirect:/admin/workerList";
+        return "redirect:/admin/workerList";
     }
 
     @ResponseBody
     @RequestMapping("/delWorker")
-    public String delWorker(Model model, int id){
+    public String delWorker(Model model, int id) {
         try {
             workerService.deleteWorker(id);
             return "success";
-        }catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
@@ -291,30 +292,100 @@ public class AdminController {
     @RequestMapping("/appointmentList")
     public String toappointmentList(Model model) {
         List<Appointment> appointments = appointmentService.getAppointmentList();
-        model.addAttribute("appointments",appointments);
+        model.addAttribute("appointments", appointments);
         appointmentService.updateAppointmentStatusEveryday();
         return "Admin/appointment-list";
     }
 
     @ResponseBody
     @RequestMapping("/changeAppointmentStatus")
-    public String changeAppointmentStatus(Model model, int id, int status){
+    public String changeAppointmentStatus(Model model, int id, int status) {
         try {
-            appointmentService.updateAppointmentStatus(id,status);
+            appointmentService.updateAppointmentStatus(id, status);
             return "success";
-        }catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
 
     @ResponseBody
     @RequestMapping("/delAppointment")
-    public String delAppointment(Model model, int id){
+    public String delAppointment(Model model, int id) {
         try {
             appointmentService.deleteAppointment(id);
             return "success";
-        }catch (Exception e){
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
+
+    @RequestMapping("/setOrderList")
+    public String setOrderList(Model model) {
+        List<SetOrder> setOrderList = setOrderService.getSetOrderAll();
+        model.addAttribute("setOrderList", setOrderList);
+        return "Admin/setOrder-list";
+    }
+
+    @ResponseBody
+    @RequestMapping("/changeSetOrderStatus")
+    public String changeSetOrderStatus(Model model, int id, int status) {
+        try {
+            setOrderService.updateSetOrderStatus(id, status);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/delSetOrder")
+    public String delSetOrder(Model model, int id) {
+        try {
+            setOrderService.delSetOrder(id);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @RequestMapping("/userList")
+    public String userList(Model model) {
+        List<User> users = userService.getUserList();
+        model.addAttribute("users", users);
+        return "Admin/user-list";
+    }
+
+    @RequestMapping("/addUser")
+    public String addUser(Model model, User user) {
+        userService.addUser(user);
+        return "redirect:/admin/userList";
+    }
+
+    @ResponseBody
+    @RequestMapping("/delUser")
+    public String delUser(Model model, int id) {
+        try {
+            userService.deleteUser(id);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/checkCode")
+    public String checkCode(Model model, String code) {
+        int flag = userService.checkCode(code);
+        if (flag == 0){
+            return "true";
+        }
+        return "false";
+    }
+
+    @RequestMapping("/modifyUser")
+    public String modifyUser(Model model, User user) {
+        userService.modifyUser(user);
+        return "redirect:/admin/userList";
+    }
+
 }

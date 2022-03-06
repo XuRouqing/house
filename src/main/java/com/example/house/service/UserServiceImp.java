@@ -66,4 +66,9 @@ public class UserServiceImp implements UserService {
         userMapper.deleteUser(id);
     }
 
+    @Override
+    public int checkCode(String id){
+        return userMapper.checkCode(id);
+    }
+
 }

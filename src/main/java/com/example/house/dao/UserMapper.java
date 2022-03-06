@@ -19,4 +19,5 @@ public interface UserMapper {
     public void modifyUser(User user);
     public void modifyPassword(int id,String password);
     public void deleteUser(Integer id);
+    public int checkCode(String code);
 }

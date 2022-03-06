@@ -37,7 +37,7 @@
     </select>
 
     <update id="modifyUser" parameterType="User">
-        UPDATE user SET name=#{name},email=#{email},phone=#{phone}
+        UPDATE user SET name=#{name},email=#{email},phone=#{phone},password=#{password},role=#{role}
         WHERE id=#{id}
     </update>
 
@@ -51,4 +51,7 @@
         WHERE id=#{id}
     </delete>
 
+    <select id="checkCode" resultType="Integer">
+        SELECT COUNT(*) FROM user WHERE code = #{code}
+    </select>
 </mapper>

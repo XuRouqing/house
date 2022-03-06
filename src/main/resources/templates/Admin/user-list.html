@@ -194,13 +194,13 @@
                     <li>
                         <a th:href="@{/admin/index}"><i class="fe fe-home"></i> <span>首页</span></a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a th:href="@{/admin/designerList}"><i class="fe fe-user"></i> <span>设计师列表</span></a>
                     </li>
                     <li>
                         <a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a th:href="@{/admin/userList}"><i class="fe fe-user-plus"></i> <span>用户列表</span></a>
                     </li>
                     <li>
@@ -319,10 +319,10 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-11">
-                        <h3 class="page-title">设计师列表</h3>
+                        <h3 class="page-title">用户列表</h3>
                     </div>
                     <div class="col-sm-1">
-                        <a class="btn btn-sm bg-primary-light mr-2" data-toggle="modal" href="#edit_personal_details">
+                        <a class="btn btn-sm bg-primary-light mr-2" data-toggle="modal" href="#add_user">
                             <i class="fe fe-plus"></i> 添加
                         </a>
                     </div>
@@ -340,41 +340,35 @@
                                     <thead>
                                     <tr>
                                         <th style="width: 5%">ID</th>
-                                        <th style="width: 15%">姓名</th>
-                                        <th style="width: 10%">性别</th>
-                                        <th style="width: 10%">工龄</th>
-                                        <th style="width: 20%">等级</th>
-                                        <th style="width: 20%">联系电话</th>
-                                        <th style="width: 20%">邮箱</th>
+                                        <th style="width: 15%">账号</th>
+                                        <th style="width: 10%">昵称</th>
+                                        <th style="width: 10%">角色</th>
+                                        <th style="width: 10%">密码</th>
+                                        <th style="width: 25%">邮箱</th>
+                                        <th style="width: 25%">联系电话</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody id="tbody">
-                                    <tr th:each="designer : ${designers}">
-                                        <td th:text="${designer.id}"></td>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle"
-                                                                                      th:src="${designer.pic}"
-                                                                                      alt="User Image"></a>
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   th:text="${designer.name}"></a>
-                                            </h2>
-                                        </td>
-                                        <td th:text="${designer.gender}"></td>
-                                        <td th:text="${designer.workingAge}"></td>
-                                        <td th:text="${designer.level}"></td>
-                                        <td th:text="${designer.tel}"></td>
-                                        <td th:text="${designer.email}"></td>
+                                    <tr th:each="user : ${users}">
+                                        <td th:text="${user.id}"></td>
+                                        <td th:text="${user.code}"></td>
+                                        <td th:text="${user.name}"></td>
+                                        <td th:text="${user.role}"></td>
+                                        <td th:text="${user.password}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.phone}"></td>
                                         <td class="text-right">
                                             <div class="actions">
-                                                <a th:href="@{/admin/designer/}+${designer.id}"
-                                                   class="btn btn-sm bg-success-light mr-2">
+                                                <button id="edit_modify" class="btn btn-sm bg-success-light mr-2" data-toggle="modal"
+                                                        th:attr="data-id=${user.id},data-name=${user.name},
+                                                        data-code=${user.code},data-role=${user.role},
+                                                        data-password=${user.password},data-email=${user.email},data-phone=${user.phone}"
+                                                        href="#modify" onclick="modify(this)">
                                                     <i class="fe fe-pencil"></i> 编辑
-                                                </a>
+                                                </button>
                                                 <button class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                        th:attr="data-id=${designer.id},data-name=${designer.name}"
+                                                        th:attr="data-id=${user.id},data-name=${user.name}"
                                                         href="#delete_modal">
                                                     <i class="fe fe-trash"></i> 删除
                                                 </button>
@@ -393,125 +387,133 @@
         </div>
     </div>
     <!-- /Page Wrapper -->
+
     <!-- Edit Details Modal -->
-    <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
+    <div class="modal fade" id="modify" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">添加设计师</h5>
+                    <h5 class="modal-title">编辑</h5>
                     <button type="button" class="close" data-dismiss="modal"
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/admin/addDesigner}" method="post" enctype="multipart/form-data">
+                    <form th:action="@{/admin/modifyUser}" method="post">
                         <div class="row form-row">
                             <div class="col-12">
-                                <h5 class="form-title"><span>基本信息</span></h5>
-                            </div>
-<!--                            <div class="col-12">-->
-<!--                                <div class="form-group">-->
-<!--                                    <label>用户ID</label>-->
-<!--                                    <input name="userId" type="text" class="form-control">-->
-<!--                                </div>-->
-<!--                            </div>-->
-                            <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                    <label>姓名</label>
+                                    <label>ID</label>
+                                    <input id="modify_id" name="id" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>账号</label>
+                                    <input id="modify_code" name="code" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>名称</label>
+                                    <input id="modify_name" name="name" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>角色</label>
+                                    <select id="modify_role" name="role" class="form-control">
+                                        <option id="select_admin" value="admin">管理员</option>
+                                        <option id="select_designer" value="designer">设计师</option>
+                                        <option id="select_customer" value="customer">普通用户</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>密码</label>
+                                    <input id="modify_password" name="password" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>邮箱</label>
+                                    <input id="modify_email" name="email" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>电话</label>
+                                    <input id="modify_phone" name="phone" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">保存
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Edit Details Modal -->
+
+    <!-- Edit Details Modal -->
+    <div class="modal fade" id="add_user" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">添加用户</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/admin/addUser}" method="post">
+                        <div class="row form-row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>账号</label>
+                                    <input id="code_add" name="code" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>昵称</label>
                                     <input name="name" type="text" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>性别</label>
-                                    <input name="gender" type="text" class="form-control" required>
-                                </div>
-                            </div>
                             <div class="col-12">
-                            <div class="form-group">
-                                <label>照片</label>
-                                <input name="filePic" type="file" class="form-control" required>
-                            </div>
-                        </div>
-                            <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                    <label>年龄</label>
-                                    <input name="age" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>工龄</label>
-                                    <input name="workingAge" type="text" class="form-control" required>
+                                    <label>角色</label>
+                                    <select name="role" class="form-control">
+                                        <option value="admin">管理员</option>
+                                        <option value="designer">设计师</option>
+                                        <option value="customer" selected>普通用户</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>地址</label>
-                                    <input name="location" type="text" class="form-control" required>
+                                    <label>密码</label>
+                                    <input name="password" type="text" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <h5 class="form-title"><span>联系方式</span></h5>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label>联系电话</label>
-                                    <input name="tel" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label>邮箱</label>
                                     <input name="email" type="text" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <h5 class="form-title"><span>设计师信息</span></h5>
-                            </div>
-                            <div class="col-12">
                                 <div class="form-group">
-                                    <label>等级</label>
-                                    <select class="form-control" name="levelValue">
-                                        <option th:each="level : ${designerLevel}"
-                                                th:text="${level.name}"
-                                                th:value="${level.id}">
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>风格</label>
-                                    <select class="form-control" id="styleValue"
-                                            multiple="multiple" style="width: 100%">
-                                        <option name="styleOpt"
-                                                th:each="style : ${designerStyle}"
-                                                th:text="${style.name}"
-                                                th:value="${style.id}"
-                                                th:data_id="${style.id}">
-                                    </select>
-                                    <input type="hidden" id="designerStyle"
-                                           name="styleValue">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>代表作</label>
-                                    <input name="represent" type="text"
-                                           class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>备注</label>
-                                    <input name="form" type="text" class="form-control">
+                                    <label>电话</label>
+                                    <input name="phone" type="text" class="form-control" required>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block"
-                                onclick="test()">保存
+                        <button type="submit" class="btn btn-primary btn-block">保存
                         </button>
                     </form>
                 </div>
@@ -524,16 +526,10 @@
     <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <!--	<div class="modal-header">
-                        <h5 class="modal-title">Delete</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>-->
                 <div class="modal-body">
                     <div class="form-content p-2">
                         <h4 class="modal-title">删除</h4>
-                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的设计师<span id="p_name"></span>吗?</p>
+                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的用户<span id="p_name"></span>吗?</p>
                         <button id="delButton" type="button" class="btn btn-primary">确认</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
@@ -571,6 +567,61 @@
 <script>
     var id;
     var name;
+    function modify(now){
+        var id = document.getElementById("modify_id");
+        id.setAttribute("value",now.getAttribute("data-id"));
+        var code = document.getElementById("modify_code");
+        code.setAttribute("value",now.getAttribute("data-code"));
+        var name = document.getElementById("modify_name");
+        name.setAttribute("value",now.getAttribute("data-name"));
+        var role = document.getElementById("modify_role");
+        var userRole = now.getAttribute("data-role");
+        switch (userRole){
+            case "admin" :
+                document.getElementById("select_admin").setAttribute("selected","true");
+                break;
+            case "designer":
+                document.getElementById("select_designer").setAttribute("selected","true");
+                break;
+            case "customer":
+                document.getElementById("select_customer").setAttribute("selected","true");
+                break;
+        }
+        var password = document.getElementById("modify_password");
+        password.setAttribute("value",now.getAttribute("data-password"));
+        var email = document.getElementById("modify_email");
+        email.setAttribute("value",now.getAttribute("data-email"));
+        var phone = document.getElementById("modify_phone");
+        phone.setAttribute("value",now.getAttribute("data-phone"));
+    }
+    // $('#modify').on('show.bs.modal', function (event) {
+    //     var edit_modify = document.getElementById("edit_modify")
+    //     var id = document.getElementById("modify_id");
+    //     id.setAttribute("value",edit_modify.getAttribute("data-id"));
+    //     var code = document.getElementById("modify_code");
+    //     code.setAttribute("value",edit_modify.getAttribute("data-code"));
+    //     var name = document.getElementById("modify_name");
+    //     name.setAttribute("value",edit_modify.getAttribute("data-name"));
+    //     var role = document.getElementById("modify_role");
+    //     var userRole = edit_modify.getAttribute("data-role");
+    //     switch (userRole){
+    //         case "admin" :
+    //             document.getElementById("select_admin").setAttribute("selected","true");
+    //             break;
+    //         case "designer":
+    //             document.getElementById("select_designer").setAttribute("selected","true");
+    //             break;
+    //         case "customer":
+    //             document.getElementById("select_customer").setAttribute("selected","true");
+    //             break;
+    //     }
+    //     var password = document.getElementById("modify_password");
+    //     password.setAttribute("value",edit_modify.getAttribute("data-password"));
+    //     var email = document.getElementById("modify_email");
+    //     email.setAttribute("value",edit_modify.getAttribute("data-email"));
+    //     var phone = document.getElementById("modify_phone");
+    //     phone.setAttribute("value",edit_modify.getAttribute("data-phone"));
+    // });
     $('#delete_modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var modal = $(this);
@@ -582,12 +633,10 @@
         p_name.appendChild(document.createTextNode(name));
     });
     $('#delButton').on('click', function () {
-        $(this).button('complete');
         $.ajax({
-            url: '/admin/delDesigner',
+            url: '/admin/delUser',
             type: 'post',
             data: {id: id},
-            dataType: "json",
             error: function () {
                 alert('出现错误！');
             }, success: function (data) {
@@ -602,28 +651,24 @@
             }
         });
     });
-    $(function () {
-        $("#styleValue").multiselect({
-            checkAllText: "全选",
-            uncheckAllText: "全不选",
-            selectedList: 8
-        });
-        ifSelected();
-    });
 
-    function test() {
-        var styleText = "";
-        var style = document.getElementsByName("multiselect_styleValue");
-        for (var i = 0; i < style.length; i++) {
-            if (style[i].getAttribute("aria-selected") == "true") {
-                styleText += style[i].value + ",";
+    $("#code_add").focus(function(){
+    }).blur(function(){
+        $.ajax({
+            url: '/admin/checkCode',
+            type: 'post',
+            data: {code: this.value},
+            error: function () {
+                alert('出现错误！');
+            }, success: function (data) {
+                if (data == "false"){
+                    alert("该账号已存在,请重新输入");
+                    var input = document.getElementById("code_add");
+                    input.value="";
+                }
             }
-            // console.log(style[i].value);
-        }
-        styleText = styleText.substring(0, styleText.length - 1);
-        var formText = document.getElementById("designerStyle");
-        formText.value = styleText;
-    }
+        });
+    });
 </script>
 </body>
 <style>

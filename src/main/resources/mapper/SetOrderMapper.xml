@@ -6,12 +6,33 @@
 <mapper namespace="com.example.house.dao.SetOrderMapper">
 
     <insert id="insertOrder" parameterType="SetOrder">
-        insert into setorder (setId,customerId,customerName,tel,email,province,city,position,time)
-        values (#{setId},#{customerId},#{customerName},#{tel},#{email},#{province},#{city},#{position},NOW())
+        insert into setorder (setId,customerId,customerName,tel,email,province,city,position,time,status)
+        values (#{setId},#{customerId},#{customerName},#{tel},#{email},#{province},#{city},#{position},NOW(),0)
     </insert>
 
     <select id="selectSetOrderNum" resultType="int">
         select count(*) from setorder
+    </select>
+
+    <select id="selectSetOrderAll" resultType="SetOrder">
+        SELECT setorder.*,CONCAT(d2.district_name,d1.district_name,setorder.position) location FROM setorder , district d1, district d2
+        WHERE d1.id = setorder.city
+          AND d1.pid = d2.id
+    </select>
+
+
+    <delete id="delSetOrder" parameterType="int">
+        DELETE FROM setorder
+        WHERE id=#{id}
+    </delete>
+
+    <update id="updateSetOrderStatus" parameterType="int">
+        UPDATE setorder SET status=#{status}
+        WHERE id=#{id}
+    </update>
+
+    <select id="checkCode" resultType="int">
+        SELECT COUNT(*) FROM user WHERE code = #{code}
     </select>
 
 </mapper>
