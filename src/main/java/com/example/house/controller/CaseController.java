@@ -1,14 +1,12 @@
 package com.example.house.controller;
 
 import com.example.house.pojo.*;
+import com.example.house.pojo.Set;
 import com.example.house.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -18,10 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/case")
@@ -44,6 +39,15 @@ public class CaseController {
 
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private SetService setService;
+
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        List<Set> set = setService.getSetList();
+        model.addAttribute("setInfo",set);
+    }
 
     @RequestMapping("/{id}")
     public String toCase(@PathVariable int id, Model model) {
@@ -195,5 +199,48 @@ public class CaseController {
         }catch (Exception e){
             return e.getMessage();
         }
+    }
+
+    @RequestMapping("/editCase/{id}")
+    public String editCase(@PathVariable int id, Model model) {
+        List<Designer> designers = designerService.getDesignerList();
+        List<Worker> workers = workerService.getWorkerList();
+        List<Index> workerTypes = workerService.getWorkerType();
+        List<Index> houseStyle = houseService.getHouseStyleIndex();
+        List<Index> houseArea = houseService.getHouseAreaIndex();
+        List<Index> houseForm = houseService.getHouseFormIndex();
+        List<Index> houseType = houseService.getHouseTypeIndex();
+        List<City> provinces = cityService.getProvinceList();
+
+        House house = houseService.findHouseById(id);
+        List<Room> roomList = roomService.getRoomByHouseId(id);
+        int nowCity = cityService.getCityListById(Integer.parseInt(house.getCity())).getId();
+        int nowProvince = cityService.getCityListById(Integer.parseInt(house.getCity())).getPid();
+
+        for (int i = 0; i < roomList.size(); i++) {
+            List<RoomPic> roomPicList = roomPicService.getRoomPicByRoomId(roomList.get(i).getRoomId());
+            roomList.get(i).setRoomPics(roomPicList);
+        }
+        String workerValue = house.getWorkerIds();
+        String[] workerList = workerValue.split(",");
+        List<Integer> wokerListInt = new ArrayList<>();
+        for (int i = 0; i < workerList.length; i++) {
+            wokerListInt.add(Integer.parseInt(workerList[i]));
+        }
+
+        model.addAttribute("designers",designers);
+        model.addAttribute("workers",workers);
+        model.addAttribute("workerTypes",workerTypes);
+        model.addAttribute("houseStyle",houseStyle);
+        model.addAttribute("houseArea",houseArea);
+        model.addAttribute("houseForm",houseForm);
+        model.addAttribute("houseType",houseType);
+        model.addAttribute("provinces",provinces);
+        model.addAttribute("house",house);
+        model.addAttribute("roomList",roomList);
+        model.addAttribute("nowCity",nowCity);
+        model.addAttribute("nowProvince",nowProvince);
+        model.addAttribute("workerList",wokerListInt);
+        return "editCase";
     }
 }

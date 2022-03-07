@@ -404,9 +404,6 @@
                     </td>
                     <td class="text-right">
                       <div class="actions">
-                        <a href="#edit_modal" data-toggle="modal" th:attr="data-id=${appointment.appointmentId}" class="btn btn-sm bg-success-light mr-2">
-                          <i class="fe fe-pencil"></i> 编辑
-                        </a>
                         <button class="btn btn-sm bg-danger-light" data-toggle="modal"
                                 th:attr="data-id=${appointment.appointmentId},data-day=${appointment.day},data-time=${appointment.time},data-designer=${appointment.designerId},
                                     data-customer=${appointment.customerName},data-tel=${appointment.customerTel},data-location=${appointment.location},data-email=${appointment.customerEmail}"
