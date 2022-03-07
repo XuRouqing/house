@@ -405,7 +405,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/admin/addDesigner}" method="post" enctype="multipart/form-data">
+                    <form th:action="@{/admin/addDesigner}" method="post" onclick="return checkCode()" enctype="multipart/form-data">
                         <div class="row form-row">
                             <div class="col-12">
                                 <h5 class="form-title"><span>基本信息</span></h5>
@@ -446,10 +446,21 @@
                                     <input name="workingAge" type="text" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                    <label>地址</label>
-                                    <input name="location" type="text" class="form-control" required>
+                                    <label>所在城市</label>
+                                    <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
+                                        <option>请选择省份</option>
+                                        <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>所在城市</label>
+                                    <select class="form-control" id="city" name="location">
+                                        <option>请选择城市</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -458,7 +469,7 @@
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label>联系电话</label>
-                                    <input name="tel" type="text" class="form-control" required>
+                                    <input id="code_add" name="tel" type="text" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
@@ -571,6 +582,43 @@
 <script>
     var id;
     var name;
+    function checkCode(){
+        var code_input = document.getElementById("code_add");
+        var code = code_input.value;
+        $.ajax({
+            url: '/admin/checkCode',
+            type: 'post',
+            data: {code: code},
+            error: function () {
+                alert('出现错误！');
+            }, success: function (data) {
+                if (data == "false"){
+                    alert("该账号已存在,请重新输入");
+                    var input = document.getElementById("code_add");
+                    input.value="";
+                    return false;
+                }
+                return true;
+            }
+        });
+    }
+    // $("#code_add").focus(function(){
+    // }).blur(function(){
+    //     $.ajax({
+    //         url: '/admin/checkCode',
+    //         type: 'post',
+    //         data: {code: this.value},
+    //         error: function () {
+    //             alert('出现错误！');
+    //         }, success: function (data) {
+    //             if (data == "false"){
+    //                 alert("该账号已存在,请重新输入");
+    //                 var input = document.getElementById("code_add");
+    //                 input.value="";
+    //             }
+    //         }
+    //     });
+    // });
     $('#delete_modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var modal = $(this);
@@ -582,12 +630,12 @@
         p_name.appendChild(document.createTextNode(name));
     });
     $('#delButton').on('click', function () {
-        $(this).button('complete');
+        // $(this).button('complete');
+        // alert(1);
         $.ajax({
             url: '/admin/delDesigner',
             type: 'post',
             data: {id: id},
-            dataType: "json",
             error: function () {
                 alert('出现错误！');
             }, success: function (data) {
@@ -624,6 +672,38 @@
         var formText = document.getElementById("designerStyle");
         formText.value = styleText;
     }
+    //城市级联
+    function changeProvince(now){
+        $.ajax({
+            url: "/queryCity/"+now.options[now.options.selectedIndex].value,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                /*这个方法里是ajax发送请求成功之后执行的代码*/
+                var province = now;
+                var city = document.getElementById("city");
+                var opt = now.options.selectedIndex;
+                var j = 0;
+                var length=city.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for(i=0;i<length;i++){
+                    city.removeChild(city.options[0]);
+                }
+                /**
+                 * 添加新选项
+                 */
+                for (i=0;i<data.length;i++) {
+                    // console.log(data[i].district_name);
+                    city.options[j++] = new Option(data[i].district_name, data[i].id);
+                }
+            },
+            error: function(msg){
+                alert("ajax连接异常："+msg);
+            }
+        });
+    };
 </script>
 </body>
 <style>

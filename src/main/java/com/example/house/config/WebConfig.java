@@ -14,8 +14,10 @@ public class WebConfig implements WebMvcConfigurer {
         //向绝对路径 (D:/College/Graduation project/house/src/main/resources/static/userPic/)映射
         String path="D:/College/Graduation project/house/src/main/resources/static/userPic/";
         String workerPath="D:/College/Graduation project/house/src/main/resources/static/workerPic/";
+        String setImagePath="D:/College/Graduation project/house/src/main/resources/static/setImage/";
         registry.addResourceHandler("/userPic/**").addResourceLocations("file:"+path);
         registry.addResourceHandler("/workerPic/**").addResourceLocations("file:"+workerPath);
+        registry.addResourceHandler("/setImage/**").addResourceLocations("file:"+setImagePath);
     }
 }
 

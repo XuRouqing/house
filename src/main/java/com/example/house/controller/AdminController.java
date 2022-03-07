@@ -89,9 +89,11 @@ public class AdminController {
         List<Designer> designers = designerService.getDesignerList();
         List<Index> designerLevel = designerService.getDesignerLevel();
         List<Index> designerStyle = designerService.getDesignerStyle();
+        List<City> provinces = cityService.getProvinceList();
         model.addAttribute("designers", designers);
         model.addAttribute("designerLevel", designerLevel);
         model.addAttribute("designerStyle", designerStyle);
+        model.addAttribute("provinces", provinces);
         return "Admin/designer-list";
     }
 
@@ -183,7 +185,7 @@ public class AdminController {
             designer.setUserId(user.getId());
             designerService.addDesigner(designer);
         }
-        return "redirect:/admin/workerList";
+        return "redirect:/admin/designerList";
     }
 
     @ResponseBody

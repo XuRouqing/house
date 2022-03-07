@@ -573,6 +573,8 @@ public class Controller {
             }
         }
 
+        set.setPic(contents[0].getPic());
+        setService.modifySet(set);
         for (int i = 0; i < contentArray.length; i++) {
             int configNum = contentArray[i];
             for (int j = 1; j <= configNum; j++) {
