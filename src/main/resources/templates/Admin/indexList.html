@@ -5,32 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>我爱我家装修公司</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="../Path/image/newlogo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../Path/image/newlogo.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../Path/admin/css/font-awesome.min.css">
 
     <!-- Feathericon CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/feathericon.min.css">
+    <link rel="stylesheet" href="../../Path/admin/css/feathericon.min.css">
 
     <!-- Datatables CSS -->
-    <link rel="stylesheet" href="../Path/admin/plugins/datatables/datatables.min.css">
+    <link rel="stylesheet" href="../../Path/admin/plugins/datatables/datatables.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/style.css">
+    <link rel="stylesheet" href="../../Path/admin/css/style.css">
 
     <!-- Select2 CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/select2.min.css">
+    <link rel="stylesheet" href="../../Path/admin/css/select2.min.css">
 
     <!--[if lt IE 9]>
-    <script src="../Path/admin/js/html5shiv.min.js"></script>
-    <script src="../Path/admin/js/respond.min.js"></script>
+    <script src="../../Path/admin/js/html5shiv.min.js"></script>
+    <script src="../../Path/admin/js/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" href="../Path/admin/css/jquery.multiselect.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Path/admin/css/jquery.multiselect.css"/>
 </head>
 <body>
 
@@ -43,10 +43,10 @@
         <!-- Logo -->
         <div class="header-left">
             <a href="index.html" class="logo">
-                <img src="../Path/image/newlogo.png" alt="Logo">
+                <img src="../../Path/image/newlogo.png" alt="Logo">
             </a>
             <a href="index.html" class="logo logo-small">
-                <img src="../Path/image/newlogo.png" alt="Logo" width="30" height="30">
+                <img src="../../Path/image/newlogo.png" alt="Logo" width="30" height="30">
             </a>
         </div>
         <!-- /Logo -->
@@ -88,7 +88,7 @@
                                     <div class="media">
 												<span class="avatar avatar-sm">
 													<img class="avatar-img rounded-circle" alt="User Image"
-                                                         src="../Path/admin/img/doctors/doctor-thumb-01.jpg">
+                                                         src="../../Path/admin/img/doctors/doctor-thumb-01.jpg">
 												</span>
                                         <div class="media-body">
                                             <p class="noti-details"><span class="noti-title">Dr. Ruby Perrin</span>
@@ -103,7 +103,7 @@
                                     <div class="media">
 												<span class="avatar avatar-sm">
 													<img class="avatar-img rounded-circle" alt="User Image"
-                                                         src="../Path/admin/img/patients/patient1.jpg">
+                                                         src="../../Path/admin/img/patients/patient1.jpg">
 												</span>
                                         <div class="media-body">
                                             <p class="noti-details"><span class="noti-title">Charlene Reed</span> has
@@ -119,7 +119,7 @@
                                     <div class="media">
 												<span class="avatar avatar-sm">
 													<img class="avatar-img rounded-circle" alt="User Image"
-                                                         src="../Path/admin/img/patients/patient2.jpg">
+                                                         src="../../Path/admin/img/patients/patient2.jpg">
 												</span>
                                         <div class="media-body">
                                             <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent
@@ -134,7 +134,7 @@
                                     <div class="media">
 												<span class="avatar avatar-sm">
 													<img class="avatar-img rounded-circle" alt="User Image"
-                                                         src="../Path/admin/img/patients/patient3.jpg">
+                                                         src="../../Path/admin/img/patients/patient3.jpg">
 												</span>
                                         <div class="media-body">
                                             <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a
@@ -156,13 +156,13 @@
             <!-- User Menu -->
             <li class="nav-item dropdown has-arrow">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                    <span class="user-img"><img class="rounded-circle" src="../Path/admin/img/profiles/avatar-01.jpg"
+                    <span class="user-img"><img class="rounded-circle" src="../../Path/admin/img/profiles/avatar-01.jpg"
                                                 width="31" alt="Ryan Taylor"></span>
                 </a>
                 <div class="dropdown-menu">
                     <div class="user-header">
                         <div class="avatar avatar-sm">
-                            <img src="../Path/admin/img/profiles/avatar-01.jpg" alt="User Image"
+                            <img src="../../Path/admin/img/profiles/avatar-01.jpg" alt="User Image"
                                  class="avatar-img rounded-circle">
                         </div>
                         <div class="user-text">
@@ -200,7 +200,7 @@
                     <li>
                         <a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a th:href="@{/admin/userList}"><i class="fe fe-user-plus"></i> <span>用户列表</span></a>
                     </li>
                     <li>
@@ -215,23 +215,23 @@
                             <li class="submenu">
                                 <a href="javascript:void(0);"> <span>案例索引</span> <span class="menu-arrow"></span></a>
                                 <ul style="display: none;">
-                                    <li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
-                                    <li><a th:href="@{/admin/indexList/housearea}"> <span>面积</span></a></li>
-                                    <li><a th:href="@{/admin/indexList/housetype}"> <span>装修类型</span></a></li>
-                                    <li><a th:href="@{/admin/indexList/houseform}"> <span>装修类别</span></a></li>
+                                    <li><a name="styleindex_a" th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
+                                    <li><a name="housearea_a" th:href="@{/admin/indexList/housearea}"> <span>面积</span></a></li>
+                                    <li><a name="housetype_a" th:href="@{/admin/indexList/housetype}"> <span>装修类型</span></a></li>
+                                    <li><a name="houseform_a" th:href="@{/admin/indexList/houseform}"> <span>装修类别</span></a></li>
                                 </ul>
                             </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);"> <span>设计师索引</span> <span class="menu-arrow"></span></a>
                                 <ul style="display: none;">
-                                    <li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
-                                    <li><a th:href="@{/admin/indexList/designerlevel}"> <span>等级</span></a></li>
+                                    <li><a name="styleindex_a" th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
+                                    <li><a name="designerlevel_a" th:href="@{/admin/indexList/designerlevel}"> <span>等级</span></a></li>
                                 </ul>
                             </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);"> <span>施工团队索引</span> <span class="menu-arrow"></span></a>
                                 <ul style="display: none;">
-                                    <li><a th:href="@{/admin/indexList/workertype}"><span>工种</span></a></li>
+                                    <li><a name="workertype_a" th:href="@{/admin/indexList/workertype}"><span>工种</span></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -346,10 +346,10 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-11">
-                        <h3 class="page-title">用户列表</h3>
+                        <h3 class="page-title">索引列表</h3>
                     </div>
                     <div class="col-sm-1">
-                        <a class="btn btn-sm bg-primary-light mr-2" data-toggle="modal" href="#add_user">
+                        <a class="btn btn-sm bg-primary-light mr-2" data-toggle="modal" href="#add_index">
                             <i class="fe fe-plus"></i> 添加
                         </a>
                     </div>
@@ -366,37 +366,26 @@
                                 <table class="datatable table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th style="width: 5%">ID</th>
-                                        <th style="width: 15%">账号</th>
-                                        <th style="width: 10%">昵称</th>
-                                        <th style="width: 10%">角色</th>
-                                        <th style="width: 10%">密码</th>
-                                        <th style="width: 25%">邮箱</th>
-                                        <th style="width: 25%">联系电话</th>
-                                        <th>操作</th>
+                                        <th width="50%">ID</th>
+                                        <th width="50%">名称</th>
+                                        <th class="text-right sorting">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody id="tbody">
-                                    <tr th:each="user : ${users}">
-                                        <td th:text="${user.id}"></td>
-                                        <td th:text="${user.code}"></td>
-                                        <td th:text="${user.name}"></td>
-                                        <td th:text="${user.role}"></td>
-                                        <td th:text="${user.password}"></td>
-                                        <td th:text="${user.email}"></td>
-                                        <td th:text="${user.phone}"></td>
+                                    <tr th:each="index : ${indexList}">
+                                        <td th:text="${index.id}"></td>
+                                        <td th:text="${index.name}"></td>
                                         <td class="text-right">
                                             <div class="actions">
-                                                <button id="edit_modify" class="btn btn-sm bg-success-light mr-2" data-toggle="modal"
-                                                        th:attr="data-id=${user.id},data-name=${user.name},
-                                                        data-code=${user.code},data-role=${user.role},
-                                                        data-password=${user.password},data-email=${user.email},data-phone=${user.phone}"
+                                                <button id="edit_modify" class="btn btn-sm bg-success-light mr-2"
+                                                        data-toggle="modal"
+                                                        th:attr="data-id=${index.id},data-name=${index.name}"
                                                         href="#modify" onclick="modify(this)">
                                                     <i class="fe fe-pencil"></i> 编辑
                                                 </button>
                                                 <button class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                        th:attr="data-id=${user.id},data-name=${user.name}"
-                                                        href="#delete_modal">
+                                                        th:attr="data-id=${index.id},data-name=${index.name}"
+                                                        href="#delete_modal" onclick="delIndex(this)">
                                                     <i class="fe fe-trash"></i> 删除
                                                 </button>
                                             </div>
@@ -427,7 +416,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/admin/modifyUser}" method="post">
+                    <form th:action="@{/admin/modifyIndex}" method="post">
                         <div class="row form-row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -437,47 +426,14 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>账号</label>
-                                    <input id="modify_code" name="code" type="text" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
                                     <label>名称</label>
-                                    <input id="modify_name" name="name" type="text" class="form-control">
+                                    <input id="modify_name" name="name" type="text" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>角色</label>
-                                    <select id="modify_role" name="role" class="form-control">
-                                        <option id="select_admin" value="admin">管理员</option>
-                                        <option id="select_designer" value="designer">设计师</option>
-                                        <option id="select_customer" value="customer">普通用户</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>密码</label>
-                                    <input id="modify_password" name="password" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>邮箱</label>
-                                    <input id="modify_email" name="email" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>电话</label>
-                                    <input id="modify_phone" name="phone" type="text" class="form-control" required>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">保存
+                            </button>
+                            <input id="modifyPath" name="path" type="hidden">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">保存
-                        </button>
                     </form>
                 </div>
             </div>
@@ -485,69 +441,37 @@
     </div>
     <!-- /Edit Details Modal -->
 
-    <!-- Edit Details Modal -->
-    <div class="modal fade" id="add_user" aria-hidden="true" role="dialog">
+    <!-- Add Details Modal -->
+    <div class="modal fade" id="add_index" aria-hidden="true" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">添加用户</h5>
+                    <h5 class="modal-title">添加索引</h5>
                     <button type="button" class="close" data-dismiss="modal"
                             aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/admin/addUser}" method="post">
+                    <form th:action="@{/admin/addIndex}" method="post">
                         <div class="row form-row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>账号</label>
-                                    <input id="code_add" name="code" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>昵称</label>
+                                    <label>名称</label>
                                     <input name="name" type="text" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>角色</label>
-                                    <select name="role" class="form-control">
-                                        <option value="admin">管理员</option>
-                                        <option value="designer">设计师</option>
-                                        <option value="customer" selected>普通用户</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>密码</label>
-                                    <input name="password" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>邮箱</label>
-                                    <input name="email" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>电话</label>
-                                    <input name="phone" type="text" class="form-control" required>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">保存
+                            </button>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">保存
-                        </button>
+                        <input id="nowPath" name="path" type="hidden">
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Edit Details Modal -->
+    <!-- /Add Details Modal -->
+
 
     <!-- Delete Modal -->
     <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
@@ -556,7 +480,7 @@
                 <div class="modal-body">
                     <div class="form-content p-2">
                         <h4 class="modal-title">删除</h4>
-                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的用户<span id="p_name"></span>吗?</p>
+                        <p class="mb-4">确定要删除吗?</p>
                         <button id="delButton" type="button" class="btn btn-primary">确认</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
@@ -570,100 +494,64 @@
 <!-- /Main Wrapper -->
 
 <!-- jQuery -->
-<script src="../Path/admin/js/jquery-3.2.1.min.js"></script>
+<script src="../../Path/admin/js/jquery-3.2.1.min.js"></script>
 
 <!-- Bootstrap Core JS -->
-<script src="../Path/admin/js/popper.min.js"></script>
+<script src="../../Path/admin/js/popper.min.js"></script>
 <script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- Slimscroll JS -->
-<script src="../Path/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../Path/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Datatables JS -->
-<script src="../Path/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../Path/admin/plugins/datatables/datatables.min.js"></script>
+<script src="../../Path/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../Path/admin/plugins/datatables/datatables.min.js"></script>
 
 <!-- Custom JS -->
-<script src="../Path/admin/js/script.js"></script>
+<script src="../../Path/admin/js/script.js"></script>
 
 <!-- Select2 JS -->
-<script src="../Path/admin/js/select2.min.js"></script>
+<script src="../../Path/admin/js/select2.min.js"></script>
 
 <script src="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../Path/admin/js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="../../Path/admin/js/jquery.multiselect.js"></script>
 <script>
-    var id;
-    var name;
-    function modify(now){
-        var id = document.getElementById("modify_id");
-        id.setAttribute("value",now.getAttribute("data-id"));
-        var code = document.getElementById("modify_code");
-        code.setAttribute("value",now.getAttribute("data-code"));
-        var name = document.getElementById("modify_name");
-        name.setAttribute("value",now.getAttribute("data-name"));
-        var role = document.getElementById("modify_role");
-        var userRole = now.getAttribute("data-role");
-        switch (userRole){
-            case "admin" :
-                document.getElementById("select_admin").setAttribute("selected","true");
-                break;
-            case "designer":
-                document.getElementById("select_designer").setAttribute("selected","true");
-                break;
-            case "customer":
-                document.getElementById("select_customer").setAttribute("selected","true");
-                break;
+    /**
+     * 获取当前url，用于判断应该对哪个表进行操作
+     */
+    var url = window.location.pathname; /* 获取文件路径（文件地址） */
+    var index = url.lastIndexOf("\/");
+    var text = url.substring(index + 1, url.length);
+    // var nowPath = document.getElementById("nowPath");
+    // nowPath.value = text;
+    $(function () {
+        var nowPath = document.getElementById("nowPath");
+        nowPath.value = text;
+        var modifyPath = document.getElementById("modifyPath");
+        modifyPath.value = text;
+        var active = document.getElementsByName(text+"_a");
+        for (var i = 0; i < active.length; i++) {
+            active[i].setAttribute("class","active");
         }
-        var password = document.getElementById("modify_password");
-        password.setAttribute("value",now.getAttribute("data-password"));
-        var email = document.getElementById("modify_email");
-        email.setAttribute("value",now.getAttribute("data-email"));
-        var phone = document.getElementById("modify_phone");
-        phone.setAttribute("value",now.getAttribute("data-phone"));
-    }
-    // $('#modify').on('show.bs.modal', function (event) {
-    //     var edit_modify = document.getElementById("edit_modify")
-    //     var id = document.getElementById("modify_id");
-    //     id.setAttribute("value",edit_modify.getAttribute("data-id"));
-    //     var code = document.getElementById("modify_code");
-    //     code.setAttribute("value",edit_modify.getAttribute("data-code"));
-    //     var name = document.getElementById("modify_name");
-    //     name.setAttribute("value",edit_modify.getAttribute("data-name"));
-    //     var role = document.getElementById("modify_role");
-    //     var userRole = edit_modify.getAttribute("data-role");
-    //     switch (userRole){
-    //         case "admin" :
-    //             document.getElementById("select_admin").setAttribute("selected","true");
-    //             break;
-    //         case "designer":
-    //             document.getElementById("select_designer").setAttribute("selected","true");
-    //             break;
-    //         case "customer":
-    //             document.getElementById("select_customer").setAttribute("selected","true");
-    //             break;
-    //     }
-    //     var password = document.getElementById("modify_password");
-    //     password.setAttribute("value",edit_modify.getAttribute("data-password"));
-    //     var email = document.getElementById("modify_email");
-    //     email.setAttribute("value",edit_modify.getAttribute("data-email"));
-    //     var phone = document.getElementById("modify_phone");
-    //     phone.setAttribute("value",edit_modify.getAttribute("data-phone"));
-    // });
-    $('#delete_modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var modal = $(this);
-        id = button.data("id");
-        name = button.data("name");
-        var p_id = document.getElementById("p_id");
-        p_id.appendChild(document.createTextNode(id));
-        var p_name = document.getElementById("p_name");
-        p_name.appendChild(document.createTextNode(name));
     });
+
+    function modify(now) {
+        var id = document.getElementById("modify_id");
+        id.setAttribute("value", now.getAttribute("data-id"));
+        var name = document.getElementById("modify_name");
+        name.setAttribute("value", now.getAttribute("data-name"));
+    }
+    var id;
+
+    function delIndex(now) {
+        id = now.getAttribute("data-id");
+    }
+
     $('#delButton').on('click', function () {
         $.ajax({
-            url: '/admin/delUser',
+            url: '/admin/delIndex',
             type: 'post',
-            data: {id: id},
+            data: {path: text, id: id},
             error: function () {
                 alert('出现错误！');
             }, success: function (data) {
@@ -679,8 +567,8 @@
         });
     });
 
-    $("#code_add").focus(function(){
-    }).blur(function(){
+    $("#code_add").focus(function () {
+    }).blur(function () {
         $.ajax({
             url: '/admin/checkCode',
             type: 'post',
@@ -688,10 +576,10 @@
             error: function () {
                 alert('出现错误！');
             }, success: function (data) {
-                if (data == "false"){
+                if (data == "false") {
                     alert("该账号已存在,请重新输入");
                     var input = document.getElementById("code_add");
-                    input.value="";
+                    input.value = "";
                 }
             }
         });

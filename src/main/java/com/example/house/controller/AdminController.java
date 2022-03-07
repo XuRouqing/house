@@ -49,6 +49,9 @@ public class AdminController {
     @Autowired
     private SetOrderService setOrderService;
 
+    @Autowired
+    private IndexService indexService;
+
     @RequestMapping("/index")
     public String toindex(Model model) {
         int workerNum = workerService.getWorkerNum();
@@ -390,4 +393,93 @@ public class AdminController {
         return "redirect:/admin/userList";
     }
 
+    @RequestMapping("/indexList/{index}")
+    public String toindexList(Model model, @PathVariable String index) {
+        List<Index> indexList = new ArrayList<>();
+        switch (index){
+            case "housearea":
+                indexList = houseService.getHouseAreaIndex();
+                break;
+            case "houseform":
+                indexList = houseService.getHouseFormIndex();
+                break;
+            case "housetype":
+                indexList = houseService.getHouseTypeIndex();
+                break;
+            case "styleindex":
+                indexList = houseService.getHouseStyleIndex();
+                break;
+            case "workertype":
+                indexList = workerService.getWorkerType();
+                break;
+        }
+        model.addAttribute(indexList);
+        return "Admin/indexList";
+    }
+
+    @RequestMapping("/addIndex")
+    public String addIndex(Model model, String path, Index index) {
+        switch (path){
+            case "housearea":
+                indexService.addHousearea(index);
+                break;
+            case "houseform":
+                indexService.addHouseform(index);
+                break;
+            case "housetype":
+                indexService.addHousetype(index);
+                break;
+            case "styleindex":
+                indexService.addStyleindex(index);
+                break;
+            case "workertype":
+                indexService.addworkertype(index);
+                break;
+        }
+        return "redirect:/admin/indexList/"+path;
+    }
+
+    @RequestMapping("/modifyIndex")
+    public String modifyIndex(Model model, String path, Index index) {
+        switch (path){
+            case "housearea":
+                indexService.modifyHousearea(index);
+                break;
+            case "houseform":
+                indexService.modifyHouseform(index);
+                break;
+            case "housetype":
+                indexService.modifyHousetype(index);
+                break;
+            case "styleindex":
+                indexService.modifyStyleindex(index);
+                break;
+            case "workertype":
+                indexService.modifyworkertype(index);
+                break;
+        }
+        return "redirect:/admin/indexList/"+path;
+    }
+
+    @ResponseBody
+    @RequestMapping("/delIndex")
+    public void delIndex(Model model, String path, int id) {
+        switch (path){
+            case "housearea":
+                indexService.delHousearea(id);
+                break;
+            case "houseform":
+                indexService.delHouseform(id);
+                break;
+            case "housetype":
+                indexService.delHousetype(id);
+                break;
+            case "styleindex":
+                indexService.delStyleindex(id);
+                break;
+            case "workertype":
+                indexService.delworkertype(id);
+                break;
+        }
+    }
 }

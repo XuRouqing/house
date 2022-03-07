@@ -191,6 +191,33 @@
 							<li>
 								<a th:href="@{/admin/setOrderList}"><i class="fe fe-table"></i> <span>活动预约列表</span></a>
 							</li>
+							<li class="submenu">
+								<a href="javascript:void(0);"><i class="fe fe-code"></i> <span>索引</span> <span class="menu-arrow"></span></a>
+								<ul style="display: none;">
+									<li class="submenu">
+										<a href="javascript:void(0);"> <span>案例索引</span> <span class="menu-arrow"></span></a>
+										<ul style="display: none;">
+											<li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
+											<li><a th:href="@{/admin/indexList/housearea}"> <span>面积</span></a></li>
+											<li><a th:href="@{/admin/indexList/housetype}"> <span>装修类型</span></a></li>
+											<li><a th:href="@{/admin/indexList/houseform}"> <span>装修类别</span></a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"> <span>设计师索引</span> <span class="menu-arrow"></span></a>
+										<ul style="display: none;">
+											<li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
+											<li><a th:href="@{/admin/indexList/designerlevel}"> <span>等级</span></a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"> <span>施工团队索引</span> <span class="menu-arrow"></span></a>
+										<ul style="display: none;">
+											<li><a th:href="@{/admin/indexList/workertype}"><span>工种</span></a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
 							<li>
 								<a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
 							</li>
