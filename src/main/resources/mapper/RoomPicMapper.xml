@@ -24,7 +24,7 @@
     </select>
 
     <update id="modifyRoomPic" parameterType="RoomPic">
-        UPDATE RoomPic SET roomId=#{roomId},href=#{href},des=#{des}}
+        UPDATE RoomPic SET roomId=#{roomId},href=#{href},des=#{des}
         WHERE picId=#{picId}
     </update>
 

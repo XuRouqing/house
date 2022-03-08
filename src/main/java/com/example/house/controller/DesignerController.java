@@ -211,7 +211,7 @@ public class DesignerController {
         house.setCity(request.getParameter("city"));
         house.setLocal(request.getParameter("location"));
         house.setTime(request.getParameter("time"));
-        house.setPrice(Double.parseDouble(request.getParameter("price")));
+        house.setPrice(Integer.parseInt(request.getParameter("price")));
         house.setDesignerId(id);
         house.setWorkerIds(request.getParameter("workerIds"));
         house.setTypeValue(request.getParameter("typeValue"));

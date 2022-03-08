@@ -62,4 +62,9 @@ public class RoomServiceImp implements RoomService  {
     public void deleteRoom(Integer roomId){
         roomMapper.deleteRoom(roomId);
     }
+
+    @Override
+    public int getPicNumByRoomId(int id){
+        return roomMapper.selectPicNumByRoomId(id);
+    }
 }

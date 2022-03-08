@@ -155,7 +155,7 @@
                         </nav> <!-- .cd-main-nav-wrapper -->
                         <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
                         <div id="search" class="cd-main-search">
-                            <form th:action="@{../searchDesigner}" method="post">
+                            <form th:action="@{../../searchDesigner}" method="post">
                                 <input type="search" name="searchText" placeholder="Search...">
                                 <div class="cd-select">
                                     <select name="category">
@@ -181,37 +181,37 @@
                             <ul>
                                 <!--                                    首页-->
                                 <li>
-                                    <a th:href="@{../index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                                    <a th:href="@{../../index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                 </li>
                                 <!--                                    精装案例-->
                                 <li>
-                                    <a th:href="@{../fullwidth}">精装案例</a>
+                                    <a th:href="@{../../fullwidth}">精装案例</a>
                                 </li>
                                 <!--                                    设计团队-->
                                 <li>
-                                    <a th:href="@{../designer-list}">设计团队</a>
+                                    <a th:href="@{../../designer-list}">设计团队</a>
                                 </li>
                                 <!--                                    施工团队-->
                                 <li>
-                                    <a th:href="@{worker-list}">施工团队</a>
+                                    <a th:href="@{../../worker-list}">施工团队</a>
                                 </li>
                                 <!--                                    营销活动-->
                                 <li class="drop-holder">
-                                    <a th:href="@{../discount/1}">营销活动</a>
+                                    <a th:href="@{../../discount/1}">营销活动</a>
                                     <ul class="drop-menu">
                                         <li th:each="set : ${setInfo}">
                                             <a style="font-size: 15px" th:text="${set.name}"
-                                               th:href="@{../discount/}+${set.setId}"></a>
+                                               th:href="@{../../discount/}+${set.setId}"></a>
                                         </li>
                                     </ul>
                                 </li>
                                 <!--                                在线预约-->
                                 <li>
-                                    <a th:href="@{../bookOnline}">在线预约</a>
+                                    <a th:href="@{../../bookOnline}">在线预约</a>
                                 </li>
                                 <!--                                    联系我们-->
                                 <li>
-                                    <a th:href="@{../contact}">联系我们</a>
+                                    <a th:href="@{../../contact}">联系我们</a>
                                 </li>
                             </ul>
                         </nav>
@@ -236,23 +236,23 @@
                             <nav class="main-nav">
                                 <ul>
                                     <li>
-                                        <a th:href="@{../index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                                        <a th:href="@{../../index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                     </li>
                                     <!--                                    精装案例-->
                                     <li>
-                                        <a th:href="@{../fullwidth}">精装案例</a>
+                                        <a th:href="@{../../fullwidth}">精装案例</a>
                                     </li>
                                     <!--                                    设计团队-->
                                     <li>
-                                        <a th:href="@{../designer-list}">设计团队</a>
+                                        <a th:href="@{../../designer-list}">设计团队</a>
                                     </li>
                                     <!--                                    施工团队-->
                                     <li>
-                                        <a th:href="@{worker-list}">施工团队</a>
+                                        <a th:href="@{../../worker-list}">施工团队</a>
                                     </li>
                                     <!--                                    营销活动-->
                                     <li class="drop-holder">
-                                        <a th:href="@{../discount/1}">营销活动</a>
+                                        <a th:href="@{../../discount/1}">营销活动</a>
                                         <ul class="drop-menu">
                                             <li th:each="set : ${setInfo}">
                                                 <a style="font-size: 15px" th:text="${set.name}"
@@ -262,11 +262,11 @@
                                     </li>
                                     <!--                                    在线预约-->
                                     <li>
-                                        <a th:href="@{../bookOnline}">在线预约</a>
+                                        <a th:href="@{../../bookOnline}">在线预约</a>
                                     </li>
                                     <!--                                    联系我们-->
                                     <li>
-                                        <a th:href="@{../contact}">联系我们</a>
+                                        <a th:href="@{../../contact}">联系我们</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -475,13 +475,15 @@
                             <h4 class="card-title">增加案例</h4>
                         </div>
                         <div class="card-body" style="padding: 20px">
-                            <form th:action="@{/case/saveCase}" method="post" enctype="multipart/form-data" name="bookForm" id="bookForm" onsubmit="sub()">
+                            <form th:action="@{/case/editCase}" method="post" enctype="multipart/form-data" name="bookForm" id="bookForm" onsubmit="sub()">
                                 <div class="form-group row">
+                                    <input th:value="${house.houseId}" type="hidden" name="houseId">
                                     <label class="col-form-label col-md-2 form-label">案例主图</label>
                                     <div class="col-md-10 file">
                                         选择文件
                                         <input id="mainPic" name="mainPic" type="file" class="form-control"
-                                               placeholder="主图" required>
+                                               th:value="${house.mainPic}"
+                                               placeholder="主图">
                                         <div id="image-holder">
                                             <img th:src="${house.mainPic}" style="width: 300px">
                                         </div>
@@ -540,7 +542,8 @@
                                     <div class="col-md-10 file">
                                         选择文件
                                         <input id="original" name="original" type="file" class="form-control"
-                                               placeholder="原始户型图" required>
+                                               th:value="${house.original}"
+                                               placeholder="原始户型图">
                                         <div id="original-image-holder">
                                             <img th:src="${house.original}" style="width: 300px">
                                         </div>
@@ -551,7 +554,8 @@
                                     <div class="col-md-10 file">
                                         选择文件
                                         <input id="plane" name="plane" type="file" class="form-control"
-                                               placeholder="平面图" required>
+                                               th:value="${house.plane}"
+                                               placeholder="平面图">
                                         <div id="plane-image-holder">
                                             <img th:src="${house.plane}" style="width: 300px">
                                         </div>
@@ -645,8 +649,77 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="house_rooms">
-                                    <div class="form-group row" id="house_room0">
+                                <div id="house_rooms1" th:if="${roomNum} ge 0">
+                                    <div class="form-group row" id="house_room1">
+                                        <div th:each="room ,roomStatus : ${roomList}" th:id="'room'+(${roomStatus.index}+1)">
+                                            <label class="col-form-label col-md-2 form-label">房间</label>
+                                            <div class="col-lg-10">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <input th:name="'room'+(${roomStatus.index}+1)+'_id'"
+                                                               th:value="${room.roomId}" type="hidden">
+                                                        <input th:value="${room.roomType}" type="text" class="form-control" placeholder="房间类别"
+                                                               th:name="'room'+(${roomStatus.index}+1)+'_type'">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input th:value="${room.specificType}" type="text" class="form-control" placeholder="具体类别"
+                                                               th:name="'room'+(${roomStatus.index}+1)+'_specificType'">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input th:value="${room.style}" type="text" class="form-control" placeholder="房间风格"
+                                                               th:name="'room'+(${roomStatus.index}+1)+'_style'">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input th:value="${room.price}" type="text" class="form-control" placeholder="房间价格"
+                                                               th:name="'room'+(${roomStatus.index}+1)+'_price'">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <button type="button"
+                                                                class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                                onclick="addRoom()">添加房间
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="room1_pic1_div" class="row" th:each="roomPic, roomPicStatus : ${room.roomPics}">
+                                                <label class="col-form-label col-md-3 form-label"></label>
+                                                <div class="col-md-3 file">
+                                                    选择文件
+                                                    <input th:name="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)+'_id'"
+                                                           th:value="${roomPic.picId}" type="hidden">
+                                                    <input type="file" class="form-control"
+                                                           th:id="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)"
+                                                           th:name="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)"
+                                                           th:value="${roomPic.href}"
+                                                           th:attr="data-room=${roomStatus.index}+1,data-pic=${roomPicStatus.index}+1"
+                                                           onchange="changePic(this)"
+                                                           placeholder="房间照片">
+                                                    <div th:id="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)+'_imageHolder'">
+                                                        <img th:src="${roomPic.href}" style="width: 150px;height: 150px">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input th:id="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)+'_describe'"
+                                                           th:name="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)+'_describe'"
+                                                           th:value="${roomPic.des}" type="text" class="form-control"
+                                                           placeholder="描述">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="button" style="margin: 0"
+                                                            id="room1_pic1_btn"
+                                                            data-room="1"
+                                                            data-pic="1"
+                                                            class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                            onclick="addRoomPic(this)">添加房间照片
+                                                    </button>
+                                                </div>
+                                                <input name="roomNum" id="roomNum" th:value="${roomNum}" class="hidden">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="house_rooms2" th:if="${roomNum} eq 0">
+                                    <div class="form-group row" id="house_room1">
                                         <div id="room1">
                                             <label class="col-form-label col-md-2 form-label">房间</label>
                                             <div class="col-lg-10">
@@ -710,6 +783,7 @@
                                         <div class="row">
                                             <div class="form-control-wrapper col-md-10">
                                                 <input id="flatpickr-tryme" class="form-control" type="text" name="time"
+                                                       th:value="${house.time}"
                                                        placeholder="时间">
                                             </div>
                                         </div>
@@ -728,6 +802,7 @@
                                     </button>
                                 </div>
                             </form>
+                            <span th:text="${roomList}" style="display: none" id="roomList"></span>
                         </div>
                     </div>
                 </div>
@@ -1061,12 +1136,23 @@
 <script>
     let workerList = [[${workerList}]];
     let workerTypeList = [[${workerTypeList}]];
+
+    var room = document.getElementById("roomNum").value;//用于表示当前房间个数
+    var roomPic = [[${roomPic}]];//用于存放room[i]中的照片个数，从下标1开始，即当只有一个房间时显示为1
+    var house_rooms = document.getElementById("house_rooms1");
+
     $(function () {
         var type1 = document.getElementById("type1");
         $(type1).val(workerTypeList[0]);
         redirec0(type1, workerList[0]);
         for (var i = 1; i < workerList.length ; i++) {
             addWorker0(workerTypeList[i],workerList[i]);
+        }
+        if (roomPic == 0){
+            room = 1;
+            roomPic = new Array();//用于存放room[i]中的照片个数，从下标1开始，即当只有一个房间时显示为1
+            roomPic[1] = 1;
+            house_rooms = document.getElementById("house_rooms2");
         }
     });
 
@@ -1203,10 +1289,6 @@
     };
 
     var cityNowId = document.getElementById("nowCity").value;
-    $(function () {
-        var provinceNow = document.getElementById("province");
-        changeProvince(provinceNow);
-    });
 
     //加载房间
     $(function () {
@@ -1441,15 +1523,11 @@
         }
     });
 
-    var room = 1;//用于表示当前房间个数
-    var roomPic = new Array();//用于存放room[i]中的照片个数，从下标1开始，即当只有一个房间时显示为1
-    roomPic[1] = 1;
-    var house_rooms = document.getElementById("house_rooms");
-
     //添加房间
     function addRoom(){
         room++;
         roomPic[room] = 1;//初始化数组
+        console.log("addRoom   room:"+room+"  pic:"+roomPic[room]);
         //房间i
         var house_roomi = document.createElement("div");
         house_roomi.setAttribute("class","form_group row");
@@ -1477,6 +1555,7 @@
         div0_1_type_input.setAttribute("class","form-control");
         div0_1_type_input.setAttribute("placeholder","房间类别");
         div0_1_type_input.setAttribute("name","room"+room+"_type");
+        console.log(room);
 
         div0_1_type.appendChild(div0_1_type_input);
         div0_1.appendChild(div0_1_type);
@@ -1632,6 +1711,7 @@
         var nowRoom = parseInt(now.getAttribute("data-room"));
         var nowPic = now.getAttribute("data-pic");
         roomPic[nowRoom]++;
+        console.log("addRoomPic   nowRoom:"+nowRoom+"   pic:"+roomPic[nowRoom]);
 
         var room0 = now.parentNode.parentNode.parentNode;
         var div = document.createElement("div");
@@ -1688,7 +1768,7 @@
         btn.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
         btn.setAttribute("onclick","addRoomPic(this)");
         btn.setAttribute("id",room0.id+"_pic"+roomPic[nowRoom]+"_btn");
-        btn.setAttribute("data-room",room);
+        btn.setAttribute("data-room",nowRoom);
         btn.setAttribute("data-pic",roomPic[nowRoom]);
         btn.appendChild(document.createTextNode("添加房间照片"));
         divBtn.appendChild(btn);

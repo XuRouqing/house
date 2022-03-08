@@ -19,7 +19,7 @@ public class Room {
     private String roomType;//类别
     private String specificType;//具体类别（主卧、次卧等）
     private String style;//风格
-    private double price;
+    private int price;
     private List<RoomPic> roomPics;
 //    private String href;
 }

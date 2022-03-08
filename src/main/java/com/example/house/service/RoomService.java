@@ -14,4 +14,5 @@ public interface RoomService {
     public List<Room> getRoomByStyle(String style);
     public void modifyRoom(Room room);
     public void deleteRoom(Integer roomId);
+    public int getPicNumByRoomId(int id);
 }

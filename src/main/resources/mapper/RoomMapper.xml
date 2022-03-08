@@ -71,4 +71,8 @@
         WHERE roomId=#{roomId}
     </delete>
 
+    <select id="selectPicNumByRoomId" resultType="int">
+        SELECT COUNT(*) FROM roompic WHERE roomId = #{id}
+    </select>
+
 </mapper>

@@ -56,7 +56,8 @@
     </select>
 
     <update id="modifyHouse" parameterType="House">
-        UPDATE house SET name=#{name},gender=#{gender},workingAge=#{workingAge},level=#{level},style=#{style},represent=#{represent},tel=#{tel},age=#{age}
+        UPDATE house SET styleValue=#{styleValue},houseType=#{houseType},areaValue=#{areaValue},formValue=#{formValue},city=#{city},local=#{local},time=#{time},original=#{original},
+                         plane=#{plane},price=#{price},designerId=#{designerId},workerIds=#{workerIds},typeValue=#{typeValue},title=#{title},des=#{des},mainPic=#{mainPic}
         WHERE houseId=#{houseId}
     </update>
 

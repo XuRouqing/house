@@ -25,7 +25,7 @@ public class House {
     private String time;
     private String original;//原始户型图
     private String plane;//平面图
-    private double price;
+    private int price;
     private int designerId;
     private String workerIds;
     private String type;//类型（全包、半包、旧改）

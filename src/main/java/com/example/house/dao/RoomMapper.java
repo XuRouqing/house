@@ -19,4 +19,5 @@ public interface RoomMapper {
     public List<Room> selectRoomByspecificType(String specificType);//getRoomByspecificType
     public void modifyRoom(Room room);//modifyRoom
     public void deleteRoom(Integer roomId);//deleteRoom
+    public int selectPicNumByRoomId(int id);
 }

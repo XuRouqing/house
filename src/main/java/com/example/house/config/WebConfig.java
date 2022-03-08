@@ -15,9 +15,17 @@ public class WebConfig implements WebMvcConfigurer {
         String path="D:/College/Graduation project/house/src/main/resources/static/userPic/";
         String workerPath="D:/College/Graduation project/house/src/main/resources/static/workerPic/";
         String setImagePath="D:/College/Graduation project/house/src/main/resources/static/setImage/";
+        String mainPicPath="D:/College/Graduation project/house/src/main/resources/static/mainPic/";
+        String originalPath="D:/College/Graduation project/house/src/main/resources/static/original/";
+        String planePath="D:/College/Graduation project/house/src/main/resources/static/plane/";
+        String roomPath="D:/College/Graduation project/house/src/main/resources/static/room/";
         registry.addResourceHandler("/userPic/**").addResourceLocations("file:"+path);
         registry.addResourceHandler("/workerPic/**").addResourceLocations("file:"+workerPath);
         registry.addResourceHandler("/setImage/**").addResourceLocations("file:"+setImagePath);
+        registry.addResourceHandler("/mainPic/**").addResourceLocations("file:"+mainPicPath);
+        registry.addResourceHandler("/original/**").addResourceLocations("file:"+originalPath);
+        registry.addResourceHandler("/plane/**").addResourceLocations("file:"+planePath);
+        registry.addResourceHandler("/room/**").addResourceLocations("file:"+roomPath);
     }
 }
 
