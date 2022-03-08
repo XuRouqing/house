@@ -227,6 +227,11 @@ public class CaseController {
         for (int i = 0; i < workerList.length; i++) {
             wokerListInt.add(Integer.parseInt(workerList[i]));
         }
+        List<Integer> workerTypeList = new ArrayList<>();
+        for (int i = 0; i < workerList.length; i++) {
+            int type = Integer.parseInt(workerService.findWorkerById(Integer.parseInt(workerList[i])).getTypeValue());
+            workerTypeList.add(type);
+        }
 
         model.addAttribute("designers",designers);
         model.addAttribute("workers",workers);
@@ -241,6 +246,9 @@ public class CaseController {
         model.addAttribute("nowCity",nowCity);
         model.addAttribute("nowProvince",nowProvince);
         model.addAttribute("workerList",wokerListInt);
+        model.addAttribute("workerTypeList",workerTypeList);
         return "editCase";
     }
+
+
 }
