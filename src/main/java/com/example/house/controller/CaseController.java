@@ -222,12 +222,17 @@ public class CaseController {
         Room[] rooms = new Room[roomNum + 1];
         for (int i = 1; i <= roomNum; i++) {
             rooms[i] = new Room();
-            rooms[i].setRoomId(Integer.parseInt(request.getParameter("room" + i + "_id")));
             rooms[i].setRoomType(request.getParameter("room" + i + "_type"));
             rooms[i].setSpecificType(request.getParameter("room" + i + "_specificType"));
             rooms[i].setStyle(request.getParameter("room" + i + "_style"));
             rooms[i].setPrice(Integer.parseInt(request.getParameter("room" + i + "_price")));
-            roomService.modifyRoom(rooms[i]);
+            if (request.getParameter("room" + i + "_id")!=null){
+                rooms[i].setRoomId(Integer.parseInt(request.getParameter("room" + i + "_id")));
+                roomService.modifyRoom(rooms[i]);
+            }else {
+                roomService.addRoom(rooms[i]);
+            }
+
         }
         if (multipartResolver.isMultipart(request)) {
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;

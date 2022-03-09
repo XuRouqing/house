@@ -712,70 +712,69 @@
                                                             onclick="addRoomPic(this)">添加房间照片
                                                     </button>
                                                 </div>
-                                                <input name="roomNum" id="roomNum" th:value="${roomNum}" class="hidden">
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div id="house_rooms2" th:if="${roomNum} eq 0">-->
-<!--                                    <div class="form-group row" id="house_room1">-->
-<!--                                        <div id="room1">-->
-<!--                                            <label class="col-form-label col-md-2 form-label">房间</label>-->
-<!--                                            <div class="col-lg-10">-->
-<!--                                                <div class="row">-->
-<!--                                                    <div class="col-md-3">-->
-<!--                                                        <input type="text" class="form-control" placeholder="房间类别"-->
-<!--                                                               name="room1_type">-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-3">-->
-<!--                                                        <input type="text" class="form-control" placeholder="具体类别"-->
-<!--                                                               name="room1_specificType">-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-2">-->
-<!--                                                        <input type="text" class="form-control" placeholder="房间风格"-->
-<!--                                                               name="room1_style">-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-2">-->
-<!--                                                        <input type="text" class="form-control" placeholder="房间价格"-->
-<!--                                                               name="room1_price">-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-1">-->
-<!--                                                        <button type="button"-->
-<!--                                                                class="my-btn btn btn-success glyphicon glyphicon-plus"-->
-<!--                                                                onclick="addRoom()">添加房间-->
-<!--                                                        </button>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <div id="room1_pic1_div" class="row">-->
-<!--                                                <label class="col-form-label col-md-3 form-label"></label>-->
-<!--                                                <div class="col-md-3 file">-->
-<!--                                                    选择文件-->
-<!--                                                    <input id="room1_pic1" type="file" class="form-control"-->
-<!--                                                           name="room1_pic1"-->
-<!--                                                           data-room="1" data-pic="1"-->
-<!--                                                           onchange="changePic(this)"-->
-<!--                                                           placeholder="房间照片" required>-->
-<!--                                                    <div id="room1_pic1_imageHolder"></div>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-md-3">-->
-<!--                                                    <input id="room1_pic1_describe" name="room1_pic1_describe" type="text" class="form-control"-->
-<!--                                                           placeholder="描述">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-md-2">-->
-<!--                                                    <button type="button" style="margin: 0"-->
-<!--                                                            id="room1_pic1_btn"-->
-<!--                                                            data-room="1"-->
-<!--                                                            data-pic="1"-->
-<!--                                                            class="my-btn btn btn-success glyphicon glyphicon-plus"-->
-<!--                                                            onclick="addRoomPic(this)">添加房间照片-->
-<!--                                                    </button>-->
-<!--                                                </div>-->
-<!--                                                <input name="roomNum" id="roomNum" class="hidden">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <input name="roomNum" id="roomNum" th:value="${roomNum}" class="hidden">
+                                <div id="house_rooms2" th:if="${roomNum} eq 0">
+                                    <div class="form-group row" id="house_rooms2_house_room1">
+                                        <div id="room1">
+                                            <label class="col-form-label col-md-2 form-label">房间</label>
+                                            <div class="col-lg-10">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" placeholder="房间类别"
+                                                               name="room1_type">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" placeholder="具体类别"
+                                                               name="room1_specificType">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" class="form-control" placeholder="房间风格"
+                                                               name="room1_style">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" class="form-control" placeholder="房间价格"
+                                                               name="room1_price">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <button type="button"
+                                                                class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                                onclick="addRoom()">添加房间
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="house_rooms2_room1_pic1_div" class="row">
+                                                <label class="col-form-label col-md-3 form-label"></label>
+                                                <div class="col-md-3 file">
+                                                    选择文件
+                                                    <input type="file" class="form-control"
+                                                           name="room1_pic1"
+                                                           data-room="1" data-pic="1"
+                                                           onchange="changePic(this)"
+                                                           placeholder="房间照片" required>
+                                                    <div id="room1_pic1_imageHolder"></div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input name="room1_pic1_describe" type="text" class="form-control"
+                                                           placeholder="描述">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="button" style="margin: 0"
+                                                            data-room="1"
+                                                            data-pic="1"
+                                                            class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                            onclick="addRoomPic(this)">添加房间照片
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">时间</label>
                                     <div class="col-lg-10">
@@ -1147,12 +1146,12 @@
         for (var i = 1; i < workerList.length ; i++) {
             addWorker0(workerTypeList[i],workerList[i]);
         }
-        // if (roomPic == 0){
-        //     room = 1;
-        //     roomPic = new Array();//用于存放room[i]中的照片个数，从下标1开始，即当只有一个房间时显示为1
-        //     roomPic[1] = 1;
-        //     house_rooms = document.getElementById("house_rooms2");
-        // }
+        if (roomPic == 0){
+            room = 1;
+            roomPic = new Array();//用于存放room[i]中的照片个数，从下标1开始，即当只有一个房间时显示为1
+            roomPic[1] = 1;
+            house_rooms = document.getElementById("house_rooms2");
+        }
     });
 
     //加载时选项
@@ -1610,6 +1609,7 @@
         var div0_1_addRoom_btn = document.createElement("button");
         div0_1_addRoom_btn.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
         div0_1_addRoom_btn.setAttribute("onclick","addRoom()");
+        div0_1_addRoom_btn.setAttribute("type","button");
         div0_1_addRoom_btn.appendChild(document.createTextNode("添加房间"));
         //添加房间按钮
 
