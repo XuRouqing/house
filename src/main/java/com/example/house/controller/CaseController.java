@@ -326,6 +326,7 @@ public class CaseController {
         int nowProvince = cityService.getCityListById(Integer.parseInt(house.getCity())).getPid();
 
         List<Integer> roomPic = new ArrayList<>();
+        roomPic.add(0);
         for (int i = 0; i < roomList.size(); i++) {
             List<RoomPic> roomPicList = roomPicService.getRoomPicByRoomId(roomList.get(i).getRoomId());
             roomList.get(i).setRoomPics(roomPicList);
