@@ -586,19 +586,6 @@ public class Controller {
             }
             //写入contents
             contents[setContentIndex++] = setContent;
-
-//            SetContent setContent = new SetContent();
-//            String contentName = request.getParameter("content"+i+"_name");//获取该content的name
-//            setContent.setName(contentName);
-//            if (request.getParameter("content"+i+"_id")!=null){
-//                int contentId = Integer.parseInt(request.getParameter("content"+i+"_id"));
-//                setContent.setContentId(contentId);
-//                setContent.setPic(contentService.findSetContentById(contentId).getPic());
-//                contentService.modifySetContent(setContent);
-//            }else{
-//                contentService.addSetContent(setContent);
-//            }
-//            contents[setContentIndex++] = setContent;
         }
 
 
@@ -650,23 +637,8 @@ public class Controller {
                     configService.addSetConfig(setConfig);
                 }
             }
-//            int configNum = contentArray[i];
-//            for (int j = 1; j <= configNum; j++) {
-//                SetConfig config = new SetConfig();
-//                config.setSetId(setId);
-//                config.setCategory(request.getParameter("content"+(i+1)+"_config"+j+"_category"));
-//                config.setBrand(request.getParameter("content"+(i+1)+"_config"+j+"_brand"));
-//                config.setContentId(contents[i].getContentId());
-//                if (request.getParameter("content"+(i+1)+"_config"+j+"_id")!=null){
-//                    config.setConfigId(Integer.parseInt(request.getParameter("content"+(i+1)+"_config"+j+"_id")));
-//                    configService.modifySetConfig(config);
-//                }else{
-//                    configService.addSetConfig(config);
-//                }
-//            }
         }
         return "redirect:/editDiscount/"+set.getSetId();
-//        return "redirect:/editDiscount/14";
     }
 
     @Value("${setImage.file.path}")
@@ -737,6 +709,15 @@ public class Controller {
             }
         }
         return "redirect:/addDiscount";
+    }
+
+    @RequestMapping("/delDiscount/{id}")
+    public String delDiscount(@PathVariable int id, HttpServletRequest request){
+        setService.deleteSet(id);
+        String refUrl=request.getHeader("Referer").toString();
+        String port = request.getScheme()+"://"+request.getServerName()+":"+request.getLocalPort();
+        refUrl = refUrl.substring(refUrl.indexOf(port)+port.length());
+        return "redirect:"+refUrl;
     }
 
     @PostMapping("/discountOrderAdd")

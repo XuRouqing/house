@@ -62,8 +62,10 @@
     </update>
 
     <delete id="deleteSetContent" parameterType="SetContent">
-        DELETE FROM setContent
-        WHERE setContentId=#{setContentId}
+        delete setconfig, setcontent
+        from setconfig, setcontent
+        where setconfig.contentId = #{contentId}
+            and setcontent.contentId = #{contentId}
     </delete>
 
 </mapper>

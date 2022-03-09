@@ -34,7 +34,7 @@
 
     <delete id="deleteSetConfig" parameterType="SetConfig">
         DELETE FROM setConfig
-        WHERE setConfigId=#{setConfigId}
+        WHERE configId=#{configId}
     </delete>
 
 </mapper>

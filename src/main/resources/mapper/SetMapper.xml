@@ -28,8 +28,11 @@
     </update>
 
     <delete id="deleteSet" parameterType="Set">
-        DELETE FROM myset
-        WHERE setId=#{setId}
+        delete myset, setconfig, setcontent
+        from myset, setconfig, setcontent
+        where myset.setId = #{setId}
+            and setconfig.setId = #{setId}
+            and setcontent.setId = #{setId}
     </delete>
 
 </mapper>

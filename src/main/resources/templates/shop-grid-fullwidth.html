@@ -533,7 +533,9 @@
                                 </nav>
                             </div>
 <!--                            添加案例-->
-                            <a type="button" id="btn_add" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/case/addCase}" class="my-btn btn btn-success glyphicon glyphicon-plus btn_add"></a>
+                            <a type="button" id="btn_add" th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                               th:href="@{/case/addCase}"
+                               class="my-btn btn btn-success glyphicon glyphicon-plus btn_add"></a>
 <!--                            <a type="button" id="btn_add" th:href="@{/addCase}" class="my-btn btn btn-success glyphicon glyphicon-plus btn_add"></a></a>-->
                         </div>
                     </div>
