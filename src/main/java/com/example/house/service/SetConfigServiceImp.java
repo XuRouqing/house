@@ -35,6 +35,11 @@ public class SetConfigServiceImp implements SetConfigService  {
     }
 
     @Override
+    public List<SetConfig> getSetConfigListByContentId(int contentId){
+        return setConfigMapper.selectSetConfigByContentId(contentId);
+    }
+
+    @Override
     public void modifySetConfig(SetConfig setConfig){
         setConfigMapper.modifySetConfig(setConfig);
     }

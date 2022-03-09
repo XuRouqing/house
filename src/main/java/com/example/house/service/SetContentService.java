@@ -9,6 +9,7 @@ public interface SetContentService {
     public SetContent findSetContentById(Integer setContentId);
     public List<SetContent> getSetContentList();
     public List<SetContent> getSetContentListBySet(int setId);
+    public List<SetContent> getSetContentListBySetId(int setId);
     public void modifySetContent(SetContent setContent);
     public void deleteSetContent(Integer setContentId);
 }

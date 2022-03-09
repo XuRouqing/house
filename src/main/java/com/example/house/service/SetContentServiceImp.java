@@ -36,6 +36,11 @@ public class SetContentServiceImp implements SetContentService  {
     }
 
     @Override
+    public List<SetContent> getSetContentListBySetId(int setId){
+        return setContentMapper.selectSetContentBySetId(setId);
+    }
+
+    @Override
     public void modifySetContent(SetContent setContent){
         setContentMapper.modifySetContent(setContent);
     }

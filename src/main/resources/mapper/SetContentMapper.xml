@@ -14,13 +14,18 @@
     </insert>
 
     <select id="selectSetContentById" resultType="setContent">
-        select * from setContent left join
+        select * from setContent
             where contentId = #{contentId}
     </select>
 
     <select id="selectSetContentBySet" resultMap="getConfig">
         SELECT (@i:=@i+1) rownum,t.*,f.* FROM setcontent t,setconfig f,(SELECT @i:=0) t2
         WHERE t.setId=#{setId} AND t.contentId=f.contentId
+    </select>
+
+    <select id="selectSetContentBySetId" resultType="setContent">
+        SELECT * FROM setcontent
+        WHERE setId = #{setId}
     </select>
 
     <resultMap id="getConfig" type="com.example.house.pojo.SetContent">
@@ -53,7 +58,7 @@
 
     <update id="modifySetContent" parameterType="SetContent">
         UPDATE setContent SET setId=#{setId},name =#{name},pic=#{pic}
-        WHERE setContentId=#{setContentId}
+        WHERE contentId=#{contentId}
     </update>
 
     <delete id="deleteSetContent" parameterType="SetContent">

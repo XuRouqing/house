@@ -23,9 +23,13 @@
         select * from setConfig where setId = #{setId}
     </select>
 
+    <select id="selectSetConfigByContentId" resultType="SetConfig">
+        select * from setConfig where contentId = #{contentId}
+    </select>
+
     <update id="modifySetConfig" parameterType="SetConfig">
         UPDATE setConfig SET setId=#{setId},category=#{category},brand=#{brand}
-        WHERE setConfigId=#{setConfigId}
+        WHERE configId=#{configId}
     </update>
 
     <delete id="deleteSetConfig" parameterType="SetConfig">

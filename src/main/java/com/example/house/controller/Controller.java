@@ -514,6 +514,161 @@ public class Controller {
         return "/addDiscount.html";
     }
 
+    @RequestMapping("/editDiscount/{id}")
+    public String editCase(@PathVariable int id, Model model) {
+        Set set = setService.findSetById(id);
+        List<SetContent> contents = contentService.getSetContentListBySetId(id);
+
+        List<Integer> config = new ArrayList<>();
+        config.add(0);
+        for (int i = 0; i < contents.size(); i++) {
+            List<SetConfig> content_config = configService.getSetConfigListByContentId(contents.get(i).getContentId());
+            contents.get(i).setSetConfigs(content_config);
+            config.add(content_config.size());
+        }
+
+        List<City> provinces = cityService.getProvinceList();
+        model.addAttribute("setInfo",set);
+        model.addAttribute("contentInfo",contents);
+        model.addAttribute("contentNum",contents.size());
+        model.addAttribute("configList",config);
+        model.addAttribute("provinces",provinces);
+        return "editDiscount";
+    }
+
+    @PostMapping("/editDiscount")
+    public String editDiscount(HttpServletResponse resp, HttpServletRequest request) throws IOException {
+        //获取表单数据
+        Enumeration<String> parameterNames = request.getParameterNames();
+//        while(parameterNames.hasMoreElements()){
+//            String name=(String)parameterNames.nextElement();
+//            String value=request.getParameter(name);
+//            System.out.println(name + "=" + value);
+//        }
+
+        int contentNum = Integer.parseInt(request.getParameter("contentNum"));
+
+        //获取contentArray,每个content的config个数
+        String arrayTemp = request.getParameter("contentArrays");
+        String[] contentArrayString = arrayTemp.split(",");
+        int[] contentArray = new int[contentArrayString.length-1];
+        for (int i = 1; i < contentArrayString.length; i++) {
+            contentArray[i-1] = Integer.parseInt(contentArrayString[i]);
+        }
+
+        Set set = new Set();
+        set.setName(request.getParameter("name"));
+        set.setDiscount(request.getParameter("discount"));
+        set.setDes(request.getParameter("des"));
+        set.setTime(request.getParameter("time"));
+        set.setSetId(Integer.parseInt(request.getParameter("setId")));
+        set.setPic(setService.findSetById(set.getSetId()).getPic());
+        int setId = set.getSetId();
+
+        //content列表，用于记录每个content
+        SetContent[] contents = new SetContent[contentNum];
+        int setContentIndex = 0;
+        for (int i = 0; i < contentNum; i++) {
+            SetContent setContent = new SetContent();
+            setContent.setSetId(setId);
+            setContent.setName(request.getParameter("content"+(i+1)+"_name"));
+            //如果存在id，则说明该content不是新增的，对其做修改
+            if (request.getParameter("content"+(i+1)+"_id")!=null){
+                int contentId = Integer.parseInt(request.getParameter("content"+(i+1)+"_id"));
+                setContent.setContentId(contentId);
+                setContent.setPic(contentService.findSetContentById(contentId).getPic());
+                contentService.modifySetContent(setContent);
+            }
+            //如果id不存在，则说明该content为新增content，数据库中增加content
+            //contentId为空，数据表自增，contentPic为空，在下方文件操作中做处理
+            else{
+                contentService.addSetContent(setContent);
+            }
+            //写入contents
+            contents[setContentIndex++] = setContent;
+
+//            SetContent setContent = new SetContent();
+//            String contentName = request.getParameter("content"+i+"_name");//获取该content的name
+//            setContent.setName(contentName);
+//            if (request.getParameter("content"+i+"_id")!=null){
+//                int contentId = Integer.parseInt(request.getParameter("content"+i+"_id"));
+//                setContent.setContentId(contentId);
+//                setContent.setPic(contentService.findSetContentById(contentId).getPic());
+//                contentService.modifySetContent(setContent);
+//            }else{
+//                contentService.addSetContent(setContent);
+//            }
+//            contents[setContentIndex++] = setContent;
+        }
+
+
+//        //图片文件操作
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        if(multipartResolver.isMultipart(request)) {
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+            Iterator<String> iter = multiRequest.getFileNames();
+            SimpleDateFormat sdf = null;
+            while(iter.hasNext()) {
+                sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+                String timeStamp = sdf.format(new Date());
+                MultipartFile file = multiRequest.getFile(iter.next());
+                if (!file.isEmpty()){
+                    String name = file.getName();//获取图片input的id，用于判断该图片属于哪个字段
+                    String fileName = file.getOriginalFilename();//获取文件名称
+                    String suffixName=fileName.substring(fileName.lastIndexOf("."));//获取文件后缀
+                    File image;
+                    image = new File(setPath+timeStamp+suffixName);//文件名字重命名,以时间戳命名
+                    file.transferTo(image);//上传文件
+                    switch (name){
+                        case "pic":
+                            set.setPic("/setImage/"+timeStamp+suffixName);
+                            break;
+                        default:
+                            int contentInex = Integer.parseInt(name.substring(7, name.indexOf('_')));//所属content
+                            String href = "/setImage/"+timeStamp+suffixName;
+                            contents[contentInex-1].setPic(href);
+                            contentService.modifySetContent(contents[contentInex-1]);
+                            break;
+                    }
+
+                }
+            }
+        }
+        setService.modifySet(set);
+        for (int i = 1; i <= contentArray.length; i++) {
+            int configNum = contentArray[i-1];
+            for (int j = 1; j <= configNum; j++) {
+                SetConfig setConfig = new SetConfig();
+                setConfig.setCategory(request.getParameter("content"+i+"_config"+j+"_category"));
+                setConfig.setBrand(request.getParameter("content"+i+"_config"+j+"_brand"));
+                setConfig.setSetId(setId);
+                setConfig.setContentId(contents[i-1].getContentId());
+                if (request.getParameter("content"+i+"_config"+j+"_id")!=null){
+                    setConfig.setConfigId(Integer.parseInt(request.getParameter("content"+i+"_config"+j+"_id")));
+                    configService.modifySetConfig(setConfig);
+                }else{
+                    configService.addSetConfig(setConfig);
+                }
+            }
+//            int configNum = contentArray[i];
+//            for (int j = 1; j <= configNum; j++) {
+//                SetConfig config = new SetConfig();
+//                config.setSetId(setId);
+//                config.setCategory(request.getParameter("content"+(i+1)+"_config"+j+"_category"));
+//                config.setBrand(request.getParameter("content"+(i+1)+"_config"+j+"_brand"));
+//                config.setContentId(contents[i].getContentId());
+//                if (request.getParameter("content"+(i+1)+"_config"+j+"_id")!=null){
+//                    config.setConfigId(Integer.parseInt(request.getParameter("content"+(i+1)+"_config"+j+"_id")));
+//                    configService.modifySetConfig(config);
+//                }else{
+//                    configService.addSetConfig(config);
+//                }
+//            }
+        }
+        return "redirect:/editDiscount/"+set.getSetId();
+//        return "redirect:/editDiscount/14";
+    }
+
     @Value("${setImage.file.path}")
     private String setPath;
 
@@ -521,11 +676,6 @@ public class Controller {
     public String saveDiscount(HttpServletResponse resp, HttpServletRequest request) throws IOException {
         //获取表单数据
         Enumeration<String> parameterNames = request.getParameterNames();
-//
-//        while (parameterNames.hasMoreElements()) {
-//            String key = parameterNames.nextElement();
-//            System.out.println(key + ":" + request.getParameter(key));
-//        }
 
         int contentNum = Integer.parseInt(request.getParameter("contentNum"));
 

@@ -13,6 +13,7 @@ public interface SetConfigMapper {
     public SetConfig selectSetConfigById(int setConfigId);//findSetConfigById
     public List<SetConfig> selectSetConfigAll();//getSetConfigList
     public List<SetConfig> selectSetConfigBySet(int setId);//getSetConfigListBySet
+    public List<SetConfig> selectSetConfigByContentId(int contentId);//
     public void modifySetConfig(SetConfig setConfig);//modifySetConfig
     public void deleteSetConfig(Integer setConfigId);//deleteSetConfig
 }
