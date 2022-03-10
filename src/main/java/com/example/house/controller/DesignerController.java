@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/designer")
@@ -42,6 +43,9 @@ public class DesignerController {
 
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private ScheduleService scheduleService;
 
 
     @RequestMapping("/index")
@@ -288,5 +292,97 @@ public class DesignerController {
             roomService.modifyRoom(rooms[i]);
         }
         return "redirect:/designer/addCase";
+    }
+
+
+    @RequestMapping("/timing")
+    public String timing(Model model) {
+        //        int userId = Integer.parseInt(session.getAttribute("id").toString());
+//        Designer designer = designerService.getDesignerByUserId(userId);
+        Designer designer = designerService.getDesignerByUserId(3);//测试用
+        int id = designer.getId();
+        //接下来一周的日期
+        ArrayList<String> week = new ArrayList<>();
+        //加下来一周的最后一天，用于对该放入一周忙碌时间的数据做判断
+        String weekLastDay = "";
+        //接下来一个月的日期
+        ArrayList<String> month = new ArrayList<>();
+        //加下来一个月的最后一天，用于对该放入一个月忙碌时间的数据做判断
+        String monthLastDay = "";
+        Date d = new Date();
+        long dTime = d.getTime();
+        long dTimesWeek[] = new long[7];//用于存放接下来一周的Date
+        long dTimesMonth[] = new long[31];//用于存放接下来一个月的Date
+
+        //写入Date数据
+        for (int i = 0; i < dTimesWeek.length; i++) {
+            if (i == 0) {
+                dTimesWeek[i] = dTime + 86400000;
+            } else {
+                dTimesWeek[i] = dTimesWeek[i - 1] + 86400000;
+            }
+        }
+        for (int i = 0; i < dTimesMonth.length; i++) {
+            if (i == 0) {
+                dTimesMonth[i] = dTime + 86400000;
+            } else {
+                dTimesMonth[i] = dTimesMonth[i - 1] + 86400000;
+            }
+        }
+        //数据格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+        //获得当天日期，用于与数据库数据进行比较，在页面读取已设置的忙碌时间
+        String today = sdf.format(new Date(Long.parseLong(String.valueOf(dTime))));
+
+        //将接下来一周的日期数据转为字符串存入week
+        for (int i = 0; i < dTimesWeek.length; i++) {
+            week.add(sdf.format(new Date(Long.parseLong(String.valueOf(dTimesWeek[i]))))+"AM");
+            week.add(sdf.format(new Date(Long.parseLong(String.valueOf(dTimesWeek[i]))))+"PM");
+            if (i==dTimesWeek.length-1){
+                weekLastDay = sdf.format(new Date(Long.parseLong(String.valueOf(dTimesWeek[i]))));
+            }
+        }
+        //将接下来一个月的日期数据转为字符串存入month
+        for (int i = 0; i < dTimesMonth.length; i++) {
+            month.add(sdf.format(new Date(Long.parseLong(String.valueOf(dTimesMonth[i]))))+"AM");
+            month.add(sdf.format(new Date(Long.parseLong(String.valueOf(dTimesMonth[i]))))+"PM");
+            if (i==dTimesMonth.length-1){
+                monthLastDay = sdf.format(new Date(Long.parseLong(String.valueOf(dTimesMonth[i]))));
+            }
+        }
+        //获取当前设计师的忙碌时间
+        List<Schedule> scheduleListAll = scheduleService.getScheduleByDesignerId(id);
+        //用于存储晚于当日的忙碌时间信息
+        List<Schedule> scheduleList = new ArrayList<>();
+        List<Schedule> scheduleListWeek = new ArrayList<>();
+        List<Schedule> scheduleListMoth = new ArrayList<>();
+
+        //获取忙碌时间的开始时间，用于比较，若结束时间早于当日日期，则不在页面显示该条数据
+        for (int i = 0; i < scheduleListAll.size(); i++) {
+            String endDay = scheduleListAll.get(i).getDay().substring(scheduleListAll.get(i).getDay().indexOf('-')+1);
+            String startDay = scheduleListAll.get(i).getDay().substring(0,scheduleListAll.get(i).getDay().indexOf('-'));
+            if (endDay.compareTo(today)>=0){
+                scheduleList.add(scheduleListAll.get(i));
+            }
+        }
+
+        //用于判断该忙碌时间放置在一周忙碌时间中还是月忙碌时间中
+        for (int i = 0; i < scheduleList.size(); i++) {
+            String startDay = scheduleList.get(i).getDay().substring(0,scheduleList.get(i).getDay().indexOf('-'));
+            //如果开始时间晚于下周最后一天，则不显示在一周忙碌时间中
+            if (startDay.compareTo(weekLastDay)<=0){
+                scheduleListWeek.add(scheduleListAll.get(i));
+            }
+            if (startDay.compareTo(monthLastDay)<=0){
+                scheduleListMoth.add(scheduleListAll.get(i));
+            }
+        }
+        scheduleList = scheduleList.stream().sorted(Comparator.comparing(Schedule::getDay)).collect(Collectors.toList());
+        model.addAttribute("weekDate",week);
+        model.addAttribute("monthDate",month);
+        model.addAttribute("scheduleList",scheduleList);
+        model.addAttribute("scheduleListWeek",scheduleListWeek);
+        model.addAttribute("scheduleListMoth",scheduleListMoth);
+        return "Designer/timing";
     }
 }
