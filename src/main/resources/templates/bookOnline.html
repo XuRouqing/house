@@ -50,9 +50,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="Path/css/material.min.css" />
-    <link rel="stylesheet" href="Path/css/bootstrap-material-datetimepicker.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="Path/css/material.min.css"/>
+    <link rel="stylesheet" href="Path/css/bootstrap-material-datetimepicker.css"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 
     <script async>
@@ -73,10 +73,10 @@
     <script async src="Path/js/flatpickr.js" onload="fp_ready()"></script>
 
 
-<!--    <link rel="stylesheet" type="text/css" href="assets/site.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="assets/site.css">-->
     <link rel="stylesheet" id=cal_style type="text/css" href="Path/css/flatpickr.min.css">
 
-<!--    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>-->
+    <!--    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>-->
 </head>
 
 <body>
@@ -118,8 +118,12 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="settingButton"
                                     th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                    <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/admin/index}">管理员界面</a></li>
-                                    <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'designer'}" th:href="@{/admin/index}">设计师界面</a></li>
+                                    <li><a class="dropdown-item"
+                                           th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                           th:href="@{/admin/index}">管理员界面</a></li>
+                                    <li><a class="dropdown-item"
+                                           th:if="${#request.getSession().getAttribute('role') eq 'designer'}"
+                                           th:href="@{/admin/index}">设计师界面</a></li>
                                     <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
                                     <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
                                     </li>
@@ -196,7 +200,8 @@
                                     <a th:href="@{discount/1}">营销活动</a>
                                     <ul class="drop-menu">
                                         <li th:each="set : ${setInfo}">
-                                            <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                            <a style="font-size: 15px" th:text="${set.name}"
+                                               th:href="@{discount/}+${set.setId}"></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -250,7 +255,8 @@
                                         <a th:href="@{discount/1}">营销活动</a>
                                         <ul class="drop-menu">
                                             <li th:each="set : ${setInfo}">
-                                                <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                                <a style="font-size: 15px" th:text="${set.name}"
+                                                   th:href="@{discount/}+${set.setId}"></a>
                                             </li>
                                         </ul>
                                     </li>
@@ -338,12 +344,12 @@
                         <ul class="mobile-menu">
                             <li>
                                 <a th:href="@{index}">
-                                        <span class="mm-text">首页</span>
+                                    <span class="mm-text">首页</span>
                                 </a>
                             </li>
                             <li>
                                 <a th:href="@{fullwidth}">
-                                        <span class="mm-text">精装案例</span>
+                                    <span class="mm-text">精装案例</span>
                                 </a>
                             </li>
                             <li class="menu-item-has-children">
@@ -473,19 +479,22 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">称呼*</label>
                                     <div class="col-md-10">
-                                        <input name="name" type="text" class="form-control" placeholder="如何称呼您" th:value="${#request.getSession().getAttribute('name')}" required>
+                                        <input name="name" type="text" class="form-control" placeholder="如何称呼您"
+                                               th:value="${#request.getSession().getAttribute('name')}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">联系电话*</label>
                                     <div class="col-md-10">
-                                        <input name="tel" type="text" class="form-control" placeholder="请输入联系电话" th:value="${#request.getSession().getAttribute('phone')}" required>
+                                        <input name="tel" type="text" class="form-control" placeholder="请输入联系电话"
+                                               th:value="${#request.getSession().getAttribute('phone')}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">邮箱</label>
                                     <div class="col-md-10">
-                                        <input name="email" type="text" class="form-control" placeholder="请输入您的邮箱" th:value="${#request.getSession().getAttribute('email')}">
+                                        <input name="email" type="text" class="form-control" placeholder="请输入您的邮箱"
+                                               th:value="${#request.getSession().getAttribute('email')}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -494,9 +503,12 @@
                                         <div class="row" id="location">
                                             <div class="col-md-2">
                                                 <div>
-                                                    <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
+                                                    <select class="form-control" id="province" name="province"
+                                                            onChange="changeProvince(this)">
                                                         <option>请选择省份</option>
-                                                        <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}"></option>
+                                                        <option th:each="province : ${provinces}"
+                                                                th:text="${province.district_name}"
+                                                                th:value="${province.id}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -508,7 +520,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" placeholder="请输入详细地址" name="location">
+                                                <input type="text" class="form-control" placeholder="请输入详细地址"
+                                                       name="location">
                                             </div>
                                         </div>
                                     </div>
@@ -516,9 +529,11 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">设计师</label>
                                     <div class="col-md-10">
-                                        <select class="form-control" th:placeholder="请选择设计师" name="designer">
+                                        <select class="form-control" th:placeholder="请选择设计师" name="designer"
+                                                onchange="changeDesigner(this)">
                                             <option th:value="0">请选择设计师</option>
-                                            <option th:each="designer : ${designers}" th:text="${designer.name}" th:value="${designer.id}"></option>
+                                            <option th:each="designer : ${designers}" th:text="${designer.name}"
+                                                    th:value="${designer.id}"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -528,9 +543,11 @@
                                         <div class="row" id="worker">
                                             <div class="col-md-5">
                                                 <div>
-                                                    <select class="form-control" id="type1" name="type1" onChange="redirec(this)">
+                                                    <select class="form-control" id="type1" name="type1"
+                                                            onChange="redirec(this)">
                                                         <option>请选择工种</option>
-                                                        <option th:each="type : ${workerTypes}" th:text="${type.name}" th:value="${type.id}"></option>
+                                                        <option th:each="type : ${workerTypes}" th:text="${type.name}"
+                                                                th:value="${type.id}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -542,7 +559,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
-                                                <button type="button" class="my-btn btn btn-success glyphicon glyphicon-plus" onclick="addWorker()"></button>
+                                                <button type="button"
+                                                        class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                        onclick="addWorker()"></button>
                                             </div>
                                             <input id="workers" name="workers" class="hidden">
                                         </div>
@@ -552,28 +571,29 @@
                                     <label class="col-form-label col-md-2 form-label">时间</label>
                                     <div class="col-lg-10">
                                         <div class="row">
-                                        <div class="form-control-wrapper col-md-5">
-                                            <input id="flatpickr-tryme" class="form-control" type="text" placeholder="请选择时间">
+                                            <div class="form-control-wrapper col-md-12">
+                                                <select class="form-control" id="time" name="time">
+                                                    <option>-</option>
+                                                    <option th:each="date : ${dateList}" th:value="${date}"
+                                                            th:text="${date}"></option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="form-control-wrapper col-md-7">
-                                            <select id="timeSelect" class="form-control" type="text">
-                                                <option>请选择具体时间</option>
-                                            </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-2 form-label">备注</label>
+                                        <div class="col-md-10">
+                                            <textarea name="describe" rows="5" cols="5" class="form-control"
+                                                      placeholder="备注"></textarea>
                                         </div>
                                     </div>
+                                    <input name="customerId" class="hidden"
+                                           th:value="${#request.getSession().getAttribute('id')}">
+                                    <div class="submit-section proceed-btn text-right">
+                                        <button class="btn submit-btn" data-toggle="modal"
+                                                data-target=".bs-example-modal-lg">预约
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2 form-label">备注</label>
-                                    <div class="col-md-10">
-                                        <textarea name="describe" rows="5" cols="5" class="form-control" placeholder="备注"></textarea>
-                                    </div>
-                                </div>
-                                <input name="customerId" class="hidden" th:value="${#request.getSession().getAttribute('id')}">
-                                <div class="submit-section proceed-btn text-right">
-                                    <button class="btn submit-btn" data-toggle="modal"
-                                            data-target=".bs-example-modal-lg">预约</button>
-                                </div>
                             </form>
                         </div>
                     </div>
@@ -905,44 +925,50 @@
 <script type="text/javascript" src="Path/js/bootstrap-material-datetimepicker.js"></script>
 
 
-
 <script>
-    $(function(){
+    var dateList = '[[${dateList}]]';
+    dateList = dateList.slice(1,-1);
+    for (var i=0;i<datelist.length;i++){
+        datelist[i] = datelist[i].trim();//去除前后多余空格*
+    }
+
+    $(function () {
         $('select').searchableSelect();
     });
+
     //施工人员级联
-    function redirec(now){
+    function redirec(now) {
         $.ajax({
             url: "/queryAllWorkers",
             type: "post",
             dataType: "json",
-            success: function(data){
+            success: function (data) {
                 /*这个方法里是ajax发送请求成功之后执行的代码*/
                 var type1 = now;
                 var s = now.id;
-                s = s.replace("type","worker");
+                s = s.replace("type", "worker");
                 var opt = now.options.selectedIndex;
 
                 var text = type1.options[opt].text;
                 // var worker1 = document.bookForm.worker1;
                 var worker1 = document.getElementById(s);
                 var j = 1;
-                for (i=0;i<data.length;i++) {
-                    if (encodeURIComponent(data[i].type)==encodeURIComponent(text)) {
+                for (i = 0; i < data.length; i++) {
+                    if (encodeURIComponent(data[i].type) == encodeURIComponent(text)) {
                         worker1.options[j++] = new Option(data[i].name, data[i].id);
                     }
                 }
                 worker1.options[0] = new Option("请选择施工人员");
-                if (j==1){
-                    length=worker1.options.length;
-                    for(i=0;i<length;i++){
+                if (j == 1) {
+                    length = worker1.options.length;
+                    for (i = 0; i < length; i++) {
                         worker1.removeChild(worker1.options[0]);
                     }
                     worker1.options[0] = new Option("暂无可选施工人员");
                 }
             },
-            error: function(msg){
-                alert("ajax连接异常："+msg);
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
             }
         });
     };
@@ -950,13 +976,13 @@
     var last = document.getElementById("type1");
 
     //添加施工人员
-    function addWorker(){
+    function addWorker() {
         $.ajax({
             url: "/queryAllTypes",
             type: "post",
             dataType: "json",
-            success: function(data){
-                if (num<=2){
+            success: function (data) {
+                if (num <= 2) {
                     document.getElementById("type1").classList.add("form-group");
                 }
                 last.classList.add("form-group");
@@ -966,26 +992,26 @@
                  * 工种选择框
                  * @type {HTMLDivElement}
                  */
-                var i=0;
-                var j=0;
+                var i = 0;
+                var j = 0;
                 // var length=worker1.options.length;
                 /**
                  * 清空原选择框中选项
                  */
-                // for(var k=0;k<length;k++){
-                //     worker1.removeChild(worker1.options[0]);
-                // }
+                    // for(var k=0;k<length;k++){
+                    //     worker1.removeChild(worker1.options[0]);
+                    // }
                 var div = document.createElement("div");
                 var div1 = document.createElement("div");
-                div1.setAttribute("class","col-md-5");
+                div1.setAttribute("class", "col-md-5");
                 var div1_1 = document.createElement("div");
                 var selectType = document.createElement("select");
-                selectType.setAttribute("class","form-control");
-                selectType.setAttribute("name","type");
-                selectType.setAttribute("id","type"+num);
-                selectType.setAttribute("onChange","redirec(this)");
+                selectType.setAttribute("class", "form-control");
+                selectType.setAttribute("name", "type");
+                selectType.setAttribute("id", "type" + num);
+                selectType.setAttribute("onChange", "redirec(this)");
                 selectType.options[i++] = new Option("请选择工种");
-                for (var k=0;k<data.length;k++){
+                for (var k = 0; k < data.length; k++) {
                     selectType.options[i++] = new Option(data[k].name, data[k].id);
                 }
                 div1_1.appendChild(selectType);
@@ -996,12 +1022,12 @@
                  * 人员选择框
                  */
                 var div2 = document.createElement("div");
-                div2.setAttribute("class","col-md-6");
+                div2.setAttribute("class", "col-md-6");
                 var div2_1 = document.createElement("div");
                 var selectWorker = document.createElement("select");
-                selectWorker.setAttribute("class","form-control");
-                selectWorker.setAttribute("name","worker");
-                selectWorker.setAttribute("id","worker"+num);
+                selectWorker.setAttribute("class", "form-control");
+                selectWorker.setAttribute("name", "worker");
+                selectWorker.setAttribute("id", "worker" + num);
                 selectWorker.options[0] = new Option("请选择施工人员");
                 div2_1.appendChild(selectWorker);
                 div2.appendChild(div2_1);
@@ -1011,11 +1037,11 @@
                  * 删除按钮
                  */
                 var div3 = document.createElement("div");
-                div3.setAttribute("class","col-md-1");
+                div3.setAttribute("class", "col-md-1");
                 var btn = document.createElement("button");
-                btn.setAttribute("type","button");
-                btn.setAttribute("class","my-btn btn btn btn-success glyphicon glyphicon-minus");
-                btn.setAttribute("onclick","deleteWorker(this)");
+                btn.setAttribute("type", "button");
+                btn.setAttribute("class", "my-btn btn btn btn-success glyphicon glyphicon-minus");
+                btn.setAttribute("onclick", "deleteWorker(this)");
                 div3.appendChild(btn);
                 div.appendChild(div3);
 
@@ -1025,13 +1051,13 @@
                  * 改变样式，增加行间距
                  * @type {string}
                  */
-                var str = "type"+(num-1);
+                var str = "type" + (num - 1);
                 last = selectType;
                 // var last = document.getElementById("type1");
                 num++;
             },
-            error: function(msg){
-                alert("ajax连接异常："+msg);
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
             }
         });
     };
@@ -1039,7 +1065,7 @@
     /**
      * 提交表单
      **/
-    function sub(){
+    function sub() {
         var wokers = document.getElementById("workers");
         var workerDoms = document.getElementsByName("worker");
         var s = "";
@@ -1047,12 +1073,12 @@
             s += workerDoms[i].value;
             s += ",";
         }
-        s = s.substring(0,s.length-1);
+        s = s.substring(0, s.length - 1);
         wokers.value = s;
         $.ajax({
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
-            url: "/addBook" ,//url
+            url: "/addBook",//url
             data: $('#bookForm').serialize(),
             success: function (result) {
                 console.log(result);//打印服务端返回的数据(调试用)
@@ -1061,50 +1087,83 @@
                 }
                 ;
             },
-            error : function() {
+            error: function () {
                 alert("异常！");
             }
         });
     }
 
     //删除施工人员
-    function deleteWorker(now){
+    function deleteWorker(now) {
         now.parentNode.parentNode.remove();
         num--;
-        if (num<=2){
+        if (num <= 2) {
             document.getElementById("type1").classList.remove("form-group");
         }
     };
 
     //城市级联
-    function changeProvince(now){
+    function changeProvince(now) {
         $.ajax({
-            url: "/queryCity/"+now.options[now.options.selectedIndex].value,
+            url: "/queryCity/" + now.options[now.options.selectedIndex].value,
             type: "post",
             dataType: "json",
-            success: function(data){
+            success: function (data) {
                 /*这个方法里是ajax发送请求成功之后执行的代码*/
                 var province = now;
                 var city = document.getElementById("city");
                 var opt = now.options.selectedIndex;
                 var j = 0;
-                var length=city.options.length;
+                var length = city.options.length;
                 /**
                  * 清空原选择框中选项
                  */
-                for(i=0;i<length;i++){
+                for (i = 0; i < length; i++) {
                     city.removeChild(city.options[0]);
                 }
                 /**
                  * 添加新选项
                  */
-                for (i=0;i<data.length;i++) {
+                for (i = 0; i < data.length; i++) {
                     // console.log(data[i].district_name);
                     city.options[j++] = new Option(data[i].district_name, data[i].id);
                 }
             },
-            error: function(msg){
-                alert("ajax连接异常："+msg);
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
+            }
+        });
+    };
+
+    function changeDesigner(now) {
+        $.ajax({
+            url: "/queryTime",
+            type: "post",
+            data: {id: now.options[now.options.selectedIndex].value, date: dateList},
+            success: function (data) {
+                data = data.slice(2,-2);
+                var date = data.split('","');
+
+                var select = document.getElementById("time");
+                var j = 0;
+                var length = select.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for (i = 0; i < length; i++) {
+                    select.removeChild(select.options[0]);
+                }
+                /**
+                 * 添加新选项
+                 */
+                for (i = 0; i < date.length; i++) {
+                    // console.log(data[i].district_name);
+                    select.options[j++] = new Option(date[i], date[i]);
+                }
+
+            },
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
             }
         });
     };
@@ -1124,6 +1183,7 @@
     a:hover {
         text-decoration: none
     }
+
     .submit-section .submit-btn {
         padding: 12px 30px;
         font-weight: 600;
@@ -1133,14 +1193,17 @@
         background-color: #09e5ab;
         border: 1px solid #09e5ab;
     }
+
     .submit-btn:hover {
         background-color: #09dca4;
         border: 1px solid #09e5ab;
     }
+
     .form-label {
         font-size: 16px;
         font-weight: normal;
     }
+
     .my-btn {
         color: #fff;
         background-color: #09e5ab;

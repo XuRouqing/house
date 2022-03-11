@@ -752,9 +752,16 @@ public class Controller {
         long dTime = d.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String nextDay = sdf.format(new Date(Long.parseLong(String.valueOf(dTime + 86400000))));
-
         String lastDay = sdf.format(new Date(Long.parseLong(String.valueOf(dTime + 86400000*7))));
 
+        //不显示在今天之前的预约
+        for (int i = 0; i < dateList.size(); i++) {
+            String temp = dateList.get(i).substring(0,dateList.get(i).length()-2);
+            if (temp.compareTo(nextDay)<0){
+                dateList.remove(i);
+                i--;
+            }
+        }
         //用于存放开始时间与结束时间，使其对应
         List<Schedule> scheduleAll = scheduleService.getScheduleByDesignerId(id);
         List<Schedule> schedule = new ArrayList<>();
@@ -763,7 +770,7 @@ public class Controller {
             endDay = endDay.replace(".","-");
             String startDay = scheduleAll.get(i).getDay().substring(0,scheduleAll.get(i).getDay().indexOf('-'));
             startDay = startDay.replace(".","-");
-            if (endDay.compareTo(nextDay)>=0 && startDay.compareTo(lastDay)<= 0){
+            if (endDay.compareTo(nextDay)>0 && startDay.compareTo(lastDay)< 0){
                 schedule.add(scheduleAll.get(i));
             }
         }
@@ -824,7 +831,7 @@ public class Controller {
         for (int i = 0; i < result.size(); i++) {
             dateList.add(result.get(i));
         }
-
+        System.out.println(dateList);
         model.addAttribute("designerInfo",designer);
         model.addAttribute("appointmentInfo",appointments);
         model.addAttribute("dateListInfo",dateList);
@@ -850,10 +857,34 @@ public class Controller {
         List<Worker> workers = workerService.getWorkerList();
         List<Index> workerTypes = workerService.getWorkerType();
         List<City> provinces = cityService.getProvinceList();
+
+        //接下来一个月的日期
+        ArrayList<String> month = new ArrayList<>();
+        Date d = new Date();
+        long dTime = d.getTime();
+        long dTimesMonth[] = new long[31];
+        for (int i = 0; i < dTimesMonth.length; i++) {
+            if (i == 0) {
+                dTimesMonth[i] = dTime + 86400000;
+            } else {
+                dTimesMonth[i] = dTimesMonth[i - 1] + 86400000;
+            }
+        }
+        //数据格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+        //获得当天日期，用于与数据库数据进行比较，在页面读取已设置的忙碌时间
+        String today = sdf.format(new Date(Long.parseLong(String.valueOf(dTime))));
+        //将接下来一个月的日期数据转为字符串存入month
+        for (int i = 0; i < dTimesMonth.length; i++) {
+            month.add(sdf.format(new Date(Long.parseLong(String.valueOf(dTimesMonth[i]))))+"AM");
+            month.add(sdf.format(new Date(Long.parseLong(String.valueOf(dTimesMonth[i]))))+"PM");
+        }
+
         model.addAttribute("designers",designers);
         model.addAttribute("workers",workers);
         model.addAttribute("workerTypes",workerTypes);
         model.addAttribute("provinces",provinces);
+        model.addAttribute("dateList",month);
         return "bookOnline.html";
     }
 
@@ -872,6 +903,135 @@ public class Controller {
             respWritter.append("400");
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取设计师的空闲时间
+     * @param resp
+     * @param id
+     */
+    @RequestMapping(value="/queryTime")
+    public void queryTime(HttpServletResponse resp, int id, String date) throws ParseException, IOException {
+        Designer designer=designerService.findDesignerById(id);
+        List<Appointment> appointments=appointmentService.getAppointmentList();
+        List<String> dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
+        //获取今天的日期
+        Date d = new Date();
+        long dTime = d.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        long dTimesMonth[] = new long[31];//用于存放接下来一个月的Date
+        String nextDay = sdf.format(new Date(Long.parseLong(String.valueOf(dTime + 86400000))));
+        for (int i = 0; i < dTimesMonth.length; i++) {
+            if (i == 0) {
+                dTimesMonth[i] = dTime + 86400000;
+            } else {
+                dTimesMonth[i] = dTimesMonth[i - 1] + 86400000;
+            }
+        }
+        String lastDay = sdf.format(new Date(Long.parseLong(String.valueOf(dTimesMonth[30]))));
+
+        //不显示在今天之前的预约
+        for (int i = 0; i < dateList.size(); i++) {
+            String temp = dateList.get(i).substring(0,dateList.get(i).length()-2);
+            if (temp.compareTo(nextDay)<0){
+                dateList.remove(i);
+                i--;
+            }
+        }
+        for (int i = 0; i < dateList.size(); i++) {
+            dateList.set(i,dateList.get(i).replace("-","."));
+        }
+        //用于存放开始时间与结束时间，使其对应
+        List<Schedule> scheduleAll = scheduleService.getScheduleByDesignerId(id);
+        List<Schedule> schedule = new ArrayList<>();
+        for (int i = 0; i < scheduleAll.size(); i++) {
+            String endDay = scheduleAll.get(i).getDay().substring(scheduleAll.get(i).getDay().indexOf('-')+1);
+            endDay = endDay.replace(".","-");
+            String startDay = scheduleAll.get(i).getDay().substring(0,scheduleAll.get(i).getDay().indexOf('-'));
+            startDay = startDay.replace(".","-");
+            if (endDay.compareTo(nextDay)>0 && startDay.compareTo(lastDay)< 0){
+                schedule.add(scheduleAll.get(i));
+            }
+        }
+
+        List<List<String>> dayTime = new ArrayList<>();//日期加时间
+        List<List<String>> day = new ArrayList<>();//日期
+        List<List<String>> time = new ArrayList<>();//时间
+        for (int i = 0; i < schedule.size(); i++) {
+            String scheduleDayTime = schedule.get(i).getDate();
+            String startDayTime = scheduleDayTime.substring(0,scheduleDayTime.indexOf("-"));
+            String endDayTime = scheduleDayTime.substring(scheduleDayTime.indexOf("-")+1);
+            List<String> dayTimeTemp = new ArrayList<>();
+            dayTimeTemp.add(startDayTime);
+            dayTimeTemp.add(endDayTime);
+            dayTime.add(dayTimeTemp);
+            String scheduleDay = schedule.get(i).getDay();
+            String startDay = scheduleDay.substring(0,scheduleDay.indexOf("-"));
+            String endDay = scheduleDay.substring(scheduleDay.indexOf("-")+1);
+            List<String> dayTemp = new ArrayList<>();
+            dayTemp.add(startDay.replace(".","-"));
+            dayTemp.add(endDay.replace(".","-"));
+            day.add(dayTemp);
+            String scheduleTime = schedule.get(i).getTime();
+            String startTime = scheduleTime.substring(0,scheduleTime.indexOf(","));
+            String endTime = scheduleTime.substring(scheduleTime.indexOf(",")+1);
+            List<String> timeTemp = new ArrayList<>();
+            timeTemp.add(startTime);
+            timeTemp.add(endTime);
+            time.add(timeTemp);
+        }
+
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < schedule.size(); i++) {
+            Date d1 = new SimpleDateFormat("yyyy-MM-dd").parse(day.get(i).get(0));
+            Date d2 = new SimpleDateFormat("yyyy-MM-dd").parse(day.get(i).get(1));
+            Calendar dd = Calendar.getInstance();//定义日期实例
+            dd.setTime(d1);
+            String startTime = time.get(i).get(0);
+            String endTime = time.get(i).get(1);
+            if (startTime.equals("AM")){
+                result.add(sdf.format(d1)+"AM");
+                result.add(sdf.format(d1)+"PM");
+            }
+            else if (startTime.equals("PM")){
+                result.add(sdf.format(d1)+"PM");
+            }
+
+            while (dd.getTime().before(d2)) {//判断是否到结束日期
+                dd.add(Calendar.DATE, 1);//进行当前日期加1
+                String str = sdf.format(dd.getTime());
+                result.add(str+"AM");
+                result.add(str+"PM");
+            }
+            if (endTime.equals("AM")){
+                result.remove(result.size()-1);
+            }
+        }
+        for (int i = 0; i < result.size(); i++) {
+            dateList.add(result.get(i).replace("-","."));
+        }
+        HashSet hash = new HashSet(dateList);
+        dateList.clear();
+        dateList.addAll(hash);
+        Collections.sort(dateList);
+        List<String> list = new ArrayList<>(Arrays.asList(date.split(", ")));
+        //设计师空闲时间
+        list.removeAll(dateList);
+        JSONArray data = JSONArray.fromObject(list);
+        resp.setCharacterEncoding("utf-8");
+        PrintWriter respWritter = resp.getWriter();
+        respWritter.append(data.toString());
+
+
+//        try {
+//            List<City> cityList = cityService.getCityListByPid(id);
+//            JSONArray data = JSONArray.fromObject(cityList);
+//            resp.setCharacterEncoding("utf-8");
+//            PrintWriter respWritter = resp.getWriter();
+//            respWritter.append(data.toString());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
