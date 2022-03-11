@@ -196,7 +196,7 @@
                     <li class="menu-title">
                         <span>Main</span>
                     </li>
-                    <li class="active">
+                    <li>
                         <a th:href="@{/designer/index}"><i class="fe fe-home"></i> <span>首页</span></a>
                     </li>
                     <li>
@@ -208,8 +208,8 @@
                     <li>
                         <a th:href="@{/designer/caseList}"><i class="fe fe-layout"></i> <span>案例列表</span></a>
                     </li>
-                    <li>
-                        <a th:href="@{/designer/timing}"><i class="fe fe-layout"></i> <span>忙碌时间</span></a>
+                    <li class="active">
+                        <a th:href="@{/designer/timing}"><i class="fe fe-calendar"></i> <span>忙碌时间</span></a>
                     </li>
                     <li>
                         <a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
@@ -354,10 +354,6 @@
                                                                 <a class="nav-link" data-toggle="tab"
                                                                    href="#slot_month">未来一个月</a>
                                                             </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" data-toggle="tab"
-                                                                   href="#slot_wednesday">Wednesday</a>
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                     <!-- /Schedule Nav -->
@@ -373,14 +369,7 @@
                                                         <h4 class="card-title d-flex justify-content-between">
                                                             <span>现有数据</span>
                                                             <a class="edit-link" data-toggle="modal"
-                                                               th:if="${scheduleListWeek.size()} ne 0"
-                                                               href="#edit_time_slot_week">
-                                                                <i class="fa fa-edit mr-1"></i>
-                                                                编辑
-                                                            </a>
-                                                            <a class="edit-link" data-toggle="modal"
-                                                               th:if="${scheduleListWeek.size()} eq 0"
-                                                               href="#add_time_slot">
+                                                               href="#add_time_slot_week">
                                                                 <i class="fa fa-plus-circle"></i>
                                                                 添加
                                                             </a>
@@ -391,7 +380,7 @@
                                                             <div class="doc-slot-list"
                                                                  th:each="schedule : ${scheduleListWeek}">
                                                                 <span th:text="${schedule.date}"></span>
-                                                                <a href="javascript:void(0)" class="delete_schedule">
+                                                                <a th:href="@{/designer/delSchedule/}+${schedule.id}" class="delete_schedule">
                                                                     <i class="fa fa-times"></i>
                                                                 </a>
                                                             </div>
@@ -400,14 +389,14 @@
                                                            th:if="${scheduleListWeek.size()} eq 0">暂无数据</p>
                                                         <!-- /Slot List -->
                                                     </div>
-                                                    <!-- /Monday Slot -->
+                                                    <!-- week Slot -->
 
                                                     <!-- month Slot -->
                                                     <div id="slot_month" class="tab-pane fade">
                                                         <h4 class="card-title d-flex justify-content-between">
                                                             <span>现有数据</span>
                                                             <a class="edit-link" data-toggle="modal"
-                                                               href="#add_time_slot"><i class="fa fa-plus-circle"></i>
+                                                               href="#add_time_slot_month"><i class="fa fa-plus-circle"></i>
                                                                添加
                                                             </a>
                                                         </h4>
@@ -425,10 +414,9 @@
                                                         <p class="text-muted mb-0"
                                                            th:if="${scheduleListMoth.size()} eq 0">暂无数据</p>
                                                         <!-- /Slot List -->
-                                                        <!-- /Slot List -->
                                                     </div>
+                                                    <!-- month Slot -->
                                                 </div>
-                                                <!-- /Tuesday Slot -->
 
                                             </div>
                                             <!-- /Schedule Content -->
@@ -473,43 +461,38 @@
 </div>
 <!-- /Main Wrapper -->
 
-<!-- Add Time Slot Modal -->
-<div class="modal fade custom-modal" id="add_time_slot">
+<!-- Add Time Slot Modal Week -->
+<div class="modal fade custom-modal" id="add_time_slot_week">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Time Slots</h5>
+                <h5 class="modal-title">添加忙碌时间</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form th:action="@{/designer/addSchedule}" method="post" onsubmit="return check('week')">
+                    <input name="designerId" th:value="${designer.id}" type="hidden">
                     <div class="hours-info">
                         <div class="row form-row hours-cont">
                             <div class="col-12 col-md-10">
                                 <div class="row form-row">
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
-                                            <label>Start Time</label>
-                                            <select class="form-control">
-                                                <option>-</option>
-                                                <option>12.00 am</option>
-                                                <option>12.30 am</option>
-                                                <option>1.00 am</option>
-                                                <option>1.30 am</option>
+                                            <label>开始时间</label>
+                                            <select class="form-control" name="startDate" id="week_startDate">
+                                                <option th:each="day : ${weekDate}" th:value="${day}"
+                                                        th:text="${day}"></option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
-                                            <label>End Time</label>
-                                            <select class="form-control">
-                                                <option>-</option>
-                                                <option>12.00 am</option>
-                                                <option>12.30 am</option>
-                                                <option>1.00 am</option>
-                                                <option>1.30 am</option>
+                                            <label>结束时间</label>
+                                            <select class="form-control" name="endDate" id="week_endDate">
+                                                <option th:each="day : ${weekDate}" th:value="${day}"
+                                                        th:text="${day}"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -517,19 +500,64 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="add-more mb-3">
-                        <a href="javascript:void(0);" class="add-hours"><i class="fa fa-plus-circle"></i> Add More</a>
-                    </div>
                     <div class="submit-section text-center">
-                        <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                        <button type="submit" class="btn btn-primary submit-btn">保存</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<!-- /Add Time Slot Modal -->
+<!-- /Add Time Slot Modal Week -->
+
+<!-- Add Time Slot Modal Month -->
+<div class="modal fade custom-modal" id="add_time_slot_month">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">添加忙碌时间</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/designer/addSchedule}" method="post" onsubmit="return check('month')">
+                    <input name="designerId" th:value="${designer.id}" type="hidden">
+                    <div class="hours-info">
+                        <div class="row form-row hours-cont">
+                            <div class="col-12 col-md-10">
+                                <div class="row form-row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>开始时间</label>
+                                            <select class="form-control" name="startDate" id="month_startDate">
+                                                <option th:each="day : ${monthDate}" th:value="${day}"
+                                                        th:text="${day}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>结束时间</label>
+                                            <select class="form-control" name="endDate" id="month_endDate">
+                                                <option th:each="day : ${monthDate}" th:value="${day}"
+                                                        th:text="${day}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section text-center">
+                        <button type="submit" class="btn btn-primary submit-btn">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Time Slot Modal Month -->
 
 <!-- Edit Time Slot Modal -->
 <div class="modal fade custom-modal" id="edit_time_slot_week">
@@ -668,6 +696,39 @@
 
 <!-- Custom JS -->
 <script src="../Path/admin/js/script.js"></script>
+
+<script>
+    function check(day){
+        switch (day){
+            case 'week':
+                var start = document.getElementById("week_startDate");
+                var startIndex = start.selectedIndex ;
+                var startDate = start.options[startIndex].value;
+                var end = document.getElementById("week_endDate");
+                var endIndex = end.selectedIndex ;
+                var endDate = end.options[endIndex].value;
+                if (startDate > endDate){
+                    alert("开始时间不得晚于结束时间");
+                    return false;
+                }
+                return true;
+                break;
+            case 'month':
+                var start = document.getElementById("month_startDate");
+                var startIndex = start.selectedIndex ;
+                var startDate = start.options[startIndex].value;
+                var end = document.getElementById("month_endDate");
+                var endIndex = end.selectedIndex ;
+                var endDate = end.options[endIndex].value;
+                if (startDate > endDate){
+                    alert("开始时间不得晚于结束时间");
+                    return false;
+                }
+                return true;
+                break;
+        }
+    }
+</script>
 
 </body>
 </html>

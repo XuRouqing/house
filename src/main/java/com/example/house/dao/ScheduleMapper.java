@@ -10,4 +10,6 @@ import java.util.List;
 @Mapper
 public interface ScheduleMapper {
     public List<Schedule> getScheduleByDesignerId(int id);
+    public void insertSchedule(Schedule schedule);
+    public void deleteSchedule(int id);
 }

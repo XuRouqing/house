@@ -9,5 +9,12 @@
         select * from schedule where designerId = #{id}
     </select>
 
+    <insert id="insertSchedule" parameterType="Schedule">
+        insert into schedule (designerId,date,day,time)
+        values (#{designerId},#{date},#{day},#{time})
+    </insert>
 
+    <delete id="deleteSchedule" parameterType="Schedule">
+        delete from schedule where id = #{id}
+    </delete>
 </mapper>

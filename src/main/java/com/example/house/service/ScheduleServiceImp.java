@@ -21,4 +21,14 @@ public class ScheduleServiceImp implements ScheduleService  {
         return scheduleMapper.getScheduleByDesignerId(id);
     }
 
+    @Override
+    public void addSchedule(Schedule schedule){
+        scheduleMapper.insertSchedule(schedule);
+    }
+
+    @Override
+    public void deleteSchedule(int id){
+        scheduleMapper.deleteSchedule(id);
+    }
+
 }

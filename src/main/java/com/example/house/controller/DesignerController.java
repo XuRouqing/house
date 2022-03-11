@@ -5,10 +5,7 @@ import com.example.house.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -59,6 +56,9 @@ public class DesignerController {
         int orderNum = designerService.getOrderNumByDesignerId(id);
         List<Appointment> appointments = appointmentService.getAppointmentByDesignerId(id);
         int appointmentNum = appointments.size();
+        //更新预约订单状态
+        appointmentService.updateAppointmentStatusEveryday();
+
         model.addAttribute("houseNum",houseNum);
         model.addAttribute("orderNum",orderNum);
         model.addAttribute("appointments",appointments);
@@ -294,7 +294,6 @@ public class DesignerController {
         return "redirect:/designer/addCase";
     }
 
-
     @RequestMapping("/timing")
     public String timing(Model model) {
         //        int userId = Integer.parseInt(session.getAttribute("id").toString());
@@ -360,7 +359,6 @@ public class DesignerController {
         //获取忙碌时间的开始时间，用于比较，若结束时间早于当日日期，则不在页面显示该条数据
         for (int i = 0; i < scheduleListAll.size(); i++) {
             String endDay = scheduleListAll.get(i).getDay().substring(scheduleListAll.get(i).getDay().indexOf('-')+1);
-            String startDay = scheduleListAll.get(i).getDay().substring(0,scheduleListAll.get(i).getDay().indexOf('-'));
             if (endDay.compareTo(today)>=0){
                 scheduleList.add(scheduleListAll.get(i));
             }
@@ -371,13 +369,15 @@ public class DesignerController {
             String startDay = scheduleList.get(i).getDay().substring(0,scheduleList.get(i).getDay().indexOf('-'));
             //如果开始时间晚于下周最后一天，则不显示在一周忙碌时间中
             if (startDay.compareTo(weekLastDay)<=0){
-                scheduleListWeek.add(scheduleListAll.get(i));
+                scheduleListWeek.add(scheduleList.get(i));
             }
             if (startDay.compareTo(monthLastDay)<=0){
-                scheduleListMoth.add(scheduleListAll.get(i));
+                scheduleListMoth.add(scheduleList.get(i));
             }
         }
-        scheduleList = scheduleList.stream().sorted(Comparator.comparing(Schedule::getDay)).collect(Collectors.toList());
+        scheduleListWeek = scheduleListWeek.stream().sorted(Comparator.comparing(Schedule::getDay)).collect(Collectors.toList());
+        scheduleListMoth = scheduleListMoth.stream().sorted(Comparator.comparing(Schedule::getDay)).collect(Collectors.toList());
+        model.addAttribute("designer",designer);
         model.addAttribute("weekDate",week);
         model.addAttribute("monthDate",month);
         model.addAttribute("scheduleList",scheduleList);
@@ -385,4 +385,29 @@ public class DesignerController {
         model.addAttribute("scheduleListMoth",scheduleListMoth);
         return "Designer/timing";
     }
+
+    @PostMapping("/addSchedule")
+    public String addSchedule(Model model, int designerId, String startDate, String endDate){
+        Schedule schedule = new Schedule();
+        schedule.setDesignerId(designerId);
+
+        schedule.setDate(startDate+"-"+endDate);
+
+        String startDay = startDate.substring(0,startDate.length()-2);
+        String endDay = endDate.substring(0,endDate.length()-2);
+        schedule.setDay(startDay+"-"+endDay);
+
+        String startTime = startDate.substring(startDate.length()-2);
+        String endTime = endDate.substring(endDate.length()-2);
+        schedule.setTime(startTime+","+endTime);
+        scheduleService.addSchedule(schedule);
+        return  "redirect:/designer/timing";
+    }
+
+    @RequestMapping("/delSchedule/{id}")
+    public String delSchedule(Model model, @PathVariable int id){
+        scheduleService.deleteSchedule(id);
+        return  "redirect:/designer/timing";
+    }
+
 }
