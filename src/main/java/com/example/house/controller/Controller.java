@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -76,6 +77,9 @@ public class Controller {
 
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private ScheduleService scheduleService;
 
     @ModelAttribute
     public void addAttributes(Model model) {
@@ -275,7 +279,6 @@ public class Controller {
                               @RequestParam(required = false, defaultValue = "") String form,
                               @RequestParam(required = false, defaultValue = "") String area,
                               HttpServletRequest request){
-        System.out.println(style);
         String refUrl=request.getHeader("Referer").toString();
         int typeP=refUrl.indexOf("type");
         String typeT="";
@@ -455,7 +458,6 @@ public class Controller {
     @RequestMapping("/designer/{id}")
     public String todesigner(@PathVariable int id, Model model) {
         Designer designer=designerService.findDesignerById(id);
-        System.out.println(designer);
         List<House> houses=houseService.findHouseByDesignerId(id);
         model.addAttribute("designerInfo",designer);
         model.addAttribute("houseInfo",houses);
@@ -740,10 +742,89 @@ public class Controller {
     }
 
     @RequestMapping("/booking/{id}")
-    public String tobooking(@PathVariable int id, Model model) {
+    public String tobooking(@PathVariable int id, Model model) throws ParseException {
         Designer designer=designerService.findDesignerById(id);
         List<Appointment> appointments=appointmentService.getAppointmentList();
-        List dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
+        List<String> dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
+
+        //获取今天的日期
+        Date d = new Date();
+        long dTime = d.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String nextDay = sdf.format(new Date(Long.parseLong(String.valueOf(dTime + 86400000))));
+
+        String lastDay = sdf.format(new Date(Long.parseLong(String.valueOf(dTime + 86400000*7))));
+
+        //用于存放开始时间与结束时间，使其对应
+        List<Schedule> scheduleAll = scheduleService.getScheduleByDesignerId(id);
+        List<Schedule> schedule = new ArrayList<>();
+        for (int i = 0; i < scheduleAll.size(); i++) {
+            String endDay = scheduleAll.get(i).getDay().substring(scheduleAll.get(i).getDay().indexOf('-')+1);
+            endDay = endDay.replace(".","-");
+            String startDay = scheduleAll.get(i).getDay().substring(0,scheduleAll.get(i).getDay().indexOf('-'));
+            startDay = startDay.replace(".","-");
+            if (endDay.compareTo(nextDay)>=0 && startDay.compareTo(lastDay)<= 0){
+                schedule.add(scheduleAll.get(i));
+            }
+        }
+
+        List<List<String>> dayTime = new ArrayList<>();//日期加时间
+        List<List<String>> day = new ArrayList<>();//日期
+        List<List<String>> time = new ArrayList<>();//时间
+        for (int i = 0; i < schedule.size(); i++) {
+            String scheduleDayTime = schedule.get(i).getDate();
+            String startDayTime = scheduleDayTime.substring(0,scheduleDayTime.indexOf("-"));
+            String endDayTime = scheduleDayTime.substring(scheduleDayTime.indexOf("-")+1);
+            List<String> dayTimeTemp = new ArrayList<>();
+            dayTimeTemp.add(startDayTime);
+            dayTimeTemp.add(endDayTime);
+            dayTime.add(dayTimeTemp);
+            String scheduleDay = schedule.get(i).getDay();
+            String startDay = scheduleDay.substring(0,scheduleDay.indexOf("-"));
+            String endDay = scheduleDay.substring(scheduleDay.indexOf("-")+1);
+            List<String> dayTemp = new ArrayList<>();
+            dayTemp.add(startDay.replace(".","-"));
+            dayTemp.add(endDay.replace(".","-"));
+            day.add(dayTemp);
+            String scheduleTime = schedule.get(i).getTime();
+            String startTime = scheduleTime.substring(0,scheduleTime.indexOf(","));
+            String endTime = scheduleTime.substring(scheduleTime.indexOf(",")+1);
+            List<String> timeTemp = new ArrayList<>();
+            timeTemp.add(startTime);
+            timeTemp.add(endTime);
+            time.add(timeTemp);
+        }
+
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < schedule.size(); i++) {
+            Date d1 = new SimpleDateFormat("yyyy-MM-dd").parse(day.get(i).get(0));
+            Date d2 = new SimpleDateFormat("yyyy-MM-dd").parse(day.get(i).get(1));
+            Calendar dd = Calendar.getInstance();//定义日期实例
+            dd.setTime(d1);
+            String startTime = time.get(i).get(0);
+            String endTime = time.get(i).get(1);
+            if (startTime.equals("AM")){
+                result.add(sdf.format(d1)+"AM");
+                result.add(sdf.format(d1)+"PM");
+            }
+            else if (startTime.equals("PM")){
+                result.add(sdf.format(d1)+"PM");
+            }
+
+            while (dd.getTime().before(d2)) {//判断是否到结束日期
+                dd.add(Calendar.DATE, 1);//进行当前日期加1
+                String str = sdf.format(dd.getTime());
+                result.add(str+"AM");
+                result.add(str+"PM");
+            }
+            if (endTime.equals("AM")){
+                result.remove(result.size()-1);
+            }
+        }
+        for (int i = 0; i < result.size(); i++) {
+            dateList.add(result.get(i));
+        }
+
         model.addAttribute("designerInfo",designer);
         model.addAttribute("appointmentInfo",appointments);
         model.addAttribute("dateListInfo",dateList);
