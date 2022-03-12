@@ -1,569 +1,433 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>我爱我家装修公司</title>
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="../Path/image/newlogo.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我爱我家装修公司</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../Path/image/newlogo.png">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-  <!-- Fontawesome CSS -->
-  <link rel="stylesheet" href="../../Path/admin/css/font-awesome.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="../../Path/admin/css/font-awesome.min.css">
 
-  <!-- Feathericon CSS -->
-  <link rel="stylesheet" href="../../Path/admin/css/feathericon.min.css">
+    <!-- Feathericon CSS -->
+    <link rel="stylesheet" href="../../Path/admin/css/feathericon.min.css">
 
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="../../Path/admin/css/style.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../../Path/admin/css/style.css">
 
-  <!-- Select2 CSS -->
-  <link rel="stylesheet" href="../../Path/admin/css/select2.min.css">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="../../Path/admin/css/select2.min.css">
 
-  <!--[if lt IE 9]>
-  <script src="../../Path/admin/js/html5shiv.min.js"></script>
-  <script src="../../Path/admin/js/respond.min.js"></script>
-  <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="../../Path/admin/js/html5shiv.min.js"></script>
+    <script src="../../Path/admin/js/respond.min.js"></script>
+    <![endif]-->
 
-  <link rel="stylesheet" type="text/css" href="../../Path/admin/css/jquery.multiselect.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Path/admin/css/jquery.multiselect.css"/>
 </head>
 <body>
 
 <!-- Main Wrapper -->
 <div class="main-wrapper">
 
-  <!-- Header -->
-  <div class="header">
+    <!-- Header -->
+    <div class="header">
 
-    <!-- Logo -->
-    <div class="header-left">
-      <a href="index.html" class="logo">
-        <img src="../../Path/admin/img/logo.png" alt="Logo">
-      </a>
-      <a href="index.html" class="logo logo-small">
-        <img src="../../Path/admin/img/logo-small.png" alt="Logo" width="30" height="30">
-      </a>
-    </div>
-    <!-- /Logo -->
+        <!-- Logo -->
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <img src="../Path/image/newlogo.png" alt="Logo">
+            </a>
+            <a href="index.html" class="logo logo-small">
+                <img src="../Path/image/newlogo.png" alt="Logo" width="30" height="30">
+            </a>
+        </div>
+        <!-- /Logo -->
 
-    <a href="javascript:void(0);" id="toggle_btn">
-      <i class="fe fe-text-align-left"></i>
-    </a>
-
-    <div class="top-nav-search">
-      <form>
-        <input type="text" class="form-control" placeholder="Search here">
-        <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
-
-    <!-- Mobile Menu Toggle -->
-    <a class="mobile_btn" id="mobile_btn">
-      <i class="fa fa-bars"></i>
-    </a>
-    <!-- /Mobile Menu Toggle -->
-
-    <!-- Header Right Menu -->
-    <ul class="nav user-menu">
-
-      <!-- Notifications -->
-      <li class="nav-item dropdown noti-dropdown">
-        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-          <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
+        <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fe fe-text-align-left"></i>
         </a>
-        <div class="dropdown-menu notifications">
-          <div class="topnav-dropdown-header">
-            <span class="notification-title">Notifications</span>
-            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-          </div>
-          <div class="noti-content">
-            <ul class="notification-list">
-              <li class="notification-message">
-                <a href="#">
-                  <div class="media">
-												<span class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" alt="User Image" src="../../Path/admin/img/doctors/doctor-thumb-01.jpg">
-												</span>
-                    <div class="media-body">
-                      <p class="noti-details"><span class="noti-title">Dr. Ruby Perrin</span> Schedule <span class="noti-title">her appointment</span></p>
-                      <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="notification-message">
-                <a href="#">
-                  <div class="media">
-												<span class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" alt="User Image" src="../../Path/admin/img/patients/patient1.jpg">
-												</span>
-                    <div class="media-body">
-                      <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
-                      <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="notification-message">
-                <a href="#">
-                  <div class="media">
-												<span class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" alt="User Image" src="../../Path/admin/img/patients/patient2.jpg">
-												</span>
-                    <div class="media-body">
-                      <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $210 for his <span class="noti-title">appointment</span></p>
-                      <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="notification-message">
-                <a href="#">
-                  <div class="media">
-												<span class="avatar avatar-sm">
-													<img class="avatar-img rounded-circle" alt="User Image" src="../../Path/admin/img/patients/patient3.jpg">
-												</span>
-                    <div class="media-body">
-                      <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
-                      <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="topnav-dropdown-footer">
-            <a href="#">View all Notifications</a>
-          </div>
-        </div>
-      </li>
-      <!-- /Notifications -->
 
-      <!-- User Menu -->
-      <li class="nav-item dropdown has-arrow">
-        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-          <span class="user-img"><img class="rounded-circle" src="../../Path/admin/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
+        <!-- Mobile Menu Toggle -->
+        <a class="mobile_btn" id="mobile_btn">
+            <i class="fa fa-bars"></i>
         </a>
-        <div class="dropdown-menu">
-          <div class="user-header">
-            <div class="avatar avatar-sm">
-              <img src="../../Path/admin/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
-            </div>
-            <div class="user-text">
-              <h6>Ryan Taylor</h6>
-              <p class="text-muted mb-0">Administrator</p>
-            </div>
-          </div>
-          <a class="dropdown-item" href="profile.html">My Profile</a>
-          <a class="dropdown-item" href="settings.html">Settings</a>
-          <a class="dropdown-item" href="login.html">Logout</a>
-        </div>
-      </li>
-      <!-- /User Menu -->
+        <!-- /Mobile Menu Toggle -->
 
-    </ul>
-    <!-- /Header Right Menu -->
+        <!-- Header Right Menu -->
+        <ul class="nav user-menu">
 
-  </div>
-  <!-- /Header -->
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-inner slimscroll">
-      <div id="sidebar-menu" class="sidebar-menu">
-        <ul>
-          <li class="menu-title">
-            <span>Main</span>
-          </li>
-          <li>
-            <a th:href="@{/admin/index}"><i class="fe fe-home"></i> <span>首页</span></a>
-          </li>
-          <li>
-            <a th:href="@{/admin/designerList}"><i class="fe fe-user"></i> <span>设计师列表</span></a>
-          </li>
-
-          <li class="active">
-            <a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
-          </li>
-          <li>
-            <a th:href="@{/admin/userList}"><i class="fe fe-user-plus"></i> <span>用户列表</span></a>
-          </li>
-          <li>
-            <a th:href="@{/admin/setOrderList}"><i class="fe fe-activity"></i> <span>活动预约列表</span></a>
-          </li>
-          <li>
-            <a th:href="@{/admin/bookList}"><i class="fe fe-table"></i> <span>在线预约列表</span></a>
-          </li>
-          <li>
-            <a th:href="@{/admin/appointmentList}"><i class="fe fe-document"></i> <span>设计师预约列表</span></a>
-          </li>
-          <li class="submenu">
-            <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>索引</span> <span class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <li class="submenu">
-                <a href="javascript:void(0);"> <span>案例索引</span> <span class="menu-arrow"></span></a>
-                <ul style="display: none;">
-                  <li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
-                  <li><a th:href="@{/admin/indexList/housearea}"> <span>面积</span></a></li>
-                  <li><a th:href="@{/admin/indexList/housetype}"> <span>装修类型</span></a></li>
-                  <li><a th:href="@{/admin/indexList/houseform}"> <span>装修类别</span></a></li>
-                </ul>
-              </li>
-              <li class="submenu">
-                <a href="javascript:void(0);"> <span>设计师索引</span> <span class="menu-arrow"></span></a>
-                <ul style="display: none;">
-                  <li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
-                  <li><a th:href="@{/admin/indexList/designerlevel}"> <span>等级</span></a></li>
-                </ul>
-              </li>
-              <li class="submenu">
-                <a href="javascript:void(0);"> <span>施工团队索引</span> <span class="menu-arrow"></span></a>
-                <ul style="display: none;">
-                  <li><a th:href="@{/admin/indexList/workertype}"><span>工种</span></a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
-          </li>
-          <li>
-            <a href="reviews.html"><i class="fe fe-star-o"></i> <span>Reviews</span></a>
-          </li>
-          <li>
-            <a href="transactions-list.html"><i class="fe fe-activity"></i> <span>Transactions</span></a>
-          </li>
-          <li>
-            <a href="settings.html"><i class="fe fe-vector"></i> <span>Settings</span></a>
-          </li>
-          <li class="submenu">
-            <a href="#"><i class="fe fe-document"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <li><a href="invoice-report.html">Invoice Reports</a></li>
-            </ul>
-          </li>
-          <li class="menu-title">
-            <span>Pages</span>
-          </li>
-          <li>
-            <a href="profile.html"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
-          </li>
-          <li class="submenu">
-            <a href="#"><i class="fe fe-document"></i> <span> Authentication </span> <span class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <li><a href="login.html"> Login </a></li>
-              <li><a href="register.html"> Register </a></li>
-              <li><a href="forgot-password.html"> Forgot Password </a></li>
-              <li><a href="lock-screen.html"> Lock Screen </a></li>
-            </ul>
-          </li>
-          <li class="submenu">
-            <a href="#"><i class="fe fe-warning"></i> <span> Error Pages </span> <span class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <li><a href="error-404.html">404 Error </a></li>
-              <li><a href="error-500.html">500 Error </a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="blank-page.html"><i class="fe fe-file"></i> <span>Blank Page</span></a>
-          </li>
-          <li class="menu-title">
-            <span>UI Interface</span>
-          </li>
-          <li>
-            <a href="components.html"><i class="fe fe-vector"></i> <span>Components</span></a>
-          </li>
-          <li class="submenu">
-            <a href="#"><i class="fe fe-layout"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
-              <li><a href="form-input-groups.html">Input Groups </a></li>
-              <li><a href="form-horizontal.html">Horizontal Form </a></li>
-              <li><a href="form-vertical.html"> Vertical Form </a></li>
-              <li><a href="form-mask.html"> Form Mask </a></li>
-              <li><a href="form-validation.html"> Form Validation </a></li>
-            </ul>
-          </li>
-          <li class="submenu">
-            <a href="#"><i class="fe fe-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <li><a href="tables-basic.html">Basic Tables </a></li>
-              <li><a href="data-tables.html">Data Table </a></li>
-            </ul>
-          </li>
-          <li class="submenu">
-            <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
-            <ul style="display: none;">
-              <li class="submenu">
-                <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
-                <ul style="display: none;">
-                  <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                  <li class="submenu">
-                    <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                      <li><a href="javascript:void(0);">Level 3</a></li>
-                      <li><a href="javascript:void(0);">Level 3</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="javascript:void(0);"> <span>Level 2</span></a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="javascript:void(0);"> <span>Level 1</span></a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- /Sidebar -->
-
-  <!-- Page Wrapper -->
-  <div class="page-wrapper">
-    <div class="content container-fluid">
-
-      <!-- Page Header -->
-      <div class="page-header">
-        <div class="row">
-          <div class="col">
-            <h3 class="page-title">工人</h3>
-          </div>
-        </div>
-      </div>
-      <!-- /Page Header -->
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="profile-header">
-            <div class="row align-items-center">
-              <div class="col-auto profile-image">
-                <a href="#">
-                  <img class="rounded-circle" alt="User Image" th:src="${workerInfo.pic}">
+            <!-- User Menu -->
+            <li class="nav-item dropdown has-arrow">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img"><img class="rounded-circle" src="../Path/admin/img/profiles/admin.png"
+                                                width="31" alt="管理员"></span>
                 </a>
-              </div>
-              <div class="col ml-md-n2 profile-user-info">
-                <h4 class="user-name" th:text="${workerInfo.name}"></h4>
-                <h6 class="text-muted" th:text="${workerInfo.tel}"></h6>
-                <div class="user-Location"><i class="fa fa-map-marker"></i><span th:text="${workerInfo.city}"></span></div>
-              </div>
-              <div class="col-auto profile-btn">
-                <a class="btn btn-primary" data-toggle="modal" href="#edit_personal_details_1">
-                  编辑
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="profile-menu">
-            <ul class="nav nav-tabs nav-tabs-solid">
-              <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#per_details_tab">详情</a>
-              </li>
-            </ul>
-          </div>
-          <div class="tab-content profile-tab-cont">
-
-            <!-- Personal Details Tab -->
-            <div class="tab-pane fade show active" id="per_details_tab">
-
-              <!-- Personal Details -->
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title d-flex justify-content-between">
-                        <span>个人信息</span>
-                        <a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>编辑</a>
-                      </h5>
-                      <div class="row">
-                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工人ID</p>
-                        <p class="col-sm-10" th:text="${workerInfo.id}"></p>
-                      </div>
-                      <div class="row">
-                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">性别</p>
-                        <p class="col-sm-10" th:text="${workerInfo.gender}"></p>
-                      </div>
-                      <div class="row">
-                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工种</p>
-                        <p class="col-sm-10" th:text="${workerInfo.type}"></p>
-                      </div>
-                      <div class="row">
-                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工龄</p>
-                        <p class="col-sm-10" th:text="${workerInfo.workingAge}"></p>
-                      </div>
-                      <div class="row">
-                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">代表作</p>
-                        <p class="col-sm-10" th:text="${workerInfo.represent}"></p>
-                      </div>
-                      <div class="row">
-                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">描述</p>
-                        <p class="col-sm-10" th:text="${workerInfo.des}"></p>
-                      </div>
-                      <div class="row">
-                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">宣言</p>
-                        <p class="col-sm-10" th:text="${workerInfo.declaration}"></p>
-                      </div>
-<!--                      <div class="row">-->
-<!--                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工龄</p>-->
-<!--                        <p class="col-sm-10" th:text="${workerInfo.workingAge}"></p>-->
-<!--                      </div>-->
-<!--                      <div class="row">-->
-<!--                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">等级</p>-->
-<!--                        <p class="col-sm-10" th:text="${workerInfo.level}"></p>-->
-<!--                      </div>-->
-<!--                      <div class="row">-->
-<!--                        <p class="col-sm-2 text-muted text-sm-right mb-0">风格</p>-->
-<!--                        <p class="col-sm-10" th:text="${workerInfo.style}"></p>-->
-<!--                      </div>-->
-<!--                      <div class="row">-->
-<!--                        <p class="col-sm-2 text-muted text-sm-right mb-0">代表作</p>-->
-<!--                        <p class="col-sm-10" th:text="${workerInfo.represent}"></p>-->
-<!--                      </div>-->
-<!--                      <div class="row">-->
-<!--                        <p class="col-sm-2 text-muted text-sm-right mb-0">宣言</p>-->
-<!--                        <p class="col-sm-10 mb-0" th:text="${workerInfo.form}"></p>-->
-<!--                      </div>-->
+                <div class="dropdown-menu">
+                    <div class="user-header">
+                        <div class="avatar avatar-sm">
+                            <img src="../Path/admin/img/profiles/admin.png" alt="User Image"
+                                 class="avatar-img rounded-circle">
+                        </div>
+                        <div class="user-text">
+                            <h6 th:text="${#request.getSession().getAttribute('name')}"></h6>
+                            <p class="text-muted mb-0">超级管理员</p>
+                        </div>
                     </div>
-                  </div>
-
-                  <!-- Edit Details Modal -->
-                  <div class="modal fade" id="edit_personal_details_1" aria-hidden="true" role="dialog">
-                    <div class="modal-dialog modal-dialog-centered" role="document" >
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">工人个人信息</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <form th:action="@{../modifyWorker1}" method="post" enctype="multipart/form-data">
-                            <div class="row form-row">
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>姓名</label>
-                                  <input name="name" type="text" class="form-control" th:value="${workerInfo.name}">
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>照片</label>
-                                  <input name="filePic" type="file" class="form-control">
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>电话</label>
-                                  <input name="tel" type="text" class="form-control" th:value="${workerInfo.tel}">
-                                </div>
-                              </div>
-                              <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                  <label>所在省份</label>
-                                  <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
-                                    <option>请选择省份</option>
-                                    <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}" th:selected="${province.id} == ${provinceNow.id}"></option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                  <label>所在城市</label>
-                                  <select class="form-control" id="city" name="cityId">
-                                    <option>请选择城市</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <input name="id" type="hidden" class="hidden" th:value="${workerInfo.id}">
-                              <input name="pic" type="hidden" class="hidden" th:value="${workerInfo.pic}">
-                              <input id="cityId_hidden" type="hidden" class="hidden" th:value="${workerInfo.cityId}">
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block col-12">保存</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /Edit Details Modal -->
-
-                  <!-- Edit Details Modal -->
-                  <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
-                    <div class="modal-dialog modal-dialog-centered" role="document" >
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">个人信息</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <form th:action="@{../modifyWorker2}" method="post">
-                            <div class="row form-row">
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>ID</label>
-                                  <input name="id" type="text"  class="form-control" th:value="${workerInfo.id}" readonly>
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>工种</label>
-                                  <select class="form-control" name="typeValue">
-                                    <option th:each="type : ${workerType}" th:text="${type.name}" th:value="${type.id}" th:selected="${workerInfo.typeValue} == ${type.id}">
-                                    </option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>工龄</label>
-                                  <input name="workingAge" type="text" class="form-control" th:value="${workerInfo.workingAge}">
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>代表作</label>
-                                  <input name="represent" type="text" class="form-control" th:value="${workerInfo.represent}">
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>描述</label>
-                                  <input name="des" type="text" class="form-control" th:value="${workerInfo.des}">
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label>宣言</label>
-                                  <input name="declaration" type="text" class="form-control" th:value="${workerInfo.declaration}">
-                                </div>
-                              </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">保存</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /Edit Details Modal -->
-
+                    <a class="dropdown-item" th:href="@{/index}">游客界面</a>
                 </div>
+            </li>
+            <!-- /User Menu -->
 
-
-              </div>
-              <!-- /Personal Details -->
-
-            </div>
-            <!-- /Personal Details Tab -->
-
-          </div>
-        </div>
-      </div>
+        </ul>
+        <!-- /Header Right Menu -->
 
     </div>
-  </div>
-  <!-- /Page Wrapper -->
+    <!-- /Header -->
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-title">
+                        <span>Main</span>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/index}"><i class="fe fe-home"></i> <span>首页</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/designerList}"><i class="fe fe-user"></i> <span>设计师列表</span></a>
+                    </li>
+
+                    <li class="active">
+                        <a th:href="@{/admin/workerList}"><i class="fe fe-users"></i> <span>工人列表</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/userList}"><i class="fe fe-user-plus"></i> <span>用户列表</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/setOrderList}"><i class="fe fe-activity"></i> <span>活动预约列表</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/bookList}"><i class="fe fe-table"></i> <span>在线预约列表</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/appointmentList}"><i class="fe fe-document"></i> <span>设计师预约列表</span></a>
+                    </li>
+                    <li class="submenu">
+                        <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>索引</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>案例索引</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
+                                    <li><a th:href="@{/admin/indexList/housearea}"> <span>面积</span></a></li>
+                                    <li><a th:href="@{/admin/indexList/housetype}"> <span>装修类型</span></a></li>
+                                    <li><a th:href="@{/admin/indexList/houseform}"> <span>装修类别</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>设计师索引</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
+                                    <li><a th:href="@{/admin/indexList/designerlevel}"> <span>等级</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>施工团队索引</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a th:href="@{/admin/indexList/workertype}"><span>工种</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="page-title">工人</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile-header">
+                        <div class="row align-items-center">
+                            <div class="col-auto profile-image">
+                                <a href="#">
+                                    <img class="rounded-circle" alt="User Image" th:src="${workerInfo.pic}">
+                                </a>
+                            </div>
+                            <div class="col ml-md-n2 profile-user-info">
+                                <h4 class="user-name" th:text="${workerInfo.name}"></h4>
+                                <h6 class="text-muted" th:text="${workerInfo.tel}"></h6>
+                                <div class="user-Location"><i class="fa fa-map-marker"></i><span
+                                        th:text="${workerInfo.city}"></span></div>
+                            </div>
+                            <div class="col-auto profile-btn">
+                                <a class="btn btn-primary" data-toggle="modal" href="#edit_personal_details_1">
+                                    编辑
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-menu">
+                        <ul class="nav nav-tabs nav-tabs-solid">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#per_details_tab">详情</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content profile-tab-cont">
+
+                        <!-- Personal Details Tab -->
+                        <div class="tab-pane fade show active" id="per_details_tab">
+
+                            <!-- Personal Details -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title d-flex justify-content-between">
+                                                <span>个人信息</span>
+                                                <a class="edit-link" data-toggle="modal"
+                                                   href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>编辑</a>
+                                            </h5>
+                                            <div class="row">
+                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工人ID</p>
+                                                <p class="col-sm-10" th:text="${workerInfo.id}"></p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">性别</p>
+                                                <p class="col-sm-10" th:text="${workerInfo.gender}"></p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工种</p>
+                                                <p class="col-sm-10" th:text="${workerInfo.type}"></p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工龄</p>
+                                                <p class="col-sm-10" th:text="${workerInfo.workingAge}"></p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">代表作</p>
+                                                <p class="col-sm-10" th:text="${workerInfo.represent}"></p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">描述</p>
+                                                <p class="col-sm-10" th:text="${workerInfo.des}"></p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">宣言</p>
+                                                <p class="col-sm-10" th:text="${workerInfo.declaration}"></p>
+                                            </div>
+                                            <!--                      <div class="row">-->
+                                            <!--                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">工龄</p>-->
+                                            <!--                        <p class="col-sm-10" th:text="${workerInfo.workingAge}"></p>-->
+                                            <!--                      </div>-->
+                                            <!--                      <div class="row">-->
+                                            <!--                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">等级</p>-->
+                                            <!--                        <p class="col-sm-10" th:text="${workerInfo.level}"></p>-->
+                                            <!--                      </div>-->
+                                            <!--                      <div class="row">-->
+                                            <!--                        <p class="col-sm-2 text-muted text-sm-right mb-0">风格</p>-->
+                                            <!--                        <p class="col-sm-10" th:text="${workerInfo.style}"></p>-->
+                                            <!--                      </div>-->
+                                            <!--                      <div class="row">-->
+                                            <!--                        <p class="col-sm-2 text-muted text-sm-right mb-0">代表作</p>-->
+                                            <!--                        <p class="col-sm-10" th:text="${workerInfo.represent}"></p>-->
+                                            <!--                      </div>-->
+                                            <!--                      <div class="row">-->
+                                            <!--                        <p class="col-sm-2 text-muted text-sm-right mb-0">宣言</p>-->
+                                            <!--                        <p class="col-sm-10 mb-0" th:text="${workerInfo.form}"></p>-->
+                                            <!--                      </div>-->
+                                        </div>
+                                    </div>
+
+                                    <!-- Edit Details Modal -->
+                                    <div class="modal fade" id="edit_personal_details_1" aria-hidden="true"
+                                         role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">工人个人信息</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form th:action="@{../modifyWorker1}" method="post"
+                                                          enctype="multipart/form-data">
+                                                        <div class="row form-row">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>姓名</label>
+                                                                    <input name="name" type="text" class="form-control"
+                                                                           th:value="${workerInfo.name}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>照片</label>
+                                                                    <input name="filePic" type="file"
+                                                                           class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>电话</label>
+                                                                    <input name="tel" type="text" class="form-control"
+                                                                           th:value="${workerInfo.tel}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>所在省份</label>
+                                                                    <select class="form-control" id="province"
+                                                                            name="province"
+                                                                            onChange="changeProvince(this)">
+                                                                        <option>请选择省份</option>
+                                                                        <option th:each="province : ${provinces}"
+                                                                                th:text="${province.district_name}"
+                                                                                th:value="${province.id}"
+                                                                                th:selected="${province.id} == ${provinceNow.id}"></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>所在城市</label>
+                                                                    <select class="form-control" id="city"
+                                                                            name="cityId">
+                                                                        <option>请选择城市</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <input name="id" type="hidden" class="hidden"
+                                                                   th:value="${workerInfo.id}">
+                                                            <input name="pic" type="hidden" class="hidden"
+                                                                   th:value="${workerInfo.pic}">
+                                                            <input id="cityId_hidden" type="hidden" class="hidden"
+                                                                   th:value="${workerInfo.cityId}">
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary btn-block col-12">
+                                                            保存
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Edit Details Modal -->
+
+                                    <!-- Edit Details Modal -->
+                                    <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">个人信息</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form th:action="@{../modifyWorker2}" method="post">
+                                                        <div class="row form-row">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>ID</label>
+                                                                    <input name="id" type="text" class="form-control"
+                                                                           th:value="${workerInfo.id}" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>工种</label>
+                                                                    <select class="form-control" name="typeValue">
+                                                                        <option th:each="type : ${workerType}"
+                                                                                th:text="${type.name}"
+                                                                                th:value="${type.id}"
+                                                                                th:selected="${workerInfo.typeValue} == ${type.id}">
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>工龄</label>
+                                                                    <input name="workingAge" type="text"
+                                                                           class="form-control"
+                                                                           th:value="${workerInfo.workingAge}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>代表作</label>
+                                                                    <input name="represent" type="text"
+                                                                           class="form-control"
+                                                                           th:value="${workerInfo.represent}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>描述</label>
+                                                                    <input name="des" type="text" class="form-control"
+                                                                           th:value="${workerInfo.des}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>宣言</label>
+                                                                    <input name="declaration" type="text"
+                                                                           class="form-control"
+                                                                           th:value="${workerInfo.declaration}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary btn-block">保存
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Edit Details Modal -->
+
+                                </div>
+
+
+                            </div>
+                            <!-- /Personal Details -->
+
+                        </div>
+                        <!-- /Personal Details Tab -->
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /Page Wrapper -->
 
 </div>
 <!-- /Main Wrapper -->
@@ -579,51 +443,52 @@
 <script src="../../Path/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom JS -->
-<script  src="../../Path/admin/js/script.js"></script>
+<script src="../../Path/admin/js/script.js"></script>
 
 <!-- Select2 JS -->
 <script src="../../Path/admin/js/select2.min.js"></script>
 
 <script>
-  var cityNowId = document.getElementById("cityId_hidden").value;
-  $(function () {
-    var provinceNow = document.getElementById("province");
-    changeProvince(provinceNow);
-  });
-  function changeProvince(now){
-    $.ajax({
-      url: "/queryCity/"+now.options[now.options.selectedIndex].value,
-      type: "post",
-      dataType: "json",
-      success: function(data){
-        /*这个方法里是ajax发送请求成功之后执行的代码*/
-        var province = now;
-        var city = document.getElementById("city");
-        var opt = now.options.selectedIndex;
-        var j = 0;
-        var length=city.options.length;
-        /**
-         * 清空原选择框中选项
-         */
-        for(i=0;i<length;i++){
-          city.removeChild(city.options[0]);
-        }
-        /**
-         * 添加新选项
-         */
-        for (i=0;i<data.length;i++) {
-          // console.log(data[i].district_name);
-          city.options[j++] = new Option(data[i].district_name, data[i].id);
-          if (data[i].id == cityNowId){
-            city.options[j-1].selected = true;
-          }
-        }
-      },
-      error: function(msg){
-        alert("ajax连接异常："+msg);
-      }
+    var cityNowId = document.getElementById("cityId_hidden").value;
+    $(function () {
+        var provinceNow = document.getElementById("province");
+        changeProvince(provinceNow);
     });
-  };
+
+    function changeProvince(now) {
+        $.ajax({
+            url: "/queryCity/" + now.options[now.options.selectedIndex].value,
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                /*这个方法里是ajax发送请求成功之后执行的代码*/
+                var province = now;
+                var city = document.getElementById("city");
+                var opt = now.options.selectedIndex;
+                var j = 0;
+                var length = city.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for (i = 0; i < length; i++) {
+                    city.removeChild(city.options[0]);
+                }
+                /**
+                 * 添加新选项
+                 */
+                for (i = 0; i < data.length; i++) {
+                    // console.log(data[i].district_name);
+                    city.options[j++] = new Option(data[i].district_name, data[i].id);
+                    if (data[i].id == cityNowId) {
+                        city.options[j - 1].selected = true;
+                    }
+                }
+            },
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
+            }
+        });
+    };
 </script>
 
 </body>
