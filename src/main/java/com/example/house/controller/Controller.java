@@ -17,12 +17,15 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import sun.security.krb5.internal.crypto.Des;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -80,6 +83,14 @@ public class Controller {
 
     @Autowired
     private ScheduleService scheduleService;
+
+    @Autowired
+    private JavaMailSender mailSender;
+    @Value("${mail.fromMail.addr}")
+    private String from;
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @ModelAttribute
     public void addAttributes(Model model) {
@@ -853,10 +864,28 @@ public class Controller {
     public String appointmentAdd(Appointment appointment, HttpSession session, HttpServletRequest request, Model model){
         if(appointment!=null){
             appointmentService.addAppointment(appointment);
+            Designer designer = designerService.findDesignerById(appointment.getDesignerId());
             List<Appointment> appointments=appointmentService.getAppointmentList();
             List dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
             model.addAttribute("appointmentInfo",appointments);
             model.addAttribute("dateListInfo",dateList);
+            String content = "设计师 " + designer.getName() + " 您好！\n" + "您有一个新的预约订单。" + "\n时间为:" + appointment.getDate() +
+                    "\n订单地址为:" + appointment.getLocation() + "\n客户联系电话为:" + appointment.getCustomerTel() + "\n详情请见客户端";
+            //用于封装邮件信息的实例
+            SimpleMailMessage smm = new SimpleMailMessage();
+            //由谁来发送邮件
+            smm.setFrom(from);
+            //邮件主题
+            smm.setSubject("新的预约订单");
+            //邮件内容
+            smm.setText(content);
+            //接受邮件
+            smm.setTo(designer.getEmail());
+            try {
+                javaMailSender.send(smm);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return "redirect:/booking/"+appointment.getDesignerId();
         }
         return "booking/"+appointment.getDesignerId();
@@ -1127,4 +1156,5 @@ public class Controller {
 
         return "fileTest.html";
     }
+
 }
