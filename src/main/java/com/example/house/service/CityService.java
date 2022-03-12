@@ -10,4 +10,5 @@ public interface CityService {
     public List<City> getProvinceList();
     public List<City> getCityListByPid(int id);
     public City getCityListById(int id);
+    public String getCityNameById(int id);
 }

@@ -737,6 +737,34 @@ public class Controller {
     public String discountOderAdd(SetOrder setOrder, HttpSession session, HttpServletRequest request, Model model){
         if(setOrder!=null){
             setOrderService.addOrder(setOrder);
+            Set set = setService.findSetById(setOrder.getSetId());
+            String province = cityService.getCityNameById(Integer.parseInt(setOrder.getProvince()));
+            String city = cityService.getCityNameById(Integer.parseInt(setOrder.getCity()));
+            String contentToAdmin =  " 您好！\n" + "新增一个" + set.getName() + "的活动订单。"  + "\n客户联系电话为:" + setOrder.getTel() +
+                    "客户邮箱为:" + setOrder.getEmail() +  "\n地址为:" + province+city+setOrder.getPosition() + "\n详情请见客户端";
+            SimpleMailMessage smmToAdmin = new SimpleMailMessage();
+            smmToAdmin.setFrom(from);
+            smmToAdmin.setSubject("新的预约订单");
+            smmToAdmin.setText(contentToAdmin);
+            smmToAdmin.setTo(from);
+            try {
+                javaMailSender.send(smmToAdmin);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (setOrder.getEmail()!=null){
+                String contentToCustomer =  " 您好！\n" + "您已成功预约套餐" + set.getName() + "。将会有工作人员与您对接，请耐心等候。" ;
+                SimpleMailMessage smmToCustomer = new SimpleMailMessage();
+                smmToCustomer.setFrom(from);
+                smmToCustomer.setSubject("预约成功");
+                smmToCustomer.setText(contentToCustomer);
+                smmToCustomer.setTo(setOrder.getEmail());
+                try {
+                    javaMailSender.send(smmToCustomer);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             return "redirect:/discount/"+setOrder.getSetId();
         }
         return "discount/"+setOrder.getSetId();
@@ -869,22 +897,36 @@ public class Controller {
             List dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
             model.addAttribute("appointmentInfo",appointments);
             model.addAttribute("dateListInfo",dateList);
-            String content = "设计师 " + designer.getName() + " 您好！\n" + "您有一个新的预约订单。" + "\n时间为:" + appointment.getDate() +
+            String contentToDesigner = "设计师 " + designer.getName() + " 您好！\n" + "您有一个新的预约订单。" + "\n时间为:" + appointment.getDate() +
                     "\n订单地址为:" + appointment.getLocation() + "\n客户联系电话为:" + appointment.getCustomerTel() + "\n详情请见客户端";
+            String contentToCustomer = "尊敬的客户 " + appointment.getCustomerName() + " 您好！\n" + "您已成功预约设计师 " + designer.getName() + "\n时间为:" + appointment.getDate() +
+                    "\n订单地址为:" + appointment.getLocation() + "\n设计师联系电话为:" + designer.getTel() + "\n详情请见客户端";
             //用于封装邮件信息的实例
-            SimpleMailMessage smm = new SimpleMailMessage();
+            SimpleMailMessage smmTodesigner = new SimpleMailMessage();
             //由谁来发送邮件
-            smm.setFrom(from);
+            smmTodesigner.setFrom(from);
             //邮件主题
-            smm.setSubject("新的预约订单");
+            smmTodesigner.setSubject("新的预约订单");
             //邮件内容
-            smm.setText(content);
+            smmTodesigner.setText(contentToDesigner);
             //接受邮件
-            smm.setTo(designer.getEmail());
+            smmTodesigner.setTo(designer.getEmail());
             try {
-                javaMailSender.send(smm);
+                javaMailSender.send(smmTodesigner);
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+            if (appointment.getCustomerEmail()!=null){
+                SimpleMailMessage smmToCustomer = new SimpleMailMessage();
+                smmToCustomer.setFrom(from);
+                smmToCustomer.setSubject("新的预约订单");
+                smmToCustomer.setText(contentToCustomer);
+                smmToCustomer.setTo(appointment.getCustomerTel());
+                try {
+                    javaMailSender.send(smmToCustomer);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             return "redirect:/booking/"+appointment.getDesignerId();
         }

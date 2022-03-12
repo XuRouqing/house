@@ -24,5 +24,10 @@
         where id = #{id}
     </select>
 
+    <select id="selectCityNameById" resultType="String">
+        select district_name from district
+        where id = #{id}
+    </select>
+
 
 </mapper>
