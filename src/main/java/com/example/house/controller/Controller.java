@@ -746,6 +746,7 @@ public class Controller {
         Designer designer=designerService.findDesignerById(id);
         List<Appointment> appointments=appointmentService.getAppointmentList();
         List<String> dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
+        List<String> bookTime = bookService.selectBookTimeByDesignerId(id);
 
         //获取今天的日期
         Date d = new Date();
@@ -761,6 +762,17 @@ public class Controller {
                 dateList.remove(i);
                 i--;
             }
+        }
+        //不显示在今天之前的预约
+        for (int i = 0; i < bookTime.size(); i++) {
+            String temp = bookTime.get(i).substring(0,bookTime.get(i).length()-2);
+            if (temp.compareTo(nextDay)<0){
+                bookTime.remove(i);
+                i--;
+            }
+        }
+        for (int i = 0; i < bookTime.size(); i++) {
+            dateList.add(bookTime.get(i));
         }
         //用于存放开始时间与结束时间，使其对应
         List<Schedule> scheduleAll = scheduleService.getScheduleByDesignerId(id);
@@ -831,7 +843,6 @@ public class Controller {
         for (int i = 0; i < result.size(); i++) {
             dateList.add(result.get(i));
         }
-        System.out.println(dateList);
         model.addAttribute("designerInfo",designer);
         model.addAttribute("appointmentInfo",appointments);
         model.addAttribute("dateListInfo",dateList);
@@ -915,6 +926,7 @@ public class Controller {
         Designer designer=designerService.findDesignerById(id);
         List<Appointment> appointments=appointmentService.getAppointmentList();
         List<String> dateList=appointments.stream().map(e -> e.getDate()).collect(Collectors.toList());
+        List<String> bookTime = bookService.selectBookTimeByDesignerId(id);
         //获取今天的日期
         Date d = new Date();
         long dTime = d.getTime();
@@ -937,6 +949,17 @@ public class Controller {
                 dateList.remove(i);
                 i--;
             }
+        }
+        //不显示在今天之前的预约
+        for (int i = 0; i < bookTime.size(); i++) {
+            String temp = bookTime.get(i).substring(0,bookTime.get(i).length()-2);
+            if (temp.compareTo(nextDay)<0){
+                bookTime.remove(i);
+                i--;
+            }
+        }
+        for (int i = 0; i < bookTime.size(); i++) {
+            dateList.add(bookTime.get(i));
         }
         for (int i = 0; i < dateList.size(); i++) {
             dateList.set(i,dateList.get(i).replace("-","."));
@@ -1021,17 +1044,6 @@ public class Controller {
         resp.setCharacterEncoding("utf-8");
         PrintWriter respWritter = resp.getWriter();
         respWritter.append(data.toString());
-
-
-//        try {
-//            List<City> cityList = cityService.getCityListByPid(id);
-//            JSONArray data = JSONArray.fromObject(cityList);
-//            resp.setCharacterEncoding("utf-8");
-//            PrintWriter respWritter = resp.getWriter();
-//            respWritter.append(data.toString());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     /**

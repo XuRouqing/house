@@ -17,11 +17,14 @@ public class Book {
     private String name;
     private String tel;
     private String email;
-    private String province;
-    private String city;
+    private int province;
+    private int city;
     private String location;
     private int designerId;
     private String workers;
     private String time;
     private String remarks;
+    private String cityStr;
+    private int status;
+    private String designerName;
 }

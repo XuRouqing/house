@@ -10,5 +10,49 @@
         values (#{customerId},#{name},#{tel},#{email},#{province},#{city},#{location},#{designerId},#{workers},#{time},#{remarks})
     </insert>
 
+    <select id="selectBook" resultType="Book">
+        SELECT book.*, designer.name designerName, CONCAT(d2.district_name,d1.district_name) cityStr
+        FROM book LEFT JOIN designer
+        ON book.designerId = designer.id, district d1, district d2
+        WHERE d1.id = book.city
+          AND d1.pid = d2.id
+    </select>
+
+    <select id="selectBookById" resultType="Book">
+        select book.*, designer.name designerName, CONCAT(d2.district_name,d1.district_name) cityStr
+        from book left join designer
+            on book.designerId = designer.id, district d1, district d2
+        where book.id = #{id}
+          AND d1.id = book.city
+          AND d1.pid = d2.id
+    </select>
+
+    <select id="selectBookByDesignerId" resultType="Book">
+        select book.*, designer.name designerName, CONCAT(d2.district_name,d1.district_name) cityStr
+        from book left join designer
+            on book.designerId = designer.id, district d1, district d2
+        where designerId = #{designerId}
+          AND d1.id = book.city
+          AND d1.pid = d2.id
+    </select>
+
+    <select id="selectBookTimeByDesignerId" resultType="String">
+        select time from book where designerId = #{designerId}
+    </select>
+
+    <update id="updateBookStatus" parameterType="Book">
+        UPDATE book SET status=#{status}
+        WHERE id=#{id}
+    </update>
+
+    <update id="modifyBook" parameterType="Book">
+        UPDATE book SET name=#{name},email=#{email},province=#{province},city=#{city},location=#{location},designerId=#{designerId},workers=#{workers},remarks=#{remarks}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteBook" parameterType="Book">
+        DELETE FROM book
+        WHERE id=#{id}
+    </delete>
 
 </mapper>

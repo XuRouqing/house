@@ -20,4 +20,41 @@ public class BookServiceImp implements BookService  {
     public void addBook(Book book){
         bookMapper.insertBook(book);
     }
+
+    @Override
+    public List<Book> selectBook(){
+        return bookMapper.selectBook();
+    }
+
+    @Override
+    public List<Book> selectBookByDesignerId(int designerId){
+        return bookMapper.selectBookByDesignerId(designerId);
+    }
+
+    @Override
+    public Book selectBookById(int id){
+        return bookMapper.selectBookById(id);
+    }
+
+    @Override
+    public List<String> selectBookTimeByDesignerId(int designerId){
+        return bookMapper.selectBookTimeByDesignerId(designerId);
+    }
+
+    @Override
+    public void updateBookStatus(int id, int status) {
+        this.bookMapper.updateBookStatus(id, status);
+    }
+
+    @Override
+    public void deleteBook(int id){
+        bookMapper.deleteBook(id);
+    }
+
+    @Override
+    public void modifyBook(Book book){
+        bookMapper.modifyBook(book);
+    }
+
+
 }

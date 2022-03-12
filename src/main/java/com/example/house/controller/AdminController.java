@@ -52,6 +52,9 @@ public class AdminController {
     @Autowired
     private IndexService indexService;
 
+    @Autowired
+    private BookService bookService;
+
     @RequestMapping("/index")
     public String toindex(Model model) {
         int workerNum = workerService.getWorkerNum();
@@ -482,4 +485,62 @@ public class AdminController {
                 break;
         }
     }
+
+    @RequestMapping("/bookList")
+    public String bookList(Model model) {
+        List<Book> books = bookService.selectBook();
+        model.addAttribute("books", books);
+        return "Admin/book-list";
+    }
+
+    @ResponseBody
+    @RequestMapping("/delBook")
+    public String delBook(Model model, int id) {
+        try {
+            bookService.deleteBook(id);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/changeBookStatus")
+    public String changeBookStatus(Model model, int id, int status) {
+        try {
+            bookService.updateBookStatus(id, status);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @RequestMapping("/book/{id}")
+    public String book(@PathVariable int id, Model model) {
+        Book book = bookService.selectBookById(id);
+        List<Designer> designers = designerService.getDesignerList();
+        List<Index> workerType = workerService.getWorkerType();
+        List<City> provinces = cityService.getProvinceList();
+        List<Worker> workers = workerService.getWorkerList();
+        String workerValue = book.getWorkers();
+        String[] workerList = workerValue.split(",");
+        List<Integer> workerListInt = new ArrayList<>();
+        for (int i = 0; i < workerList.length; i++) {
+            workerListInt.add(Integer.parseInt(workerList[i]));
+        }
+        model.addAttribute("book", book);
+        model.addAttribute("designers", designers);
+        model.addAttribute("workerType", workerType);
+        model.addAttribute("provinces", provinces);
+        model.addAttribute("workers", workers);
+        model.addAttribute("workerList", workerListInt);
+        return "Admin/book";
+    }
+
+    @RequestMapping("/modifyBook")
+    public String modifyBook(Model model, Book book) {
+        bookService.modifyBook(book);
+        return "redirect:/admin/book/" + book.getId();
+    }
+
 }
