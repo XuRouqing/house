@@ -66,8 +66,6 @@
                     <div class="row align-items-center">
                         <div class="col-6">
                             <div class="header-top-left">
-                                <img src="Path/image/location.png" width="20px" height="20px">
-                                <span class="pronia-offer">城市</span>
                             </div>
                         </div>
                         <div class="col-6">
@@ -111,16 +109,16 @@
                                     <a href="tel://+00-123-456-789">+00 123 456 789</a>
                                 </div>
                                 <a class="header-logo">
-                                    <img src="Path/picture/dark.png" alt="Header Logo">
+                                    <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
                                 </a>
                                 <!--                            搜索框-->
                                 <nav class="cd-main-nav-wrapper">
-                                    <a href="#search" class="cd-search-trigger cd-text-replace">Search</a>
+                                    <a href="#search" class="cd-search-trigger cd-text-replace">搜索</a>
                                 </nav> <!-- .cd-main-nav-wrapper -->
                                 <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
                                 <div id="search" class="cd-main-search">
                                     <form th:action="@{/searchDesigner}" method="post">
-                                        <input type="search" name="searchText" placeholder="Search...">
+                                        <input type="search" name="searchText" placeholder="搜索">
                                         <div class="cd-select">
                                             <select name="category">
                                                 <option value="designer">设计师</option>
@@ -190,7 +188,7 @@
                             <div class="col-lg-3 col-6">
 
                                 <a href="" class="header-logo" style="margin-right: 20px">
-                                    <img src="Path/picture/dark.png" alt="Header Logo">
+                                    <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
                                 </a>
 
                             </div>
@@ -354,96 +352,6 @@
                     </div>
                 </div>
             </div>
-            <!--        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">-->
-            <!--            <div class="modal-dialog modal-fullscreen">-->
-            <!--                <div class="modal-content modal-bg-dark">-->
-            <!--                    <div class="modal-header">-->
-            <!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"-->
-            <!--                                data-tippy="Close" data-tippy-inertia="true" data-tippy-animation="shift-away"-->
-            <!--                                data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">-->
-            <!--                        </button>-->
-            <!--                    </div>-->
-            <!--                    <div class="modal-body">-->
-            <!--                        <div class="modal-search">-->
-            <!--                            <span class="searchbox-info">Start typing and press Enter to search or ESC to close</span>-->
-            <!--                            <form action="#" class="hm-searchbox">-->
-            <!--                                <input type="text" name="Search..." value="Search..."-->
-            <!--                                       onblur="if(this.value==''){this.value='Search...'}"-->
-            <!--                                       onfocus="if(this.value=='Search...'){this.value=''}" autocomplete="off">-->
-            <!--                                <button class="search-btn" type="submit" aria-label="searchbtn">-->
-            <!--                                    <i class="pe-7s-search"></i>-->
-            <!--                                </button>-->
-            <!--                            </form>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--        </div>-->
-            <div class="offcanvas-minicart_wrapper" id="miniCart">
-                <div class="offcanvas-body">
-                    <div class="minicart-content">
-                        <div class="minicart-heading">
-                            <h4 class="mb-0">Shopping Cart</h4>
-                            <a href="#" class="button-close"><i class="pe-7s-close" data-tippy="Close"
-                                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                                                data-tippy-delay="50" data-tippy-arrow="true"
-                                                                data-tippy-theme="sharpborder"></i></a>
-                        </div>
-                        <ul class="minicart-list">
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#"><i class="pe-7s-close" data-tippy="Remove"
-                                                                           data-tippy-inertia="true"
-                                                                           data-tippy-animation="shift-away"
-                                                                           data-tippy-delay="50" data-tippy-arrow="true"
-                                                                           data-tippy-theme="sharpborder"></i></a>
-                                <a href="single-product-variable.html" class="product-item_img">
-                                    <img class="img-full" src="Path/picture/2-1-70x78.png" alt="Product Image">
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="single-product-variable.html">American Marigold</a>
-                                    <span class="product-item_quantity">1 x $23.45</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#"><i class="pe-7s-close" data-tippy="Remove"
-                                                                           data-tippy-inertia="true"
-                                                                           data-tippy-animation="shift-away"
-                                                                           data-tippy-delay="50" data-tippy-arrow="true"
-                                                                           data-tippy-theme="sharpborder"></i></a>
-                                <a href="single-product-variable.html" class="product-item_img">
-                                    <img class="img-full" src="Path/picture/2-2-70x78.png" alt="Product Image">
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="single-product-variable.html">Black Eyed Susan</a>
-                                    <span class="product-item_quantity">1 x $25.45</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#">
-                                    <i class="pe-7s-close" data-tippy="Remove" data-tippy-inertia="true"
-                                       data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
-                                       data-tippy-theme="sharpborder"></i>
-                                </a>
-                                <a href="single-product-variable.html" class="product-item_img">
-                                    <img class="img-full" src="Path/picture/2-3-70x78.png" alt="Product Image">
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="single-product-variable.html">Bleeding Heart</a>
-                                    <span class="product-item_quantity">1 x $30.45</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="minicart-item_total">
-                        <span>Subtotal</span>
-                        <span class="ammount">$79.35</span>
-                    </div>
-                    <div class="group-btn_wrap d-grid gap-2">
-                        <a href="cart.html" class="btn btn-dark">View Cart</a>
-                        <a href="checkout.html" class="btn btn-dark">Checkout</a>
-                    </div>
-                </div>
-            </div>
             <div class="global-overlay"></div>
         </header>
         <!-- Main Header Area End Here -->
@@ -565,41 +473,47 @@
         <!-- Main Content Area End Here -->
 
         <!-- Begin Footer Area -->
-        <div class="footer-area" data-bg-image="/Path/image/1-1920x465.jpg">
+        <div class="footer-area" data-bg-image="Path/image/1-1920x465.jpg">
             <div class="footer-top section-space-top-100 pb-60">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="footer-widget-item">
                                 <div class="footer-widget-logo">
-                                    <a href="index.html">
-                                        <img src="Path/picture/dark.png" alt="Logo">
+                                    <a href="">
+                                        <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Logo">
                                     </a>
                                 </div>
-                                <p class="footer-widget-desc">Lorem ipsum dolor sit amet, consec adipisl elit, sed do eiusmod
-                                    tempor
-                                    <br>
-                            incidio ut labore et dolore magna.
+                                <p class="footer-widget-desc">我爱我家以匠心品质诠释品牌价值
+                                    <br>20年为超过15万+个家庭提供了高性价比家装解决方案及高品质居住空间
                                 </p>
                                 <div class="social-link with-border">
                                     <ul>
                                         <li>
-                                            <a href="#" data-tippy="Facebook" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                            <a href="#" data-tippy="Facebook" data-tippy-inertia="true"
+                                               data-tippy-animation="shift-away" data-tippy-delay="50"
+                                               data-tippy-arrow="true" data-tippy-theme="sharpborder">
                                                 <i class="fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" data-tippy="Twitter" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                            <a href="#" data-tippy="Twitter" data-tippy-inertia="true"
+                                               data-tippy-animation="shift-away" data-tippy-delay="50"
+                                               data-tippy-arrow="true" data-tippy-theme="sharpborder">
                                                 <i class="fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" data-tippy="Pinterest" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                            <a href="#" data-tippy="Pinterest" data-tippy-inertia="true"
+                                               data-tippy-animation="shift-away" data-tippy-delay="50"
+                                               data-tippy-arrow="true" data-tippy-theme="sharpborder">
                                                 <i class="fa fa-pinterest"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" data-tippy="Dribbble" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                            <a href="#" data-tippy="Dribbble" data-tippy-inertia="true"
+                                               data-tippy-animation="shift-away" data-tippy-delay="50"
+                                               data-tippy-arrow="true" data-tippy-theme="sharpborder">
                                                 <i class="fa fa-dribbble"></i>
                                             </a>
                                         </li>
@@ -609,78 +523,78 @@
                         </div>
                         <div class="col-lg-2 col-md-4 pt-40">
                             <div class="footer-widget-item">
-                                <h3 class="footer-widget-title">Useful Links</h3>
+                                <h3 class="footer-widget-title">友情链接</h3>
                                 <ul class="footer-widget-list-item">
                                     <li>
-                                        <a href="#">About Pronia</a>
+                                        <a th:href="@{fullwidth}">精装案例</a>
                                     </li>
                                     <li>
-                                        <a href="#">How to shop</a>
+                                        <a th:href="@{designer-list}">设计团队</a>
                                     </li>
                                     <li>
-                                        <a href="#">FAQ</a>
+                                        <a th:href="@{worker-list}">施工团队</a>
                                     </li>
                                     <li>
-                                        <a href="#">Contact us</a>
+                                        <a th:href="@{bookOnline}">在线预约</a>
                                     </li>
                                     <li>
-                                        <a href="#">Log in</a>
+                                        <a th:href="@{/login}">登录</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 pt-40">
                             <div class="footer-widget-item">
-                                <h3 class="footer-widget-title">My Account</h3>
+                                <h3 class="footer-widget-title">保障承诺</h3>
                                 <ul class="footer-widget-list-item">
                                     <li>
-                                        <a href="#">Sign In</a>
+                                        <a href="javascript:void(0);" >品牌承诺</a>
                                     </li>
                                     <li>
-                                        <a href="#">View Cart</a>
+                                        <a href="javascript:void(0);" >材料承诺</a>
                                     </li>
                                     <li>
-                                        <a href="#">My Wishlist</a>
+                                        <a href="javascript:void(0);" >廉洁承诺</a>
                                     </li>
                                     <li>
-                                        <a href="#">Track My Order</a>
+                                        <a href="javascript:void(0);" >设计承诺</a>
                                     </li>
                                     <li>
-                                        <a href="#">Help</a>
+                                        <a href="javascript:void(0);" >服务承诺</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 pt-40">
                             <div class="footer-widget-item">
-                                <h3 class="footer-widget-title">Our Service</h3>
+                                <h3 class="footer-widget-title">保障承诺</h3>
                                 <ul class="footer-widget-list-item">
                                     <li>
-                                        <a href="#">Payment Methods</a>
+                                        <a href="javascript:void(0);" >产品承诺</a>
                                     </li>
                                     <li>
-                                        <a href="#">Money Guarantee!</a>
+                                        <a href="javascript:void(0);" >工程承诺</a>
                                     </li>
                                     <li>
-                                        <a href="#">Returns</a>
+                                        <a href="javascript:void(0);" >售后承诺</a>
                                     </li>
                                     <li>
-                                        <a href="#">Shipping</a>
+                                        <a href="javascript:void(0);" >预算承诺</a>
                                     </li>
                                     <li>
-                                        <a href="#">Privacy Policy</a>
+                                        <a href="javascript:void(0);" >环保承诺</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
+
                         <div class="col-lg-3 pt-40">
                             <div class="footer-contact-info">
-                                <h3 class="footer-widget-title">Got Question? Call Us</h3>
+                                <h3 class="footer-widget-title">有问题？联系我们</h3>
                                 <a class="number" href="tel://123-456-789">123 456 789</a>
                                 <div class="address">
                                     <ul>
                                         <li>
-                                            Your Address Goes Here
                                         </li>
                                     </ul>
                                 </div>
@@ -699,8 +613,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="copyright">
-                                <span class="copyright-text">© 2021 Pronia Made with <i class="fa fa-heart text-danger"></i> by
-                            <a href="javascript:;" rel="noopener" target="_blank">HasThemes</a> </span>
+                            <span class="copyright-text">© 2022 Pronia Made with <i
+                                    class="fa fa-heart text-danger"></i> by
+                        <a href="javascript:;" rel="noopener" target="_blank">Me</a> </span>
                             </div>
                         </div>
                     </div>
@@ -708,6 +623,7 @@
             </div>
         </div>
         <!-- Footer Area End Here -->
+
 
         <!-- Begin Scroll To Top -->
         <a class="scroll-to-top" href="">
