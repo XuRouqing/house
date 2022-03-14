@@ -507,6 +507,7 @@
                                                     </p>
                                                     <a th:href="@{/case/}+${house.houseId}" class="read-more">详情</a>
                                                     <a th:href="@{/case/editCase/}+${house.houseId}" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" class="read-more">编辑</a>
+                                                    <a th:href="@{/case/delCase/}+${house.houseId}" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" class="read-more">删除</a>
                                                 </div>
                                             </div>
                                         </div>

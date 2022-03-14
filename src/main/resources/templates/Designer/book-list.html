@@ -22,15 +22,52 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="../Path/admin/css/style.css">
 
-    <!-- Select2 CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/select2.min.css">
-
     <!--[if lt IE 9]>
     <script src="../Path/admin/js/html5shiv.min.js"></script>
     <script src="../Path/admin/js/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" href="../Path/admin/css/jquery.multiselect.css"/>
+    <style>
+        /* Switch开关样式 */
+        input[type='checkbox'].switch {
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background: #ccc;
+            border-radius: 10px;
+            transition: border-color .3s, background-color .3s;
+        }
+
+        input[type='checkbox'].switch::after {
+            content: '';
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0, 0, 2px, #999;
+            transition: .4s;
+            top: 2px;
+            position: absolute;
+            left: 2px;
+        }
+
+        input[type='checkbox'].switch:checked {
+            background: rgb(19, 206, 102);
+        }
+
+        /* 当input[type=checkbox]被选中时：伪元素显示下面样式 位置发生变化 */
+        input[type='checkbox'].switch:checked::after {
+            content: '';
+            position: absolute;
+            left: 55%;
+            top: 2px;
+        }
+    </style>
 </head>
 <body>
 
@@ -109,10 +146,10 @@
                     <li>
                         <a th:href="@{/designer/appointmentList}"><i class="fe fe-document"></i> <span>预约列表</span></a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a th:href="@{/designer/bookList}"><i class="fe fe-table"></i> <span>在线预约列表</span></a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a th:href="@{/designer/caseList}"><i class="fe fe-layout"></i> <span>案例列表</span></a>
                     </li>
                     <li>
@@ -131,13 +168,8 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row">
-                    <div class="col-sm-11">
-                        <h3 class="page-title">案例列表</h3>
-                    </div>
-                    <div class="col-sm-1">
-                        <a class="btn btn-sm bg-primary-light mr-2" th:href="@{/designer/addCase}">
-                            <i class="fe fe-plus"></i> 添加
-                        </a>
+                    <div class="col-sm-12">
+                        <h3 class="page-title">在线预约列表</h3>
                     </div>
                 </div>
             </div>
@@ -152,35 +184,38 @@
                                 <table class="datatable table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th style="width: 5%">ID</th>
-                                        <th style="width: 25%">主图</th>
-                                        <th style="width: 40%">标题</th>
-                                        <th style="width: 10%">风格</th>
-                                        <th style="width: 10%">价格</th>
-                                        <th style="width: 10%">时间</th>
+                                        <th style="width: 10%">ID</th>
+                                        <th style="width: 15%">日期</th>
+                                        <th style="width: 10%">顾客名称</th>
+                                        <th style="width: 15%">联系电话</th>
+                                        <th style="width: 15%">邮箱</th>
+                                        <th style="width: 10%">设计师</th>
+                                        <th style="width: 20%">地址</th>
+                                        <th style="width: 15%">状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody id="tbody">
-                                    <tr th:each="house : ${houses}">
-                                        <td th:text="${house.houseId}"></td>
+                                    <tr th:each="book : ${books}">
+                                        <td th:text="${book.id}"></td>
+                                        <td th:text="${book.time}"></td>
+                                        <td th:text="${book.name}"></td>
+                                        <td th:text="${book.tel}"></td>
+                                        <td th:text="${book.email}"></td>
+                                        <td th:text="${book.designerName}"></td>
+                                        <td th:text="${book.cityStr}+${book.location}"></td>
                                         <td>
-                                            <h2 class="table-avatar">
-                                               <img th:src="${house.mainPic}" alt="house Image" style="height: 100px;width: 180px">
-                                            </h2>
+                                            <input th:if="${book.status} eq 1" th:attr="data-id=${book.id}" checked type="checkbox" class="switch" th:value="${book.status}" onclick="changeStatus(this)">
+                                            <input th:if="${book.status} eq 0" th:attr="data-id=${book.id}" type="checkbox" class="switch" th:value="${book.status}" onclick="changeStatus(this)">
                                         </td>
-                                        <td th:text="${house.title}"></td>
-                                        <td th:text="${house.style}"></td>
-                                        <td th:text="${house.price}"></td>
-                                        <td th:text="${house.time}"></td>
                                         <td class="text-right">
                                             <div class="actions">
-                                                <a th:href="@{/designer/case/}+${house.houseId}"
-                                                   class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="fe fe-pencil"></i> 编辑
+                                                <a id="edit_modify" class="btn btn-sm bg-success-light mr-2"
+                                                   th:href="@{/designer/book/}+${book.id}">
+                                                    <i class="fe fe-pencil"></i> 详情
                                                 </a>
                                                 <button class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                        th:attr="data-id=${house.houseId}"
+                                                        th:attr="data-id=${book.id}"
                                                         href="#delete_modal">
                                                     <i class="fe fe-trash"></i> 删除
                                                 </button>
@@ -199,10 +234,56 @@
         </div>
     </div>
     <!-- /Page Wrapper -->
+    <!-- Edit Details Modal -->
+    <div class="modal fade" id="edit_modal" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">编辑</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span></span>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row form-row">
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>姓名</label>
+                                    <input type="text" class="form-control" value="	#PT002">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>照片</label>
+                                    <input type="file"  class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>等级</label>
+                                    <input type="text"  class="form-control" value="$200.00">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>城市</label>
+                                    <input type="text"  class="form-control" value="29th Oct 2019">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Edit Details Modal -->
 
     <!-- Delete Modal -->
     <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
             <div class="modal-content">
                 <!--	<div class="modal-header">
                         <h5 class="modal-title">Delete</h5>
@@ -213,7 +294,7 @@
                 <div class="modal-body">
                     <div class="form-content p-2">
                         <h4 class="modal-title">删除</h4>
-                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的案例<span id="p_name"></span>吗?</p>
+                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的预约订单吗?</p>
                         <button id="delButton" type="button" class="btn btn-primary">确认</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
@@ -241,106 +322,89 @@
 <script src="../Path/admin/plugins/datatables/datatables.min.js"></script>
 
 <!-- Custom JS -->
-<script src="../Path/admin/js/script.js"></script>
+<script  src="../Path/admin/js/script.js"></script>
 
-<!-- Select2 JS -->
-<script src="../Path/admin/js/select2.min.js"></script>
-
-<script src="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../Path/admin/js/jquery.multiselect.js"></script>
 <script>
     var id;
     var name;
-    $('#delete_modal').on('show.bs.modal', function (event) {
+    $('#delete_modal').on('show.bs.modal',function(event){
         var button = $(event.relatedTarget);
         var modal = $(this);
         id = button.data("id");
         name = button.data("name");
         var p_id = document.getElementById("p_id");
         p_id.appendChild(document.createTextNode(id));
-        var p_name = document.getElementById("p_name");
-        p_name.appendChild(document.createTextNode(name));
     });
-    $('#delButton').on('click', function () {
+    $('#delButton').on('click',function(){
         $(this).button('complete');
         $.ajax({
-            url: '/case/delCase',
-            type: 'post',
-            data: {id: id},
-            error: function () {
+            url:'/designer/delBook',
+            type:'post',
+            data: {id:id},
+            error:function(){
                 alert('出现错误！');
-            }, success: function (data) {
-                if (data.indexOf('error') < 0) {
+            },success:function(data){
+                if (data.indexOf('error') < 0){
                     //模态框隐藏
                     $('#delete_modal').modal('hide');
                     alert("删除成功");
                     location.reload();
-                } else {
+                }else{
                     alert(data);
                 }
             }
         });
     });
-    $(function () {
-        $("#styleValue").multiselect({
-            checkAllText: "全选",
-            uncheckAllText: "全不选",
-            selectedList: 8
-        });
-        ifSelected();
-    });
-
-    function test() {
-        var styleText = "";
-        var style = document.getElementsByName("multiselect_styleValue");
-        for (var i = 0; i < style.length; i++) {
-            if (style[i].getAttribute("aria-selected") == "true") {
-                styleText += style[i].value + ",";
+    function changeStatus(obj){
+        var id = obj.getAttribute("data-id");
+        var status = obj.value;
+        if (status == 0){
+            var a = confirm("是否确认该订单已完成？");
+            if (a == false){
+                obj.checked=false;
             }
-            // console.log(style[i].value);
+            else if (a == true){
+                $.ajax({
+                    url:'/designer/changeBookStatus',
+                    type:'post',
+                    data: {id:id,status:1},
+                    error:function(){
+                        alert('出现错误！');
+                    },success:function(data){
+                        if (data.indexOf('error') < 0){
+                            alert("该订单已完成");
+                            // location.reload();
+                        }else{
+                            alert(data);
+                        }
+                    }
+                });
+            }
         }
-        styleText = styleText.substring(0, styleText.length - 1);
-        var formText = document.getElementById("designerStyle");
-        formText.value = styleText;
+        else if (status == 1){
+            var a = confirm("是否确认该订单未完成？");
+            if (a == false){
+                obj.checked=true;
+            }
+            else if (a == true){
+                $.ajax({
+                    url:'/designer/changeBookStatus',
+                    type:'post',
+                    data: {id:id,status:0},
+                    error:function(){
+                        alert('出现错误！');
+                    },success:function(data){
+                        if (data.indexOf('error') < 0){
+                            alert("该订单状态已更改");
+                            // location.reload();
+                        }else{
+                            alert(data);
+                        }
+                    }
+                });
+            }
+        }
     }
 </script>
 </body>
-<style>
-    .ui-widget-content {
-        border: 1px solid #ddd;
-        background: white;
-        color: #333;
-    }
-
-    .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-        border: 1px solid #a4ecfc;
-        background: white;
-        color: #333;
-        font-size: 15px;
-        height: 40px;
-        border-radius: 7px;
-        padding: 0.375rem 0.75rem;
-    }
-
-    ul {
-        list-style-type: none;
-    }
-
-    .ui-multiselect {
-        border: 1px solid #ddd;
-        box-shadow: none;
-        color: #333;
-        font-size: 15px;
-        height: 40px;
-        display: block;
-        width: 100%;
-        padding: 0.375rem 0.75rem;
-        font-weight: 400;
-        line-height: 1.5;
-        background-color: #fff;
-        background-clip: padding-box;
-        border-radius: 0.25rem;
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    }
-</style>
 </html>

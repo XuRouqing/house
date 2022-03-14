@@ -26,6 +26,9 @@ public class UserRealm extends AuthorizingRealm {
         if ("admin".equals(currentUser.getRole())){
             roles.add("admin");
         }
+        if ("designer".equals(currentUser.getRole())){
+            roles.add("designer");
+        }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
 
         return info;

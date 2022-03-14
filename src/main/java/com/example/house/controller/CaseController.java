@@ -128,8 +128,10 @@ public class CaseController {
             rooms[i].setRoomType(request.getParameter("room" + i + "_type"));
             rooms[i].setSpecificType(request.getParameter("room" + i + "_specificType"));
             rooms[i].setStyle(request.getParameter("room" + i + "_style"));
-            rooms[i].setPrice(Integer.parseInt(request.getParameter("room" + i + "_price")));
-            roomService.addRoom(rooms[i]);
+            if (request.getParameter("room" + i + "_price")!=""){
+                rooms[i].setPrice(Integer.parseInt(request.getParameter("room" + i + "_price")));
+                roomService.addRoom(rooms[i]);
+            }
         }
         if (multipartResolver.isMultipart(request)) {
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
@@ -303,15 +305,10 @@ public class CaseController {
         return "redirect:/case/editCase/"+house.getHouseId();
     }
 
-    @ResponseBody
-    @PostMapping("/delCase")
-    public String delCase(Model model, int id) {
-        try {
-            houseService.deleteHouse(id);
-            return "success";
-        } catch (Exception e) {
-            return e.getMessage();
-        }
+    @RequestMapping("/delCase/{id}")
+    public String delCase(Model model, @PathVariable int id) {
+        houseService.deleteHouse(id);
+        return "redirect:/fullwidth";
     }
 
     @RequestMapping("/editCase/{id}")
@@ -341,12 +338,21 @@ public class CaseController {
         String[] workerList = workerValue.split(",");
         List<Integer> wokerListInt = new ArrayList<>();
         for (int i = 0; i < workerList.length; i++) {
-            wokerListInt.add(Integer.parseInt(workerList[i]));
+            if (workerList[i]!="0"){
+                try {
+                    wokerListInt.add(Integer.parseInt(workerList[i]));
+                }catch (Exception e){
+                }
+            }
         }
         List<Integer> workerTypeList = new ArrayList<>();
-        for (int i = 0; i < workerList.length; i++) {
-            int type = Integer.parseInt(workerService.findWorkerById(Integer.parseInt(workerList[i])).getTypeValue());
-            workerTypeList.add(type);
+        if (workerList.length > 0){
+            for (int i = 0; i < workerList.length; i++) {
+                if (Integer.parseInt(workerList[i])!=0){
+                    int type = Integer.parseInt(workerService.findWorkerById(Integer.parseInt(workerList[i])).getTypeValue());
+                    workerTypeList.add(type);
+                }
+            }
         }
 
         model.addAttribute("designers", designers);

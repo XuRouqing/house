@@ -4,6 +4,8 @@ import com.example.house.pojo.*;
 import com.example.house.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,13 +46,26 @@ public class DesignerController {
     @Autowired
     private ScheduleService scheduleService;
 
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    private WorkerService workerService;
+
+    @Autowired
+    private JavaMailSender mailSender;
+    @Value("${mail.fromMail.addr}")
+    private String from;
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @RequestMapping("/index")
     public String toIndex(HttpSession session, Model model) {
         //获取当前userId以获得当前设计师信息
-//        int userId = Integer.parseInt(session.getAttribute("id").toString());
-//        Designer designer = designerService.getDesignerByUserId(userId);
-        Designer designer = designerService.getDesignerByUserId(3);//测试用
+        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        Designer designer = designerService.getDesignerByUserId(userId);
+//        Designer designer = designerService.getDesignerByUserId(3);//测试用
         int id = designer.getId();
         int houseNum = designerService.getHouseNumByDesignerId(id);
         int orderNum = designerService.getOrderNumByDesignerId(id);
@@ -80,9 +95,9 @@ public class DesignerController {
     @RequestMapping("/appointmentList")
     public String toappointmentList(HttpSession session, Model model) {
         //获取当前userId以获得当前设计师信息
-//        int userId = Integer.parseInt(session.getAttribute("id").toString());
-//        Designer designer = designerService.getDesignerByUserId(userId);
-        Designer designer = designerService.getDesignerByUserId(3);//测试用
+        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        Designer designer = designerService.getDesignerByUserId(userId);
+//        Designer designer = designerService.getDesignerByUserId(3);//测试用
         int id = designer.getId();
         List<Appointment> appointments = appointmentService.getAppointmentAllByDesignerId(id);
         model.addAttribute("appointments",appointments);
@@ -103,9 +118,9 @@ public class DesignerController {
     @RequestMapping("/account")
     public String toAccount(HttpSession session, Model model) {
         //获取当前userId以获得当前设计师信息
-//        int userId = Integer.parseInt(session.getAttribute("id").toString());
-//        Designer designer = designerService.getDesignerByUserId(userId);
-        Designer designer = designerService.getDesignerByUserId(3);//测试用
+        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        Designer designer = designerService.getDesignerByUserId(userId);
+//        Designer designer = designerService.getDesignerByUserId(3);//测试用
         int id = designer.getId();
         String styleValue = designer.getStyleValue();
         List<Index> styleIndex = designerService.getDesignerStyle();
@@ -155,10 +170,10 @@ public class DesignerController {
     }
 
     @RequestMapping("/caseList")
-    public String caseList(Model model) {
-//        int userId = Integer.parseInt(session.getAttribute("id").toString());
-//        Designer designer = designerService.getDesignerByUserId(userId);
-        Designer designer = designerService.getDesignerByUserId(3);//测试用
+    public String caseList(HttpSession session, Model model) {
+        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        Designer designer = designerService.getDesignerByUserId(userId);
+//        Designer designer = designerService.getDesignerByUserId(3);//测试用
         int id = designer.getId();
         List<House> houses = houseService.findHouseByDesignerId(id);
         model.addAttribute("houses",houses);
@@ -166,10 +181,10 @@ public class DesignerController {
     }
 
     @RequestMapping("/addCase")
-    public String addCase(Model model) {
-//        int userId = Integer.parseInt(session.getAttribute("id").toString());
-//        Designer designer = designerService.getDesignerByUserId(userId);
-        Designer designer = designerService.getDesignerByUserId(3);//测试用
+    public String addCase(HttpSession session, Model model) {
+        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        Designer designer = designerService.getDesignerByUserId(userId);
+//        Designer designer = designerService.getDesignerByUserId(3);//测试用
         int id = designer.getId();
         List<Index> houseStyle = houseService.getHouseStyleIndex();
         List<Index> houseArea = houseService.getHouseAreaIndex();
@@ -194,10 +209,10 @@ public class DesignerController {
     private String planePath;
 
     @PostMapping("/saveCase")
-    public String saveCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
-        //        int userId = Integer.parseInt(session.getAttribute("id").toString());
-//        Designer designer = designerService.getDesignerByUserId(userId);
-        Designer designer = designerService.getDesignerByUserId(3);//测试用
+    public String saveCase(HttpSession session, HttpServletResponse resp, HttpServletRequest request) throws IOException {
+        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        Designer designer = designerService.getDesignerByUserId(userId);
+//        Designer designer = designerService.getDesignerByUserId(3);//测试用
         int id = designer.getId();
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         String mainPic;
@@ -295,10 +310,10 @@ public class DesignerController {
     }
 
     @RequestMapping("/timing")
-    public String timing(Model model) {
-        //        int userId = Integer.parseInt(session.getAttribute("id").toString());
-//        Designer designer = designerService.getDesignerByUserId(userId);
-        Designer designer = designerService.getDesignerByUserId(3);//测试用
+    public String timing(HttpSession session, Model model) {
+        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        Designer designer = designerService.getDesignerByUserId(userId);
+//        Designer designer = designerService.getDesignerByUserId(3);//测试用
         int id = designer.getId();
         //接下来一周的日期
         ArrayList<String> week = new ArrayList<>();
@@ -408,6 +423,76 @@ public class DesignerController {
     public String delSchedule(Model model, @PathVariable int id){
         scheduleService.deleteSchedule(id);
         return  "redirect:/designer/timing";
+    }
+
+    @RequestMapping("/bookList")
+    public String bookList(HttpSession session, Model model) {
+        int userId = Integer.parseInt(session.getAttribute("id").toString());
+        Designer designer = designerService.getDesignerByUserId(userId);
+        List<Book> books = bookService.selectBookByDesignerId(designer.getId());
+        model.addAttribute("books", books);
+        return "designer/book-list";
+    }
+
+    @ResponseBody
+    @RequestMapping("/delBook")
+    public String delBook(Model model, int id) {
+        try {
+            bookService.deleteBook(id);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/changeBookStatus")
+    public String changeBookStatus(Model model, int id, int status) {
+        try {
+            bookService.updateBookStatus(id, status);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @RequestMapping("/book/{id}")
+    public String book(@PathVariable int id, Model model) {
+        Book book = bookService.selectBookById(id);
+        List<Designer> designers = designerService.getDesignerList();
+        List<Index> workerType = workerService.getWorkerType();
+        List<City> provinces = cityService.getProvinceList();
+        List<Worker> workers = workerService.getWorkerList();
+        String workerValue = book.getWorkers();
+        String[] workerList = workerValue.split(",");
+        List<Integer> workerListInt = new ArrayList<>();
+        for (int i = 0; i < workerList.length; i++) {
+            workerListInt.add(Integer.parseInt(workerList[i]));
+        }
+        model.addAttribute("book", book);
+        model.addAttribute("designers", designers);
+        model.addAttribute("workerType", workerType);
+        model.addAttribute("provinces", provinces);
+        model.addAttribute("workers", workers);
+        model.addAttribute("workerList", workerListInt);
+        return "designer/book";
+    }
+
+    @RequestMapping("/modifyBook")
+    public String modifyBook(Model model, Book book) {
+        bookService.modifyBook(book);
+        String content = "您好，您有一个订单被修改，详情请见客户端。";
+        SimpleMailMessage smm = new SimpleMailMessage();
+        smm.setFrom(from);
+        smm.setSubject("订单修改");
+        smm.setText(content);
+        smm.setTo(book.getEmail());
+        try {
+            javaMailSender.send(smm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/designer/book/" + book.getId();
     }
 
 }

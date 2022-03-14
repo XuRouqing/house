@@ -1,29 +1,34 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Doccure - Basic Inputs</title>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我爱我家装修公司</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="../Path/admin/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../Path/image/newlogo.png">
+
+    <link rel="shortcut icon" type="image/x-icon" href="../../Path/image/newlogo.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../Path/admin/css/font-awesome.min.css">
 
     <!-- Feathericon CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/feathericon.min.css">
+    <link rel="stylesheet" href="../../Path/admin/css/feathericon.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="../Path/admin/css/style.css">
+    <link rel="stylesheet" href="../../Path/admin/css/style.css">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="../../Path/admin/css/select2.min.css">
 
     <!--[if lt IE 9]>
-    <script src="../Path/admin/js/html5shiv.min.js"></script>
-    <script src="../Path/admin/js/respond.min.js"></script>
+    <script src="../../Path/admin/js/html5shiv.min.js"></script>
+    <script src="../../Path/admin/js/respond.min.js"></script>
     <![endif]-->
+
     <link rel="stylesheet" type="text/css" href="../../Path/admin/css/jquery.multiselect.css"/>
 </head>
 <body>
@@ -97,13 +102,13 @@
                     <li>
                         <a th:href="@{/designer/index}"><i class="fe fe-home"></i> <span>首页</span></a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a th:href="@{/designer/account}"><i class="fe fe-user"></i> <span>个人信息</span></a>
                     </li>
                     <li>
                         <a th:href="@{/designer/appointmentList}"><i class="fe fe-document"></i> <span>预约列表</span></a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a th:href="@{/designer/bookList}"><i class="fe fe-table"></i> <span>在线预约列表</span></a>
                     </li>
                     <li>
@@ -126,143 +131,117 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3 class="page-title">个人信息</h3>
+                        <h3 class="page-title">在线预约</h3>
                     </div>
                 </div>
             </div>
             <!-- /Page Header -->
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">个人信息修改</h4>
+                            <h4 class="card-title">预约信息</h4>
                         </div>
                         <div class="card-body">
-                            <form th:action="@{/designer/modifyAccount}" method="post" enctype="multipart/form-data">
+                            <form th:action="@{/designer/modifyBook}" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2">姓名</label>
+                                    <label class="col-form-label col-md-2">ID</label>
                                     <div class="col-md-10">
-                                        <input name="name" th:value="${designer.name}" type="text" class="form-control">
+                                        <input name="id" th:value="${book.id}" type="text" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2">照片</label>
+                                    <label class="col-form-label col-md-2">顾客ID</label>
                                     <div class="col-md-10">
-                                        <div class="file" style="width: 100%">
-                                            <input id="filePic" name="filePic" type="file" class="form-control">
-                                            请选择文件
-                                            <div id="image-holder">
-                                                <img th:src="${designer.pic}">
-                                            </div>
-                                        </div>
+                                        <input name="customerId" th:value="${book.customerId}" type="text" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-2">性别</label>
+                                    <label class="col-form-label col-md-2">称呼</label>
                                     <div class="col-md-10">
-                                        <div class="radio">
-                                            <label th:if="${designer.gender} eq '男'">
-                                                <input type="radio" name="gender" th:value="男" checked>男
-                                                <input type="radio" name="gender" th:value="女">女
-                                            </label>
-                                            <label th:if="${designer.gender} eq '女'">
-                                                <input type="radio" name="gender" th:value="男">男
-                                                <input type="radio" name="gender" th:value="女" checked>女
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">年龄</label>
-                                    <div class="col-md-10">
-                                        <input name="age" th:value="${designer.age}" type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">工龄</label>
-                                    <div class="col-md-10">
-                                        <input name="workingAge" th:value="${designer.workingAge}" type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">等级</label>
-                                    <div class="col-md-10">
-                                        <select class="form-control" name="levelValue">
-                                            <option th:each="level : ${designerLevel}"
-                                                    th:text="${level.name}"
-                                                    th:value="${level.id}"
-                                                    th:selected="${designer.levelValue} == ${level.id}">
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2 form-label">风格</label>
-                                    <div class="col-md-10">
-                                        <select class="form-control" id="styleValue"
-                                                multiple="multiple" style="width: 100%">
-                                            <option name="styleOpt" id="styleOpt"
-                                                    th:each="style : ${styleIndex}"
-                                                    th:text="${style.name}"
-                                                    th:value="${style.id}"
-                                                    th:data_id="${style.id}">
-                                        </select>
-                                        <input type="hidden" id="designerStyle"
-                                               name="styleValue">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">代表作</label>
-                                    <div class="col-md-10">
-                                        <input name="represent" th:value="${designer.represent}" class="form-control">
+                                        <input name="name" th:value="${book.name}" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">联系电话</label>
                                     <div class="col-md-10">
-                                        <input name="tel" th:value="${designer.tel}" class="form-control">
+                                        <input name="tel" th:value="${book.tel}" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">邮箱</label>
                                     <div class="col-md-10">
-                                        <input name="email" th:value="${designer.email}" class="form-control">
+                                        <input name="email" th:value="${book.email}" type="text" class="form-control">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">地址(所在城市)</label>
-                                    <div class="col-sm-5">
+                                <div class="row">
+                                    <label class="col-form-label col-md-2">城市</label>
+                                    <div class="col-md-5">
                                         <div class="form-group">
                                             <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
                                                 <option>请选择省份</option>
-                                                <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}" th:selected="${province.id} == ${provinceNow.id}"></option>
+                                                <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}"
+                                                        th:selected="${province.id} == ${book.province}"></option>
                                             </select>
                                         </div>
-                                        <input id="location_hidden" th:value="${designer.location}" type="hidden">
                                     </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-md-5">
                                         <div class="form-group">
-                                            <select class="form-control" id="location" name="location">
+                                            <select class="form-control" id="city" name="city">
                                                 <option>请选择城市</option>
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+                                <input id="province_hidden" th:value="${book.province}" type="hidden">
+                                <input id="city_hidden" th:value="${book.city}" type="hidden">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">详细地址</label>
+                                    <div class="col-md-10">
+                                        <input name="location" th:value="${book.location}" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">设计师</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="designerId" name="designerId" onchange="changeDesigner(this)">
+                                            <option th:each="designer : ${designers}" th:text="${designer.name}" th:value="${designer.id}"
+                                                    th:selected="${designer.id} == ${book.designerId}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">施工人员</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="workerValue"
+                                                multiple="multiple" style="width: 100%">
+                                            <option name="workerOpt" id="workerOpt"
+                                                    th:each="worker : ${workers}"
+                                                    th:text="${worker.name}"
+                                                    th:value="${worker.id}"
+                                                    th:data_id="${worker.id}">
+                                                <input type="hidden" id="workers"
+                                                       name="workers">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">时间</label>
+                                    <div class="col-md-10">
+                                        <input name="time" th:value="${book.time}" type="text" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">备注</label>
                                     <div class="col-md-10">
                                         <textarea name="form" rows="5" cols="5" class="form-control"
-                                                  th:value="${designer.form}"
+                                                  th:value="${book.remarks}"
                                                   placeholder="备注"></textarea>
                                     </div>
                                 </div>
-                                <input name="id" th:value="${designer.id}" type="hidden">
-                                <input name="userId" th:value="${designer.userId}" type="hidden">
-                                <input name="pic" th:value="${designer.pic}" type="hidden">
                                 <div class="submit-section proceed-btn text-right">
                                     <button type="submit" class="btn submit-btn" data-toggle="modal"
-                                            data-target=".bs-example-modal-lg" onclick="sub()">保存
+                                            data-target=".bs-example-modal-lg" onclick="test()">保存
                                     </button>
                                 </div>
                             </form>
@@ -270,74 +249,73 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    <!-- /Main Wrapper -->
+    <!-- /Page Wrapper -->
 
 </div>
 <!-- /Main Wrapper -->
-
 <!-- jQuery -->
-<script src="../Path/admin/js/jquery-3.2.1.min.js"></script>
+<script src="../../Path/admin/js/jquery-3.2.1.min.js"></script>
 
 <!-- Bootstrap Core JS -->
-<script src="../Path/admin/js/popper.min.js"></script>
+<script src="../../Path/admin/js/popper.min.js"></script>
 <script src="http://cdn.bootstrapmb.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- Slimscroll JS -->
-<script src="../Path/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../Path/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom JS -->
-<script src="../Path/admin/js/script.js"></script>
+<script src="../../Path/admin/js/script.js"></script>
+
+<!-- Select2 JS -->
+<script src="../../Path/admin/js/select2.min.js"></script>
 
 <script src="http://cdn.bootcss.com/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../../Path/admin/js/jquery.multiselect.js"></script>
+
 <script>
-    let styleList = [[${styleList}]];
+    var cityNowId = document.getElementById("city_hidden").value;
+    var designer = document.getElementById("designerId");
     $(function () {
-        $("#styleValue").multiselect({
+        var province = document.getElementById("province");
+        changeProvince(province);
+        changeDesigner(designer);
+    });
+    let workerList = [[${workerList}]];
+    $(function () {
+        $("#workerValue").multiselect({
             checkAllText: "全选",
             uncheckAllText: "全不选",
             selectedList: 8
         });
         ifSelected();
-    });
 
+    });
     //加载默认选项
     function ifSelected() {
-        var opt = document.getElementsByName("multiselect_styleValue");
+        var opt = document.getElementsByName("multiselect_workerValue");
         for (var i = 0; i < opt.length; i++) {
-            if (styleList.indexOf(parseInt(opt[i].value)) >= 0) {
+            if (workerList.indexOf(parseInt(opt[i].value)) >= 0) {
                 // 模拟点击元素，在加载时选择
                 opt[i].click();
             }
         }
     }
-
-    $("#filePic").on('change', function () {
-        if (typeof (FileReader) != "undefined") {
-            var image_holder = $("#image-holder");
-            image_holder.empty();
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $("<img />", {
-                    "src": e.target.result,
-                    "class": "thumb-image"
-                }).appendTo(image_holder);
+    function test() {
+        var workerText = "";
+        var worker = document.getElementsByName("multiselect_workerValue");
+        for (var i = 0; i < style.length; i++) {
+            if (worker[i].getAttribute("aria-selected") == "true") {
+                workerText += worker[i].value + ",";
             }
-            image_holder.show();
-            reader.readAsDataURL($(this)[0].files[0]);
-        } else {
-            alert("你的浏览器不支持FileReader.");
+            // console.log(style[i].value);
         }
-    });
+        workerText = workerText.substring(0, workerText.length - 1);
+        var formText = document.getElementById("workers");
+        formText.value = workerText;
+    }
 
-    var cityNowId = document.getElementById("location_hidden").value;
-    $(function () {
-        var provinceNow = document.getElementById("province");
-        changeProvince(provinceNow);
-    });
     function changeProvince(now){
         $.ajax({
             url: "/queryCity/"+now.options[now.options.selectedIndex].value,
@@ -346,7 +324,7 @@
             success: function(data){
                 /*这个方法里是ajax发送请求成功之后执行的代码*/
                 var province = now;
-                var city = document.getElementById("location");
+                var city = document.getElementById("city");
                 var opt = now.options.selectedIndex;
                 var j = 0;
                 var length=city.options.length;
@@ -373,48 +351,42 @@
         });
     };
 
-    function sub() {
-        var styleText = "";
-        var style = document.getElementsByName("multiselect_styleValue");
-        for (var i = 0; i < style.length; i++) {
-            if (style[i].getAttribute("aria-selected") == "true") {
-                styleText += style[i].value + ",";
+    function changeDesigner(now) {
+        $.ajax({
+            url: "/queryTime",
+            type: "post",
+            data: {id: now.options[now.options.selectedIndex].value, date: dateList},
+            success: function (data) {
+                data = data.slice(2,-2);
+                var date = data.split('","');
+
+                var select = document.getElementById("time");
+                var j = 0;
+                var length = select.options.length;
+                /**
+                 * 清空原选择框中选项
+                 */
+                for (i = 0; i < length; i++) {
+                    select.removeChild(select.options[0]);
+                }
+                /**
+                 * 添加新选项
+                 */
+                for (i = 0; i < date.length; i++) {
+                    // console.log(data[i].district_name);
+                    select.options[j++] = new Option(date[i], date[i]);
+                }
+
+            },
+            error: function (msg) {
+                alert("ajax连接异常：" + msg);
             }
-            // console.log(style[i].value);
-        }
-        styleText = styleText.substring(0, styleText.length - 1);
-        var formText = document.getElementById("designerStyle");
-        formText.value = styleText;
-    }
+        });
+    };
+
 </script>
 </body>
 <style>
-    .file {
-        position: relative;
-        display: inline-block;
-        background: #ffffff;
-        border: 1px solid #d1eeff;
-        border-radius: 4px;
-        padding: 4px 12px;
-        overflow: hidden;
-        color: #1E88C7;
-        text-decoration: none;
-        text-indent: 0;
-    }
-    .file input {
-        position: absolute;
-        font-size: 100px;
-        right: 0;
-        top: 0;
-        opacity: 0;
-        -ms-filter: 'alpha(opacity=0)';
-    }
-    .file:hover {
-        background: #AADFFD;
-        border-color: #78C3F3;
-        color: #004974;
-        text-decoration: none;
-    }
     .ui-widget-content {
         border: 1px solid #ddd;
         background: white;

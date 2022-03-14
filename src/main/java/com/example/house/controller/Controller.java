@@ -975,10 +975,53 @@ public class Controller {
     public void addBook(Book book, HttpServletResponse resp) throws IOException {
         try {
             bookService.addBook(book);
+            String province = cityService.getCityNameById(book.getProvince());
+            String city = cityService.getCityNameById(book.getCity());
             //给后台传输插入成功的消息
             resp.setCharacterEncoding("utf-8");
             PrintWriter respWritter = resp.getWriter();
             respWritter.append("200");
+            if (book.getDesignerId()!=0){
+                Designer designer = designerService.findDesignerById(book.getDesignerId());
+                String contentToDesigner = "设计师 " + "您好！\n" + "您有一个新的预约订单。" + "\n时间为:" + book.getTime() + "\n客户联系电话为:" + book.getName() +
+                        "客户邮箱为:" + book.getEmail() +  "\n地址为:" + province+city+book.getLocation() + "\n详情请见客户端";
+                SimpleMailMessage smmToDesigner = new SimpleMailMessage();
+                smmToDesigner.setFrom(from);
+                smmToDesigner.setSubject("新的预约订单");
+                smmToDesigner.setText(contentToDesigner);
+                smmToDesigner.setTo(designer.getEmail());
+                try {
+                    javaMailSender.send(smmToDesigner);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                String contentToDesigner = "管理员 " + "您好！\n" + "新增一个暂未指定设计师的订单，请前往查看。" ;
+                SimpleMailMessage smmToAdmin = new SimpleMailMessage();
+                smmToAdmin.setFrom(from);
+                smmToAdmin.setSubject("新的预约订单");
+                smmToAdmin.setText(contentToDesigner);
+                smmToAdmin.setTo(from);
+                try {
+                    javaMailSender.send(smmToAdmin);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (book.getEmail()!=null){
+                String contentToCustomer =  " 您好！\n" + "您已成功预套餐" + "\n时间为:" + book.getTime() + "\n详情请见客户端";
+                SimpleMailMessage smmToCustomer = new SimpleMailMessage();
+                smmToCustomer.setFrom(from);
+                smmToCustomer.setSubject("预约成功");
+                smmToCustomer.setText(contentToCustomer);
+                smmToCustomer.setTo(book.getEmail());
+                try {
+                    javaMailSender.send(smmToCustomer);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (Exception e) {
             resp.setCharacterEncoding("utf-8");
             PrintWriter respWritter = resp.getWriter();

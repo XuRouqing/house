@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>我爱我家装修公司</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="../Path/image/newlogo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../Path/image/newlogo.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="http://cdn.bootstrapmb.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -40,10 +40,10 @@
         <!-- Logo -->
         <div class="header-left">
             <a href="index.html" class="logo">
-                <img src="../Path/image/newlogo.png" alt="Logo">
+                <img src="../../Path/image/newlogo.png" alt="Logo">
             </a>
             <a href="index.html" class="logo logo-small">
-                <img src="../Path/image/newlogo.png" alt="Logo" width="30" height="30">
+                <img src="../../Path/image/newlogo.png" alt="Logo" width="30" height="30">
             </a>
         </div>
         <!-- /Logo -->
@@ -64,13 +64,13 @@
             <!-- User Menu -->
             <li class="nav-item dropdown has-arrow">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                    <span class="user-img"><img class="rounded-circle" src="../Path/admin/img/profiles/admin.png"
+                    <span class="user-img"><img class="rounded-circle" src="../../Path/admin/img/profiles/admin.png"
                                                 width="31" alt="管理员"></span>
                 </a>
                 <div class="dropdown-menu">
                     <div class="user-header">
                         <div class="avatar avatar-sm">
-                            <img src="../Path/admin/img/profiles/admin.png" alt="User Image"
+                            <img src="../../Path/admin/img/profiles/admin.png" alt="User Image"
                                  class="avatar-img rounded-circle">
                         </div>
                         <div class="user-text">
@@ -116,6 +116,33 @@
                     </li>
                     <li>
                         <a th:href="@{/admin/appointmentList}"><i class="fe fe-document"></i> <span>设计师预约列表</span></a>
+                    </li>
+                    <li class="submenu">
+                        <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>索引</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>案例索引</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
+                                    <li><a th:href="@{/admin/indexList/housearea}"> <span>面积</span></a></li>
+                                    <li><a th:href="@{/admin/indexList/housetype}"> <span>装修类型</span></a></li>
+                                    <li><a th:href="@{/admin/indexList/houseform}"> <span>装修类别</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>设计师索引</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a th:href="@{/admin/indexList/styleindex}"><span>风格</span></a></li>
+                                    <li><a th:href="@{/admin/indexList/designerlevel}"> <span>等级</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);"> <span>施工团队索引</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a th:href="@{/admin/indexList/workertype}"><span>工种</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

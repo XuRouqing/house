@@ -7,6 +7,8 @@ import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +56,14 @@ public class AdminController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private JavaMailSender mailSender;
+    @Value("${mail.fromMail.addr}")
+    private String from;
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
     @RequestMapping("/index")
     public String toindex(Model model) {
@@ -152,12 +162,34 @@ public class AdminController {
             designer.setPic(pic);
         }
         designerService.modifyDesignerMain(designer);
+        String content = "设计师" + designer.getName() + "您好," + "您的信息已被管理员修改，详情请于客户端查看。";
+        SimpleMailMessage smmToAdmin = new SimpleMailMessage();
+        smmToAdmin.setFrom(from);
+        smmToAdmin.setSubject("设计师个人信息修改");
+        smmToAdmin.setText(content);
+        smmToAdmin.setTo(from);
+        try {
+            javaMailSender.send(smmToAdmin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/admin/designer/" + designer.getId();
     }
 
     @RequestMapping("/modifyDesigner2")
     public String modifyDesigner2(Model model, Designer designer) {
         designerService.modifyDesigner(designer);
+        String content = "设计师" + designer.getName() + "您好," + "您的信息已被管理员修改，详情请于客户端查看。";
+        SimpleMailMessage smmToAdmin = new SimpleMailMessage();
+        smmToAdmin.setFrom(from);
+        smmToAdmin.setSubject("新的预约订单");
+        smmToAdmin.setText(content);
+        smmToAdmin.setTo(from);
+        try {
+            javaMailSender.send(smmToAdmin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/admin/designer/" + designer.getId();
     }
 
@@ -540,6 +572,17 @@ public class AdminController {
     @RequestMapping("/modifyBook")
     public String modifyBook(Model model, Book book) {
         bookService.modifyBook(book);
+        String content = "您好，您有一个订单被修改，详情请见客户端。";
+        SimpleMailMessage smm = new SimpleMailMessage();
+        smm.setFrom(from);
+        smm.setSubject("订单修改");
+        smm.setText(content);
+        smm.setTo(book.getEmail());
+        try {
+            javaMailSender.send(smm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/admin/book/" + book.getId();
     }
 
