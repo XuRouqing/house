@@ -464,10 +464,12 @@ public class DesignerController {
         List<City> provinces = cityService.getProvinceList();
         List<Worker> workers = workerService.getWorkerList();
         String workerValue = book.getWorkers();
-        String[] workerList = workerValue.split(",");
         List<Integer> workerListInt = new ArrayList<>();
-        for (int i = 0; i < workerList.length; i++) {
-            workerListInt.add(Integer.parseInt(workerList[i]));
+        if (workerValue!=null){
+            String[] workerList = workerValue.split(",");
+            for (int i = 0; i < workerList.length; i++) {
+                workerListInt.add(Integer.parseInt(workerList[i]));
+            }
         }
         model.addAttribute("book", book);
         model.addAttribute("designers", designers);
@@ -493,6 +495,181 @@ public class DesignerController {
             e.printStackTrace();
         }
         return "redirect:/designer/book/" + book.getId();
+    }
+
+    @PostMapping("/editCase")
+    public String editCase(HttpServletResponse resp, HttpServletRequest request) throws IOException {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        String mainPic;
+        String original;
+        String plane;
+        Enumeration<String> parameterNames = request.getParameterNames();
+        /**
+         * 封装house
+         */
+        House house = houseService.findHouseById(Integer.parseInt(request.getParameter("houseId")));
+        house.setStyleValue(request.getParameter("styleValue"));
+        house.setHouseType(request.getParameter("houseType"));
+        house.setAreaValue(request.getParameter("areaValue"));
+        house.setFormValue(request.getParameter("formValue"));
+        house.setCity(request.getParameter("city"));
+        house.setLocal(request.getParameter("location"));
+        house.setTime(request.getParameter("time"));
+        house.setPrice(Integer.parseInt(request.getParameter("price")));
+        house.setDesignerId(Integer.parseInt(request.getParameter("designer")));
+        house.setWorkerIds(request.getParameter("workerIds"));
+        house.setTypeValue(request.getParameter("typeValue"));
+        house.setTitle(request.getParameter("title"));
+        house.setDes(request.getParameter("describe"));
+        /**
+         * 房间封装
+         */
+        int roomNum = Integer.parseInt(request.getParameter("roomNum"));
+        Room[] rooms = new Room[roomNum + 1];
+        for (int i = 1; i <= roomNum; i++) {
+            rooms[i] = new Room();
+            rooms[i].setRoomType(request.getParameter("room" + i + "_type"));
+            rooms[i].setSpecificType(request.getParameter("room" + i + "_specificType"));
+            rooms[i].setStyle(request.getParameter("room" + i + "_style"));
+            rooms[i].setPrice(Integer.parseInt(request.getParameter("room" + i + "_price")));
+            if (request.getParameter("room" + i + "_id")!=null){
+                rooms[i].setRoomId(Integer.parseInt(request.getParameter("room" + i + "_id")));
+                roomService.modifyRoom(rooms[i]);
+            }else {
+                roomService.addRoom(rooms[i]);
+            }
+
+        }
+        if (multipartResolver.isMultipart(request)) {
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+            Iterator<String> iter = multiRequest.getFileNames();
+            SimpleDateFormat sdf = null;
+            while (iter.hasNext()) {
+                sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+                String timeStamp = sdf.format(new Date());
+                MultipartFile file = multiRequest.getFile(iter.next());
+                if (!file.isEmpty()) {
+                    String name = file.getName();//获取图片input的id，用于判断该图片属于哪个字段
+                    String fileName = file.getOriginalFilename();//获取文件名称
+                    String suffixName = fileName.substring(fileName.lastIndexOf("."));//获取文件后缀
+                    File image;
+                    switch (name) {
+                        case "mainPic":
+                            image = new File(mainPicPath + timeStamp + suffixName);//文件名字重命名,以时间戳命名
+                            file.transferTo(image);//上传文件
+                            mainPic = "/mainPic/" + timeStamp + suffixName;//设置mainPic字段，house.mainPic=mainPic
+                            house.setMainPic(mainPic);
+                            break;
+                        case "original":
+                            image = new File(originalPath + timeStamp + suffixName);//文件名字重命名,以时间戳命名
+                            file.transferTo(image);//上传文件
+                            original = "/original/" + timeStamp + suffixName;
+                            house.setOriginal(original);
+                            break;
+                        case "plane":
+                            image = new File(planePath + timeStamp + suffixName);//文件名字重命名,以时间戳命名
+                            file.transferTo(image);//上传文件
+                            plane = "/plane/" + timeStamp + suffixName;
+                            house.setPlane(plane);
+                            break;
+                        default:
+                            image = new File(roomPath + timeStamp + suffixName);//文件名字重命名,以时间戳命名
+                            file.transferTo(image);//上传文件
+                            /**
+                             * roomPic封装
+                             */
+                            RoomPic roomPic = new RoomPic();
+                            int roomInex = Integer.parseInt(name.substring(4, name.indexOf('_')));//所属房间
+                            int roomId = rooms[roomInex].getRoomId();
+                            String href = "/room/" + timeStamp + suffixName;
+                            String des = request.getParameter(name + "_describe");//获取该图片的describe
+                            roomPic.setRoomId(roomId);
+                            roomPic.setHref(href);
+                            roomPic.setDes(des);
+                            if (request.getParameter(name + "_id")!=null){
+                                roomPic.setPicId(Integer.parseInt(request.getParameter(name + "_id")));
+                                roomPicService.modifyRoomPic(roomPic);
+                            }else{
+                                roomPicService.addRoomPic(roomPic);
+                            }
+                            //数据库中写入roomPic数据
+                            break;
+                    }
+                }
+            }
+
+        }
+        houseService.modifyHouse(house);
+        int houseId = house.getHouseId();
+        //为room添加houseid
+        for (int i = 1; i <= roomNum; i++) {
+            rooms[i].setHouseId(houseId);
+            roomService.modifyRoom(rooms[i]);
+        }
+        return "redirect:/case/editCase/"+house.getHouseId();
+    }
+
+    @RequestMapping("/case/{id}")
+    public String editCase(@PathVariable int id, Model model) {
+        List<Designer> designers = designerService.getDesignerList();
+        List<Worker> workers = workerService.getWorkerList();
+        List<Index> workerTypes = workerService.getWorkerType();
+        List<Index> houseStyle = houseService.getHouseStyleIndex();
+        List<Index> houseArea = houseService.getHouseAreaIndex();
+        List<Index> houseForm = houseService.getHouseFormIndex();
+        List<Index> houseType = houseService.getHouseTypeIndex();
+        List<City> provinces = cityService.getProvinceList();
+
+        House house = houseService.findHouseById(id);
+        List<Room> roomList = roomService.getRoomByHouseId(id);
+        int nowCity = cityService.getCityListById(Integer.parseInt(house.getCity())).getId();
+        int nowProvince = cityService.getCityListById(Integer.parseInt(house.getCity())).getPid();
+
+        List<Integer> roomPic = new ArrayList<>();
+        roomPic.add(0);
+        for (int i = 0; i < roomList.size(); i++) {
+            List<RoomPic> roomPicList = roomPicService.getRoomPicByRoomId(roomList.get(i).getRoomId());
+            roomList.get(i).setRoomPics(roomPicList);
+            roomPic.add(roomService.getPicNumByRoomId(roomList.get(i).getRoomId()));
+        }
+        String workerValue = house.getWorkerIds();
+        String[] workerList = workerValue.split(",");
+        List<Integer> wokerListInt = new ArrayList<>();
+        for (int i = 0; i < workerList.length; i++) {
+            if (workerList[i]!="0"){
+                try {
+                    wokerListInt.add(Integer.parseInt(workerList[i]));
+                }catch (Exception e){
+                }
+            }
+        }
+        List<Integer> workerTypeList = new ArrayList<>();
+        if (workerList.length > 0){
+            for (int i = 0; i < workerList.length; i++) {
+                if (Integer.parseInt(workerList[i])!=0){
+                    int type = Integer.parseInt(workerService.findWorkerById(Integer.parseInt(workerList[i])).getTypeValue());
+                    workerTypeList.add(type);
+                }
+            }
+        }
+
+        model.addAttribute("designers", designers);
+        model.addAttribute("workers", workers);
+        model.addAttribute("workerTypes", workerTypes);
+        model.addAttribute("houseStyle", houseStyle);
+        model.addAttribute("houseArea", houseArea);
+        model.addAttribute("houseForm", houseForm);
+        model.addAttribute("houseType", houseType);
+        model.addAttribute("provinces", provinces);
+        model.addAttribute("house", house);
+        model.addAttribute("roomList", roomList);
+        model.addAttribute("roomNum", roomList.size());
+        model.addAttribute("roomPic", roomPic);
+        model.addAttribute("nowCity", nowCity);
+        model.addAttribute("nowProvince", nowProvince);
+        model.addAttribute("workerList", wokerListInt);
+        model.addAttribute("workerTypeList", workerTypeList);
+        return "Designer/case";
     }
 
 }

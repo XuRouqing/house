@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -213,8 +213,14 @@
                                     <li class="drop-holder">
                                         <a th:href="@{discount/1}">营销活动</a>
                                         <ul class="drop-menu">
+                                            <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                            <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
                                             <li th:each="set : ${setInfo}">
                                                 <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                                <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                   th:href="@{editDiscount/}+${set.setId}">编辑</a>
+                                                <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                   th:href="@{delDiscount/}+${set.setId}">删除</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -326,11 +332,15 @@
                                         <i class="pe-7s-angle-down"></i>
                                     </span>
                                 </a>
-                                <ul class="sub-menu">
+                                <ul class="drop-menu">
+                                    <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                    <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
                                     <li th:each="set : ${setInfo}">
-                                        <a th:href="@{discount/}+${set.setId}">
-                                            <span class="mm-text" th:text="${set.name}"></span>
-                                        </a>
+                                        <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                        <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                           th:href="@{editDiscount/}+${set.setId}">编辑</a>
+                                        <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                           th:href="@{delDiscount/}+${set.setId}">删除</a>
                                     </li>
                                 </ul>
                             </li>
@@ -378,20 +388,17 @@
                             </ul>
                         </div>
                         <form id="contact-form" class="contact-form"
+                              th:action="contactEmail" method="post"
                               action="https://htmlmail.hasthemes.com/mamunur/pronia.php">
                             <div class="group-input">
-                                <div class="form-field me-lg-30 mb-35 mb-lg-0">
+                                <div class="form-field mb-5">
                                     <input type="text" name="name" id="name" placeholder="姓名*"
                                            class="input-field" autocomplete="off" required>
-                                </div>
-                                <div class="form-field mb-35">
-                                    <input type="text" name="position" id="position" placeholder="地址"
-                                           class="input-field" autocomplete="off">
                                 </div>
                             </div>
                             <div class="group-input mb-35">
                                 <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                                    <input type="text" name="phone" id="phone" placeholder="联系电话*"
+                                    <input type="text" name="tel" id="phone" placeholder="联系电话*"
                                            class="input-field" autocomplete="off" required>
                                 </div>
                                 <div class="form-field">
@@ -404,10 +411,9 @@
                                           class="textarea-field"></textarea>
                             </div>
                             <div class="contact-button-wrap">
-                                <button type="submit" value="submit"
-                                        class="btn btn btn-custom-size xl-size btn-pronia-primary" name="submit">提交
+                                <button type="submit" style="line-height: 50px"
+                                        class="btn btn btn-custom-size xl-size btn-pronia-primary" id="submit">提交
                                 </button>
-                                <p class="form-messege mb-0"></p>
                             </div>
                         </form>
                     </div>
@@ -589,6 +595,11 @@
 <script src="Path/js/main.js"></script> <!-- Resource jQuery -->
 <script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
+    $('#submit').on('click', function () {
+        // $(this).button('complete');
+        alert("提交成功");
+        location.reload();
+    });
     (function () {
 
         var slideMenu = function () {

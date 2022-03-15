@@ -555,10 +555,12 @@ public class AdminController {
         List<City> provinces = cityService.getProvinceList();
         List<Worker> workers = workerService.getWorkerList();
         String workerValue = book.getWorkers();
-        String[] workerList = workerValue.split(",");
         List<Integer> workerListInt = new ArrayList<>();
-        for (int i = 0; i < workerList.length; i++) {
-            workerListInt.add(Integer.parseInt(workerList[i]));
+        if (workerValue!=null){
+            String[] workerList = workerValue.split(",");
+            for (int i = 0; i < workerList.length; i++) {
+                workerListInt.add(Integer.parseInt(workerList[i]));
+            }
         }
         model.addAttribute("book", book);
         model.addAttribute("designers", designers);

@@ -466,7 +466,7 @@ public class Controller {
         return "designer-list";
     }
 
-    @RequestMapping("/designer/{id}")
+    @RequestMapping("/designerDetail/{id}")
     public String todesigner(@PathVariable int id, Model model) {
         Designer designer=designerService.findDesignerById(id);
         List<House> houses=houseService.findHouseByDesignerId(id);
@@ -1236,10 +1236,26 @@ public class Controller {
         }
     }
 
-    @RequestMapping("/fileTest")
-    public String test(Model model, HttpServletResponse resp){
-
-        return "fileTest.html";
+    @RequestMapping("/contactEmail")
+    public String contactEmail(HttpServletRequest request, Model model, HttpServletResponse resp){
+//        Enumeration<String> parameterNames = request.getParameterNames();
+        String name = request.getParameter("name");
+        String tel = request.getParameter("tel");
+        String email = request.getParameter("email");
+        String message = request.getParameter("message");
+        String content = "有一个来自客户" + name + "的邮件。\n" + "客户联系电话为:" + tel + "\n客户邮箱为:" + email +
+                "\n留言内容为:" + message + "\n请尽快回复!";
+        SimpleMailMessage smm = new SimpleMailMessage();
+        smm.setFrom(from);
+        smm.setSubject("客户邮件");
+        smm.setText(content);
+        smm.setTo(from);
+        try {
+            javaMailSender.send(smm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "contact.html";
     }
 
 }

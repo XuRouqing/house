@@ -10,21 +10,21 @@
     <meta name="description"
           content="Pronia plant store bootstrap 5 template is an awesome website template for any home plant shop.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Path/css/plugins.min.css">
-    <link rel="stylesheet" href="../Path/css/style.min.css">
+    <link rel="stylesheet" href="../../Path/css/plugins.min.css">
+    <link rel="stylesheet" href="../../Path/css/style.min.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="../Path/css/reset.css"> <!-- CSS reset -->
-    <link rel="stylesheet" type="text/css" href="../Path/css/htmleaf-demo.css">
-    <link rel="stylesheet" href="../Path/css/search.css"> <!-- Resource style -->
-    <script src="../Path/js/modernizr.js"></script> <!-- Modernizr -->
-    <link rel="icon" href="../Path/image/newlogo.png">
+    <link rel="stylesheet" href="../../Path/css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" type="text/css" href="../../Path/css/htmleaf-demo.css">
+    <link rel="stylesheet" href="../../Path/css/search.css"> <!-- Resource style -->
+    <script src="../../Path/js/modernizr.js"></script> <!-- Modernizr -->
+    <link rel="icon" href="../../Path/image/newlogo.png">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/dashboard/">
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/css/ie10-viewport-bug-workaround.css"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-olOxEXxDwd20BlATUibkEnjPN3sVq2YWmYOnsMYutq7X8YcUdD6y/1I+f+ZOq/47" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../Path/css/dmaku.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Path/css/dmaku.css"/>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
@@ -40,9 +40,9 @@
             integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
             crossorigin="anonymous"></script>
 
-    <link href="../Path/css/jquery.searchableSelect.css" rel="stylesheet" type="text/css">
-    <script src="../Path/js/jquery-1.11.1.min.js"></script>
-    <script src="../Path/js/jquery.searchableSelect.js"></script>
+    <link href="../../Path/css/jquery.searchableSelect.css" rel="stylesheet" type="text/css">
+    <script src="../../Path/js/jquery-1.11.1.min.js"></script>
+    <script src="../../Path/js/jquery.searchableSelect.js"></script>
 
     <script>window.jQuery || document.write('<script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/dist/js/bootstrap.min.js"></script>
@@ -51,8 +51,8 @@
 
 
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../Path/css/material.min.css"/>
-    <link rel="stylesheet" href="../Path/css/bootstrap-material-datetimepicker.css"/>
+    <link rel="stylesheet" href="../../Path/css/material.min.css"/>
+    <link rel="stylesheet" href="../../Path/css/bootstrap-material-datetimepicker.css"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 
     <script async>
@@ -70,11 +70,11 @@
 
         }
     </script>
-    <script async src="../Path/js/flatpickr.js" onload="fp_ready()"></script>
+    <script async src="../../Path/js/flatpickr.js" onload="fp_ready()"></script>
 
 
     <!--    <link rel="stylesheet" type="text/css" href="assets/site.css">-->
-    <link rel="stylesheet" id=cal_style type="text/css" href="../Path/css/flatpickr.min.css">
+    <link rel="stylesheet" id=cal_style type="text/css" href="../../Path/css/flatpickr.min.css">
 
     <!--    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>-->
 </head>
@@ -110,20 +110,16 @@
                                         th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                 </button>
                                 <a class="btn btn-link dropdown-toggle ht-btn p-0"
-                                   th:href="@{login}"
+                                   th:href="@{..//login}"
                                    th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                     登录
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="settingButton"
                                     th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                    <li><a class="dropdown-item"
-                                           th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
-                                           th:href="@{admin/index}">管理员界面</a></li>
-                                    <li><a class="dropdown-item"
-                                           th:if="${#request.getSession().getAttribute('role') eq 'designer'}"
-                                           th:href="@{admin/index}">设计师界面</a></li>
-                                    <li><a class="dropdown-item" th:href="@{account}">个人信息</a></li>
-                                    <li><a class="dropdown-item" th:href="@{logout}">退出</a>
+                                    <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{..//admin/index}">管理员界面</a></li>
+                                    <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'designer'}" th:href="@{..//admin/index}">设计师界面</a></li>
+                                    <li><a class="dropdown-item" th:href="@{..//account}">个人信息</a></li>
+                                    <li><a class="dropdown-item" th:href="@{..//logout}">退出</a>
                                     </li>
                                 </ul>
                             </li>
@@ -145,7 +141,7 @@
                             <a href="tel://+00-123-456-789">+00 123 456 789</a>
                         </div>
                         <a class="header-logo">
-                            <img src="../Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
+                            <img src="../../Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
                         </a>
                         <!--                            搜索框-->
                         <nav class="cd-main-nav-wrapper">
@@ -153,7 +149,7 @@
                         </nav> <!-- .cd-main-nav-wrapper -->
                         <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
                         <div id="search" class="cd-main-search">
-                            <form th:action="@{searchDesigner}" method="post">
+                            <form th:action="@{../searchDesigner}" method="post">
                                 <input type="search" name="searchText" placeholder="搜索">
                                 <div class="cd-select">
                                     <select name="category">
@@ -179,37 +175,42 @@
                             <ul>
                                 <!--                                    首页-->
                                 <li>
-                                    <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                                    <a th:href="@{../index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                 </li>
                                 <!--                                    精装案例-->
                                 <li>
-                                    <a th:href="@{fullwidth}">精装案例</a>
+                                    <a th:href="@{../fullwidth}">精装案例</a>
                                 </li>
                                 <!--                                    设计团队-->
                                 <li>
-                                    <a th:href="@{designer-list}">设计团队</a>
+                                    <a th:href="@{../designer-list}">设计团队</a>
                                 </li>
                                 <!--                                    施工团队-->
                                 <li>
-                                    <a th:href="@{worker-list}">施工团队</a>
+                                    <a th:href="@{../worker-list}">施工团队</a>
                                 </li>
                                 <!--                                    营销活动-->
                                 <li class="drop-holder">
-                                    <a th:href="@{discount/1}">营销活动</a>
+                                    <a th:href="@{../discount/1}">营销活动</a>
                                     <ul class="drop-menu">
+                                        <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{../addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                        <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
                                         <li th:each="set : ${setInfo}">
-                                            <a style="font-size: 15px" th:text="${set.name}"
-                                               th:href="@{discount/}+${set.setId}"></a>
+                                            <a style="font-size: 15px" th:text="${set.name}" th:href="@{../discount/}+${set.setId}"></a>
+                                            <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                               th:href="@{../editDiscount/}+${set.setId}">编辑</a>
+                                            <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                               th:href="@{../delDiscount/}+${set.setId}">删除</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <!--                                在线预约-->
                                 <li>
-                                    <a th:href="@{bookOnline}">在线预约</a>
+                                    <a th:href="@{../bookOnline}">在线预约</a>
                                 </li>
                                 <!--                                    联系我们-->
                                 <li>
-                                    <a th:href="@{contact}">联系我们</a>
+                                    <a th:href="@{../contact}">联系我们</a>
                                 </li>
                             </ul>
                         </nav>
@@ -225,7 +226,7 @@
                     <div class="col-lg-3 col-6">
 
                         <a href="" class="header-logo" style="margin-right: 20px">
-                            <img src="../Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
+                            <img src="../../Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
                         </a>
 
                     </div>
@@ -234,37 +235,37 @@
                             <nav class="main-nav">
                                 <ul>
                                     <li>
-                                        <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                                        <a th:href="@{../index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                     </li>
                                     <!--                                    精装案例-->
                                     <li>
-                                        <a th:href="@{fullwidth}">精装案例</a>
+                                        <a th:href="@{../fullwidth}">精装案例</a>
                                     </li>
                                     <!--                                    设计团队-->
                                     <li>
-                                        <a th:href="@{designer-list}">设计团队</a>
+                                        <a th:href="@{../designer-list}">设计团队</a>
                                     </li>
                                     <!--                                    施工团队-->
                                     <li>
-                                        <a th:href="@{worker-list}">施工团队</a>
+                                        <a th:href="@{../worker-list}">施工团队</a>
                                     </li>
                                     <!--                                    营销活动-->
                                     <li class="drop-holder">
-                                        <a th:href="@{discount/1}">营销活动</a>
+                                        <a th:href="@{../discount/1}">营销活动</a>
                                         <ul class="drop-menu">
                                             <li th:each="set : ${setInfo}">
                                                 <a style="font-size: 15px" th:text="${set.name}"
-                                                   th:href="@{discount/}+${set.setId}"></a>
+                                                   th:href="@{../discount/}+${set.setId}"></a>
                                             </li>
                                         </ul>
                                     </li>
                                     <!--                                    在线预约-->
                                     <li>
-                                        <a th:href="@{bookOnline}">在线预约</a>
+                                        <a th:href="@{../bookOnline}">在线预约</a>
                                     </li>
                                     <!--                                    联系我们-->
                                     <li>
-                                        <a th:href="@{contact}">联系我们</a>
+                                        <a th:href="@{../contact}">联系我们</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -288,12 +289,12 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="settingButton"
                                         th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                        <li><a class="dropdown-item" th:href="@{account}">个人信息</a></li>
-                                        <li><a class="dropdown-item" th:href="@{logout}">退出</a></li>
+                                        <li><a class="dropdown-item" th:href="@{../account}">个人信息</a></li>
+                                        <li><a class="dropdown-item" th:href="@{../logout}">退出</a></li>
                                     </ul>
                                     <ul class="dropdown-menu" aria-labelledby="settingButton"
                                         th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                        <li><a class="dropdown-item" th:href="@{login}">登录</a></li>
+                                        <li><a class="dropdown-item" th:href="@{../login}">登录</a></li>
                                     </ul>
                                 </li>
                                 <li class="mobile-menu_wrap d-block d-lg-none">
@@ -326,7 +327,7 @@
                                 <i class="pe-7s-users"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="settingButtonTwo">
-                                <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
+                                <li><a class="dropdown-item" th:href="@{../account}">My account</a></li>
                                 <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
                             </ul>
                         </li>
@@ -341,22 +342,22 @@
                     <nav class="offcanvas-navigation">
                         <ul class="mobile-menu">
                             <li>
-                                <a th:href="@{index}">
+                                <a th:href="@{../index}">
                                     <span class="mm-text">首页</span>
                                 </a>
                             </li>
                             <li>
-                                <a th:href="@{fullwidth}">
+                                <a th:href="@{../fullwidth}">
                                     <span class="mm-text">精装案例</span>
                                 </a>
                             </li>
                             <li class="menu-item-has-children">
-                                <a th:href="@{designer-list}">
+                                <a th:href="@{../designer-list}">
                                     <span class="mm-text">设计团队</span>
                                 </a>
                             </li>
                             <li class="menu-item-has-children">
-                                <a th:href="@{worker-list}">
+                                <a th:href="@{../worker-list}">
                                     <span class="mm-text">施工团队</span>
                                 </a>
                             </li>
@@ -368,20 +369,20 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li th:each="set : ${setInfo}">
-                                        <a th:href="@{discount/}+${set.setId}">
+                                        <a th:href="@{../discount/}+${set.setId}">
                                             <span class="mm-text" th:text="${set.name}"></span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
-                                <a th:href="@{bookOnline}">
+                                <a th:href="@{../bookOnline}">
                                     <span class="mm-text">在线预约</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="about.html">
-                                    <span th:href="@{contact}">联系我们</span>
+                                    <span th:href="@{../contact}">联系我们</span>
                                 </a>
                             </li>
                         </ul>
@@ -408,7 +409,7 @@
                                                                    data-tippy-delay="50" data-tippy-arrow="true"
                                                                    data-tippy-theme="sharpborder"></i></a>
                         <a href="single-product-variable.html" class="product-item_img">
-                            <img class="img-full" src="../Path/picture/2-1-70x78.png" alt="Product Image">
+                            <img class="img-full" src="../../Path/picture/2-1-70x78.png" alt="Product Image">
                         </a>
                         <div class="product-item_content">
                             <a class="product-item_title" href="single-product-variable.html">American Marigold</a>
@@ -422,7 +423,7 @@
                                                                    data-tippy-delay="50" data-tippy-arrow="true"
                                                                    data-tippy-theme="sharpborder"></i></a>
                         <a href="single-product-variable.html" class="product-item_img">
-                            <img class="img-full" src="../Path/picture/2-2-70x78.png" alt="Product Image">
+                            <img class="img-full" src="../../Path/picture/2-2-70x78.png" alt="Product Image">
                         </a>
                         <div class="product-item_content">
                             <a class="product-item_title" href="single-product-variable.html">Black Eyed Susan</a>
@@ -436,7 +437,7 @@
                                data-tippy-theme="sharpborder"></i>
                         </a>
                         <a href="single-product-variable.html" class="product-item_img">
-                            <img class="img-full" src="../Path/picture/2-3-70x78.png" alt="Product Image">
+                            <img class="img-full" src="../../Path/picture/2-3-70x78.png" alt="Product Image">
                         </a>
                         <div class="product-item_content">
                             <a class="product-item_title" href="single-product-variable.html">Bleeding Heart</a>
@@ -473,7 +474,7 @@
                             <h4 class="card-title">添加套餐</h4>
                         </div>
                         <div class="card-body" style="padding: 20px">
-                            <form th:action="@{/editDiscount}" method="post" enctype="multipart/form-data">
+                            <form th:action="@{..//editDiscount}" method="post" enctype="multipart/form-data">
                                 <input name="setId" th:value="${setInfo.setId}" type="hidden">
                                 <h3>套餐详情</h3>
                                 <div class="form-group row">
@@ -664,7 +665,7 @@
 <!-- /Main Wrapper -->
 
 <!-- Begin Footer Area -->
-<div class="footer-area" data-bg-image="../Path/image/1-1920x465.jpg">
+<div class="footer-area" data-bg-image="../../Path/image/1-1920x465.jpg">
     <div class="footer-top section-space-top-100 pb-60">
         <div class="container">
             <div class="row">
@@ -672,7 +673,7 @@
                     <div class="footer-widget-item">
                         <div class="footer-widget-logo">
                             <a href="">
-                                <img src="../Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Logo">
+                                <img src="../../Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Logo">
                             </a>
                         </div>
                         <p class="footer-widget-desc">我爱我家以匠心品质诠释品牌价值
@@ -717,19 +718,19 @@
                         <h3 class="footer-widget-title">友情链接</h3>
                         <ul class="footer-widget-list-item">
                             <li>
-                                <a th:href="@{fullwidth}">精装案例</a>
+                                <a th:href="@{../fullwidth}">精装案例</a>
                             </li>
                             <li>
-                                <a th:href="@{designer-list}">设计团队</a>
+                                <a th:href="@{../designer-list}">设计团队</a>
                             </li>
                             <li>
-                                <a th:href="@{worker-list}">施工团队</a>
+                                <a th:href="@{../worker-list}">施工团队</a>
                             </li>
                             <li>
-                                <a th:href="@{bookOnline}">在线预约</a>
+                                <a th:href="@{../bookOnline}">在线预约</a>
                             </li>
                             <li>
-                                <a th:href="@{/login}">登录</a>
+                                <a th:href="@{..//login}">登录</a>
                             </li>
                         </ul>
                     </div>
@@ -792,7 +793,7 @@
                     </div>
                     <div class="payment-method">
                         <a href="#">
-                            <img src="../Path/picture/1.png" alt="Payment Method">
+                            <img src="../../Path/picture/1.png" alt="Payment Method">
                         </a>
                     </div>
                 </div>
@@ -821,16 +822,16 @@
 </a>
 <!-- Scroll To Top End Here -->
 
-<script src="../Path/js/plugins.min.js"></script>
-<script src="../Path/js/jquery-2.1.1.min.js"></script>
-<script src="../Path/js/main.js"></script> <!-- Resource jQuery -->
-<script type="text/javascript" src="../Path/js/jquery-1.9.1.min.js"></script>
+<script src="../../Path/js/plugins.min.js"></script>
+<script src="../../Path/js/jquery-2.1.1.min.js"></script>
+<script src="../../Path/js/main.js"></script> <!-- Resource jQuery -->
+<script type="text/javascript" src="../../Path/js/jquery-1.9.1.min.js"></script>
 
 
 <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../Path/js/material.min.js"></script>
-<script type="text/javascript" src="../Path/js/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="../Path/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript" src="../../Path/js/material.min.js"></script>
+<script type="text/javascript" src="../../Path/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../../Path/js/bootstrap-material-datetimepicker.js"></script>
 
 
 <script>

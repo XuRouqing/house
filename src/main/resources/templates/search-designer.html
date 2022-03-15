@@ -83,18 +83,22 @@
                                <li class="dropdown d-none d-lg-block">
                                    <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
                                            id="settingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                           aria-expanded="false">
-                                       用户
+                                           aria-expanded="false" th:text="${#request.getSession().getAttribute('name')}"
+                                           th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                    </button>
+                                   <a class="btn btn-link dropdown-toggle ht-btn p-0"
+                                      th:href="@{/login}"
+                                      th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                       登录
+                                   </a>
                                    <ul class="dropdown-menu" aria-labelledby="settingButton"
                                        th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
                                        <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/admin/index}">管理员界面</a></li>
                                        <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'designer'}" th:href="@{/admin/index}">设计师界面</a></li>
                                        <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
-                                       <li><a class="dropdown-item" onclick="logout()">退出</a>
+                                       <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
                                        </li>
                                    </ul>
-                               </li>
                                </li>
                            </ul>
                        </div>
@@ -166,8 +170,14 @@
                                     <li class="drop-holder">
                                         <a th:href="@{discount/1}">营销活动</a>
                                         <ul class="drop-menu">
+                                            <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                            <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
                                             <li th:each="set : ${setInfo}">
                                                 <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                                <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                   th:href="@{editDiscount/}+${set.setId}">编辑</a>
+                                                <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                   th:href="@{delDiscount/}+${set.setId}">删除</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -220,8 +230,14 @@
                                         <li class="drop-holder">
                                             <a th:href="@{discount/1}">营销活动</a>
                                             <ul class="drop-menu">
+                                                <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                                <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
                                                 <li th:each="set : ${setInfo}">
                                                     <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                                    <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                       th:href="@{editDiscount/}+${set.setId}">编辑</a>
+                                                    <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                       th:href="@{delDiscount/}+${set.setId}">删除</a>
                                                 </li>
                                             </ul>
                                         </li>
