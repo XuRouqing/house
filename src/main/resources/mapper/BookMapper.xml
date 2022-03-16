@@ -36,6 +36,11 @@
           AND d1.pid = d2.id
     </select>
 
+    <select id="selectBookByCustomerId" resultType="Book">
+        select * from book
+        where customerId = #{id}
+    </select>
+
     <select id="selectBookTimeByDesignerId" resultType="String">
         select time from book where designerId = #{designerId}
     </select>

@@ -26,10 +26,14 @@ public class SetOrderServiceImp implements SetOrderService  {
         return this.setOrderMapper.selectSetOrderNum();
     }
 
-
     @Override
     public List<SetOrder> getSetOrderAll(){
         return this.setOrderMapper.selectSetOrderAll();
+    }
+
+    @Override
+    public List<SetOrder> selectSetOrderByCustomerId(int id){
+        return this.setOrderMapper.selectSetOrderByCustomerId(id);
     }
 
     @Override

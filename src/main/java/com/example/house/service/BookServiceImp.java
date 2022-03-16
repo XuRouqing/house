@@ -32,6 +32,11 @@ public class BookServiceImp implements BookService  {
     }
 
     @Override
+    public List<Book> selectBookByCustomerId(int id){
+        return bookMapper.selectBookByCustomerId(id);
+    }
+
+    @Override
     public Book selectBookById(int id){
         return bookMapper.selectBookById(id);
     }

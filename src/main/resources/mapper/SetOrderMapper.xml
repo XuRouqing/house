@@ -20,6 +20,11 @@
           AND d1.pid = d2.id
     </select>
 
+    <select id="selectSetOrderByCustomerId" resultType="SetOrder">
+        SELECT * FROM setorder
+        WHERE customerId = #{id}
+    </select>
+
 
     <delete id="delSetOrder" parameterType="int">
         DELETE FROM setorder

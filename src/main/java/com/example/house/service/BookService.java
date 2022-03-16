@@ -8,6 +8,7 @@ public interface BookService {
     public void addBook(Book book);
     public List<Book> selectBook();
     public List<Book> selectBookByDesignerId(int designerId);
+    public List<Book> selectBookByCustomerId(int id);
     public Book selectBookById(int id);
     public List<String> selectBookTimeByDesignerId(int designerId);
     void updateBookStatus(int id, int status);

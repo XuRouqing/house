@@ -11,6 +11,7 @@ import java.util.List;
 public interface SetOrderMapper {
     void insertOrder(SetOrder setOrder);
     List<SetOrder> selectSetOrderAll();
+    public List<SetOrder> selectSetOrderByCustomerId(int id);
     void updateSetOrderStatus(int id, int status);
     void delSetOrder(int id);
     int selectSetOrderNum();

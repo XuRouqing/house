@@ -199,7 +199,50 @@ public class Controller {
     }
 
     @RequestMapping("/account")
-    public String toAccount() {
+    public String toAccount(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getSession().getAttribute("id").toString());
+        User user = userService.findUserById(id);
+        if (user.getRole().equals("customer")){
+            List<UserOrder> userOrderList = new ArrayList<>();
+            List<SetOrder> setOrder = setOrderService.selectSetOrderByCustomerId(id);
+            for (int i = 0; i < setOrder.size(); i++) {
+                UserOrder userOrder = new UserOrder();
+                userOrder.setTime(setOrder.get(i).getTime());
+                userOrder.setType("营销活动");
+                if (setOrder.get(i).getStatus()==1){
+                    userOrder.setStatus("已完成");
+                }else {
+                    userOrder.setStatus("未完成");
+                }
+                userOrderList.add(userOrder);
+            }
+            List<Appointment> appointments = appointmentService.getAppointmentListByCustomer(id);
+            for (int i = 0; i < appointments.size(); i++) {
+                UserOrder userOrder = new UserOrder();
+                userOrder.setTime(appointments.get(i).getDate());
+                userOrder.setType("设计师预约");
+                if (appointments.get(i).getStatus()==1){
+                    userOrder.setStatus("已完成");
+                }else {
+                    userOrder.setStatus("未完成");
+                }
+                userOrderList.add(userOrder);
+            }
+            List<Book> books = bookService.selectBookByCustomerId(id);
+            for (int i = 0; i < books.size(); i++) {
+                UserOrder userOrder = new UserOrder();
+                userOrder.setTime(books.get(i).getTime());
+                userOrder.setType("在线预约");
+                if (books.get(i).getStatus()==1){
+                    userOrder.setStatus("已完成");
+                }else {
+                    userOrder.setStatus("未完成");
+                }
+                userOrderList.add(userOrder);
+            }
+            model.addAttribute("userOrder",userOrderList);
+        }
+        model.addAttribute("userRole",user.getRole());
         return "my-account";
     }
 
