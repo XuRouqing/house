@@ -516,7 +516,7 @@ public class DesignerController {
         house.setLocal(request.getParameter("location"));
         house.setTime(request.getParameter("time"));
         house.setPrice(Integer.parseInt(request.getParameter("price")));
-        house.setDesignerId(Integer.parseInt(request.getParameter("designer")));
+        house.setDesignerId(Integer.parseInt(request.getParameter("designerId")));
         house.setWorkerIds(request.getParameter("workerIds"));
         house.setTypeValue(request.getParameter("typeValue"));
         house.setTitle(request.getParameter("title"));
@@ -531,7 +531,9 @@ public class DesignerController {
             rooms[i].setRoomType(request.getParameter("room" + i + "_type"));
             rooms[i].setSpecificType(request.getParameter("room" + i + "_specificType"));
             rooms[i].setStyle(request.getParameter("room" + i + "_style"));
-            rooms[i].setPrice(Integer.parseInt(request.getParameter("room" + i + "_price")));
+            if (request.getParameter("room" + i + "_price")!=""){
+                rooms[i].setPrice(Integer.parseInt(request.getParameter("room" + i + "_price")));
+            }
             if (request.getParameter("room" + i + "_id")!=null){
                 rooms[i].setRoomId(Integer.parseInt(request.getParameter("room" + i + "_id")));
                 roomService.modifyRoom(rooms[i]);
@@ -606,7 +608,7 @@ public class DesignerController {
             rooms[i].setHouseId(houseId);
             roomService.modifyRoom(rooms[i]);
         }
-        return "redirect:/case/editCase/"+house.getHouseId();
+        return "redirect:/designer/case/"+house.getHouseId();
     }
 
     @RequestMapping("/case/{id}")
@@ -652,7 +654,6 @@ public class DesignerController {
                 }
             }
         }
-
         model.addAttribute("designers", designers);
         model.addAttribute("workers", workers);
         model.addAttribute("workerTypes", workerTypes);

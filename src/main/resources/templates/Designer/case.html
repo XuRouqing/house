@@ -140,6 +140,9 @@
                         </div>
                         <div class="card-body">
                             <form th:action="@{/designer/editCase}" method="post" enctype="multipart/form-data" onsubmit="sub()">
+                                <input name="houseId" th:value="${house.houseId}" type="hidden">
+                                <input name="designerId" th:value="${house.designerId}" type="hidden">
+                                <input name="workerIds" th:value="${house.workerIds}" type="hidden">
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2">案例主图</label>
                                     <div class="col-md-10">
@@ -148,15 +151,21 @@
                                             <input id="mainPic" name="mainPic" type="file" class="form-control"
                                             th:value="${house.mainPic}">
                                             <div id="image-holder">
-                                                <img th:src="${house.mainPic}">
+                                                <img th:src="${house.mainPic}" style="width: 500px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-form-label col-md-2 form-label">标题</label>
+                                    <div class="col-md-10">
+                                        <input th:value="${house.title}" name="title" type="text" class="form-control" placeholder="标题" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">描述</label>
                                     <div class="col-md-10">
-                                        <input name="describe" type="text" class="form-control" placeholder="描述">
+                                        <input name="describe" type="text" class="form-control" placeholder="描述" th:value="${house.des}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -164,14 +173,15 @@
                                     <div class="col-md-10">
                                         <select class="form-control" name="styleValue">
                                             <option th:each="style : ${houseStyle}" th:text="${style.name}"
-                                                    th:value="${style.id}"></option>
+                                                    th:value="${style.id}"
+                                                    th:selected="${house.styleValue} == ${style.id}"></option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">户型</label>
                                     <div class="col-md-10">
-                                        <input name="houseType" type="text" class="form-control" placeholder="户型">
+                                        <input th:value="${house.houseType}" name="houseType" type="text" class="form-control" placeholder="户型">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -179,7 +189,8 @@
                                     <div class="col-md-10">
                                         <select class="form-control" name="areaValue">
                                             <option th:each="area : ${houseArea}" th:text="${area.name}"
-                                                    th:value="${area.id}"></option>
+                                                    th:value="${area.id}"
+                                                    th:selected="${house.areaValue} == ${area.id}"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -188,7 +199,8 @@
                                     <div class="col-md-10">
                                         <select class="form-control" name="formValue">
                                             <option th:each="form : ${houseForm}" th:text="${form.name}"
-                                                    th:value="${form.id}"></option>
+                                                    th:value="${form.id}"
+                                                    th:selected="${house.formValue} == ${form.id}"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -196,9 +208,12 @@
                                     <label class="col-form-label col-md-2 form-label">原始户型图</label>
                                     <div class="col-md-10">
                                         <div class="file" style="width: 100%">
-                                            <input id="original" name="original" type="file" class="form-control">
+                                            <input id="original" name="original" type="file" class="form-control"
+                                                   th:value="${house.original}">
                                             请选择文件
-                                            <div id="original-image-holder"></div>
+                                            <div id="original-image-holder">
+                                                <img th:src="${house.original}" style="width: 300px">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -206,16 +221,19 @@
                                     <label class="col-form-label col-md-2 form-label">平面图</label>
                                     <div class="col-md-10">
                                         <div class="file" style="width: 100%">
-                                            <input id="plane" name="plane" type="file" class="form-control">
+                                            <input id="plane" name="plane" type="file" class="form-control"
+                                                   th:value="${house.plane}">
                                             请选择文件
-                                            <div id="plane-image-holder"></div>
+                                            <div id="plane-image-holder">
+                                                <img th:src="${house.plane}" style="width: 300px">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">价格</label>
                                     <div class="col-md-10">
-                                        <input name="price" type="text" class="form-control" placeholder="价格">
+                                        <input th:value="${house.price}" name="price" type="text" class="form-control" placeholder="价格">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -223,7 +241,8 @@
                                     <div class="col-md-10">
                                         <select class="form-control" name="typeValue">
                                             <option th:each="type : ${houseType}" th:text="${type.name}"
-                                                    th:value="${type.id}"></option>
+                                                    th:value="${type.id}"
+                                                    th:selected="${house.typeValue} == ${type.id}"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -233,31 +252,93 @@
                                         <div class="row" id="local">
                                             <div class="col-md-2">
                                                 <div>
-                                                    <select class="form-control" id="province" name="province"
+                                                    <select class="form-control" id="province" name="province" th:value="${nowProvince}"
                                                             onChange="changeProvince(this)">
                                                         <option>请选择省份</option>
                                                         <option th:each="province : ${provinces}"
                                                                 th:text="${province.district_name}"
-                                                                th:value="${province.id}"></option>
+                                                                th:value="${province.id}"
+                                                                th:selected="${nowProvince} == ${province.id}"></option>
                                                     </select>
+                                                    <input id="nowCity" th:value="${nowCity}" type="hidden">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div>
                                                     <select class="form-control" id="city" name="city">
-                                                        <option>请选择城市</option>
+                                                        <option value="0">请选择城市</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
                                                 <input type="text" class="form-control" placeholder="请输入详细地址"
-                                                       name="location">
+                                                       th:value="${house.local}" name="location">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="house_rooms">
-                                    <div id="house_room1">
+                                    <div id="house_room1" th:if="${roomNum} ge 0">
+                                        <div id="room1" class="form-group"  th:each="room ,roomStatus : ${roomList}" th:id="'room'+(${roomStatus.index}+1)">
+                                            <div class="row">
+                                                <label class="col-form-label col-md-2 form-label">房间</label>
+                                                <div class="col-lg-10">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <input th:name="'room'+(${roomStatus.index}+1)+'_id'"
+                                                                   th:value="${room.roomId}" type="hidden">
+                                                            <input th:value="${room.roomType}" type="text" class="form-control" placeholder="房间类别"
+                                                                   th:name="'room'+(${roomStatus.index}+1)+'_type'">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input th:value="${room.specificType}" type="text" class="form-control" placeholder="具体类别"
+                                                                   th:name="'room'+(${roomStatus.index}+1)+'_specificType'">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input th:value="${room.style}" type="text" class="form-control" placeholder="房间风格"
+                                                                   th:name="'room'+(${roomStatus.index}+1)+'_style'">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input th:value="${room.price}" type="text" class="form-control" placeholder="房间价格"
+                                                                   th:name="'room'+(${roomStatus.index}+1)+'_price'">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button type="button"
+                                                                    class="btn btn-success glyphicon glyphicon-plus"
+                                                                    onclick="addRoom()">添加
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="room1_pic1_div" class="row" style="margin-top: 10px" th:each="roomPic, roomPicStatus : ${room.roomPics}">
+                                                <label class="col-form-label col-md-3 form-label"></label>
+                                                <div class="col-md-3 file">选择文件
+                                                    <input type="file" class="form-control"
+                                                           th:id="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)"
+                                                           th:name="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)"
+                                                           th:value="${roomPic.href}"
+                                                           th:attr="data-room=${roomStatus.index}+1,data-pic=${roomPicStatus.index}+1"
+                                                           onchange="changePic(this)">
+                                                    <div th:id="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)+'_imageHolder'">
+                                                        <img th:src="${roomPic.href}" style="width: 150px;height: 150px">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3"><input th:id="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)+'_describe'"
+                                                                             th:name="'room'+(${roomStatus.index}+1)+'_pic'+(${roomPicStatus.index}+1)+'_describe'"
+                                                                             th:value="${roomPic.des}" type="text" class="form-control"
+                                                                             placeholder="描述"></div>
+                                                <div class="col-md-2">
+                                                    <button type="button" style="margin: 0"
+                                                            class="my-btn btn btn-success glyphicon glyphicon-plus"
+                                                            onclick="addRoomPic(this)" id="room1_pic1_btn" data-room="1"
+                                                            data-pic="2">添加房间照片
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="house_room1" th:if="${roomNum} eq 0">
                                         <div id="room1" class="form-group">
                                             <div class="row">
                                                 <label class="col-form-label col-md-2 form-label">房间</label>
@@ -307,16 +388,17 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <input name="roomNum" id="roomNum" type="hidden">
                                         </div>
                                     </div>
                                 </div>
+                                <input name="roomNum" id="roomNum" th:value="${roomNum}" type="hidden">
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">时间</label>
                                     <div class="col-lg-10">
                                         <div class="row">
-                                            <div class="form-control-wrapper col-md-12">
+                                            <div class="form-control-wrapper col-md-10">
                                                 <input id="flatpickr-tryme" class="form-control" type="text" name="time"
+                                                       th:value="${house.time}"
                                                        placeholder="时间">
                                             </div>
                                         </div>
@@ -548,6 +630,7 @@
         var div0_1_addRoom_btn = document.createElement("button");
         div0_1_addRoom_btn.setAttribute("class", "btn btn-success glyphicon glyphicon-plus");
         div0_1_addRoom_btn.setAttribute("onclick", "addRoom()");
+        div0_1_addRoom_btn.setAttribute("type", "button");
         div0_1_addRoom_btn.appendChild(document.createTextNode("添加"));
         //添加房间按钮
 
@@ -715,7 +798,13 @@
         room0.appendChild(div);
     }
 
-    var cityNowId = document.getElementById("location_hidden").value;
+    var cityNowId = document.getElementById("nowCity").value;
+    $(function () {
+        var provinceNow = document.getElementById("province");
+        changeProvince(provinceNow);
+    });
+
+    //加载城市
     $(function () {
         var provinceNow = document.getElementById("province");
         changeProvince(provinceNow);
