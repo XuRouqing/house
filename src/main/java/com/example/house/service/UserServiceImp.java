@@ -57,6 +57,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public void modifyUserMain(User user){
+        userMapper.modifyUserMain(user);
+    }
+
+    @Override
     public void modifyPassword(int id, String password){
         userMapper.modifyPassword(id,password);
     }

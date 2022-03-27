@@ -845,12 +845,11 @@
             type: "post",
             dataType: "json",
             success: function (data) {
-                if (num <= 2) {
-                    document.getElementById("type1").classList.add("form-group");
-                }
-                last.classList.add("form-group");
+                // if (num <= 2) {
+                //     document.getElementById("type1").classList.add("form-group");
+                // }
+                // last.classList.add("form-group");
                 var workerDiv = document.getElementById("worker");
-
                 /**
                  * 工种选择框
                  * @type {HTMLDivElement}
@@ -880,7 +879,6 @@
                 div1_1.appendChild(selectType);
                 div1.appendChild(div1_1);
                 div.appendChild(div1);
-
                 /**
                  * 人员选择框
                  */

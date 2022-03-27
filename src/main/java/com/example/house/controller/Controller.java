@@ -248,7 +248,8 @@ public class Controller {
 
     @PostMapping("/editAccount")
     public String editAccount(User user, HttpServletRequest request) {
-        userService.modifyUser(user);
+        System.out.println(user);
+        userService.modifyUserMain(user);
         request.getSession().setAttribute("name",user.getName());
         request.getSession().setAttribute("email",user.getEmail());
         request.getSession().setAttribute("phone",user.getPhone());
@@ -964,7 +965,7 @@ public class Controller {
                 smmToCustomer.setFrom(from);
                 smmToCustomer.setSubject("新的预约订单");
                 smmToCustomer.setText(contentToCustomer);
-                smmToCustomer.setTo(appointment.getCustomerTel());
+                smmToCustomer.setTo(appointment.getCustomerEmail());
                 try {
                     javaMailSender.send(smmToCustomer);
                 } catch (Exception e) {
@@ -1017,6 +1018,7 @@ public class Controller {
     @PostMapping("/addBook")
     public void addBook(Book book, HttpServletResponse resp) throws IOException {
         try {
+            book.setStatus(0);
             bookService.addBook(book);
             String province = cityService.getCityNameById(book.getProvince());
             String city = cityService.getCityNameById(book.getCity());

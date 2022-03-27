@@ -732,7 +732,7 @@
                                             <input type="text" id="position" name="position" class="form-control" placeholder="请输入详细地址">
                                         </div>
                                         <input id="setId" name="setId" class="hidden" th:value="${setInfo.setId}">
-                                        <input id="customerId" name="customerId" class="hidden" th:value="${#request.getSession().getAttribute('id')}">
+                                        <input id="customerId" name="customerId" class="hidden" th:value="${#request.getSession().getAttribute('id')} ? ${#request.getSession().getAttribute('id')} : 0">
                                     </div>
                                 </div>
                             </div>

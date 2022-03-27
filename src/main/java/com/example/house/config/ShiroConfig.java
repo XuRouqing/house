@@ -26,9 +26,6 @@ public class ShiroConfig {
         filterMap.put("/user/set","user");
         filterMap.put("/user/result","user");
         filterMap.put("/user/setPassword","user");
-        filterMap.put("/user/billList","user");
-        filterMap.put("/user/billList/*","user");
-        filterMap.put("/user/addBill/*","user");
         bean.setFilterChainDefinitionMap(filterMap);
         bean.setLoginUrl("/login");
         bean.setUnauthorizedUrl("/user/noauth");

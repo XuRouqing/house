@@ -474,7 +474,7 @@
                             <h4 class="card-title">添加套餐</h4>
                         </div>
                         <div class="card-body" style="padding: 20px">
-                            <form th:action="@{..//editDiscount}" method="post" enctype="multipart/form-data">
+                            <form th:action="@{../editDiscount}" method="post" enctype="multipart/form-data">
                                 <input name="setId" th:value="${setInfo.setId}" type="hidden">
                                 <h3>套餐详情</h3>
                                 <div class="form-group row">
@@ -1202,6 +1202,7 @@
         color: #004974;
         text-decoration: none;
     }
+
 </style>
 
 </html>

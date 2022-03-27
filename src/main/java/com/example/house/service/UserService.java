@@ -13,6 +13,7 @@ public interface UserService {
     public User findUserByCodeAndPWD(String code,String password);
     public User findUserByCode(String code);
     public void modifyUser(User user);
+    public void modifyUserMain(User user);
     public void modifyPassword(int id,String password);
     public void deleteUser(Integer id);
     public int checkCode(String code);

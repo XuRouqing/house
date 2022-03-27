@@ -41,6 +41,11 @@
         WHERE id=#{id}
     </update>
 
+    <update id="modifyUserMain" parameterType="User">
+        UPDATE user SET name=#{name},email=#{email},phone=#{phone}
+        WHERE id=#{id}
+    </update>
+
     <update id="modifyPassword" parameterType="User">
         UPDATE user SET password=#{password}
         WHERE id=#{id}
