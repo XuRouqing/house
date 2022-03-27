@@ -199,6 +199,17 @@ public class DesignerController {
         return "Designer/addCase";
     }
 
+    @ResponseBody
+    @RequestMapping("/delCase")
+    public String delCae(Model model, int id){
+        try {
+            houseService.deleteHouse(id);
+            return "success";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
     @Value("${room.file.path}")
     private String roomPath;
     @Value("${mainPic.file.path}")
@@ -635,25 +646,28 @@ public class DesignerController {
             roomPic.add(roomService.getPicNumByRoomId(roomList.get(i).getRoomId()));
         }
         String workerValue = house.getWorkerIds();
-        String[] workerList = workerValue.split(",");
         List<Integer> wokerListInt = new ArrayList<>();
-        for (int i = 0; i < workerList.length; i++) {
-            if (workerList[i]!="0"){
-                try {
-                    wokerListInt.add(Integer.parseInt(workerList[i]));
-                }catch (Exception e){
-                }
-            }
-        }
         List<Integer> workerTypeList = new ArrayList<>();
-        if (workerList.length > 0){
+        if (workerValue!=null){
+            String[] workerList = workerValue.split(",");
             for (int i = 0; i < workerList.length; i++) {
-                if (Integer.parseInt(workerList[i])!=0){
-                    int type = Integer.parseInt(workerService.findWorkerById(Integer.parseInt(workerList[i])).getTypeValue());
-                    workerTypeList.add(type);
+                if (workerList[i]!="0"){
+                    try {
+                        wokerListInt.add(Integer.parseInt(workerList[i]));
+                    }catch (Exception e){
+                    }
+                }
+            }
+            if (workerList.length > 0){
+                for (int i = 0; i < workerList.length; i++) {
+                    if (Integer.parseInt(workerList[i])!=0){
+                        int type = Integer.parseInt(workerService.findWorkerById(Integer.parseInt(workerList[i])).getTypeValue());
+                        workerTypeList.add(type);
+                    }
                 }
             }
         }
+
         model.addAttribute("designers", designers);
         model.addAttribute("workers", workers);
         model.addAttribute("workerTypes", workerTypes);

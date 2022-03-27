@@ -212,7 +212,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-2 form-label">价格</label>
                                     <div class="col-md-10">
-                                        <input name="price" type="text" class="form-control" placeholder="价格">
+                                        <input name="price" type="text" class="form-control" placeholder="价格" th:value="0">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -319,6 +319,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input name="workerIds" value="0" type="hidden">
                                 <div class="submit-section proceed-btn text-right">
                                     <button type="submit" class="btn submit-btn" data-toggle="modal"
                                             data-target=".bs-example-modal-lg" onclick="sub()">保存
@@ -745,6 +746,7 @@
                     if (data[i].id == cityNowId) {
                         city.options[j - 1].selected = true;
                     }
+                    city.value=city.option[0]
                 }
             },
             error: function (msg) {

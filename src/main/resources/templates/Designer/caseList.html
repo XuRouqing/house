@@ -213,7 +213,7 @@
                 <div class="modal-body">
                     <div class="form-content p-2">
                         <h4 class="modal-title">删除</h4>
-                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的案例<span id="p_name"></span>吗?</p>
+                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的案例吗?</p>
                         <button id="delButton" type="button" class="btn btn-primary">确认</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
@@ -258,13 +258,10 @@
         name = button.data("name");
         var p_id = document.getElementById("p_id");
         p_id.appendChild(document.createTextNode(id));
-        var p_name = document.getElementById("p_name");
-        p_name.appendChild(document.createTextNode(name));
     });
     $('#delButton').on('click', function () {
-        $(this).button('complete');
         $.ajax({
-            url: '/case/delCase',
+            url: '/designer/delCase',
             type: 'post',
             data: {id: id},
             error: function () {
