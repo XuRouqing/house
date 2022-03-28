@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我爱我家装修公司</title>
+    <title>我爱我家</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../Path/image/newlogo.png">
 
@@ -149,7 +149,7 @@
                                         <th width="20%">客户邮箱</th>
                                         <th width="20%">地点</th>
                                         <th width="15%">备注</th>
-                                        <th width="15%">状态</th>
+                                        <th width="15%" id="status_sort">状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -178,7 +178,7 @@
                                                 <button class="btn btn-sm bg-danger-light" data-toggle="modal"
                                                         th:attr="data-id=${appointment.appointmentId}"
                                                         href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> 删除
+                                                    <i class="fe fe-trash"></i> 拒绝
                                                 </button>
                                             </div>
                                         </td>
@@ -208,8 +208,8 @@
                     </div>-->
                 <div class="modal-body">
                     <div class="form-content p-2">
-                        <h4 class="modal-title">删除</h4>
-                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的预约订单吗?</p>
+                        <h4 class="modal-title">拒绝预约</h4>
+                        <p class="mb-4">确定要拒绝该预约吗?</p>
                         <button id="delButton" type="button" class="btn btn-primary">确认</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
@@ -245,10 +245,10 @@
     $('#delete_modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var modal = $(this);
-        id = button.data("id");
-        name = button.data("name");
-        var p_id = document.getElementById("p_id");
-        p_id.appendChild(document.createTextNode(id));
+        // id = button.data("id");
+        // name = button.data("name");
+        // var p_id = document.getElementById("p_id");
+        // p_id.appendChild(document.createTextNode(id));
     });
     $('#delButton').on('click', function () {
         $(this).button('complete');

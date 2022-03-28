@@ -615,10 +615,10 @@
             <div class="row">
                 <div class="col-lg-6 order-2 order-lg-1 align-self-center">
                     <div class="slide-content text-black">
-                        <span class="offer" th:text="${setInfo.discount}" style="color: white"></span>
-                        <h2 class="title" th:text="${setInfo.name}" style="color: white"></h2>
-                        <p class="short-desc" th:text="${setInfo.des}" style="color: white"></p>
-                        <p class="short-desc" th:text="${setInfo.time}" style="color: white"></p>
+                        <span class="offer" th:text="${set.discount}" style="color: white"></span>
+                        <h2 class="title" th:text="${set.name}" style="color: white"></h2>
+                        <p class="short-desc" th:text="${set.des}" style="color: white"></p>
+                        <p class="short-desc" th:text="${set.time}" style="color: white"></p>
                     </div>
                 </div>
             </div>
@@ -629,7 +629,7 @@
 <div class="product-area section-space-top-80">
     <div class="container">
         <div class="section-title-wrap">
-            <h2 class="section-title mb-0" th:text="${setInfo.name}"></h2>
+            <h2 class="section-title mb-0" th:text="${set.name}"></h2>
         </div>
 
         <div class="row">
@@ -731,7 +731,7 @@
                                         <div class="col-md-8">
                                             <input type="text" id="position" name="position" class="form-control" placeholder="请输入详细地址">
                                         </div>
-                                        <input id="setId" name="setId" class="hidden" th:value="${setInfo.setId}">
+                                        <input id="setId" name="setId" class="hidden" th:value="${set.setId}">
                                         <input id="customerId" name="customerId" class="hidden" th:value="${#request.getSession().getAttribute('id')} ? ${#request.getSession().getAttribute('id')} : 0">
                                     </div>
                                 </div>

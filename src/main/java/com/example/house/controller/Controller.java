@@ -585,7 +585,7 @@ public class Controller {
         }
 
         List<City> provinces = cityService.getProvinceList();
-        model.addAttribute("setInfo",set);
+        model.addAttribute("set",set);
         model.addAttribute("contentInfo",contents);
         model.addAttribute("contentNum",contents.size());
         model.addAttribute("configList",config);

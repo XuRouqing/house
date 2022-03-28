@@ -184,20 +184,18 @@
                                 <table class="datatable table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th style="width: 10%">ID</th>
                                         <th style="width: 15%">日期</th>
                                         <th style="width: 10%">顾客名称</th>
                                         <th style="width: 15%">联系电话</th>
                                         <th style="width: 15%">邮箱</th>
                                         <th style="width: 10%">设计师</th>
                                         <th style="width: 20%">地址</th>
-                                        <th style="width: 15%">状态</th>
+                                        <th style="width: 15%" id="status_sort">状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody id="tbody">
                                     <tr th:each="book : ${books}">
-                                        <td th:text="${book.id}"></td>
                                         <td th:text="${book.time}"></td>
                                         <td th:text="${book.name}"></td>
                                         <td th:text="${book.tel}"></td>
@@ -327,6 +325,7 @@
 <script>
     var id;
     var name;
+
     $('#delete_modal').on('show.bs.modal',function(event){
         var button = $(event.relatedTarget);
         var modal = $(this);

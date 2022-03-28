@@ -54,6 +54,7 @@
 
     <select id="selectAppointmentAllByDesignerId" resultType="Appointment">
         select * from appointment where designerId = #{id}
+        ORDER BY STATUS ASC
     </select>
 
 </mapper>
