@@ -855,6 +855,8 @@
                                             <input name="designerId" id="designerId" type="hidden"
                                                    th:value="${designerInfo.id}">
                                         </div>
+                                        <input name="customerId" type="hidden"
+                                               th:value="${#request.getSession().getAttribute('id')}">
                                         <div class="contact-button-wrap submit-section">
                                             <button id="save" type="submit" class="btn submit-btn" name="submit">提交
                                             </button>

@@ -47,101 +47,168 @@
 </head>
 
 <body>
-    <div class="preloader-activate preloader-active open_tm_preloader">
-        <div class="preloader-area-wrap">
-            <div class="spinner d-flex justify-content-center align-items-center h-100">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-            </div>
+<div class="preloader-activate preloader-active open_tm_preloader">
+    <div class="preloader-area-wrap">
+        <div class="spinner d-flex justify-content-center align-items-center h-100">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
         </div>
     </div>
-    <div class="main-wrapper">
+</div>
+<div class="main-wrapper">
 
-        <!--头部-->
-        <header class="main-header-area">
-            <!--固定顶部-->
-            <div class="header-top bg-pronia-primary d-none d-lg-block">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <div class="header-top-left">
-                            </div>
+    <!--头部-->
+    <header class="main-header-area">
+        <!--固定顶部-->
+        <div class="header-top bg-pronia-primary d-none d-lg-block">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <div class="header-top-left">
                         </div>
-                        <div class="col-6">
-                            <div class="header-top-right">
-                                <ul class="dropdown-wrap">
-                                    <li class="dropdown d-none d-lg-block">
-                                        <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
-                                                id="settingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                                aria-expanded="false" th:text="${#request.getSession().getAttribute('name')}"
-                                                th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                        </button>
-                                        <a class="btn btn-link dropdown-toggle ht-btn p-0"
-                                           th:href="@{/login}"
-                                           th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                            登录
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="settingButton"
+                    </div>
+                    <div class="col-6">
+                        <div class="header-top-right">
+                            <ul class="dropdown-wrap">
+                                <li class="dropdown d-none d-lg-block">
+                                    <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
+                                            id="settingButton" data-bs-toggle="dropdown" aria-label="setting"
+                                            aria-expanded="false"
+                                            th:text="${#request.getSession().getAttribute('name')}"
                                             th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                            <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/admin/index}">管理员界面</a></li>
-                                            <li><a class="dropdown-item" th:if="${#request.getSession().getAttribute('role') eq 'designer'}" th:href="@{/admin/index}">设计师界面</a></li>
-                                            <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
-                                            <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
+                                    </button>
+                                    <a class="btn btn-link dropdown-toggle ht-btn p-0"
+                                       th:href="@{/login}"
+                                       th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                        登录
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                        th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                        <li><a class="dropdown-item"
+                                               th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                               th:href="@{/admin/index}">管理员界面</a></li>
+                                        <li><a class="dropdown-item"
+                                               th:if="${#request.getSession().getAttribute('role') eq 'designer'}"
+                                               th:href="@{/admin/index}">设计师界面</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/logout}">退出</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 导航条 -->
+        <div class="header-middle py-30">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <div class="header-middle-wrap position-relative cd-main-header">
+                            <div class="header-contact d-none d-lg-flex">
+                                <i class="pe-7s-call"></i>
+                                <a href="tel://+00-123-456-789">+00 123 456 789</a>
+                            </div>
+                            <a class="header-logo">
+                                <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
+                            </a>
+                            <!--                            搜索框-->
+                            <nav class="cd-main-nav-wrapper">
+                                <a href="#search" class="cd-search-trigger cd-text-replace">搜索</a>
+                            </nav> <!-- .cd-main-nav-wrapper -->
+                            <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
+                            <div id="search" class="cd-main-search">
+                                <form th:action="@{/searchDesigner}" method="post">
+                                    <input type="search" name="searchText" placeholder="搜索">
+                                    <div class="cd-select">
+                                        <select name="category">
+                                            <option value="designer">设计师</option>
+                                            <option value="worker">施工人员</option>
+                                        </select>
+                                        <span class="selected-value">设计师</span>
+                                    </div>
+                                </form>
+                                <a href="#0" class="close cd-text-replace">Close Form</a>
+                            </div> <!-- .cd-main-search -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom d-none d-lg-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main-menu position-relative">
+                            <nav class="main-nav">
+                                <ul>
+                                    <!--                                    首页-->
+                                    <li>
+                                        <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
+                                    </li>
+                                    <!--                                    精装案例-->
+                                    <li>
+                                        <a th:href="@{fullwidth}">精装案例</a>
+                                    </li>
+                                    <!--                                    设计团队-->
+                                    <li>
+                                        <a th:href="@{designer-list}">设计团队</a>
+                                    </li>
+                                    <!--                                    施工团队-->
+                                    <li>
+                                        <a th:href="@{worker-list}">施工团队</a>
+                                    </li>
+                                    <!--                                    营销活动-->
+                                    <li class="drop-holder">
+                                        <a th:href="@{discount/1}">营销活动</a>
+                                        <ul class="drop-menu">
+                                            <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                   th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                            <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
+                                            <li th:each="set : ${setInfo}">
+                                                <a style="font-size: 15px" th:text="${set.name}"
+                                                   th:href="@{discount/}+${set.setId}"></a>
+                                                <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                   th:href="@{editDiscount/}+${set.setId}">编辑</a>
+                                                <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                   th:href="@{delDiscount/}+${set.setId}">删除</a>
                                             </li>
                                         </ul>
                                     </li>
+                                    <!--                                在线预约-->
+                                    <li>
+                                        <a th:href="@{bookOnline}">在线预约</a>
+                                    </li>
+                                    <!--                                    联系我们-->
+                                    <li>
+                                        <a th:href="@{contact}">联系我们</a>
+                                    </li>
                                 </ul>
-                            </div>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- 导航条 -->
-            <div class="header-middle py-30">
-                <div class="container">
+        </div>
+        <div class="header-sticky py-4 py-lg-0">
+            <div class="container">
+                <div class="header-nav position-relative">
                     <div class="row align-items-center">
-                        <div class="col-lg-12">
-                            <div class="header-middle-wrap position-relative cd-main-header">
-                                <div class="header-contact d-none d-lg-flex">
-                                    <i class="pe-7s-call"></i>
-                                    <a href="tel://+00-123-456-789">+00 123 456 789</a>
-                                </div>
-                                <a class="header-logo">
-                                    <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
-                                </a>
-                                <!--                            搜索框-->
-                                <nav class="cd-main-nav-wrapper">
-                                    <a href="#search" class="cd-search-trigger cd-text-replace">搜索</a>
-                                </nav> <!-- .cd-main-nav-wrapper -->
-                                <a href="#0" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
-                                <div id="search" class="cd-main-search">
-                                    <form th:action="@{/searchDesigner}" method="post">
-                                        <input type="search" name="searchText" placeholder="搜索">
-                                        <div class="cd-select">
-                                            <select name="category">
-                                                <option value="designer">设计师</option>
-                                                <option value="worker">施工人员</option>
-                                            </select>
-                                            <span class="selected-value">设计师</span>
-                                        </div>
-                                    </form>
-                                    <a href="#0" class="close cd-text-replace">Close Form</a>
-                                </div> <!-- .cd-main-search -->
-                            </div>
+                        <div class="col-lg-3 col-6">
+
+                            <a href="" class="header-logo" style="margin-right: 20px">
+                                <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
+                            </a>
+
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="header-bottom d-none d-lg-block">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="main-menu position-relative">
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="main-menu">
                                 <nav class="main-nav">
                                     <ul>
-                                        <!--                                    首页-->
                                         <li>
                                             <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
                                         </li>
@@ -161,10 +228,12 @@
                                         <li class="drop-holder">
                                             <a th:href="@{discount/1}">营销活动</a>
                                             <ul class="drop-menu">
-                                                <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                                <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
+                                                       th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
                                                 <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
                                                 <li th:each="set : ${setInfo}">
-                                                    <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                                    <a style="font-size: 15px" th:text="${set.name}"
+                                                       th:href="@{discount/}+${set.setId}"></a>
                                                     <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
                                                        th:href="@{editDiscount/}+${set.setId}">编辑</a>
                                                     <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
@@ -172,7 +241,7 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <!--                                在线预约-->
+                                        <!--                                    在线预约-->
                                         <li>
                                             <a th:href="@{bookOnline}">在线预约</a>
                                         </li>
@@ -184,502 +253,712 @@
                                 </nav>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="header-sticky py-4 py-lg-0">
-                <div class="container">
-                    <div class="header-nav position-relative">
-                        <div class="row align-items-center">
-                            <div class="col-lg-3 col-6">
-
-                                <a href="" class="header-logo" style="margin-right: 20px">
-                                    <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
-                                </a>
-
-                            </div>
-                            <div class="col-lg-6 d-none d-lg-block">
-                                <div class="main-menu">
-                                    <nav class="main-nav">
-                                        <ul>
-                                            <li>
-                                                <a th:href="@{index}">&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;</a>
-                                            </li>
-                                            <!--                                    精装案例-->
-                                            <li>
-                                                <a th:href="@{fullwidth}">精装案例</a>
-                                            </li>
-                                            <!--                                    设计团队-->
-                                            <li>
-                                                <a th:href="@{designer-list}">设计团队</a>
-                                            </li>
-                                            <!--                                    施工团队-->
-                                            <li>
-                                                <a th:href="@{worker-list}">施工团队</a>
-                                            </li>
-                                            <!--                                    营销活动-->
-                                            <li class="drop-holder">
-                                                <a th:href="@{discount/1}">营销活动</a>
-                                                <ul class="drop-menu">
-                                                    <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
-                                                    <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
-                                                    <li th:each="set : ${setInfo}">
-                                                        <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
-                                                        <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
-                                                           th:href="@{editDiscount/}+${set.setId}">编辑</a>
-                                                        <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
-                                                           th:href="@{delDiscount/}+${set.setId}">删除</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <!--                                    在线预约-->
-                                            <li>
-                                                <a th:href="@{bookOnline}">在线预约</a>
-                                            </li>
-                                            <!--                                    联系我们-->
-                                            <li>
-                                                <a th:href="@{contact}">联系我们</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-6">
-                                <div class="header-right">
-                                    <ul>
-                                        <li class="dropdown d-none d-lg-block">
-                                            <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
-                                                    id="stickysettingButton" data-bs-toggle="dropdown" aria-label="setting"
-                                                    aria-expanded="false"
-                                                    th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                                <i class="pe-7s-users"></i>
-                                            </button>
-                                            <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
-                                                    data-bs-toggle="dropdown" aria-label="setting"
-                                                    aria-expanded="false"
-                                                    th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                                <i class="pe-7s-users"></i>
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="settingButton"
+                        <div class="col-lg-3 col-6">
+                            <div class="header-right">
+                                <ul>
+                                    <li class="dropdown d-none d-lg-block">
+                                        <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
+                                                id="stickysettingButton" data-bs-toggle="dropdown" aria-label="setting"
+                                                aria-expanded="false"
                                                 th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                                <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
-                                                <li><a class="dropdown-item" th:href="@{/logout}">退出</a></li>
-                                            </ul>
-                                            <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                            <i class="pe-7s-users"></i>
+                                        </button>
+                                        <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button"
+                                                data-bs-toggle="dropdown" aria-label="setting"
+                                                aria-expanded="false"
                                                 th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
-                                                <li><a class="dropdown-item" th:href="@{/login}">登录</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mobile-menu_wrap d-block d-lg-none">
-                                            <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">
-                                                <i class="pe-7s-menu"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mobile-menu_wrapper" id="mobileMenu">
-                <div class="offcanvas-body">
-                    <div class="inner-body">
-                        <div class="offcanvas-top">
-                            <a href="#" class="button-close"><i class="pe-7s-close"></i></a>
-                        </div>
-                        <div class="header-contact offcanvas-contact">
-                            <i class="pe-7s-call"></i>
-                            <a href="tel://+00-123-456-789">+00 123 456 789</a>
-                        </div>
-                        <div class="offcanvas-user-info">
-                            <ul class="dropdown-wrap">
-                                <li class="dropdown dropdown-left">
-                                    <button class="btn btn-link dropdown-toggle ht-btn usd-dropdown" type="button"
-                                            id="settingButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="pe-7s-users"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="settingButtonTwo">
-                                        <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
-                                        <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a>
-                                        <i class="pe-7s-like"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="offcanvas-menu_area">
-                            <nav class="offcanvas-navigation">
-                                <ul class="mobile-menu">
-                                    <li>
-                                        <a th:href="@{index}">
-                                            <span class="mm-text">首页</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{fullwidth}">
-                                            <span class="mm-text">精装案例</span>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a th:href="@{designer-list}">
-                                            <span class="mm-text">设计团队</span>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a th:href="@{worker-list}">
-                                            <span class="mm-text">施工团队</span>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
-                                    <span class="mm-text">营销活动
-                                        <i class="pe-7s-angle-down"></i>
-                                    </span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li th:each="set : ${setInfo}">
-                                                <a th:href="@{discount/}+${set.setId}">
-                                                    <span class="mm-text" th:text="${set.name}"></span>
-                                                </a>
-                                            </li>
+                                            <i class="pe-7s-users"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                            th:if="${not #strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                            <li><a class="dropdown-item" th:href="@{/account}">个人信息</a></li>
+                                            <li><a class="dropdown-item" th:href="@{/logout}">退出</a></li>
+                                        </ul>
+                                        <ul class="dropdown-menu" aria-labelledby="settingButton"
+                                            th:if="${#strings.isEmpty(#request.getSession().getAttribute('name'))}">
+                                            <li><a class="dropdown-item" th:href="@{/login}">登录</a></li>
                                         </ul>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a th:href="@{bookOnline}">
-                                            <span class="mm-text">在线预约</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="about.html">
-                                            <span th:href="@{contact}">联系我们</span>
+                                    <li class="mobile-menu_wrap d-block d-lg-none">
+                                        <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">
+                                            <i class="pe-7s-menu"></i>
                                         </a>
                                     </li>
                                 </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="global-overlay"></div>
-        </header>
-        <!-- Main Header Area End Here -->
-
-        <!-- Begin Main Content Area -->
-        <main class="main-content">
-            <div class="account-page-area section-space-y-axis-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders" role="tab" aria-controls="account-orders" aria-selected="false"
-                                       th:if="${#request.getSession().getAttribute('role') eq 'customer'}">我的预约</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="account-details-tab" data-bs-toggle="tab" href="#account-details" role="tab" aria-controls="account-details" aria-selected="false">个人信息</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="account-address-tab" data-bs-toggle="tab" href="#account-password" role="tab" aria-controls="account-password" aria-selected="false">修改密码</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="account-logout-tab" th:href="@{/logout}" role="tab" aria-selected="false">退出登录</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
-                                <div class="tab-pane active" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
-                                    <div class="myaccount-orders">
-                                        <h4 class="small-title">我的预约</h4>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover">
-                                                <tbody>
-                                                    <tr>
-                                                        <th width="40%">时间</th>
-                                                        <th width="30%">类型</th>
-                                                        <th width="30%">状态</th>
-<!--                                                        <th width="20%">取消预约</th>-->
-                                                    </tr>
-                                                    <tr th:each="order : ${userOrder}">
-                                                        <td th:text="${order.time}"></td>
-                                                        <td th:text="${order.type}"></td>
-                                                        <td th:text="${order.status}"></td>
-<!--                                                        <td><a href="#" class="btn btn-danger"><span>取消预约</span></a>-->
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="account-password" role="tabpanel" aria-labelledby="account-password-tab">
-                                    <div class="myaccount-details">
-                                        <form th:action="@{/editPassword}" method="post" class="myaccount-form" onsubmit="return checkpas()">
-                                            <div class="myaccount-form-inner">
-                                                <div class="single-input hidden">
-                                                    <label>id</label>
-                                                    <input type="text" name="id" th:value="${#request.getSession().getAttribute('id')}">
-                                                </div>
-                                                <div class="single-input">
-                                                    <label>新密码</label>
-                                                    <input id="password" type="password" name="password" placeholder="请输入新的密码" required>
-                                                </div>
-                                                <div class="single-input">
-                                                    <label>确认新密码</label>
-                                                    <input id="repassword" type="password" placeholder="请再输入一次新的密码" required>
-                                                </div>
-                                                <div class="single-input">
-                                                    <button class="btn btn-custom-size lg-size btn-pronia-primary" type="submit">
-                                                        <span>保存</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="account-details" role="tabpanel" aria-labelledby="account-details-tab">
-                                    <div class="myaccount-details">
-                                        <form th:action="@{/editAccount}" method="post" class="myaccount-form">
-                                            <div class="myaccount-form-inner">
-                                                <div class="single-input hidden">
-                                                    <label>id</label>
-                                                    <input type="text" name="id" th:value="${#request.getSession().getAttribute('id')}">
-                                                </div>
-                                                <div class="single-input">
-                                                    <label>昵称</label>
-                                                    <input type="text" name="name" th:value="${#request.getSession().getAttribute('name')}">
-                                                </div>
-                                                <div class="single-input">
-                                                    <label>联系电话</label>
-                                                    <input type="text" name="phone" th:value="${#request.getSession().getAttribute('phone')}">
-                                                </div>
-                                                <div class="single-input">
-                                                    <label>邮箱</label>
-                                                    <input type="email" name="email" th:value="${#request.getSession().getAttribute('email')}">
-                                                </div>
-                                                <div class="single-input">
-                                                    <button class="btn btn-custom-size lg-size btn-pronia-primary" type="submit">
-                                                        <span>保存</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <input id="userRole" th:value="${userRole}" type="hidden">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <!-- Main Content Area End Here -->
-
-        <!-- Begin Footer Area -->
-        <div class="footer-area" data-bg-image="Path/image/1-1920x465.jpg">
-            <div class="footer-top section-space-top-100 pb-60">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="footer-widget-item">
-                                <div class="footer-widget-logo">
-                                    <a href="">
-                                        <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Logo">
-                                    </a>
-                                </div>
-                                <p class="footer-widget-desc">我爱我家以匠心品质诠释品牌价值
-                                    <br>20年为超过15万+个家庭提供了高性价比家装解决方案及高品质居住空间
-                                </p>
-                                <div class="social-link with-border">
-                                    <ul>
-                                        <li>
-                                            <a href="#" data-tippy="Facebook" data-tippy-inertia="true"
-                                               data-tippy-animation="shift-away" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-tippy="Twitter" data-tippy-inertia="true"
-                                               data-tippy-animation="shift-away" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-tippy="Pinterest" data-tippy-inertia="true"
-                                               data-tippy-animation="shift-away" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                <i class="fa fa-pinterest"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-tippy="Dribbble" data-tippy-inertia="true"
-                                               data-tippy-animation="shift-away" data-tippy-delay="50"
-                                               data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                <i class="fa fa-dribbble"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 pt-40">
-                            <div class="footer-widget-item">
-                                <h3 class="footer-widget-title">友情链接</h3>
-                                <ul class="footer-widget-list-item">
-                                    <li>
-                                        <a th:href="@{fullwidth}">精装案例</a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{designer-list}">设计团队</a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{worker-list}">施工团队</a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{bookOnline}">在线预约</a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{/login}">登录</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 pt-40">
-                            <div class="footer-widget-item">
-                                <h3 class="footer-widget-title">保障承诺</h3>
-                                <ul class="footer-widget-list-item">
-                                    <li>
-                                        <a href="javascript:void(0);" >品牌承诺</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" >材料承诺</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" >廉洁承诺</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" >设计承诺</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" >服务承诺</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 pt-40">
-                            <div class="footer-widget-item">
-                                <h3 class="footer-widget-title">保障承诺</h3>
-                                <ul class="footer-widget-list-item">
-                                    <li>
-                                        <a href="javascript:void(0);" >产品承诺</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" >工程承诺</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" >售后承诺</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" >预算承诺</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" >环保承诺</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 pt-40">
-                            <div class="footer-contact-info">
-                                <h3 class="footer-widget-title">有问题？联系我们</h3>
-                                <a class="number" href="tel://123-456-789">123 456 789</a>
-                                <div class="address">
-                                    <ul>
-                                        <li>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="payment-method">
-                                <a href="#">
-                                    <img src="Path/picture/1.png" alt="Payment Method">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="copyright">
-                            <span class="copyright-text">© 2022 Pronia Made with <i
-                                    class="fa fa-heart text-danger"></i> by
-                        <a href="javascript:;" rel="noopener" target="_blank">Me</a> </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Footer Area End Here -->
+        <div class="mobile-menu_wrapper" id="mobileMenu">
+            <div class="offcanvas-body">
+                <div class="inner-body">
+                    <div class="offcanvas-top">
+                        <a href="#" class="button-close"><i class="pe-7s-close"></i></a>
+                    </div>
+                    <div class="header-contact offcanvas-contact">
+                        <i class="pe-7s-call"></i>
+                        <a href="tel://+00-123-456-789">+00 123 456 789</a>
+                    </div>
+                    <div class="offcanvas-user-info">
+                        <ul class="dropdown-wrap">
+                            <li class="dropdown dropdown-left">
+                                <button class="btn btn-link dropdown-toggle ht-btn usd-dropdown" type="button"
+                                        id="settingButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="pe-7s-users"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="settingButtonTwo">
+                                    <li><a class="dropdown-item" th:href="@{account}">My account</a></li>
+                                    <li><a class="dropdown-item" th:href="login-register">Login | Register</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a>
+                                    <i class="pe-7s-like"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="offcanvas-menu_area">
+                        <nav class="offcanvas-navigation">
+                            <ul class="mobile-menu">
+                                <li>
+                                    <a th:href="@{index}">
+                                        <span class="mm-text">首页</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{fullwidth}">
+                                        <span class="mm-text">精装案例</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a th:href="@{designer-list}">
+                                        <span class="mm-text">设计团队</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a th:href="@{worker-list}">
+                                        <span class="mm-text">施工团队</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="#">
+                                    <span class="mm-text">营销活动
+                                        <i class="pe-7s-angle-down"></i>
+                                    </span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li th:each="set : ${setInfo}">
+                                            <a th:href="@{discount/}+${set.setId}">
+                                                <span class="mm-text" th:text="${set.name}"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a th:href="@{bookOnline}">
+                                        <span class="mm-text">在线预约</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="about.html">
+                                        <span th:href="@{contact}">联系我们</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="global-overlay"></div>
+    </header>
+    <!-- Main Header Area End Here -->
 
+    <!-- Begin Main Content Area -->
+    <main class="main-content">
+        <div class="account-page-area section-space-y-axis-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders"
+                                   role="tab" aria-controls="account-orders" aria-selected="false"
+                                   th:if="${#request.getSession().getAttribute('role') eq 'customer'}">我的预约</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="account-details-tab" data-bs-toggle="tab"
+                                   href="#account-details" role="tab" aria-controls="account-details"
+                                   aria-selected="false">个人信息</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="account-address-tab" data-bs-toggle="tab"
+                                   href="#account-password" role="tab" aria-controls="account-password"
+                                   aria-selected="false">修改密码</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="account-logout-tab" th:href="@{/logout}" role="tab"
+                                   aria-selected="false">退出登录</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
+                            <div class="tab-pane active" id="account-orders" role="tabpanel"
+                                 aria-labelledby="account-orders-tab">
+                                <div class="myaccount-orders">
+                                    <h4 class="small-title">我的预约</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                            <tr>
+                                                <th width="30%">时间</th>
+                                                <th width="20%">类型</th>
+                                                <th width="30%">状态</th>
+                                                <th width="10%">详情</th>
+                                                <th width="10%">取消</th>
+                                                <!--                                                        <th width="20%">取消预约</th>-->
+                                            </tr>
+                                            <tr th:each="order : ${userOrder}">
+                                                <td th:text="${order.time}"></td>
+                                                <td th:text="${order.type}"></td>
+                                                <td th:text="${order.status}" class="status"></td>
+                                                <td>
+                                                    <button id="detialBtn" class="mybtn btn btn-sm bg-danger-light"
+                                                            data-toggle="modal"
+                                                            th:attr="data-id=${order.id},data-type=${order.typeValue}"
+                                                            href="#details">
+                                                        <i class="fe fe-trash"></i> 详情
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="mybtn btn btn-sm bg-danger-light delBtn" data-toggle="modal"
+                                                            th:attr="data-id=${order.id},data-type=${order.typeValue}"
+                                                            href="#delete_modal">
+                                                        <i class="fe fe-trash"></i> 取消
+                                                    </button>
+                                                </td>
+                                                <!--                                                        <td><a href="#" class="btn btn-danger"><span>取消预约</span></a>-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="account-password" role="tabpanel"
+                                 aria-labelledby="account-password-tab">
+                                <div class="myaccount-details">
+                                    <form th:action="@{/editPassword}" method="post" class="myaccount-form"
+                                          onsubmit="return checkpas()">
+                                        <div class="myaccount-form-inner">
+                                            <div class="single-input hidden">
+                                                <label>id</label>
+                                                <input type="text" name="id"
+                                                       th:value="${#request.getSession().getAttribute('id')}">
+                                            </div>
+                                            <div class="single-input">
+                                                <label>新密码</label>
+                                                <input id="password" type="password" name="password"
+                                                       placeholder="请输入新的密码" required>
+                                            </div>
+                                            <div class="single-input">
+                                                <label>确认新密码</label>
+                                                <input id="repassword" type="password" placeholder="请再输入一次新的密码"
+                                                       required>
+                                            </div>
+                                            <div class="single-input">
+                                                <button class="btn btn-custom-size lg-size btn-pronia-primary"
+                                                        type="submit">
+                                                    <span>保存</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="account-details" role="tabpanel"
+                                 aria-labelledby="account-details-tab">
+                                <div class="myaccount-details">
+                                    <form th:action="@{/editAccount}" method="post" class="myaccount-form">
+                                        <div class="myaccount-form-inner">
+                                            <div class="single-input hidden">
+                                                <label>id</label>
+                                                <input type="text" name="id"
+                                                       th:value="${#request.getSession().getAttribute('id')}">
+                                            </div>
+                                            <div class="single-input">
+                                                <label>昵称</label>
+                                                <input type="text" name="name"
+                                                       th:value="${#request.getSession().getAttribute('name')}">
+                                            </div>
+                                            <div class="single-input">
+                                                <label>联系电话</label>
+                                                <input type="text" name="phone"
+                                                       th:value="${#request.getSession().getAttribute('phone')}">
+                                            </div>
+                                            <div class="single-input">
+                                                <label>邮箱</label>
+                                                <input type="email" name="email"
+                                                       th:value="${#request.getSession().getAttribute('email')}">
+                                            </div>
+                                            <div class="single-input">
+                                                <button class="btn btn-custom-size lg-size btn-pronia-primary"
+                                                        type="submit">
+                                                    <span>保存</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <input id="userRole" th:value="${userRole}" type="hidden">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Main Content Area End Here -->
 
-        <!-- Begin Scroll To Top -->
-        <a class="scroll-to-top" href="">
-            <i class="fa fa-angle-double-up"></i>
-        </a>
-        <!-- Scroll To Top End Here -->
-
+    <div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-content p-2">
+                        <h4 class="modal-title">取消预约</h4>
+                        <p class="mb-4">确定要取消该预约吗?</p>
+                        <button id="delButton" type="button" class="btn btn-primary">确认</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Minify Version -->
-    <script src="Path/js/plugins.min.js"></script>
-    <script src="Path/js/jquery-2.1.1.min.js"></script>
-    <script src="Path/js/main.js"></script> <!-- Resource jQuery -->
-    <script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
-    <script>
-        $(function (){
-            var userRole = document.getElementById("userRole").value;
-            if (!userRole=="customer"){
-                document.getElementById("account-details-tab").click();
+    <div class="modal fade" id="details" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">预约详情</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data">
+                        <div class="row form-row">
+                            <div id="formBody" class="row form-row form-body">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Begin Footer Area -->
+    <div class="footer-area" data-bg-image="Path/image/1-1920x465.jpg">
+        <div class="footer-top section-space-top-100 pb-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="footer-widget-item">
+                            <div class="footer-widget-logo">
+                                <a href="">
+                                    <img src="Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Logo">
+                                </a>
+                            </div>
+                            <p class="footer-widget-desc">我爱我家以匠心品质诠释品牌价值
+                                <br>20年为超过15万+个家庭提供了高性价比家装解决方案及高品质居住空间
+                            </p>
+                            <div class="social-link with-border">
+                                <ul>
+                                    <li>
+                                        <a href="#" data-tippy="Facebook" data-tippy-inertia="true"
+                                           data-tippy-animation="shift-away" data-tippy-delay="50"
+                                           data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-tippy="Twitter" data-tippy-inertia="true"
+                                           data-tippy-animation="shift-away" data-tippy-delay="50"
+                                           data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-tippy="Pinterest" data-tippy-inertia="true"
+                                           data-tippy-animation="shift-away" data-tippy-delay="50"
+                                           data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                            <i class="fa fa-pinterest"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-tippy="Dribbble" data-tippy-inertia="true"
+                                           data-tippy-animation="shift-away" data-tippy-delay="50"
+                                           data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                            <i class="fa fa-dribbble"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 pt-40">
+                        <div class="footer-widget-item">
+                            <h3 class="footer-widget-title">友情链接</h3>
+                            <ul class="footer-widget-list-item">
+                                <li>
+                                    <a th:href="@{fullwidth}">精装案例</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{designer-list}">设计团队</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{worker-list}">施工团队</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{bookOnline}">在线预约</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/login}">登录</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 pt-40">
+                        <div class="footer-widget-item">
+                            <h3 class="footer-widget-title">保障承诺</h3>
+                            <ul class="footer-widget-list-item">
+                                <li>
+                                    <a href="javascript:void(0);">品牌承诺</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">材料承诺</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">廉洁承诺</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">设计承诺</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">服务承诺</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 pt-40">
+                        <div class="footer-widget-item">
+                            <h3 class="footer-widget-title">保障承诺</h3>
+                            <ul class="footer-widget-list-item">
+                                <li>
+                                    <a href="javascript:void(0);">产品承诺</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">工程承诺</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">售后承诺</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">预算承诺</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">环保承诺</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 pt-40">
+                        <div class="footer-contact-info">
+                            <h3 class="footer-widget-title">有问题？联系我们</h3>
+                            <a class="number" href="tel://123-456-789">123 456 789</a>
+                            <div class="address">
+                                <ul>
+                                    <li>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="payment-method">
+                            <a href="#">
+                                <img src="Path/picture/1.png" alt="Payment Method">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright">
+                            <span class="copyright-text">© 2022 Pronia Made with <i
+                                    class="fa fa-heart text-danger"></i> by
+                        <a href="javascript:;" rel="noopener" target="_blank">Me</a> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area End Here -->
+
+
+    <!-- Begin Scroll To Top -->
+    <a class="scroll-to-top" href="">
+        <i class="fa fa-angle-double-up"></i>
+    </a>
+    <!-- Scroll To Top End Here -->
+
+</div>
+
+<!-- Minify Version -->
+<script src="Path/js/plugins.min.js"></script>
+<script src="Path/js/jquery-2.1.1.min.js"></script>
+<script src="Path/js/main.js"></script> <!-- Resource jQuery -->
+<script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
+<script>
+    let statusList = document.querySelectorAll(".status")
+    $(function () {
+        var userRole = document.getElementById("userRole").value;
+        if (!userRole == "customer") {
+            document.getElementById("account-details-tab").click();
+        }
+        for (let i = 0; i < statusList.length; i++) {
+            if (statusList[i].innerText === "未完成") {
+                statusList[i].classList.add("unfinished")
             }
+        }
+    })
+
+    function checkpas() {//当第一个密码框失去焦点时，触发checkpas1事件
+        var pas1 = document.getElementById("password").value;
+        var pas2 = document.getElementById("repassword").value;//获取两个密码框的值
+        if (pas1 != pas2) {//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
+            alert("两次输入的密码不一致！");
+            return false;
+        } else {
+            alert("修改密码成功");
+            return true;
+        }
+    };
+    let btn = document.querySelectorAll("#detialBtn")
+    $(function () {
+        for (let i = 0; i < btn.length; i++) {
+            btn[i].addEventListener('click', function () {
+                let id = btn[i].getAttribute('data-id')
+                let type = btn[i].getAttribute('data-type')
+                $.ajax({
+                    url: "/getDetial",
+                    type: "post",
+                    dataType: "json",
+                    data: {id: id, type: type},
+                    success: function (data) {
+                        console.log(data[0])
+                        console.log(data[0].city)
+                        if (+type == 1) {
+                            let model = document.querySelector('#formBody')
+                            model.innerHTML = `
+                             <div class="col-12">
+                                   <div class="form-group">
+                                            <h4>活动名称</h4>
+                                            <h3>${data[0].setName}</h3>
+                                    </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <h4>地址</h4>
+                                            <h3>${data[0].position}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <h4>时间</h4>
+                                            <h3>${data[0].time}</h3>
+                                        </div>
+                                    </div>
+                             </div>
+                        `
+                        }
+                        if (+type == 2) {
+                            let model = document.querySelector('#formBody')
+                            model.innerHTML = `
+                             <div class="col-12">
+                                   <div class="form-group">
+                                            <h4>设计师</h4>
+                                            <h3>${data[0].designerName}</h3>
+                                    </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <h4>地址</h4>
+                                            <h3>${data[0].location}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <h4>时间</h4>
+                                            <h3>${data[0].date}</h3>
+                                        </div>
+                                    </div>
+                             </div>
+                        `
+                        }
+                        if (+type == 3) {
+                            let model = document.querySelector('#formBody')
+                            model.innerHTML = `
+                             <div class="col-12">
+                                   <div class="form-group">
+                                            <h4>设计师</h4>
+                                            <h3>${data[0].designerName}</h3>
+                                    </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <h4>地址</h4>
+                                            <h3>${data[0].cityStr} ${data[0].location}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <h4>时间</h4>
+                                            <h3>${data[0].time}</h3>
+                                        </div>
+                                    </div>
+                             </div>
+                        `
+                        }
+                    },
+                    error: function (msg) {
+                        alert("ajax连接异常：" + msg);
+                    }
+                });
+            })
+        }
+    })
+
+    let id;
+    let type;
+
+    let delBtns = document.querySelectorAll(".delBtn")
+    for (let i = 0; i < delBtns.length; i++) {
+        delBtns[i].addEventListener('click',function(){
+            id = delBtns[i].getAttribute("data-id")
+            type = delBtns[i].getAttribute("data-type")
         })
-        function checkpas(){//当第一个密码框失去焦点时，触发checkpas1事件
-            var pas1=document.getElementById("password").value;
-            var pas2=document.getElementById("repassword").value;//获取两个密码框的值
-            if(pas1!=pas2) {//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
-                alert("两次输入的密码不一致！");
-                return false;
-            }else{
-                alert("修改密码成功");
-                return true;
-            }
-        };
-    </script>
+    }
+
+    $('#delButton').on('click', function () {
+        if(type==1){
+            $.ajax({
+                url: '/delSetOrder',
+                type: 'post',
+                data: {id: id},
+                error: function () {
+                    alert('出现错误！');
+                }, success: function (data) {
+                    if (data.indexOf('error') < 0) {
+                        //模态框隐藏
+                        $('#delete_modal').modal('hide');
+                        alert("删除成功");
+                        location.reload();
+                    } else {
+                        alert(data);
+                    }
+                }
+            });
+        }else if (type == 2){
+            $.ajax({
+                url: '/delAppointment',
+                type: 'post',
+                data: {id: id},
+                error: function () {
+                    alert('出现错误！');
+                }, success: function (data) {
+                    if (data.indexOf('error') < 0) {
+                        //模态框隐藏
+                        $('#delete_modal').modal('hide');
+                        alert("删除成功");
+                        location.reload();
+                    } else {
+                        alert(data);
+                    }
+                }
+            });
+        }else if(type==3){
+            $.ajax({
+                url:'/delBook',
+                type:'post',
+                data: {id:id},
+                error:function(){
+                    alert('出现错误！');
+                },success:function(data){
+                    if (data.indexOf('error') < 0){
+                        //模态框隐藏
+                        $('#delete_modal').modal('hide');
+                        alert("删除成功");
+                        location.reload();
+                    }else{
+                        alert(data);
+                    }
+                }
+            });
+        }
+
+    });
+
+</script>
 </body>
 <style>
-    .main-nav>ul>li>a{
+    .main-nav > ul > li > a {
         width: 60px;
     }
-    .btn.active.focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn:active:focus,.btn:focus{
-        outline:none;
+
+    .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+        outline: none;
         box-shadow: none;
     }
-    a:hover{
-        text-decoration:none
+
+    a:hover {
+        text-decoration: none
     }
+
     .myaccount-form, .myaccount-form-boxed {
         padding: 30px;
         border-radius: 0;
         border: none;
     }
+
+    .mybtn {
+        width: 46px;
+        height: 30px;
+        background-color: #039c5e;
+        color: white;
+    }
+
+    .unfinished {
+        color: red;
+    }
+
+    .form-body {
+        margin: 0 auto;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
 </style>
 </html>

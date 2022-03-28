@@ -437,34 +437,6 @@
         var phone = document.getElementById("modify_phone");
         phone.setAttribute("value",now.getAttribute("data-phone"));
     }
-    // $('#modify').on('show.bs.modal', function (event) {
-    //     var edit_modify = document.getElementById("edit_modify")
-    //     var id = document.getElementById("modify_id");
-    //     id.setAttribute("value",edit_modify.getAttribute("data-id"));
-    //     var code = document.getElementById("modify_code");
-    //     code.setAttribute("value",edit_modify.getAttribute("data-code"));
-    //     var name = document.getElementById("modify_name");
-    //     name.setAttribute("value",edit_modify.getAttribute("data-name"));
-    //     var role = document.getElementById("modify_role");
-    //     var userRole = edit_modify.getAttribute("data-role");
-    //     switch (userRole){
-    //         case "admin" :
-    //             document.getElementById("select_admin").setAttribute("selected","true");
-    //             break;
-    //         case "designer":
-    //             document.getElementById("select_designer").setAttribute("selected","true");
-    //             break;
-    //         case "customer":
-    //             document.getElementById("select_customer").setAttribute("selected","true");
-    //             break;
-    //     }
-    //     var password = document.getElementById("modify_password");
-    //     password.setAttribute("value",edit_modify.getAttribute("data-password"));
-    //     var email = document.getElementById("modify_email");
-    //     email.setAttribute("value",edit_modify.getAttribute("data-email"));
-    //     var phone = document.getElementById("modify_phone");
-    //     phone.setAttribute("value",edit_modify.getAttribute("data-phone"));
-    // });
     $('#delete_modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var modal = $(this);

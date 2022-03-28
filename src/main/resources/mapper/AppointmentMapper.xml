@@ -25,6 +25,11 @@
         order by a.day desc
     </select>
 
+    <select id="selectAppointmentById" resultType="Appointment">
+        select * from appointment
+        where appointmentId = #{id}
+    </select>
+
     <select id="selectAppointmentByDesigner" resultType="Appointment">
         select * from appointment
         where designerId = #{designerId}

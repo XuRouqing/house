@@ -14,6 +14,7 @@ public interface AppointmentMapper {
     int selectAppointmentNum();
     public void deleteAppointment(Integer id);
     List<Appointment> selectAppointmentAll();
+    Appointment selectAppointmentById(int id);
     List<Appointment> selectAppointmentByDesigner(int designerId);
     List<Appointment> selectAppointmentByCustomer(int customerId);
     void updateAppointmentStatus(int id, int status);

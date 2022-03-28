@@ -99,8 +99,43 @@ public class DesignerController {
         Designer designer = designerService.getDesignerByUserId(userId);
 //        Designer designer = designerService.getDesignerByUserId(3);//测试用
         int id = designer.getId();
+        List<AdminOrder> orders = new ArrayList<>();
         List<Appointment> appointments = appointmentService.getAppointmentAllByDesignerId(id);
-        model.addAttribute("appointments",appointments);
+        for (int i = 0; i < appointments.size(); i++) {
+            AdminOrder order = new AdminOrder();
+            order.setCustomerName(appointments.get(i).getCustomerName());
+            order.setCustomerTel(appointments.get(i).getCustomerTel());
+            order.setCustomerEmail(appointments.get(i).getCustomerEmail());
+            order.setLocation(appointments.get(i).getLocation());
+            order.setStatus(appointments.get(i).getStatus());
+            order.setMessage(appointments.get(i).getMessage());
+            order.setDay(appointments.get(i).getDay());
+            order.setTime(appointments.get(i).getTime());
+            order.setAppointmentId(appointments.get(i).getAppointmentId());
+            order.setType(1);
+            orders.add(order);
+        }
+
+        List<Book> books = bookService.selectBookByDesignerId(designer.getId());
+        for (int i = 0; i < books.size(); i++) {
+            AdminOrder order = new AdminOrder();
+            order.setCustomerName(books.get(i).getName());
+            order.setCustomerTel(books.get(i).getTel());
+            order.setCustomerEmail(books.get(i).getEmail());
+            order.setLocation(books.get(i).getLocation());
+            order.setStatus(books.get(i).getStatus());
+            order.setMessage(books.get(i).getRemarks());
+            order.setAppointmentId(books.get(i).getId());
+            String day = books.get(i).getTime().substring(0,books.get(i).getTime().length()-2);
+            day = day.replace(".","-");
+            String time = books.get(i).getTime().substring(books.get(i).getTime().length()-2);
+            order.setDay(day);
+            order.setTime(time);
+            order.setType(2);
+            orders.add(order);
+        }
+        orders = orders.stream().sorted(Comparator.comparing(AdminOrder::getStatus)).collect(Collectors.toList());
+        model.addAttribute("appointments",orders);
         return "Designer/appointment-list";
     }
 

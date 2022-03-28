@@ -209,6 +209,8 @@ public class Controller {
                 UserOrder userOrder = new UserOrder();
                 userOrder.setTime(setOrder.get(i).getTime());
                 userOrder.setType("营销活动");
+                userOrder.setTypeValue(1);
+                userOrder.setId(setOrder.get(i).getId());
                 if (setOrder.get(i).getStatus()==1){
                     userOrder.setStatus("已完成");
                 }else {
@@ -221,6 +223,8 @@ public class Controller {
                 UserOrder userOrder = new UserOrder();
                 userOrder.setTime(appointments.get(i).getDate());
                 userOrder.setType("设计师预约");
+                userOrder.setTypeValue(2);
+                userOrder.setId(appointments.get(i).getAppointmentId());
                 if (appointments.get(i).getStatus()==1){
                     userOrder.setStatus("已完成");
                 }else {
@@ -233,6 +237,8 @@ public class Controller {
                 UserOrder userOrder = new UserOrder();
                 userOrder.setTime(books.get(i).getTime());
                 userOrder.setType("在线预约");
+                userOrder.setTypeValue(3);
+                userOrder.setId(books.get(i).getId());
                 if (books.get(i).getStatus()==1){
                     userOrder.setStatus("已完成");
                 }else {
@@ -244,6 +250,80 @@ public class Controller {
         }
         model.addAttribute("userRole",user.getRole());
         return "my-account";
+    }
+
+    @RequestMapping(value="/getDetial")
+    public void getDetial(HttpServletResponse resp,HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        int type = Integer.parseInt(request.getParameter("type"));
+        try {
+            JSONArray data;
+            Designer designer;
+            resp.setCharacterEncoding("utf-8");
+            PrintWriter respWritter = resp.getWriter();
+            switch (type){
+                case 1:
+                    SetOrder setOrder = setOrderService.selectSetOrderById(id);
+                    Set set = setService.findSetById(setOrder.getSetId());
+                    setOrder.setSetName(set.getName());
+                    data = JSONArray.fromObject(setOrder);
+                    respWritter.append(data.toString());
+                    break;
+                case 2:
+                    Appointment appointment = appointmentService.getAppointmentById(id);
+                    designer = designerService.findDesignerById(appointment.getDesignerId());
+                    appointment.setDesignerName(designer.getName());
+                    data = JSONArray.fromObject(appointment);
+                    respWritter.append(data.toString());
+                    break;
+                case 3:
+                    Book book = bookService.selectBookById(id);
+                    designer = designerService.findDesignerById(book.getDesignerId());
+                    book.setDesignerName(designer.getName());
+                    data = JSONArray.fromObject(book);
+                    respWritter.append(data.toString());
+                    break;
+            }
+//            JSONArray data = JSONArray.fromObject(cityList);
+//            resp.setCharacterEncoding("utf-8");
+//            PrintWriter respWritter = resp.getWriter();
+//            respWritter.append(data.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/delSetOrder")
+    public String delSetOrder(Model model, int id) {
+        try {
+            setOrderService.delSetOrder(id);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/delAppointment")
+    public String delAppointment(Model model, int id) {
+        try {
+            appointmentService.deleteAppointment(id);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/delBook")
+    public String delBook(Model model, int id) {
+        try {
+            bookService.deleteBook(id);
+            return "success";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     @PostMapping("/editAccount")
@@ -559,7 +639,7 @@ public class Controller {
         List<SetContent> contents = contentService.getSetContentListBySet(id);
         List<SetConfig> configs = configService.getSetConfigListBySet(id);
         List<City> provinces = cityService.getProvinceList();
-        model.addAttribute("setInfo",set);
+        model.addAttribute("set",set);
         model.addAttribute("contentInfo",contents);
         model.addAttribute("configInfo",configs);
         model.addAttribute("provinces",provinces);

@@ -37,6 +37,11 @@ public class SetOrderServiceImp implements SetOrderService  {
     }
 
     @Override
+    public SetOrder selectSetOrderById(int id){
+        return this.setOrderMapper.selectSetOrderById(id);
+    }
+
+    @Override
     public void delSetOrder(int id){
         this.setOrderMapper.delSetOrder(id);
     }

@@ -10,6 +10,7 @@ public interface AppointmentService {
     public int getAppointmentNum();
     public void deleteAppointment(Integer id);
     public List<Appointment> getAppointmentList();
+    public Appointment getAppointmentById(int id);
     public List<Appointment> getAppointmentListByDesigner(int designerId);
     public List<Appointment> getAppointmentListByCustomer(int customerId);
     public void updateAppointmentStatus(int id, int status);

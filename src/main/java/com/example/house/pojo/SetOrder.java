@@ -24,4 +24,5 @@ public class SetOrder {
     private String time;
     private int status;
     private String location;
+    private String setName;
 }
