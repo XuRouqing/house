@@ -595,7 +595,7 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <input type="text" class="form-control" placeholder="房间价格"
-                                                               name="room1_price">
+                                                               name="room1_price" value="0">
                                                     </div>
                                                     <div class="col-md-1">
                                                         <button type="button"
@@ -1145,6 +1145,7 @@
         div0_1_price_input.setAttribute("class","form-control");
         div0_1_price_input.setAttribute("placeholder","房间价格");
         div0_1_price_input.setAttribute("name","room"+room+"_price");
+        div0_1_price_input.setAttribute("value",0);
 
         div0_1_price.appendChild(div0_1_price_input);
         div0_1.appendChild(div0_1_price);
@@ -1156,6 +1157,7 @@
 
         //添加房间按钮
         var div0_1_addRoom_btn = document.createElement("button");
+        div0_1_addRoom_btn.setAttribute("type", "button");
         div0_1_addRoom_btn.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
         div0_1_addRoom_btn.setAttribute("onclick","addRoom()");
         div0_1_addRoom_btn.appendChild(document.createTextNode("添加房间"));

@@ -158,14 +158,14 @@
                                 <li class="drop-holder">
                                     <a th:href="@{../discount/1}">营销活动</a>
                                     <ul class="drop-menu">
-                                        <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                        <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{..//addDiscount}" style="color: #09e5ab">添加活动</a></li>
                                         <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
                                         <li th:each="set : ${setInfo}">
-                                            <a style="font-size: 15px" th:text="${set.name}" th:href="@{discount/}+${set.setId}"></a>
+                                            <a style="font-size: 15px" th:text="${set.name}" th:href="@{../discount/}+${set.setId}"></a>
                                             <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
-                                               th:href="@{editDiscount/}+${set.setId}">编辑</a>
+                                               th:href="@{../editDiscount/}+${set.setId}">编辑</a>
                                             <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
-                                               th:href="@{delDiscount/}+${set.setId}">删除</a>
+                                               th:href="@{../delDiscount/}+${set.setId}">删除</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -200,6 +200,11 @@ public class CaseController {
         String original;
         String plane;
         Enumeration<String> parameterNames = request.getParameterNames();
+//        while(parameterNames.hasMoreElements()){
+//            String name=(String)parameterNames.nextElement();
+//            String value=request.getParameter(name);
+//            System.out.println(name + "=" + value);
+//        }
         /**
          * 封装house
          */
@@ -279,6 +284,7 @@ public class CaseController {
                             int roomId = rooms[roomInex].getRoomId();
                             String href = "/room/" + timeStamp + suffixName;
                             String des = request.getParameter(name + "_describe");//获取该图片的describe
+                            System.out.println(des);
                             roomPic.setRoomId(roomId);
                             roomPic.setHref(href);
                             roomPic.setDes(des);

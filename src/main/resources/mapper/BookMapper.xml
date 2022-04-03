@@ -6,8 +6,8 @@
 <mapper namespace="com.example.house.dao.BookMapper">
 
     <insert id="insertBook" parameterType="Book">
-        insert into book (customerId,name,tel,email,province,city,location,designerId,workers,time,remarks)
-        values (#{customerId},#{name},#{tel},#{email},#{province},#{city},#{location},#{designerId},#{workers},#{time},#{remarks})
+        insert into book (customerId,name,tel,email,province,city,location,designerId,workers,time,remarks,status)
+        values (#{customerId},#{name},#{tel},#{email},#{province},#{city},#{location},#{designerId},#{workers},#{time},#{remarks},0)
     </insert>
 
     <select id="selectBook" resultType="Book">

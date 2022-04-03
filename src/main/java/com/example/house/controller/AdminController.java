@@ -333,7 +333,7 @@ public class AdminController {
     public String toappointmentList(Model model) {
         List<Appointment> appointments = appointmentService.getAppointmentList();
         model.addAttribute("appointments", appointments);
-        appointmentService.updateAppointmentStatusEveryday();
+//        appointmentService.updateAppointmentStatusEveryday();
         return "Admin/appointment-list";
     }
 
