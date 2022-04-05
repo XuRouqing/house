@@ -742,7 +742,7 @@
         }
     })
 
-    function checkpas() {//当第一个密码框失去焦点时，触发checkpas1事件
+    function checkpas() {
         var pas1 = document.getElementById("password").value;
         var pas2 = document.getElementById("repassword").value;//获取两个密码框的值
         if (pas1 != pas2) {//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
@@ -938,6 +938,9 @@
         padding: 30px;
         border-radius: 0;
         border: none;
+    }
+    .btn-custom-size.lg-size{
+        line-height: 40px;
     }
 
     .mybtn {

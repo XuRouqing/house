@@ -171,7 +171,8 @@
                                             <div class="actions">
                                                 <button class="btn btn-sm bg-danger-light" data-toggle="modal"
                                                         th:attr="data-id=${appointment.appointmentId},data-type=${appointment.type}"
-                                                        href="#delete_modal">
+                                                        href="#delete_modal"
+                                                        th:disabled="${appointment.status} eq 1">
                                                     <i class="fe fe-trash"></i> 拒绝
                                                 </button>
                                             </div>

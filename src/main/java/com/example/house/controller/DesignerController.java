@@ -122,7 +122,8 @@ public class DesignerController {
             order.setCustomerName(books.get(i).getName());
             order.setCustomerTel(books.get(i).getTel());
             order.setCustomerEmail(books.get(i).getEmail());
-            order.setLocation(books.get(i).getLocation());
+            String location = cityService.getCityNameById(books.get(i).getProvince()) + cityService.getCityNameById(books.get(i).getCity()) ;
+            order.setLocation(location+books.get(i).getLocation());
             order.setStatus(books.get(i).getStatus());
             order.setMessage(books.get(i).getRemarks());
             order.setAppointmentId(books.get(i).getId());
@@ -144,6 +145,18 @@ public class DesignerController {
     public String delAppointment(Model model, int id){
         try {
             appointmentService.deleteAppointment(id);
+            Appointment appointment = appointmentService.getAppointmentById(id);
+            String contentToCustomer =  " 您好！\n" + "您的设计师预约订单已由设计师取消，详情可以咨询设计师。" ;
+            SimpleMailMessage smmToCustomer = new SimpleMailMessage();
+            smmToCustomer.setFrom(from);
+            smmToCustomer.setSubject("预约已取消");
+            smmToCustomer.setText(contentToCustomer);
+            smmToCustomer.setTo(appointment.getCustomerEmail());
+            try {
+                javaMailSender.send(smmToCustomer);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return "success";
         }catch (Exception e){
             return e.getMessage();
@@ -485,6 +498,18 @@ public class DesignerController {
     public String delBook(Model model, int id) {
         try {
             bookService.deleteBook(id);
+            Book book = bookService.selectBookById(id);
+            String contentToCustomer =  " 您好！\n" + "您的在线预约订单已由设计师取消，详情可以咨询设计师。" ;
+            SimpleMailMessage smmToCustomer = new SimpleMailMessage();
+            smmToCustomer.setFrom(from);
+            smmToCustomer.setSubject("预约已取消");
+            smmToCustomer.setText(contentToCustomer);
+            smmToCustomer.setTo(book.getEmail());
+            try {
+                javaMailSender.send(smmToCustomer);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return "success";
         } catch (Exception e) {
             return e.getMessage();

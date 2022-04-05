@@ -174,7 +174,7 @@
                                 <table class="datatable table table-hover table-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th width="5%">套餐ID</th>
+                                        <th width="5%">套餐</th>
                                         <th width="10%">客户名字</th>
                                         <th width="15%">客户电话</th>
                                         <th width="20%">客户邮箱</th>
@@ -186,7 +186,7 @@
                                     </thead>
                                     <tbody id="tbody">
                                     <tr th:each="setOrder : ${setOrderList}">
-                                        <td th:text="${setOrder.setId}"></td>
+                                        <td th:text="${setOrder.setName}"></td>
                                         <td th:text="${setOrder.customerName}"></td>
                                         <td th:text="${setOrder.tel}"></td>
                                         <td th:text="${setOrder.email}"></td>

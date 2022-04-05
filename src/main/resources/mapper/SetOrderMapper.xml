@@ -15,9 +15,10 @@
     </select>
 
     <select id="selectSetOrderAll" resultType="SetOrder">
-        SELECT setorder.*,CONCAT(d2.district_name,d1.district_name,setorder.position) location FROM setorder , district d1, district d2
+        SELECT setorder.*,myset.name setName, CONCAT(d2.district_name,d1.district_name,setorder.position) location FROM setorder , myset, district d1, district d2
         WHERE d1.id = setorder.city
           AND d1.pid = d2.id
+          AND setorder.setId = myset.setID
     </select>
 
     <select id="selectSetOrderById" resultType="SetOrder">

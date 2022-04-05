@@ -34,7 +34,7 @@
 
     <select id="findWorkerByName" resultType="Worker">
         select worker.*, type.name type from worker ,workertype type
-        where (name like CONCAT(CONCAT('%',#{name},'%')) or #{name}='') and worker.typeValue = type.id
+        where (worker.name like CONCAT(CONCAT('%',#{name},'%')) or #{name}='') and worker.typeValue = type.id
     </select>
 
     <select id="findWorkerByHouse" resultType="Worker">

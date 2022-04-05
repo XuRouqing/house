@@ -36,12 +36,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/js/ie10-viewport-bug-workaround.js"></script>
     <link rel="stylesheet" href="../Path/css/scrollbar.css">
     <link rel="stylesheet" href="../Path/css/jquery.mCustomScrollbar.css">
-
-    <script>
-        function save(){
-            alert("预约成功,预约信息将会发送到您的邮箱，或通过电话告知您，请注意查看");
-        }
-    </script>
 </head>
 
 <body>
@@ -704,18 +698,18 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-md-2 form-label">邮箱</label>
+                                <label class="col-form-label col-md-2 form-label">邮箱*</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="email" id="email" class="form-control" placeholder="请输入您的邮箱" th:value="${#request.getSession().getAttribute('email')}">
+                                    <input type="text" name="email" id="email" class="form-control" placeholder="请输入您的邮箱" th:value="${#request.getSession().getAttribute('email')}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-md-2 form-label">城市</label>
+                                <label class="col-form-label col-md-2 form-label">城市*</label>
                                 <div class="col-lg-10">
                                     <div class="row" id="location">
                                         <div class="col-md-2">
                                             <div>
-                                                <select class="form-control" id="province" name="province" onChange="changeProvince(this)">
+                                                <select class="form-control" id="province" name="province" onChange="changeProvince(this)" required>
                                                     <option>请选择省份</option>
                                                     <option th:each="province : ${provinces}" th:text="${province.district_name}" th:value="${province.id}"></option>
                                                 </select>
@@ -723,13 +717,13 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div>
-                                                <select class="form-control" id="city" name="city">
+                                                <select class="form-control" id="city" name="city" required>
                                                     <option>请选择城市</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <input type="text" id="position" name="position" class="form-control" placeholder="请输入详细地址">
+                                            <input type="text" id="position" name="position" class="form-control" placeholder="请输入详细地址" required>
                                         </div>
                                         <input id="setId" name="setId" class="hidden" th:value="${set.setId}">
                                         <input id="customerId" name="customerId" class="hidden" th:value="${#request.getSession().getAttribute('id')} ? ${#request.getSession().getAttribute('id')} : 0">
@@ -957,6 +951,15 @@
             }
         });
     };
+    // function save(){
+    //     alert("预约成功,预约信息将会发送到您的邮箱，或通过电话告知您，请注意查看");
+    // }
+
+    let form = document.querySelector("#bookForm")
+    form.addEventListener('submit',function(){
+        alert("预约成功,预约信息将会发送到您的邮箱，或通过电话告知您，请注意查看");
+    })
+</script>
 </script>
 </body>
 
