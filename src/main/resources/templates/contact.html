@@ -22,8 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.8/assets/css/ie10-viewport-bug-workaround.css"
           rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-olOxEXxDwd20BlATUibkEnjPN3sVq2YWmYOnsMYutq7X8YcUdD6y/1I+f+ZOq/47" crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="Path/css/dmaku.css"/>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -388,8 +387,7 @@
                             </ul>
                         </div>
                         <form id="contact-form" class="contact-form"
-                              th:action="contactEmail" method="post"
-                              action="https://htmlmail.hasthemes.com/mamunur/pronia.php">
+                              th:action="@{/contactEmail}" method="post">
                             <div class="group-input">
                                 <div class="form-field mb-5">
                                     <input type="text" name="name" id="name" placeholder="姓名*"
@@ -403,12 +401,12 @@
                                 </div>
                                 <div class="form-field">
                                     <input type="text" name="email" id="email" placeholder="邮箱*"
-                                           class="input-field" autocomplete="off">
+                                           class="input-field" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-field mb-5">
-                                <textarea name="message" id="message" placeholder="备注"
-                                          class="textarea-field"></textarea>
+                                <textarea name="message" id="message" placeholder="备注*"
+                                          class="textarea-field" required></textarea>
                             </div>
                             <div class="contact-button-wrap">
                                 <button type="submit" style="line-height: 50px"
@@ -596,108 +594,30 @@
 <script type="text/javascript" src="Path/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
     $('#submit').on('click', function () {
-        // $(this).button('complete');
-        alert("提交成功");
-        location.reload();
+        return sub()
     });
-    (function () {
-
-        var slideMenu = function () {
-            var sp, st, t, m, sa, l, w, gw, ot;
-            return {
-                destruct: function () {
-                    if (m) {
-                        clearInterval(m.htimer);
-                        clearInterval(m.timer);
-                    }
-                },
-                build: function (sm, sw, mt, s, sl, h) {
-                    sp = s;
-                    st = sw;
-                    t = mt;
-                    m = document.getElementById(sm);
-                    sa = m.getElementsByTagName('li');
-                    l = sa.length;
-                    w = m.offsetWidth;
-                    gw = w / l;
-                    ot = Math.floor((w - st) / (l - 1));
-                    var i = 0;
-                    for (i; i < l; i++) {
-                        s = sa[i];
-                        s.style.width = gw + 'px';
-                        this.timer(s)
-                    }
-                    if (sl != null) {
-                        m.timer = setInterval(function () {
-                            slideMenu.slide(sa[sl - 1])
-                        }, t)
-                    }
-                },
-                timer: function (s) {
-                    s.onmouseover = function () {
-                        clearInterval(m.htimer);
-                        clearInterval(m.timer);
-                        m.timer = setInterval(function () {
-                            slideMenu.slide(s)
-                        }, t);
-                        //console.log($(this).find('.mask_b').html());
-                        $(this).find('.mask_b').hide();
-                        //console.log($(this).find('.mask_b').attr("style"));
-                    }
-                    s.onmouseout = function () {
-                        clearInterval(m.timer);
-                        clearInterval(m.htimer);
-                        m.htimer = setInterval(function () {
-                            slideMenu.slide(s, true)
-                        }, t);
-                        //console.log($(this).find('.mask_b').html());
-                        $(this).find('.mask_b').show();
-                        //console.log($(this).find('.mask_b').attr("style"));
-                    }
-                },
-                slide: function (s, c) {
-                    var cw = parseInt(s.style.width);
-                    if ((cw < st && !c) || (cw > gw && c)) {
-                        var owt = 0;
-                        var i = 0;
-                        for (i; i < l; i++) {
-                            if (sa[i] != s) {
-                                var o, ow;
-                                var oi = 0;
-                                o = sa[i];
-                                ow = parseInt(o.style.width);
-                                if (ow < gw && c) {
-                                    oi = Math.floor((gw - ow) / sp);
-                                    oi = (oi > 0) ? oi : 1;
-                                    o.style.width = (ow + oi) + 'px';
-                                    //console.log(o);
-                                    //console.log(o.style.width);
-                                } else if (ow > ot && !c) {
-                                    oi = Math.floor((ow - ot) / sp);
-                                    oi = (oi > 0) ? oi : 1;
-                                    o.style.width = (ow - oi) + 'px';
-                                    //console.log(o);
-                                    //console.log(o.style.width);
-                                }
-                                if (c) {
-                                    owt = owt + (ow + oi)
-                                } else {
-                                    owt = owt + (ow - oi)
-                                }
-                            }
-                        }
-                        s.style.width = (w - owt) + 'px';
-                    } else {
-                        if (m.htimer)
-                            clearInterval(m.htimer)
-                        if (m.timer)
-                            clearInterval(m.timer);
-                    }
-                }
-            };
-        }();
-        slideMenu.build('sm', 875, 10, 10, 1);
-    })();
+    function sub(){
+        var strTemp = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
+        let phone = $('#phone').val()
+        if (!strTemp.test(phone)) {
+            alert('手机号码格式不正确')
+            return false
+        }
+        else{
+            alert('提交成功')
+            return true
+        }
+    }
+    // $('#contact-form').on('submit', function () {
+    //     var strTemp = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
+    //     let phone = $('#phone').val()
+    //     if (!strTemp.test(phone)) {
+    //         alert('手机号码格式不正确')
+    //         return false
+    //     }
+    //     alert('提交成功')
+    //     return true
+    // });
 </script>
 </body>
 
