@@ -38,6 +38,7 @@
         <div class="header-left">
             <a href="index.html" class="logo">
                 <img src="../Path/image/newlogo.png" alt="Logo">
+                <span style="font-size: 16px;color: pink;font-width: 700">我爱我家</span>
             </a>
             <a href="index.html" class="logo logo-small">
                 <img src="../Path/image/newlogo.png" alt="Logo" width="30" height="30">
@@ -91,9 +92,6 @@
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
-                    <li class="menu-title">
-                        <span>Main</span>
-                    </li>
                     <li class="active">
                         <a th:href="@{/designer/index}"><i class="fe fe-home"></i> <span>首页</span></a>
                     </li>
@@ -214,7 +212,7 @@
                                                 <button class="btn btn-sm bg-danger-light" data-toggle="modal"
                                                         th:attr="data-id=${appointment.appointmentId}"
                                                         href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> 删除
+                                                    <i class="fe fe-trash"></i> 拒绝
                                             </div>
                                         </td>
                                     </tr>
@@ -246,8 +244,8 @@
                     </div>-->
                 <div class="modal-body">
                     <div class="form-content p-2">
-                        <h4 class="modal-title">删除</h4>
-                        <p class="mb-4">确定要删除ID为<span id="p_id"></span>的预约订单吗?</p>
+                        <h4 class="modal-title">拒绝</h4>
+                        <p class="mb-4">确定要拒绝该预约订单吗?</p>
                         <button id="delButton" type="button" class="btn btn-primary">确认</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                     </div>
@@ -288,8 +286,8 @@
         var modal = $(this);
         id = button.data("id");
         name = button.data("name");
-        var p_id = document.getElementById("p_id");
-        p_id.appendChild(document.createTextNode(id));
+        // var p_id = document.getElementById("p_id");
+        // p_id.appendChild(document.createTextNode(id));
     });
     $('#delButton').on('click', function () {
         $(this).button('complete');

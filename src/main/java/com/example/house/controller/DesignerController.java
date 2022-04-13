@@ -69,14 +69,60 @@ public class DesignerController {
         int id = designer.getId();
         int houseNum = designerService.getHouseNumByDesignerId(id);
         int orderNum = designerService.getOrderNumByDesignerId(id);
-        List<Appointment> appointments = appointmentService.getAppointmentByDesignerId(id);
-        int appointmentNum = appointments.size();
+//        List<Appointment> appointments = appointmentService.getAppointmentByDesignerId(id);
+
+        List<AdminOrder> orders = new ArrayList<>();
+        List<Appointment> appointments = appointmentService.getAppointmentAllByDesignerId(id);
+        for (int i = 0; i < appointments.size(); i++) {
+            AdminOrder order = new AdminOrder();
+            order.setCustomerName(appointments.get(i).getCustomerName());
+            order.setCustomerTel(appointments.get(i).getCustomerTel());
+            order.setCustomerEmail(appointments.get(i).getCustomerEmail());
+            order.setLocation(appointments.get(i).getLocation());
+            order.setStatus(appointments.get(i).getStatus());
+            order.setMessage(appointments.get(i).getMessage());
+            order.setDay(appointments.get(i).getDay());
+            order.setTime(appointments.get(i).getTime());
+            order.setAppointmentId(appointments.get(i).getAppointmentId());
+            order.setType(1);
+            if(order.getStatus()==0){
+                orders.add(order);
+            }
+
+        }
+
+        List<Book> books = bookService.selectBookByDesignerId(designer.getId());
+        for (int i = 0; i < books.size(); i++) {
+            AdminOrder order = new AdminOrder();
+            order.setCustomerName(books.get(i).getName());
+            order.setCustomerTel(books.get(i).getTel());
+            order.setCustomerEmail(books.get(i).getEmail());
+            String location = cityService.getCityNameById(books.get(i).getProvince()) + cityService.getCityNameById(books.get(i).getCity()) ;
+            order.setLocation(location+books.get(i).getLocation());
+            order.setStatus(books.get(i).getStatus());
+            order.setMessage(books.get(i).getRemarks());
+            order.setAppointmentId(books.get(i).getId());
+            String day = books.get(i).getTime().substring(0,books.get(i).getTime().length()-2);
+            day = day.replace(".","-");
+            String time = books.get(i).getTime().substring(books.get(i).getTime().length()-2);
+            order.setDay(day);
+            order.setTime(time);
+            order.setType(2);
+            if(order.getStatus()==0){
+                orders.add(order);
+            }
+
+//            orders.add(order);
+        }
+        orders = orders.stream().sorted(Comparator.comparing(AdminOrder::getStatus)).collect(Collectors.toList());
+
+        int appointmentNum = orders.size();
         //更新预约订单状态
         appointmentService.updateAppointmentStatusEveryday();
 
         model.addAttribute("houseNum",houseNum);
         model.addAttribute("orderNum",orderNum);
-        model.addAttribute("appointments",appointments);
+        model.addAttribute("appointments",orders);
         model.addAttribute("appointmentNum",appointmentNum);
         return "Designer/index";
     }

@@ -140,6 +140,7 @@
                         </div>
                         <a class="header-logo">
                             <img src="../Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
+                            <h2 style="color: #abd373;margin-left: 20px">我爱我家</h2>
                         </a>
                         <!--                            搜索框-->
                         <nav class="cd-main-nav-wrapper">
@@ -192,15 +193,15 @@
                                     <a th:href="@{../discount/1}">营销活动</a>
                                     <ul class="drop-menu">
                                         <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
-                                               th:href="@{/addDiscount}" style="color: #09e5ab">添加活动</a></li>
+                                               th:href="@{../addDiscount}" style="color: #09e5ab">添加活动</a></li>
                                         <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
                                         <li th:each="set : ${setInfo}">
                                             <a style="font-size: 15px" th:text="${set.name}"
-                                               th:href="@{discount/}+${set.setId}"></a>
+                                               th:href="@{../discount/}+${set.setId}"></a>
                                             <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
-                                               th:href="@{editDiscount/}+${set.setId}">编辑</a>
+                                               th:href="@{../editDiscount/}+${set.setId}">编辑</a>
                                             <a th:if="${#request.getSession().getAttribute('role') eq 'admin'}"
-                                               th:href="@{delDiscount/}+${set.setId}">删除</a>
+                                               th:href="@{../delDiscount/}+${set.setId}">删除</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -227,6 +228,7 @@
 
                         <a href="" class="header-logo" style="margin-right: 20px">
                             <img src="../Path/image/newlogo.png" style="height: 60px; width: 60px" alt="Header Logo">
+                            <h2 style="color: #abd373;margin-left: 20px">我爱我家</h2>
                         </a>
 
                     </div>
