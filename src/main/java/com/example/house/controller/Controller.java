@@ -263,9 +263,11 @@ public class Controller {
             PrintWriter respWritter = resp.getWriter();
             switch (type){
                 case 1:
+                    System.out.println(1);
                     SetOrder setOrder = setOrderService.selectSetOrderById(id);
                     Set set = setService.findSetById(setOrder.getSetId());
                     setOrder.setSetName(set.getName());
+                    System.out.println(2);
                     data = JSONArray.fromObject(setOrder);
                     respWritter.append(data.toString());
                     break;
@@ -1135,7 +1137,7 @@ public class Controller {
             }
 
             if (book.getEmail()!=null){
-                String contentToCustomer =  " 您好！\n" + "您已成功预套餐" + "\n时间为:" + book.getTime() + "\n详情请见客户端";
+                String contentToCustomer =  " 您好！\n" + "您已成功预约" + "\n时间为:" + book.getTime() + "\n详情请见客户端";
                 SimpleMailMessage smmToCustomer = new SimpleMailMessage();
                 smmToCustomer.setFrom(from);
                 smmToCustomer.setSubject("预约成功");

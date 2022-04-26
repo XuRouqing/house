@@ -164,7 +164,7 @@
                 </li>
                 <!--                                    营销活动-->
                 <li class="drop-holder">
-                  <a th:href="@{../discount/1}">营销活动</a>
+                  <a th:href="@{../discount/}+${setInfo.get(0).setId}">营销活动</a>
                   <ul class="drop-menu">
                     <li><a th:if="${#request.getSession().getAttribute('role') eq 'admin'}" th:href="@{../addDiscount}" style="color: #09e5ab">添加活动</a></li>
                     <!--                                        <li><a th:href="@{/addDiscount}" style="color: #2196f3">添加活动</a></li>-->
@@ -225,7 +225,7 @@
                   </li>
                   <!--                                    营销活动-->
                   <li class="drop-holder">
-                    <a th:href="@{../discount/1}">营销活动</a>
+                    <a th:href="@{../discount/}+${setInfo.get(0).setId}">营销活动</a>
                     <ul class="drop-menu">
                       <li th:each="set : ${setInfo}">
                         <a style="font-size: 15px" th:text="${set.name}" th:href="@{../discount/}+${set.setId}"></a>
