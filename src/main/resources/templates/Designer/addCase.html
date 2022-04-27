@@ -121,7 +121,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3 class="page-title">个人信息</h3>
+                        <h3 class="page-title">添加案例</h3>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">增加案例</h4>
+                            <h4 class="card-title">添加案例</h4>
                         </div>
                         <div class="card-body">
                             <form th:action="@{/designer/saveCase}" method="post" enctype="multipart/form-data" onsubmit="sub()">
@@ -317,7 +317,7 @@
                                 <input name="workerIds" value="0" type="hidden">
                                 <div class="submit-section proceed-btn text-right">
                                     <button type="submit" class="btn submit-btn" data-toggle="modal"
-                                            data-target=".bs-example-modal-lg" onclick="sub()">保存
+                                            data-target=".bs-example-modal-lg" onclick="sub()" style="border: #00d0f1 1px solid">保存
                                     </button>
                                 </div>
                             </form>

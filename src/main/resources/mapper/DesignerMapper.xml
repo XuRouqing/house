@@ -56,7 +56,7 @@
     </select>
 
     <update id="modifyDesignerAll" parameterType="Designer">
-        UPDATE designer SET name=#{name},gender=#{gender},workingAge=#{workingAge},levelValue=#{levelValue},styleValue=#{styleValue},represent=#{represent},tel=#{tel},email=#{email},age=#{age},form=#{form},pic=#{pic}
+        UPDATE designer SET name=#{name},gender=#{gender},workingAge=#{workingAge},levelValue=#{levelValue},styleValue=#{styleValue},represent=#{represent},tel=#{tel},email=#{email},age=#{age},form=#{form},pic=#{pic},location=#{location}
         WHERE id=#{id}
     </update>
 

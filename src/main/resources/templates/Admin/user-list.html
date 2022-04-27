@@ -311,7 +311,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/admin/addUser}" method="post">
+                    <form th:action="@{/admin/addUser}" method="post" onclick="return checkCode()">
                         <div class="row form-row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -482,6 +482,26 @@
             }
         });
     });
+    function checkCode(){
+        var code_input = document.getElementById("code_add");
+        var code = code_input.value;
+        $.ajax({
+            url: '/admin/checkCode',
+            type: 'post',
+            data: {code: code},
+            error: function () {
+                alert('出现错误！');
+            }, success: function (data) {
+                if (data == "false"){
+                    alert("该账号已存在,请重新输入");
+                    var input = document.getElementById("code_add");
+                    input.value="";
+                    return false;
+                }
+                return true;
+            }
+        });
+    }
 </script>
 </body>
 <style>

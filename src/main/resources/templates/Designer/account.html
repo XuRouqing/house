@@ -148,7 +148,7 @@
                                             <input id="filePic" name="filePic" type="file" class="form-control">
                                             请选择文件
                                             <div id="image-holder">
-                                                <img th:src="${designer.pic}">
+                                                <img th:src="${designer.pic}" style="width: 200px">
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +248,7 @@
                                     <label class="col-form-label col-md-2">备注</label>
                                     <div class="col-md-10">
                                         <textarea name="form" rows="5" cols="5" class="form-control"
-                                                  th:value="${designer.form}"
+                                                  th:text="${designer.form}"
                                                   placeholder="备注"></textarea>
                                     </div>
                                 </div>
@@ -257,7 +257,7 @@
                                 <input name="pic" th:value="${designer.pic}" type="hidden">
                                 <div class="submit-section proceed-btn text-right">
                                     <button type="submit" class="btn submit-btn" data-toggle="modal"
-                                            data-target=".bs-example-modal-lg" onclick="sub()">保存
+                                            data-target=".bs-example-modal-lg" onclick="sub()" style="border: #00d0f1 1px solid">保存
                                     </button>
                                 </div>
                             </form>
@@ -318,7 +318,8 @@
             reader.onload = function (e) {
                 $("<img />", {
                     "src": e.target.result,
-                    "class": "thumb-image"
+                    "class": "thumb-image",
+                    "style": "width:200px"
                 }).appendTo(image_holder);
             }
             image_holder.show();
