@@ -510,7 +510,7 @@
                                 <div id="contentDiv">
                                     <h3>配置1</h3>
                                     <div id="content1" class="row">
-                                        <label class="col-form-label col-md-2 form-label">房间1</label>
+                                        <label class="col-form-label col-md-2 form-label">房间</label>
                                         <div class="col-md-4">
                                             <input id="content1_name" name="content1_name" type="text" class="form-control"
                                                    placeholder="名称">
@@ -531,7 +531,7 @@
                                                     data-pic="1"
                                                     style="margin: 0"
                                                     class="my-btn btn btn-success glyphicon glyphicon-plus"
-                                                    onclick="addContent(this)">添加房间
+                                                    onclick="addContent(this)">添加配置
                                             </button>
                                         </div>
                                         <div class="form-group row" id="content1_confige1">
@@ -539,7 +539,7 @@
                                                 <div class="col-lg-10" style="margin-top:10px">
                                                     <div class="col-md-1">
                                                     </div>
-                                                    <label class="col-form-label col-md-2 form-label">内容</label>
+                                                    <label class="col-form-label col-md-2 form-label">内容项</label>
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <input type="text" class="form-control" placeholder="内容"
@@ -556,7 +556,7 @@
                                                                     data-div="content1_configDiv"
                                                                     data-content="1"
                                                                     data-config="1"
-                                                                    onclick="addConfig(this)">添加配置
+                                                                    onclick="addConfig(this)">添加内容项
                                                             </button>
                                                         </div>
                                                         <input id="contentNum" name="contentNum" type="hidden">
@@ -831,7 +831,7 @@
         contentn_div3_button.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
         contentn_div3_button.setAttribute("onclick","addContent()");
         contentn_div3_button.setAttribute("style","margin:0");
-        contentn_div3_button.appendChild(document.createTextNode("添加房间"));
+        contentn_div3_button.appendChild(document.createTextNode("添加配置"));
         contentn_div3.appendChild(contentn_div3_button);
         //添加房间按钮 end
         contentn.appendChild(contentn_div3);
@@ -850,7 +850,7 @@
         contentn_div4_div1_div1_div1.setAttribute("class","col-md-1");
         var contentn_div4_div1_div1_div1_label = document.createElement("label");
         contentn_div4_div1_div1_div1_label.setAttribute("class","col-form-label col-md-2 form-label");
-        contentn_div4_div1_div1_div1_label.appendChild(document.createTextNode("内容"));
+        contentn_div4_div1_div1_div1_label.appendChild(document.createTextNode("内容项"));
         contentn_div4_div1_div1.appendChild(contentn_div4_div1_div1_div1);
         contentn_div4_div1_div1.appendChild(contentn_div4_div1_div1_div1_label);
         //config列
@@ -896,7 +896,7 @@
         addconfigBtn.setAttribute("data-div","content"+content+"_configDiv");
         addconfigBtn.setAttribute("data-content",content);
         addconfigBtn.setAttribute("data-config",configs[content]);
-        addconfigBtn.appendChild(document.createTextNode("添加配置"));
+        addconfigBtn.appendChild(document.createTextNode("添加内容项"));
         configBtn.appendChild(addconfigBtn);
         //config列添加配置块 button end
         contentn_div4_div1_div1_div2.appendChild(configBtn);
@@ -962,7 +962,7 @@
         btn.setAttribute("data-config",configs[contentNow]);
         btn.setAttribute("class","my-btn btn btn-success glyphicon glyphicon-plus");
         btn.setAttribute("onclick","addConfig(this)");
-        btn.appendChild(document.createTextNode("添加配置"));
+        btn.appendChild(document.createTextNode("添加内容项"));
         div4.appendChild(btn);
 
         div1.appendChild(div2);
