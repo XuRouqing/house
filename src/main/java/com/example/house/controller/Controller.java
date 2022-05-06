@@ -806,11 +806,13 @@ public class Controller {
         set.setTime(request.getParameter("time"));
         setService.addSet(set);
         int setId = set.getSetId();
-//        //图片文件操作
+        //图片文件操作
+        //创建一个通用的多部分解析器
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        //判断 request 是否有文件上传,即多部分请求
         if(multipartResolver.isMultipart(request)) {
-            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-            Iterator<String> iter = multiRequest.getFileNames();
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;//转换成多部分request
+            Iterator<String> iter = multiRequest.getFileNames();//获取上传的文件
             SimpleDateFormat sdf = null;
             while(iter.hasNext()) {
                 sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
